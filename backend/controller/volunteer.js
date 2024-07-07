@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 // Function to create a new volunteer // Working
 const createVolunteer = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const {
       full_name,
       date_of_birth,
@@ -51,6 +51,7 @@ const createVolunteer = async (req, res) => {
     }
 
     const savedVolunteer = await newVolunteer.save();
+    console.log(savedVolunteer.password);
     res.status(201).send();
   } catch (error) {
     if (error.code == 11000) {
@@ -202,8 +203,7 @@ const loginVolunteer = async (req, res) => {
     if (!volunteer) {
       return res.status(400).json({ message: "Invalid email" });
     }
-    console.log(volunteer);
-    // const isMatch = await volunteer.comparePassword(password);
+
     const isMatch = await bcrypt.compare(password, volunteer.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });

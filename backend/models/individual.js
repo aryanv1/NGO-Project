@@ -14,8 +14,7 @@ const addressSchema = new mongoose.Schema({
   },
 });
 
-// Main Volunteer Registration Schema
-const volunteerSchema = new mongoose.Schema({
+const obj = {
   full_name: { type: String, required: true },
   date_of_birth: { type: Date, required: true },
   email_address: { type: String, required: true, unique: true },
@@ -24,12 +23,16 @@ const volunteerSchema = new mongoose.Schema({
   current_work_status: { type: String, required: true },
   home_address: { type: addressSchema, required: true },
   availability_mode: { type: Boolean, default: false },
-});
+}
+
+// Main Volunteer Registration Schema
+const volunteerSchema = new mongoose.Schema(obj);
+const unverifiedSchema = new mongoose.Schema(obj);
 
 // Password hashing middleware
-volunteerSchema.pre("save", async function (next) {
+unverifiedSchema.pre("save", async function (next) {
   if (this.isModified("password") || this.isNew) {
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(7);
     this.password = await bcrypt.hash(this.password, salt);
   }
   next();
@@ -50,10 +53,14 @@ volunteerSchema.methods.comparePassword = function (password2) {
   return bcrypt.compare(password2, this.password);
 };
 
+unverifiedSchema.methods.comparePassword = function (password2) {
+  return bcrypt.compare(password2, this.password);
+};
+
 const Volunteer = mongoose.model("Volunteer", volunteerSchema);
 const Unverified_Individuals = mongoose.model(
   "Unverified_Individuals",
-  volunteerSchema
+  unverifiedSchema
 );
 
 module.exports = { Volunteer, Unverified_Individuals };

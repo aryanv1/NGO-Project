@@ -80,7 +80,7 @@ const verifyVolunteer = async (req, res) => {
     const { vol_id } = req.body;
 
     const vol_data = await Unverified_Individuals.findOne({ _id: vol_id });
-    // console.log(vol_data);
+    
     const data = new Volunteer({
       full_name: vol_data.full_name,
       date_of_birth: vol_data.date_of_birth,
@@ -93,7 +93,7 @@ const verifyVolunteer = async (req, res) => {
 
     await data.save();
 
-    await Unverified_NGOs.deleteOne({ _id: vol_id });
+    await Unverified_Individuals.deleteOne({ _id : vol_id });
 
     res.status(201).send();
   } catch (error) {

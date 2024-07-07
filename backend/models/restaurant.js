@@ -14,8 +14,7 @@ const addressSchema = new mongoose.Schema({
   },
 });
 
-// Main Restaurant/Community Hall Registration Schema
-const restaurantSchema = new mongoose.Schema({
+const restObj = {
   name: { type: String, required: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -31,9 +30,12 @@ const restaurantSchema = new mongoose.Schema({
   primary_contact_phone: { type: String, required: true, unique: true },
   physical_address: { type: addressSchema, required: true },
   food_handlers_permit: { type: String, required: true },
-});
+}
 
-restaurantSchema.pre("save", async function (next) {
+const restaurantSchema = new mongoose.Schema(restObj);
+const unverifiedSchema = new mongoose.Schema(restObj);
+
+unverifiedSchema.pre("save", async function (next) {
   if (this.isModified("password") || this.isNew) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -56,10 +58,14 @@ restaurantSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+unverifiedSchema.methods.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 const Unverified_Restaurants = mongoose.model(
   "Unverified_Restaurants",
-  restaurantSchema
+  unverifiedSchema
 );
 
 module.exports = { Restaurant, Unverified_Restaurants };
