@@ -1,0 +1,154 @@
+const admin = require("../models/admin");
+const { NGO, Unverified_NGOs } = require("../models/ngo");
+const { Volunteer, Unverified_Individuals } = require("../models/individual");
+const { Restaurant, Unverified_Restaurants } = require("../models/restaurant");
+const jwt = require("jsonwebtoken");
+
+const adminlogin = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const admin_detail = await admin.findOne({ username: username });
+    if (!admin_detail) {
+      return res.status(400).json({ message: "Invalid username." });
+    }
+
+    const isMatch = await admin_detail.comparePassword(password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+
+    const token = jwt.sign({ id: admin_detail._id }, process.env.JWT_SECRET, {
+      expiresIn: "2d",
+    });
+
+    res.status(200).json({
+      message: "Admin login successful",
+      token,
+    });
+  } catch (error) {
+    console.error("Error during admin login:", error);
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+const verifyngo = async (req, res) => {
+  try {
+    const { ngo_id } = req.body;
+
+    const ngo_data = await Unverified_NGOs.findOne({ _id: ngo_id });
+    console.log(ngo_data);
+    const data = new NGO({
+      organization_name: ngo_data.organization_name,
+      registration_number: ngo_data.registration_number,
+      tax_id_ein: ngo_data.tax_id_ein,
+      website_url: ngo_data.website_url,
+      physical_addresses: ngo_data.physical_addresses,
+      primary_contact: ngo_data.primary_contact,
+      password: ngo_data.password,
+      secondary_contact: ngo_data.secondary_contact,
+      registration_certificate: ngo_data.registration_certificate,
+      tax_exemption_certificate: ngo_data.tax_exemption_certificate,
+      recent_annual_report: ngo_data.recent_annual_report,
+      ngo_photos: ngo_data.ngo_photos,
+    });
+    await data.save();
+
+    await Unverified_NGOs.deleteOne({ _id: ngo_id });
+
+    res.status(201).send();
+  } catch (error) {
+    if (error.code == 11000) {
+      const dup = Object.keys(error.keyValue)[0];
+      res.status(400).json({
+        message: `Duplicate entry detected for ${dup}`,
+      });
+    } else {
+      res.status(400).json({
+        message: "Error while verifying data of NGO",
+        error: error.message,
+      });
+    }
+  }
+};
+
+const verifyVolunteer = async (req, res) => {
+  try {
+    const { vol_id } = req.body;
+
+    const vol_data = await Unverified_Individuals.findOne({ _id: vol_id });
+    // console.log(vol_data);
+    const data = new Volunteer({
+      full_name: vol_data.full_name,
+      date_of_birth: vol_data.date_of_birth,
+      email_address: vol_data.email_address,
+      password: vol_data.password,
+      phone_number: vol_data.phone_number,
+      current_work_status: vol_data.current_work_status,
+      home_address: vol_data.home_address,
+    });
+
+    await data.save();
+
+    await Unverified_NGOs.deleteOne({ _id: vol_id });
+
+    res.status(201).send();
+  } catch (error) {
+    if (error.code == 11000) {
+      const dup = Object.keys(error.keyValue)[0];
+      res.status(400).json({
+        message: `Duplicate entry detected for ${dup}`,
+      });
+    } else {
+      res.status(400).json({
+        message: "Error verifying volunteer",
+        error: error.message,
+      });
+    }
+  }
+};
+
+const verifyRestaurant = async (req, res) => {
+  try {
+    const { rest_id } = req.body;
+
+    const rest_data = await Unverified_Restaurants.findOne({ _id: rest_id });
+    // console.log(vol_data);
+    const data = new Restaurant({
+      name: rest_data.name,
+      username: rest_data.username,
+      password: rest_data.password,
+      type: rest_data.type,
+      business_license_number: rest_data.business_license_number,
+      website_url: rest_data.website_url,
+      manager_name: rest_data.manager_name,
+      primary_contact_email: rest_data.primary_contact_email,
+      primary_contact_phone: rest_data.primary_contact_phone,
+      physical_address: rest_data.physical_address,
+      food_handlers_permit: rest_data.food_handlers_permit,
+    });
+
+    await data.save();
+
+    await Unverified_Restaurants.deleteOne({ _id: rest_id });
+
+    res.status(201).send();
+  } catch (error) {
+    if (error.code == 11000) {
+      const dup = Object.keys(error.keyValue)[0];
+      res.status(400).json({
+        message: `Duplicate entry detected for ${dup}`,
+      });
+    } else {
+      res.status(400).json({
+        message: "Error verifying restaurant",
+        error: error.message,
+      });
+    }
+  }
+};
+
+module.exports = { adminlogin, verifyngo, verifyVolunteer, verifyRestaurant };
