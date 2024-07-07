@@ -46,8 +46,8 @@ volunteerSchema.pre("findOneAndUpdate", async function (next) {
 });
 
 // Method to compare password
-volunteerSchema.methods.comparePassword = function (password) {
-  return bcrypt.compare(password, this.password);
+volunteerSchema.methods.comparePassword = function (password2) {
+  return bcrypt.compare(password2, this.password);
 };
 
 const Volunteer = mongoose.model("Volunteer", volunteerSchema);

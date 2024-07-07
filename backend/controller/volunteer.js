@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {Volunteer,Unverified_Individuals} = require("../models/individual");
 const jwt = require("jsonwebtoken");
-
+const bcrypt = require('bcryptjs');
 // Function to create a new volunteer // Working
 const createVolunteer = async (req, res) => {
   try {
@@ -27,19 +27,6 @@ const createVolunteer = async (req, res) => {
     }
 
     const parsed_home_address =JSON.parse(home_address);
-
-    // if (
-    //   !full_name ||
-    //   !parsed_dob ||
-    //   !email_address ||
-    //   !phone_number ||
-    //   !current_work_status ||
-    //   !parsed_home_address
-    // ) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "All required fields must be provided" });
-    // }
 
     const newVolunteer = new Unverified_Individuals({
       full_name,
@@ -195,6 +182,7 @@ const updateVolunteerAvailability = async(req,res)=> {
 // Function to delete a volunteer by ID
 const deleteVolunteerById = async (req, res) => {
   try {
+    console.log(req.user);
     const deletedVolunteer = await Volunteer.findByIdAndDelete(req.params.id);
     if (!deletedVolunteer) {
       return res.status(404).json({ message: "Volunteer not found" });
@@ -214,8 +202,9 @@ const loginVolunteer = async (req, res) => {
     if (!volunteer) {
       return res.status(400).json({ message: "Invalid email" });
     }
-
-    const isMatch = await volunteer.comparePassword(password);
+    console.log(volunteer);
+    // const isMatch = await volunteer.comparePassword(password);
+    const isMatch = await bcrypt.compare(password, volunteer.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
