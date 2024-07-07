@@ -270,6 +270,7 @@
 
             const form = event.target;
             const formData = new FormData(form);
+            console.log(formData);
 
             const homeAddress = {
                 address_line_1: formData.get('address_line_1'),
@@ -294,9 +295,6 @@
                 });
                 
                 console.log(response);
-
-                // const result = await response.json();
-                // console.log(result);
 
                 if (response.status == 201) {
                     alert("Registration successful");

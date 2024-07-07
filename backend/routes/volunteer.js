@@ -22,8 +22,8 @@ router.route("/getallvolunteers/available").get(authenticateMiddleWare, getAvail
 router
   .route("/:id")
   .get(authenticateMiddleWare, getVolunteerById)
-  .delete(authenticateMiddleWare, deleteVolunteerById)
   .patch(authenticateMiddleWare, updateVolunteerById);
+router.route('/delete').delete(authenticateMiddleWare,deleteVolunteerById);
 router
   .route("/updateavailabilitymode/:id")
   .patch(authenticateMiddleWare, updateVolunteerAvailability);
