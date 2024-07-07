@@ -10,8 +10,6 @@ const restaurantRoutes = require('./routes/restaurants.js');
 const foodTransaction = require('./routes/foodTransaction.js');
 const adminRoutes = require('./routes/admin.js'); 
 const fileUpload = require("express-fileupload");
-//Vagh Bhaiiii
-
 
 require('dotenv').config();
 

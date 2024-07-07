@@ -5,8 +5,7 @@ const jwt = require("jsonwebtoken");
 // Function to create a new volunteer // Working
 const createVolunteer = async (req, res) => {
   try {
-    // console.log(req.body);
-    // console.log(req.headers);
+    console.log(req.body);
     const {
       full_name,
       date_of_birth,
