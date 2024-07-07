@@ -151,4 +151,39 @@ const verifyRestaurant = async (req, res) => {
   }
 };
 
-module.exports = { adminlogin, verifyngo, verifyVolunteer, verifyRestaurant };
+const getAllUnverifiedNGOs = async (req, res) => {
+  try {
+    const ngos = await Unverified_NGOs.find();
+    res.status(200).json({ ngos });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getAllUnverifiedVolunteers = async (req, res) => {
+  try {
+    const volunteers = await Unverified_Individuals.find();
+    res.status(200).json(volunteers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getAllUnverifiedRestaurants = async (req, res) => {
+  try {
+    const restaurants = await Unverified_Restaurants.find();
+    res.status(200).json({ restaurants });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  adminlogin,
+  verifyngo,
+  verifyVolunteer,
+  verifyRestaurant,
+  getAllUnverifiedNGOs,
+  getAllUnverifiedVolunteers,
+  getAllUnverifiedRestaurants,
+};

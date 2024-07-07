@@ -179,11 +179,12 @@ const updateVolunteerAvailability = async(req,res)=> {
   }
 }
 
-// Function to delete a volunteer by ID
+// Function to delete a volunteer by ID 
+// To check.
 const deleteVolunteerById = async (req, res) => {
   try {
     console.log(req.user);
-    const deletedVolunteer = await Volunteer.findByIdAndDelete(req.params.id);
+    const deletedVolunteer = await Volunteer.findByIdAndDelete(req.user._id);
     if (!deletedVolunteer) {
       return res.status(404).json({ message: "Volunteer not found" });
     }
