@@ -152,14 +152,32 @@
         });
     }
 
-    // Function to handle accepting a donation request
-    function acceptRequest(button, transactionId) {
-        console.log(`Donation with ID ${transactionId} accepted.`);
-        button.textContent = 'Accepted';
-        button.disabled = true;
-        button.classList.remove('btn-success');
-        button.classList.add('btn-secondary');
-        // Implement further actions as needed
+    async function acceptRequest(button ,transactionId) {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch(`${BACKEND_URL}/foodtransaction/claimstatusupdate`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify({ transactionId })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to claim the food transaction');
+            }
+
+            const data = await response.json();
+            console.log(`Donation with ID ${transactionId} accepted:`, data);
+
+            button.textContent = 'Accepted';
+            button.disabled = true;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-secondary');
+        } catch (error) {
+            console.error('Error claiming food transaction:', error);
+        }
     }
 
     document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
