@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Guest page view of NGOs</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -59,61 +59,21 @@
     </nav>
     <!-- END nav -->
 
-    <!-- Search Bar -->
+  <!-- Search Bar -->
     <div class="container my-4" style="padding-top: 5rem">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for NGOs..." style="border-radius: 5px;">
-            <button class="btn btn-primary" type="button" style="border-radius: 5px;">Search</button>
+            <input type="text" id="searchInput" class="form-control" placeholder="Search for NGOs..." style="border-radius: 5px;">
+            <button id="clearButton" class="btn btn-secondary" type="button" style="border-radius: 5px; margin-left: 10px;">Clear</button>
         </div>
     </div>
 
-    <!-- NGOs List -->
-    <div class="container" id="ngoContainer">
+
+    <div id="ngoContainer" class="container">
         <div class="row">
-            <!-- NGO Card Example -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="NGO Image">
-                    <div class="card-body">
-                        <h5 class="card-title">NGO Name 1</h5>
-                        <p class="card-text">Manager Name: XYZ</p>
-                        <p class="card-text">Address: NGO Address</p>
-                        <p class="card-text">Email: NGO Phone</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ngoModal1"
-                            style="display: block; margin: auto;">Additional Information</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more NGO cards here as needed -->
-
-            <!-- Add more NGO Card Examples as needed -->
+            <!-- NGO cards will be appended here dynamically -->
         </div>
     </div>
-
-    <!-- NGO Modal 1 -->
-    <div class="modal fade" id="ngoModal1" tabindex="-1" role="dialog" aria-labelledby="ngoModalLabel1"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ngoModalLabel1">NGO Name 1</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Manager Name:</strong> XYZ</p>
-                    <p><strong>Address:</strong> NGO Address</p>
-                    <p><strong>Email:</strong> NGO Email</p>
-                    <p><strong>Phone:</strong> NGO Phone</p>
-                    <p><strong>Description:</strong> Detailed information about the NGO.</p>
-                </div>
-                <div class="modal-footer" style="justify-content: center;">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
@@ -213,15 +173,13 @@
         </svg></div>
 
 
-    <script>
+    <!-- <script>
         window.addEventListener('load', async () => {
             try {
 
-                console.log("here")
-                const response = await fetch('http://localhost:3000/ngo/get'); // Update with the correct backend URL
+                const response = await fetch('http://localhost:3000/ngo/get');
                 const data = await response.json();
-                // console.log(response);
-                console.log(data);
+               
                 if (response.status === 200) {
                     displayNGOs(data.ngos);
                 } else {
@@ -235,7 +193,7 @@
         function displayNGOs(ngos) {
             const ngoContainer = document.getElementById('ngoContainer');
             const rowDiv = ngoContainer.querySelector('.row');
-            rowDiv.innerHTML = ''; // Clear existing content
+            rowDiv.innerHTML = ''; 
 
             ngos.forEach((ngo, index) => {
                 console.log(index)
@@ -254,7 +212,7 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+           
             <div class="modal fade" id="ngoModal${index}" tabindex="-1" aria-labelledby="ngoModalLabel${index}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -296,40 +254,6 @@
         ${address.city}, ${address.state}, ${address.zip_code}, ${address.country}
     `;
         }
-    </script>
-
-    <!-- <script>
-        window.addEventListener('load', function () {
-            fetch('new.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Fetched data:', data);
-                    let ngoList = document.getElementById('ngoList');
-                    data.NGOs.forEach((ngo, index) => {
-                        ngoList.innerHTML += `
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card">
-                            <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">${ngo.name}</h4>
-                                <p class="card-text">Manager: ${ngo.manager}</p>
-                                <p class="card-text">Address: ${ngo.address}</p>
-                                <p class="card-text">Email: ${ngo.email}</p>
-                                <p class="card-text">Phone: ${ngo.phone}</p>
-                                <a href="#" class="btn btn-primary">Additional Information</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        });
     </script> -->
 
     <script src="js/new_js.js"></script>
