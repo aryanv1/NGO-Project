@@ -31,7 +31,4 @@ router.route('/claimstatusupdate').patch(authenticationMiddleware,claimFoodTrans
 router.route('/completion').post(authenticationMiddleware,createFoodTransactionLog);
 
 
-// router.route('/getDetail/:id').get(getFoodDonationById);
-// router.route('/update/:id').patch(updateFoodDonation).delete(deleteFoodDonation);
-
 module.exports = router;

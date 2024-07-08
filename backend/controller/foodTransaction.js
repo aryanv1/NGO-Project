@@ -143,7 +143,7 @@ const createFoodTransaction = async (req, res) => {
 // Get Available Food Transactions
 const getAvailableFoodTransactions = async (req, res) => {
   try {
-    const availableTransactions = await FoodTransaction.find({ claimed: false });
+    const availableTransactions = await FoodTransaction.find({ claimed: false }).populate('donor', 'name');
     res.status(200).json(availableTransactions);
   } catch (error) {
     res.status(400).json({ error: error.message });
