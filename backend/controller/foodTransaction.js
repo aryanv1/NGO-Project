@@ -27,16 +27,14 @@ const createFoodTransaction = async (req, res) => {
 
     if (contactPerson) {
       parsed_contactPerson = JSON.parse(contactPerson);
-      console.log(
-        `this is contact person provided by frontend : ${contactPerson}`
-      );
     } 
-    
-    const restaurant = await Restaurant.findById(donor);
-    parsed_contactPerson = {
-      name: restaurant.manager_name,
-      phone: restaurant.primary_contact_phone,
-    };
+    else{
+      const restaurant = await Restaurant.findById(donor);
+      parsed_contactPerson = {
+        name: restaurant.manager_name,
+        phone: restaurant.primary_contact_phone,
+      };
+    }
 
     // console.log("-------------  Parsed DATA -------------------");
     // console.log(`Parsed contact  : ${parsed_contactPerson}`);
@@ -113,7 +111,7 @@ const createFoodTransaction = async (req, res) => {
     });
 
     const NGOEmails = nearbyNGOs.map(ngo => ngo.primary_contact.email);
-
+    const restaurant = await Restaurant.findById(donor);
     sendReport(NGOEmails, restaurant.name , restaurant.manager_name, restaurant.primary_contact_phone);
 
     res.status(201).json({

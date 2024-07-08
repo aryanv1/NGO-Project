@@ -76,99 +76,6 @@
         </div>
     </nav>
     <!-- END nav -->
-    <!-- Registration Starts  -->
-    <!-- <div>
-        <div class="container" style="margin-top: 5.5rem; padding-top: 2rem; padding-bottom: 2rem; max-width: 100rem;">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="registration-form bg-light p-5 rounded shadow-lg p-3 mb-5 bg-white rounded">
-                        <h1 class="mb-4" style="text-align: center;">Food Donation Form</h1>
-                        <form action="" method="post">
-                            <div class="form-group">
-                                <label for="foodType">Food (Eg. Daal, Rice, Roti)</label>
-                                <input type="text" class="form-control" style="border-radius: 5px;" id="foodType"
-                                    name="foodType" placeholder="Enter Food Type" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="quantity">Quantity</label>
-                                <input type="number" class="form-control" style="border-radius: 5px;" id="quantity"
-                                    name="quantity" placeholder="Enter Quantity" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dietaryCategories">Food Category</label>
-                                <select class="form-control" style="border-radius: 5px;" id="dietaryCategories"
-                                    name="dietaryCategories">
-                                    <option value="disabled" selected disabled>Select</option>
-                                    <option value="Veg">Veg</option>
-                                    <option value="Non-Veg">Non-Veg</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="packaged">Packaged</label>
-                                <select class="form-control" style="border-radius: 5px;" id="packaged" name="packaged">
-                                    <option value="disabled" selected disabled>Select</option>
-                                    <option value="true">Yes</option>
-                                    <option value="false">No</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="pickupLocation">Pickup Address</label>
-                                <input type="text" class="form-control" style="border-radius: 5px;" id="pickupLocation"
-                                    name="pickupLocation" placeholder="Enter Pickup Location" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="location">Location</label>
-                                <div class="location-field">
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <input type="number" class="form-control" style="border-radius: 5px;"
-                                                id="latitude" name="latitude" placeholder="Latitude" required>
-                                        </div>
-                                        <div class="col">
-                                            <input type="number" class="form-control" style="border-radius: 5px;"
-                                                id="longitude" name="longitude" placeholder="Longitude" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px;"
-                                onclick="getLocation()">Get Location</button>
-                            <div class="form-group">
-                                <label for="contactPersonName">Contact Person Name</label>
-                                <input type="text" class="form-control" style="border-radius: 5px;"
-                                    id="contactPersonName" name="contactPersonName"
-                                    placeholder="Enter Contact Person Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contactPersonPhone">Contact Person Phone</label>
-                                <input type="text" class="form-control" style="border-radius: 5px;"
-                                    id="contactPersonPhone" name="contactPersonPhone"
-                                    placeholder="Enter Contact Person Phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="photos">Photos (Maximum 5)</label>
-                                <input type="file" class="form-control"
-                                    style="border-radius: 5px; padding-top: 0.75rem;" id="photos" name="photos"
-                                    accept="image/*" multiple required>
-                                <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
-                                    5 photos.</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="additionalNotes">Additional Notes</label>
-                                <textarea class="form-control" style="border-radius: 5px;" id="additionalNotes"
-                                    name="additionalNotes" placeholder="Enter Additional Notes"></textarea>
-                            </div>
-                            <div class="form-group text-center">
-                                <button type="submit" class="btn btn-success btn-lg" style="border-radius: 5px;">Submit
-                                    Donation</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div>
       <div
         class="container"
@@ -179,250 +86,278 @@
           max-width: 100rem;
         "
       >
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div
-              class="registration-form bg-light p-5 rounded shadow-lg p-3 mb-5 bg-white rounded"
-            >
-              <h1 class="mb-4" style="text-align: center">
-                Food Donation Form
-              </h1>
-              <form id="foodDonationForm">
-                <div class="form-group">
-                  <label for="foodItems"
-                    >Food Items (Eg. Daal, Rice, Roti)</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="foodItems"
-                    name="foodItems"
-                    placeholder="Enter Food Items"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="quantity">Quantity</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="quantity"
-                    name="quantity"
-                    placeholder="Enter Quantity"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="foodtype">Food Category</label>
-                  <select
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="foodtype"
-                    name="foodtype"
-                  >
-                    <option value="disabled" selected disabled>Select</option>
-                    <option value="Veg">Veg</option>
-                    <option value="Non-Veg">Non-Veg</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="packaged">Packaged</label>
-                  <select
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="packaged"
-                    name="packaged"
-                  >
-                    <option value="disabled" selected disabled>Select</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="pickupLocation">Pickup Address</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="pickupLocation"
-                    name="pickupLocation"
-                    placeholder="Enter Pickup Location"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="location">Location</label>
-                  <div class="location-field">
-                    <div class="form-row">
-                      <div class="col">
-                        <input
-                          type="number"
-                          class="form-control"
-                          style="border-radius: 5px"
-                          id="latitude"
-                          name="latitude"
-                          placeholder="Latitude"
-                          step="any"
-                          required
-                        />
-                      </div>
-                      <div class="col">
-                        <input
-                          type="number"
-                          class="form-control"
-                          style="border-radius: 5px"
-                          id="longitude"
-                          name="longitude"
-                          placeholder="Longitude"
-                          step="any"
-                          required
-                        />
-                      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="registration-form bg-light p-5 rounded shadow-lg p-3 mb-5 bg-white rounded">
+            <h1 class="mb-4" style="text-align: center">Food Donation Form</h1>
+            <form id="foodDonationForm">
+              <div class="form-group">
+                <label for="foodItems">Food Items (Eg. Daal, Rice, Roti)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="foodItems"
+                  name="foodItems"
+                  placeholder="Enter Food Items"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="quantity"
+                  name="quantity"
+                  placeholder="Enter Quantity"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="foodtype">Food Category</label>
+                <select
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="foodtype"
+                  name="foodtype"
+                >
+                  <option value="disabled" selected disabled>Select</option>
+                  <option value="Veg">Veg</option>
+                  <option value="Non-Veg">Non-Veg</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="packaged">Packaged</label>
+                <select
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="packaged"
+                  name="packaged"
+                >
+                  <option value="disabled" selected disabled>Select</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="address_line_1">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border-radius: 5px; margin-bottom: 0.5rem;"
+                  id="address_line_1"
+                  name="address_line_1"
+                  placeholder="Enter Address Line 1"
+                  required
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border-radius: 5px;"
+                  id="address_line_2"
+                  name="address_line_2"
+                  placeholder="Enter Address Line 2"
+                />
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border-radius: 5px;"
+                  id="city"
+                  name="city"
+                  placeholder="Enter City"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <div class="location-field">
+                  <div class="form-row">
+                    <div class="col">
+                      <input
+                        type="number"
+                        class="form-control"
+                        style="border-radius: 5px"
+                        id="latitude"
+                        name="latitude"
+                        placeholder="Latitude"
+                        step="any"
+                        required
+                      />
+                    </div>
+                    <div class="col">
+                      <input
+                        type="number"
+                        class="form-control"
+                        style="border-radius: 5px"
+                        id="longitude"
+                        name="longitude"
+                        placeholder="Longitude"
+                        step="any"
+                        required
+                      />
                     </div>
                   </div>
                 </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary mb-4"
+                style="border-radius: 30px"
+                onclick="getLocation()"
+              >
+                Get Location
+              </button>
+              <div class="form-group">
+                <label for="contactPersonName">Contact Person Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="contactPersonName"
+                  name="contactPersonName"
+                  placeholder="Enter Contact Person Name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contactPersonPhone">Contact Person Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="contactPersonPhone"
+                  name="contactPersonPhone"
+                  placeholder="Enter Contact Person Phone"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="photos">Photos (Maximum 5)</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  style="border-radius: 5px; padding-top: 0.75rem"
+                  id="photos"
+                  name="photos"
+                  accept="image/*"
+                  multiple
+                  required
+                />
+                <p id="photo-error" style="color: red; display: none">
+                  You can only upload a maximum of 5 photos.
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="additionalNotes">Additional Notes</label>
+                <textarea
+                  class="form-control"
+                  style="border-radius: 5px"
+                  id="additionalNotes"
+                  name="additionalNotes"
+                  placeholder="Enter Additional Notes"
+                ></textarea>
+              </div>
+              <div class="form-group text-center">
                 <button
-                  type="button"
-                  class="btn btn-primary mb-4"
-                  style="border-radius: 30px"
-                  onclick="getLocation()"
+                  type="submit"
+                  class="btn btn-success btn-lg"
+                  style="border-radius: 5px"
                 >
-                  Get Location
+                  Submit Donation
                 </button>
-                <div class="form-group">
-                  <label for="contactPersonName">Contact Person Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="contactPersonName"
-                    name="contactPersonName"
-                    placeholder="Enter Contact Person Name"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="contactPersonPhone">Contact Person Phone</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="contactPersonPhone"
-                    name="contactPersonPhone"
-                    placeholder="Enter Contact Person Phone"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="photos">Photos (Maximum 5)</label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    style="border-radius: 5px; padding-top: 0.75rem"
-                    id="photos"
-                    name="photos"
-                    accept="image/*"
-                    multiple
-                    required
-                  />
-                  <p id="photo-error" style="color: red; display: none">
-                    You can only upload a maximum of 5 photos.
-                  </p>
-                </div>
-                <div class="form-group">
-                  <label for="additionalNotes">Additional Notes</label>
-                  <textarea
-                    class="form-control"
-                    style="border-radius: 5px"
-                    id="additionalNotes"
-                    name="additionalNotes"
-                    placeholder="Enter Additional Notes"
-                  ></textarea>
-                </div>
-                <div class="form-group text-center">
-                  <button
-                    type="submit"
-                    class="btn btn-success btn-lg"
-                    style="border-radius: 5px"
-                  >
-                    Submit Donation
-                  </button>
-                </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+      
     <!-- Register End -->
 
     <script>
-      const BACKEND_URL = "http://localhost:3000";
-
-      document
-        .getElementById("foodDonationForm")
-        .addEventListener("submit", async function (event) {
+        const BACKEND_URL = "http://localhost:3000";
+        document.getElementById('foodDonationForm').addEventListener('submit', async function (event) {
           event.preventDefault();
-
+      
           const form = event.target;
           const formData = new FormData(form);
-
-          const photos = document.getElementById("photos").files;
+          console.log(formData);
+      
+          // Construct pickupLocation object
+          const pickupLocation = {
+            address: {
+              address_line_1: formData.get('address_line_1'),
+              address_line_2: formData.get('address_line_2'),
+              city: formData.get('city'),
+            },
+            geo_location: {
+              latitude: formData.get('latitude'),
+              longitude: formData.get('longitude'),
+            },
+          };
+          formData.append('pickupLocation', JSON.stringify(pickupLocation));
+      
+          // Construct contactPerson object
+          const contactPerson = {
+            name: formData.get('contactPersonName'),
+            phone: formData.get('contactPersonPhone'),
+          };
+          formData.append('contactPerson', JSON.stringify(contactPerson));
+      
+          // Construct packaged boolean
+          const packaged = formData.get('packaged') === 'true';
+      
+          // Append packaged value
+          formData.set('packaged', packaged);
+      
+          // Prepare food photos array
+          const photos = formData.getAll('photos');
           if (photos.length > 5) {
-            document.getElementById("photo-error").style.display = "block";
+            document.getElementById('photo-error').style.display = 'block';
             return;
           } else {
-            document.getElementById("photo-error").style.display = "none";
+            document.getElementById('photo-error').style.display = 'none';
           }
-
-          for (const photo of photos) {
-            formData.append("photos", photo);
-          }
-          console.log(formData);
-
+      
           try {
-            const token = localStorage.getItem("authToken");
-            const response = await fetch(
-              `${BACKEND_URL}/foodtransaction/create`,
-              {
-                method: "POST",
-                headers: {
-                  Authorization: token,
+            const token = localStorage.getItem('authToken');
+            const response = await fetch(`${BACKEND_URL}/foodtransaction/create`, {
+              method: 'POST',
+              headers: {
+                    'Authorization': token
                 },
-                body: formData,
-              }
-            );
-
+              body: formData,
+            });
+      
             const result = await response.json();
             console.log(result);
-
+      
             if (response.ok) {
-              alert("Food donation created successfully");
-              form.reset();
+              alert('Food donation created successfully');
+              window.location.href = '/Frontend/index.html';
             } else {
               alert(result.message);
             }
           } catch (error) {
-            console.error("Error creating food donation:", error);
-            alert("Failed to create food donation");
+            alert('An error occurred. Please try again later.');
           }
         });
-
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
-      }
-
-      function showPosition(position) {
-        document.getElementById("latitude").value = position.coords.latitude;
-        document.getElementById("longitude").value = position.coords.longitude;
-      }
-    </script>
+      
+        document.getElementById('photos').addEventListener('change', function (event) {
+          const files = event.target.files;
+          if (files.length > 5) {
+            document.getElementById('photo-error').style.display = 'block';
+            event.target.value = '';
+          } else {
+            document.getElementById('photo-error').style.display = 'none';
+          }
+        });
+      </script>
+      
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
