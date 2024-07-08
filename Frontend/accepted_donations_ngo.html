@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Food Donation Requests</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .ftco-navbar-light {
+            background: #343a40 !important;
+            top: 0;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-details {
+            flex: 1;
+        }
+
+        .btn-success {
+            border-radius: 4px;
+        }
+
+        .photo-container {
+            max-width: 90%;
+            /* Adjust as needed */
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .photo-tile {
+            display: flex;
+            flex-wrap: nowrap;
+            /* Ensure photos stay in a row */
+        }
+
+        .tile-photo {
+            max-width: 100%;
+            /* Ensures each photo fits within its container */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin-right: 10px;
+            /* Space between photos */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Welfare</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item active"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
+                    <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a>
+                    </li>
+                    <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a>
+                    </li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+
+    <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
+        <div class="container mt-5">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">Food: Bread, Milk, Cheese</h5>
+                            <p class="card-text">Quantity: 20 units</p>
+                            <p class="card-text">Category: Perishable</p>
+                            <p class="card-text">Packaged: Yes</p>
+                            <p class="card-text">Pickup Address: 123 Main St, Cityville</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text">Latitude: 40.7128</p>
+                            <p class="card-text">Longitude: -74.0060</p>
+                            <p class="card-text">Contact Person: John Doe</p>
+                            <p class="card-text">Contact Phone: (555) 123-4567</p>
+                            <p class="card-text">Donor: Jane Smith</p>
+                            <p class="card-text">Additional Notes: Please pick up before 5 PM</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success btn-accept">Accept Donation</button>
+                        <button class="btn btn-primary btn-view-photos ml-2">View Photos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Modal -->
+        <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="photoModalLabel">Photos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="photo-container">
+                            <div class="photo-tile">
+                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
+                            <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        function createDonationCards(donations) {
+            const container = document.getElementById('foodTransactionsContainer');
+            container.innerHTML = '';
+
+            donations.forEach(donation => {
+                const card = document.createElement('div');
+                card.className = 'card mb-4';
+                card.innerHTML = `
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="card-title">Food: ${donation.foodItems.join(', ')}</h5>
+                        <p class="card-text">Quantity: ${donation.quantity}</p>
+                        <p class="card-text">Category: ${donation.foodtype}</p>
+                        <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
+                        <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}, ${donation.pickupLocation.address.city}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text">Latitude: ${donation.pickupLocation.geo_location.latitude}</p>
+                        <p class="card-text">Longitude: ${donation.pickupLocation.geo_location.longitude}</p>
+                        <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
+                        <p class="card-text">Contact Phone: ${donation.contactPerson.phone}</p>
+                        <p class="card-text">Donor: ${donation.donor.name}</p>
+                        <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
+                    </div>
+                </div>
+                <div class="photo-tile mt-3">
+                    <img src="path/to/photo1.jpg" alt="Photo 1" class="tile-photo">
+                    <img src="path/to/photo2.jpg" alt="Photo 2" class="tile-photo">
+                    <img src="path/to/photo3.jpg" alt="Photo 3" class="tile-photo">
+                    <img src="path/to/photo4.jpg" alt="Photo 4" class="tile-photo">
+                    <img src="path/to/photo5.jpg" alt="Photo 5" class="tile-photo">
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-success btn-accept" onclick="acceptRequest(this, '${donation._id}')">Accept Donation</button>
+                </div>
+            </div>
+        `;
+                container.appendChild(card);
+            });
+        }
+    </script> -->
+
+    <script>
+        // View Photos button click event
+        document.querySelector('.btn-view-photos').addEventListener('click', function () {
+            $('#photoModal').modal('show');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Variables to track current photo index and total number of photos
+            let currentPhotoIndex = 0;
+            const photos = document.querySelectorAll('.tile-photo');
+            const numPhotos = photos.length;
+
+            // Function to update displayed photo
+            function updateDisplayedPhoto() {
+                photos.forEach(photo => {
+                    photo.style.display = 'none'; // Hide all photos
+                });
+                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
+            }
+
+            // Next photo button click handler
+            document.querySelector('.btn-next-photo').addEventListener('click', function () {
+                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
+                updateDisplayedPhoto(); // Update displayed photo
+            });
+
+            // Previous photo button click handler
+            document.querySelector('.btn-previous-photo').addEventListener('click', function () {
+                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
+                updateDisplayedPhoto(); // Update displayed photo
+            });
+
+            // Initial setup
+            updateDisplayedPhoto(); // Show initial photo
+        });
+
+
+    </script>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Welfare</h2>
+                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-4">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Recent Blog</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
+                                        the blind texts</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
+                                        the blind texts</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Services</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Cooked</a></li>
+                            <li><a href="#" class="py-2 d-block">Dry Food</a></li>
+                            <li><a href="#" class="py-2 d-block">Transport</a></li>
+                            <li><a href="#" class="py-2 d-block">Other</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain
+                                        View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
+                                            210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span
+                                            class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="icon-heart"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
