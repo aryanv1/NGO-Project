@@ -157,6 +157,8 @@
         console.log(`Donation with ID ${transactionId} accepted.`);
         button.textContent = 'Accepted';
         button.disabled = true;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-secondary');
         // Implement further actions as needed
     }
 
@@ -268,14 +270,7 @@
         </svg></div> -->
 
     <!-- <script src="js/new_js.js"></script> -->
-    <script>
-        function acceptRequest(button) {
-            button.textContent = 'Accepted';
-            button.classList.remove('btn-success');
-            button.classList.add('btn-secondary');
-            button.disabled = true;
-        }
-    </script>
+
 </body>
 
 </html>
