@@ -210,12 +210,13 @@ const loginVolunteer = async (req, res) => {
     }
 
     const token = jwt.sign({ id: volunteer._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "5d",
     });
 
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error", error: error.message });
+    console.log("Error at volunteer login");
+    res.status(500).json({ message: error.message });
   }
 };
 

@@ -121,7 +121,7 @@ const loginNGO = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Error during login:", error);
+    console.error("Error during ngo login");
     res.status(500).json({
       message: "Internal server error",
       error: error.message,

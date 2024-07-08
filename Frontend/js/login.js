@@ -22,6 +22,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.ok) {
             // Handle successful login, e.g., redirect to another page
+            localStorage.setItem('authToken', result.token);
             alert("LogIn Successful")
             window.location.href = '/Frontend/index.html';
 

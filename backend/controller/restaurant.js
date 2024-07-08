@@ -99,7 +99,10 @@ const loginRestaurant = async (req, res) => {
 
     const token = jwt.sign({ id: restaurant._id }, process.env.JWT_SECRET, { expiresIn: '5d' });
 
-    res.status(200).json({ token, restaurant });
+    res.status(200).json({
+      message: "Login successful",
+      token,
+    });
   } catch (error) {
     console.log("Error at restaurant login");
     res.status(500).json({ message: error.message });
