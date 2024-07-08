@@ -140,16 +140,16 @@ const getAvailableFoodTransactions = async (req, res) => {
 const getAllFoodLogs = async (req, res) => {
   try {
 
-    const pipe = [{
-      $project:{
-        ngo:1,
-        donor:1,
-        _id:0
-      }
-    }];
+    // const pipe = [{
+    //   $project:{
+    //     ngo:1,
+    //     donor:1,
+    //     _id:0
+    //   }
+    // }];
 
-    const allFoodLogs = await FoodTransactionLogs.aggregate(pipe);
-
+    // const allFoodLogs = await FoodTransactionLogs.aggregate(pipe);
+    const allFoodLogs = await FoodTransactionLogs.find();
     res.status(200).json(allFoodLogs);
   } catch (error) {
     res.status(400).json({ error: error.message });
