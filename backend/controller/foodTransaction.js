@@ -178,8 +178,8 @@ const getLogsofRestaurant = async (req, res) => {
 
 const getTransactionsOfNGO = async (req, res) => {
   try {
-    const getTransactionsOfNGO = await FoodTransaction.find({ngo : req.user.id});
-    res.status(200).json(getTransactionsOfNGO);
+    const transactions = await FoodTransaction.find({ ngo: req.user.id }).populate('donor', 'name');
+    res.status(200).json(transactions);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
