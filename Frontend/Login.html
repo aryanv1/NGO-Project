@@ -71,6 +71,7 @@
                       <option value="ngo">NGO</option>
                       <option value="restaurant">Restaurant/Community Hall</option>
                       <option value="volunteer">Volunteer</option>
+                      <option value="admin">Admin</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -197,7 +198,7 @@
     function changeInputType() {
       const userType = document.getElementById('userType').value;
       const emailInput = document.getElementById('email');
-      if (userType === 'restaurant') {
+      if (userType === 'restaurant' || userType === 'admin') {
         emailInput.setAttribute('type', 'text');
         emailInput.setAttribute('placeholder', 'Enter username');
       } else {
