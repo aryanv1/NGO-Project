@@ -23,9 +23,26 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         if (response.ok) {
             // Handle successful login, e.g., redirect to another page
             localStorage.setItem('authToken', result.token);
-            alert("LogIn Successful")
-            window.location.href = '/Frontend/index.html';
+            alert("Login Successful");
 
+            // Redirect based on user type
+            let redirectPath = '';
+            switch (userType) {
+                case 'admin':
+                    redirectPath = '/frontend/admin_Ind.html';
+                    break;
+                case 'ngo':
+                    redirectPath = '/frontend/index_ngo.html';
+                    break;
+                case 'restaurant':
+                    redirectPath = '/frontend/index_restaurant.html';
+                    break;
+                case 'volunteer':
+                    redirectPath = '/frontend/index_Ind.html';
+                    break;
+            }
+
+            window.location.href = redirectPath;
         } else {
             // Display error message
             alert(result.message);
