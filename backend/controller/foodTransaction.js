@@ -75,30 +75,19 @@ const createFoodTransaction = async (req, res) => {
     // console.log(`Parsed pick-up Location : ${parsed_pickup_location}`);
     // console.log("-------------  Parsed DATA -------------------");
 
-    // To upload photos of food.
-    const fileName1 = req.files.photo1.mimetype;
-    const fileName2 = req.files.photo2.mimetype;
-    const fileName3 = req.files.photo3.mimetype;
-
     const photoUrls = [];
-    const photoUrl1 = await docsUpload(
-      req.files.photo1.tempFilePath,
-      "photo",
-      fileName1
-    );
-    const photoUrl2 = await docsUpload(
-      req.files.photo2.tempFilePath,
-      "photo",
-      fileName2
-    );
-    const photoUrl3 = await docsUpload(
-      req.files.photo3.tempFilePath,
-      "photo",
-      fileName3
-    );
-    photoUrls.push(photoUrl1);
-    photoUrls.push(photoUrl2);
-    photoUrls.push(photoUrl3);
+
+    for (const photo of req.files.photos) {
+      if (photo) {
+        const fileName = photo.mimetype;
+        const photoUrl = await docsUpload(
+          photo.tempFilePath,
+          "photo",
+          fileName
+        );
+        photoUrls.push(photoUrl);
+      }
+    }
 
     const foodTransaction = new FoodTransaction({
       donor,
