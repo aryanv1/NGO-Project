@@ -1,7 +1,5 @@
 // For GeoLocation
 
-const { Restaurant } = require("../../backend/models/restaurant");
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
