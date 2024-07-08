@@ -76,12 +76,17 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="restaurant_main_2.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item"><a href="Login.html" class="nav-link">SignIn</a></li>
+                    <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item active"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
+                    <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a>
+                    </li>
+                    <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a>
+                    </li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -97,34 +102,34 @@
         const BACKEND_URL = "http://localhost:3000";
 
         async function fetchFoodTransactions() {
-        try {
-            const token = localStorage.getItem('authToken');
-            console.log(token);
-            const response = await fetch(`${BACKEND_URL}/foodtransaction/available`, {
-                headers: {
-                    'Authorization': token
+            try {
+                const token = localStorage.getItem('authToken');
+                console.log(token);
+                const response = await fetch(`${BACKEND_URL}/foodtransaction/available`, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch available food transactions');
                 }
-            });
 
-            if (!response.ok) {
-                throw new Error('Failed to fetch available food transactions');
+                const data = await response.json();
+                createDonationCards(data);
+            } catch (error) {
+                console.error('Error fetching food transactions:', error);
             }
-
-            const data = await response.json();
-            createDonationCards(data);
-        } catch (error) {
-            console.error('Error fetching food transactions:', error);
         }
-    }
 
-    function createDonationCards(donations) {
-        const container = document.getElementById('foodTransactionsContainer');
-        container.innerHTML = '';
+        function createDonationCards(donations) {
+            const container = document.getElementById('foodTransactionsContainer');
+            container.innerHTML = '';
 
-        donations.forEach(donation => {
-            const card = document.createElement('div');
-            card.className = 'card mb-4';
-            card.innerHTML = `
+            donations.forEach(donation => {
+                const card = document.createElement('div');
+                card.className = 'card mb-4';
+                card.innerHTML = `
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -148,25 +153,25 @@
                     </div>
                 </div>
             `;
-            container.appendChild(card);
-        });
-    }
+                container.appendChild(card);
+            });
+        }
 
-    // Function to handle accepting a donation request
-    function acceptRequest(button, transactionId) {
-        console.log(`Donation with ID ${transactionId} accepted.`);
-        button.textContent = 'Accepted';
-        button.disabled = true;
-        button.classList.remove('btn-success');
-        button.classList.add('btn-secondary');
-        // Implement further actions as needed
-    }
+        // Function to handle accepting a donation request
+        function acceptRequest(button, transactionId) {
+            console.log(`Donation with ID ${transactionId} accepted.`);
+            button.textContent = 'Accepted';
+            button.disabled = true;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-secondary');
+            // Implement further actions as needed
+        }
 
-    document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
+        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
 
-    // Call fetchFoodTransactions when the page loads
-    window.onload = fetchFoodTransactions;
-    
+        // Call fetchFoodTransactions when the page loads
+        window.onload = fetchFoodTransactions;
+
     </script>
 
     <!-- Footer Start -->
@@ -220,11 +225,17 @@
                     <div class="ftco-footer-widget mb-4 ml-md-4">
                         <h2 class="ftco-heading-2">Site Links</h2>
                         <ul class="list-unstyled">
-                            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                            <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                            <li class="nav-item"><a href="restaurant_main_2.html" class="nav-link">NGO</a></li>
+                            <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
+                            <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
+                            <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
+                            <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
+                            <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+                            <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
+                            <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted
+                                    Donations</a></li>
+                            <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations
+                                    History</a></li>
+                            <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
                         </ul>
                     </div>
                 </div>
