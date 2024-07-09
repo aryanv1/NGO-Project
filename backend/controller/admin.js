@@ -116,7 +116,7 @@ const verifyRestaurant = async (req, res) => {
     const { rest_id } = req.body;
 
     const rest_data = await Unverified_Restaurants.findOne({ _id: rest_id });
-    // console.log(vol_data);
+    
     const data = new Restaurant({
       name: rest_data.name,
       username: rest_data.username,
