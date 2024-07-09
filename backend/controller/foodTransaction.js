@@ -220,8 +220,7 @@ const claimFoodTransaction = async (req, res) => {
     transaction.claimed = true;
     transaction.ngo = ngoId;
     await transaction.save();
-
-    res.status(200).json(transaction);
+    res.status(200).json();
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -79,169 +79,86 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-<<<<<<< HEAD
-                    <li class="nav-item"><a href="volunteer_find.html" class="nav-link">Volunteers</a></li>
-                    <li class="nav-item active"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
-                    <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a>
-=======
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Donations
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="food_transations_ngo.html">Incoming Donations</a></li>
-                            <li><a class="dropdown-item" href="accepted_donations_ngo.html">Accepted Donations</a></li>
-                            <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
-                        </ul>
->>>>>>> refs/remotes/origin/main
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="icon-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">View Profile</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
-                        </div>
-                    </li>
+          <a class="navbar-brand" href="index.html">Welfare</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+    
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
+              <li class="nav-item "><a href="about_ngo.html" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
+              <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Donations
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="food_transations_ngo.html">Incoming Donations</a></li>
+                  <li><a class="dropdown-item" href="accepted_donations_ngo.html">Accepted Donations</a></li>
+                  <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
                 </ul>
-            </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="icon-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="#">View Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
     </nav>
     <!-- END nav -->
 
     <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
-        <div class="container mt-5">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5 class="card-title">Food: Bread, Milk, Cheese</h5>
-                            <p class="card-text">Quantity: 20 units</p>
-                            <p class="card-text">Category: Perishable</p>
-                            <p class="card-text">Packaged: Yes</p>
-                            <p class="card-text">Pickup Address: 123 Main St, Cityville</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="card-text">Latitude: 40.7128</p>
-                            <p class="card-text">Longitude: -74.0060</p>
-                            <p class="card-text">Contact Person: John Doe</p>
-                            <p class="card-text">Contact Phone: (555) 123-4567</p>
-                            <p class="card-text">Donor: Jane Smith</p>
-                            <p class="card-text">Additional Notes: Please pick up before 5 PM</p>
+        <!-- Food transactions will be dynamically inserted here -->
+    </div>
+
+    <!-- Photo Modal -->
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="align-items: center;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photoModalLabel">Photos</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="photo-container">
+                        <div class="photo-tile">
+                            <!-- Photos will be dynamically inserted here -->
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept">Accept Donation</button>
-                        <button class="btn btn-primary btn-view-photos ml-2">View Photos</button>
+                        <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
+                        <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Photo Modal -->
-        <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="justify-content: center;">
-                        <h5 class="modal-title" id="photoModalLabel">Photos</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="photo-container">
-                            <div class="photo-tile">
-                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
-                                <img src="images/image_3.jpg" alt="Photo 1" class="tile-photo">
-                                <img src="images/image_2.jpg" alt="Photo 1" class="tile-photo">
-                                <img src="images/image_5.jpg" alt="Photo 1" class="tile-photo">
-                                <img src="images/image_4.jpg" alt="Photo 1" class="tile-photo">
-                            </div>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
-                            <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
-                        </div>
-                    </div>
-                    <div class="modal-footer" style="justify-content: center;">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // View Photos button click event
-        document.querySelector('.btn-view-photos').addEventListener('click', function () {
-            $('#photoModal').modal('show');
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Variables to track current photo index and total number of photos
-            let currentPhotoIndex = 0;
-            const photos = document.querySelectorAll('.tile-photo');
-            const numPhotos = photos.length;
-
-            // Function to update displayed photo
-            function updateDisplayedPhoto() {
-                photos.forEach(photo => {
-                    photo.style.display = 'none'; // Hide all photos
-                });
-                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
-            }
-
-            // Next photo button click handler
-            document.querySelector('.btn-next-photo').addEventListener('click', function () {
-                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
-                updateDisplayedPhoto(); // Update displayed photo
-            });
-
-            // Previous photo button click handler
-            document.querySelector('.btn-previous-photo').addEventListener('click', function () {
-                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
-                updateDisplayedPhoto(); // Update displayed photo
-            });
-
-            // Initial setup
-            updateDisplayedPhoto(); // Show initial photo
-        });
-
-
-    </script>
-
-    <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
-        <!-- Food transactions will be dynamically inserted here -->
-        <div class="extra text-center" style="height: 35rem;">
-            <p>No Transactions Done</p>
-        </div>
-    </div>
-
-    <!-- <script>
-        const BACKEND_URL = "http://localhost:3000";
+        const BACKEND_URL = "http://localhost:3000"; // Update this with your actual backend URL
 
         async function fetchFoodTransactions() {
             try {
                 const token = localStorage.getItem('authToken');
-                console.log(token);
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/available`, {
+                    method: "GET",
                     headers: {
                         'Authorization': token
                     }
@@ -285,7 +202,8 @@
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept" onclick="acceptRequest(this, '${donation._id}')">Accept Donation</button>
+                        <button class="btn btn-success btn-accept" onclick="claimDonation('${donation._id}', this)">Accept Donation</button>
+                        <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
                     </div>
                 </div>
             `;
@@ -293,40 +211,71 @@
             });
         }
 
-        async function acceptRequest(button, transactionId) {
+        async function claimDonation(transactionId, button) {
             try {
                 const token = localStorage.getItem('authToken');
+                console.log(token);
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/claimstatusupdate`, {
-                    method: 'PATCH',
+                    method: "PATCH",
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': token
                     },
-                    body: JSON.stringify({ transactionId })
+                    body: JSON.stringify({transactionId}),
                 });
+                console.log(response);
 
-                if (!response.ok) {
-                    throw new Error('Failed to claim the food transaction');
-                }
+                if(response.status == 200)
+                alert('Donation claimed successfully');
 
-                const data = await response.json();
-                console.log(`Donation with ID ${transactionId} accepted:`, data);
-
-                button.textContent = 'Accepted';
-                button.disabled = true;
-                button.classList.remove('btn-success');
-                button.classList.add('btn-secondary');
+                const card = button.closest('.card');
+                card.remove();
             } catch (error) {
-                console.error('Error claiming food transaction:', error);
+                console.error('Error claiming donation:', error);
+                alert('Error claiming donation');
             }
         }
 
+        function showPhotos(photos) {
+            const photoContainer = document.querySelector('.photo-tile');
+            photoContainer.innerHTML = ''; // Clear previous photos
+
+            photos.forEach((photo, index) => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = `Photo ${index + 1}`;
+                img.className = 'tile-photo';
+                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
+                photoContainer.appendChild(img);
+            });
+
+            let currentPhotoIndex = 0;
+            const numPhotos = photos.length;
+
+            function updateDisplayedPhoto() {
+                const photos = document.querySelectorAll('.tile-photo');
+                photos.forEach(photo => {
+                    photo.style.display = 'none'; // Hide all photos
+                });
+                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
+            }
+
+            document.querySelector('.btn-next-photo').onclick = function () {
+                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
+                updateDisplayedPhoto(); // Update displayed photo
+            };
+
+            document.querySelector('.btn-previous-photo').onclick = function () {
+                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
+                updateDisplayedPhoto(); // Update displayed photo
+            };
+
+            $('#photoModal').modal('show');
+        }
+
         document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
+    </script>
 
-        // Call fetchFoodTransactions when the page loads
-        window.onload = fetchFoodTransactions;
-
-    </script> -->
 
     <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
