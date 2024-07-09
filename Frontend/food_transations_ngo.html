@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -52,14 +51,26 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 768px) {
-            .card-details {
-                flex-direction: column;
-            }
+        .photo-container {
+            max-width: 90%;
+            /* Adjust as needed */
+            margin: 0 auto;
+            overflow: hidden;
+        }
 
-            .text-center.mt-3 {
-                margin-top: 1rem !important;
-            }
+        .photo-tile {
+            display: flex;
+            flex-wrap: nowrap;
+            /* Ensure photos stay in a row */
+        }
+
+        .tile-photo {
+            max-width: 100%;
+            /* Ensures each photo fits within its container */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin-right: 10px;
+            /* Space between photos */
         }
     </style>
 </head>
@@ -81,13 +92,27 @@
                     <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item active"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
-                    <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Donations
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="food_transations_ngo.html">Incoming Donations</a></li>
+                            <li><a class="dropdown-item" href="accepted_donations_ngo.html">Accepted Donations</a></li>
+                            <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">View Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -95,15 +120,115 @@
     </nav>
     <!-- END nav -->
 
-
     <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
-        <!-- Food transactions will be dynamically inserted here -->
-         <div class="extra text-center" style="height: 35rem;">
-            <p>No Transactions Done</p>
-         </div>
+        <div class="container mt-5">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">Food: Bread, Milk, Cheese</h5>
+                            <p class="card-text">Quantity: 20 units</p>
+                            <p class="card-text">Category: Perishable</p>
+                            <p class="card-text">Packaged: Yes</p>
+                            <p class="card-text">Pickup Address: 123 Main St, Cityville</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text">Latitude: 40.7128</p>
+                            <p class="card-text">Longitude: -74.0060</p>
+                            <p class="card-text">Contact Person: John Doe</p>
+                            <p class="card-text">Contact Phone: (555) 123-4567</p>
+                            <p class="card-text">Donor: Jane Smith</p>
+                            <p class="card-text">Additional Notes: Please pick up before 5 PM</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success btn-accept">Accept Donation</button>
+                        <button class="btn btn-primary btn-view-photos ml-2">View Photos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Modal -->
+        <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="justify-content: center;">
+                        <h5 class="modal-title" id="photoModalLabel">Photos</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="photo-container">
+                            <div class="photo-tile">
+                                <img src="images/image_1.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_3.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_2.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_5.jpg" alt="Photo 1" class="tile-photo">
+                                <img src="images/image_4.jpg" alt="Photo 1" class="tile-photo">
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
+                            <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="justify-content: center;">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
+        // View Photos button click event
+        document.querySelector('.btn-view-photos').addEventListener('click', function () {
+            $('#photoModal').modal('show');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Variables to track current photo index and total number of photos
+            let currentPhotoIndex = 0;
+            const photos = document.querySelectorAll('.tile-photo');
+            const numPhotos = photos.length;
+
+            // Function to update displayed photo
+            function updateDisplayedPhoto() {
+                photos.forEach(photo => {
+                    photo.style.display = 'none'; // Hide all photos
+                });
+                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
+            }
+
+            // Next photo button click handler
+            document.querySelector('.btn-next-photo').addEventListener('click', function () {
+                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
+                updateDisplayedPhoto(); // Update displayed photo
+            });
+
+            // Previous photo button click handler
+            document.querySelector('.btn-previous-photo').addEventListener('click', function () {
+                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
+                updateDisplayedPhoto(); // Update displayed photo
+            });
+
+            // Initial setup
+            updateDisplayedPhoto(); // Show initial photo
+        });
+
+
+    </script>
+
+    <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
+        <!-- Food transactions will be dynamically inserted here -->
+        <div class="extra text-center" style="height: 35rem;">
+            <p>No Transactions Done</p>
+        </div>
+    </div>
+
+    <!-- <script>
         const BACKEND_URL = "http://localhost:3000";
 
         async function fetchFoodTransactions() {
@@ -195,7 +320,7 @@
         // Call fetchFoodTransactions when the page loads
         window.onload = fetchFoodTransactions;
 
-    </script>
+    </script> -->
 
     <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
@@ -313,6 +438,28 @@
             }
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/ngo_cards.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
