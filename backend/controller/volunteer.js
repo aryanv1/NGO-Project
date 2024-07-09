@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {Volunteer,Unverified_Individuals} = require("../models/individual");
+const {NGO} = require('../models/ngo');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 // Function to create a new volunteer // Working
@@ -77,11 +78,30 @@ const getAllVolunteers = async (req, res) => {
   }
 };
 
-// Remaining .. get alll avaiable volunteeer within 25 km of radius ................................. !!!!!!!!!!!!!!!!!
+
 const getAvailableVolunteers = async (req, res) => {
   try {
-    const getAvailableVolunteers = await Volunteer.find({availability_mode : true});
-    res.status(200).json(getAvailableVolunteers);
+    const ngo = await NGO.findById(req.user.id);
+
+    if (!ngo) {
+      return res.status(404).json({ message: 'NGO not found' });
+    }
+
+    const { latitude, longitude } = ngo.physical_addresses.geo_location;
+    console.log(latitude ,longitude);
+    const maxDistance = 25; // 25 km radius in meters
+
+    const availableVolunteers = await Volunteer.find({
+      "home_address.geo_location": {
+        $geoWithin: {
+          $centerSphere: [[longitude, latitude], maxDistance / 6378.1] // 25 km radius
+        }
+      },
+    })
+    // .select('full_name email_address phone_number');
+    console.log(availableVolunteers);
+
+    res.status(200).json(availableVolunteers);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>NGO's Food Transactions</title>
+    <title>Available Volunteers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -54,6 +54,7 @@
                     <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
                     <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
+                    <li class="nav-item"><a href="volunteer_find.html" class="nav-link">Volunteers</a></li>
                     <li class="nav-item active"><a href="accepted_donations_ngo.html" class="nav-link">Accepted
                             Donations</a>
                     </li>
@@ -75,62 +76,41 @@
                     <h2 class="section-title mb-4">Available Volunteers</h2>
                 </div>
             </div>
-            <div class="row">
-                <!-- Volunteer Card Example -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="card-details">
-                                <h3 class="card-title">John Doe</h3>
-                                <p class="card-text">Phone: +1234567890</p>
-                                <p class="card-text">Email: john.doe@example.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat this card structure for each volunteer -->
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="card-details">
-                                <h3 class="card-title">John Doe</h3>
-                                <p class="card-text">Phone: +1234567890</p>
-                                <p class="card-text">Email: john.doe@example.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat this card structure for each volunteer -->
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="card-details">
-                                <h3 class="card-title">John Doe</h3>
-                                <p class="card-text">Phone: +1234567890</p>
-                                <p class="card-text">Email: john.doe@example.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat this card structure for each volunteer -->
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="card-details">
-                                <h3 class="card-title">John Doe</h3>
-                                <p class="card-text">Phone: +1234567890</p>
-                                <p class="card-text">Email: john.doe@example.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat this card structure for each volunteer -->
+            <div class="row" id="volunteers-container">
+                <!-- Volunteer cards will be inserted here dynamically -->
             </div>
         </div>
     </section>
+    <script>
+        async function fetchVolunteers() {
+            try {
+                const response = await fetch('/http://localhost:3000/volunteer/getallvolunteers/available');
+                const volunteers = await response.json();
+                const container = document.getElementById('volunteers-container');
+                
+                volunteers.forEach(volunteer => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-4';
+                    card.innerHTML = `
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="card-details">
+                                    <h3 class="card-title">${volunteer.full_name}</h3>
+                                    <p class="card-text">Phone: ${volunteer.phone_number}</p>
+                                    <p class="card-text">Email: ${volunteer.email_address}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching volunteers:', error);
+            }
+        }
+
+        fetchVolunteers();
+    </script>
 
 
     <footer class="ftco-footer ftco-section img">

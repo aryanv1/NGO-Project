@@ -62,6 +62,8 @@ unverifiedSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+restaurantSchema.index({ geo_location: "2dsphere" });
+
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 const Unverified_Restaurants = mongoose.model(
   "Unverified_Restaurants",

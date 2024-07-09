@@ -14,6 +14,8 @@ const addressSchema = new mongoose.Schema({
   },
 });
 
+
+
 const obj = {
   full_name: { type: String, required: true },
   date_of_birth: { type: Date, required: true },
@@ -56,6 +58,8 @@ volunteerSchema.methods.comparePassword = function (password2) {
 unverifiedSchema.methods.comparePassword = function (password2) {
   return bcrypt.compare(password2, this.password);
 };
+
+addressSchema.index({ geo_location: "2dsphere" });
 
 const Volunteer = mongoose.model("Volunteer", volunteerSchema);
 const Unverified_Individuals = mongoose.model(
