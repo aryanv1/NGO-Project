@@ -52,7 +52,9 @@
           <li class="nav-item"><a href="contact_restaurant.html" class="nav-link">Contact</a></li>
           <li class="nav-item"><a href="ngolist_restaurant.html" class="nav-link">NGO</a></li>
           <li class="nav-item active"><a href="restaurant_donate.html" class="nav-link">Donate</a></li>
-          <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+          <li class="nav-item">
+            <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -297,7 +299,9 @@
                   <li class="nav-item"><a href="contact_restaurant.html" class="nav-link">Contact</a></li>
                   <li class="nav-item"><a href="ngolist_restaurant.html" class="nav-link">NGO</a></li>
                   <li class="nav-item"><a href="restaurant_donate.html" class="nav-link">Donate</a></li>
-                  <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+                  <li class="nav-item">
+                    <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -332,6 +336,16 @@
         </div>
       </footer>
 
-    <script src="js/ngo_cards.js"></script>
-  </body>
+      <script>
+        document.getElementById('logoutLink').addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent the default link action
+          var confirmation = confirm('Are you sure you want to logout?');
+          if (confirmation) {
+            window.location.href = 'index.html'; // Redirect to the logout page
+          }
+        });
+      </script>
+      <script src="js/ngo_cards.js"></script>
+</body>
+
 </html>

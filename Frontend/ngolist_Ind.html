@@ -52,7 +52,9 @@
                     <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
                     <li class="nav-item active"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -62,8 +64,10 @@
     <!-- Search Bar -->
     <div class="container my-4" style="padding-top: 5rem">
         <div class="input-group">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search for NGOs..." style="border-radius: 5px;">
-            <button id="clearButton" class="btn btn-secondary" type="button" style="border-radius: 5px; margin-left: 10px;">Clear</button>
+            <input type="text" id="searchInput" class="form-control" placeholder="Search for NGOs..."
+                style="border-radius: 5px;">
+            <button id="clearButton" class="btn btn-secondary" type="button"
+                style="border-radius: 5px; margin-left: 10px;">Clear</button>
         </div>
     </div>
 
@@ -128,7 +132,9 @@
                             <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
                             <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
                             <li class="nav-item"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
-                            <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -172,7 +178,15 @@
                 stroke="#F96D00" />
         </svg></div>
 
-
+    <script>
+        document.getElementById('logoutLink').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link action
+            var confirmation = confirm('Are you sure you want to logout?');
+            if (confirmation) {
+                window.location.href = 'index.html'; // Redirect to the logout page
+            }
+        });
+    </script>
     <script src="js/ngo_cards.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>

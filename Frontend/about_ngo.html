@@ -49,7 +49,9 @@
           <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
           <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a></li>
           <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a></li>
-          <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+          <li class="nav-item">
+            <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -184,7 +186,9 @@
               <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
               <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a></li>
               <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a></li>
-              <li class="nav-item"><a href="index.html" class="nav-link">Logout</a></li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -226,7 +230,15 @@
         stroke="#F96D00" />
     </svg></div>
 
-
+  <script>
+    document.getElementById('logoutLink').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default link action
+      var confirmation = confirm('Are you sure you want to logout?');
+      if (confirmation) {
+        window.location.href = 'index.html'; // Redirect to the logout page
+      }
+    });
+  </script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
