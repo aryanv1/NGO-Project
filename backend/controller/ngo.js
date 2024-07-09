@@ -112,16 +112,16 @@ const loginNGO = async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: ngo._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: ngo._id }, process.env.JWT_SECRET_NGO, {
       expiresIn: "5d",
     });
 
     res.status(200).json({
-      message: "Login successful",
+      message: "NGO Login successful",
       token,
     });
   } catch (error) {
-    console.error("Error during ngo login");
+    console.error("Error during NGO login");
     res.status(500).json({
       message: "Internal server error",
       error: error.message,
@@ -165,7 +165,7 @@ const getNGOById = async (req, res) => {
 };
 
 const updateNGODetails = async (req, res) => {
-  const ngoId = req.params.id;
+  const ngoId = req.user.id;
 
   if (!mongoose.isValidObjectId(ngoId)) {
     console.log("Invalid NGO ID format.");

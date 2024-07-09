@@ -9,7 +9,7 @@ const {
   deleteRestaurant,
   loginRestaurant,
 } = require("../controller/restaurant");
-const authenticateMiddleWare = require("../middleware/auth");
+const {authenticateMiddleWare ,authenticateMiddleWare_for_restaurant} = require("../middleware/auth");
 
 //Public routes
 router.route("/login").post(loginRestaurant);
@@ -18,9 +18,10 @@ router.route("/register").post(registerRestaurant);
 // protected routes
 router.route("/get/:id").get(authenticateMiddleWare, getRestaurantById);
 router.route("/get").get(authenticateMiddleWare, getAllRestaurants);
-router.route("/delete/:id").delete(authenticateMiddleWare, deleteRestaurant);
+
+router.route("/delete").delete(authenticateMiddleWare_for_restaurant, deleteRestaurant);
 router
-  .route("/update/:id")
-  .patch(authenticateMiddleWare, updateRestaurantDetails);
+  .route("/updatedetails")
+  .patch(authenticateMiddleWare_for_restaurant, updateRestaurantDetails);
 
 module.exports = router;

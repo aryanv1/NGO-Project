@@ -97,7 +97,7 @@ const loginRestaurant = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ id: restaurant._id }, process.env.JWT_SECRET, { expiresIn: '5d' });
+    const token = jwt.sign({ id: restaurant._id }, process.env.JWT_SECRET_Rest, { expiresIn: '5d' });
 
     res.status(200).json({
       message: "Login successful",
@@ -148,7 +148,7 @@ const getAllRestaurants = async (req, res) => {
 
 const updateRestaurantDetails = async (req,res)=> {
 
-  const restaurantId = req.params.id;
+  const restaurantId = req.user.id;
   
   // Check if the ID is a valid ObjectId
   if (!mongoose.isValidObjectId(restaurantId)) {
@@ -202,7 +202,7 @@ const updateRestaurantDetails = async (req,res)=> {
 
 const deleteRestaurant = async (req, res) => {
 
-  const restaurantId = req.params.id;
+  const restaurantId = req.user.id;
   
   // Check if the ID is a valid ObjectId
   if (!mongoose.isValidObjectId(restaurantId)) {

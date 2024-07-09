@@ -68,8 +68,6 @@ const createVolunteer = async (req, res) => {
   }
 };
 
-// Function to get all volunteers
-//working
 const getAllVolunteers = async (req, res) => {
   try {
     const volunteers = await Volunteer.find();
@@ -79,6 +77,7 @@ const getAllVolunteers = async (req, res) => {
   }
 };
 
+// Remaining .. get alll avaiable volunteeer within 25 km of radius ................................. !!!!!!!!!!!!!!!!!
 const getAvailableVolunteers = async (req, res) => {
   try {
     const getAvailableVolunteers = await Volunteer.find({availability_mode : true});
@@ -209,7 +208,7 @@ const loginVolunteer = async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: volunteer._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: volunteer._id }, process.env.JWT_SECRET_Vol, {
       expiresIn: "5d",
     });
 
