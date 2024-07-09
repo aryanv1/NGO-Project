@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Food Donation Requests</title>
+    <title>NGO's Food Transactions</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
@@ -23,7 +24,6 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -32,34 +32,6 @@
         .ftco-navbar-light {
             background: #343a40 !important;
             top: 0;
-        }
-
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-details {
-            flex: 1;
-        }
-
-        .btn-success {
-            border-radius: 4px;
-        }
-
-        @media (max-width: 768px) {
-            .card-details {
-                flex-direction: column;
-            }
-
-            .text-center.mt-3 {
-                margin-top: 1rem !important;
-            }
         }
     </style>
 </head>
@@ -81,8 +53,9 @@
                     <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item active"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
-                    <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted Donations</a>
+                    <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
+                    <li class="nav-item active"><a href="accepted_donations_ngo.html" class="nav-link">Accepted
+                            Donations</a>
                     </li>
                     <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a>
                     </li>
@@ -95,109 +68,71 @@
     </nav>
     <!-- END nav -->
 
-
-    <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
-        <!-- Food transactions will be dynamically inserted here -->
-         <div class="extra text-center" style="height: 35rem;">
-            <p>No Transactions Done</p>
-         </div>
-    </div>
-
-    <script>
-        const BACKEND_URL = "http://localhost:3000";
-
-        async function fetchFoodTransactions() {
-            try {
-                const token = localStorage.getItem('authToken');
-                console.log(token);
-                const response = await fetch(`${BACKEND_URL}/foodtransaction/available`, {
-                    headers: {
-                        'Authorization': token
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch available food transactions');
-                }
-
-                const data = await response.json();
-                createDonationCards(data);
-            } catch (error) {
-                console.error('Error fetching food transactions:', error);
-            }
-        }
-
-        function createDonationCards(donations) {
-            const container = document.getElementById('foodTransactionsContainer');
-            container.innerHTML = '';
-
-            donations.forEach(donation => {
-                const card = document.createElement('div');
-                card.className = 'card mb-4';
-                card.innerHTML = `
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5 class="card-title">Food: ${donation.foodItems.join(', ')}</h5>
-                            <p class="card-text">Quantity: ${donation.quantity}</p>
-                            <p class="card-text">Category: ${donation.foodtype}</p>
-                            <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
-                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}, ${donation.pickupLocation.address.city}</p>
+    <section class="ftco-section ftco-volunteers">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h2 class="section-title mb-4">Available Volunteers</h2>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Volunteer Card Example -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-details">
+                                <h3 class="card-title">John Doe</h3>
+                                <p class="card-text">Phone: +1234567890</p>
+                                <p class="card-text">Email: john.doe@example.com</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p class="card-text">Latitude: ${donation.pickupLocation.geo_location.latitude}</p>
-                            <p class="card-text">Longitude: ${donation.pickupLocation.geo_location.longitude}</p>
-                            <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
-                            <p class="card-text">Contact Phone: ${donation.contactPerson.phone}</p>
-                            <p class="card-text">Donor: ${donation.donor.name}</p>
-                            <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
-                        </div>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept" onclick="acceptRequest(this, '${donation._id}')">Accept Donation</button>
                     </div>
                 </div>
-            `;
-                container.appendChild(card);
-            });
-        }
+                <!-- Repeat this card structure for each volunteer -->
 
-        async function acceptRequest(button, transactionId) {
-            try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch(`${BACKEND_URL}/foodtransaction/claimstatusupdate`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token
-                    },
-                    body: JSON.stringify({ transactionId })
-                });
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-details">
+                                <h3 class="card-title">John Doe</h3>
+                                <p class="card-text">Phone: +1234567890</p>
+                                <p class="card-text">Email: john.doe@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat this card structure for each volunteer -->
 
-                if (!response.ok) {
-                    throw new Error('Failed to claim the food transaction');
-                }
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-details">
+                                <h3 class="card-title">John Doe</h3>
+                                <p class="card-text">Phone: +1234567890</p>
+                                <p class="card-text">Email: john.doe@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat this card structure for each volunteer -->
 
-                const data = await response.json();
-                console.log(`Donation with ID ${transactionId} accepted:`, data);
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-details">
+                                <h3 class="card-title">John Doe</h3>
+                                <p class="card-text">Phone: +1234567890</p>
+                                <p class="card-text">Email: john.doe@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat this card structure for each volunteer -->
+            </div>
+        </div>
+    </section>
 
-                button.textContent = 'Accepted';
-                button.disabled = true;
-                button.classList.remove('btn-success');
-                button.classList.add('btn-secondary');
-            } catch (error) {
-                console.error('Error claiming food transaction:', error);
-            }
-        }
 
-        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
-
-        // Call fetchFoodTransactions when the page loads
-        window.onload = fetchFoodTransactions;
-
-    </script>
-
-    <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
         <div class="container">
@@ -253,11 +188,14 @@
                             <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
                             <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
                             <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-                            <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
+                            <li class="nav-item active"><a href="food_transations_ngo.html"
+                                    class="nav-link">Donations</a></li>
                             <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted
-                                    Donations</a></li>
+                                    Donations</a>
+                            </li>
                             <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations
-                                    History</a></li>
+                                    History</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
                             </li>
@@ -298,12 +236,6 @@
     </footer>
     <!-- Footer End -->
 
-    <!-- loader -->
-    <!-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
-        </svg></div> -->
     <script>
         document.getElementById('logoutLink').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action
@@ -313,6 +245,23 @@
             }
         });
     </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
 
 </html>

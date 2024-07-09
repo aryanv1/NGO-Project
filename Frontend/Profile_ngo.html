@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/index.js"></script>
+
+    <style>
+        .ftco-navbar-light {
+            background: #343a40 !important;
+            top: 0;
+        }
+
+        .profile-image {
+            width: 150px;
+            /* Adjust as needed */
+            height: 150px;
+            /* Adjust as needed */
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .card-footer button {
+            margin-right: 10px;
+        }
+
+        .photo-container {
+            max-width: 90%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .photo-tile {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        .tile-photo {
+            max-width: 100%;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .modal-content {
+            align-items: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Welfare</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="Login.html" class="nav-link">SignIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+
+    <!-- Content -->
+    <div class="container" style="margin-top: 8rem;">
+        <div class="row justify-content-center">
+            <div class="col-md-8" style="font-size: large;">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <!-- Profile Photo -->
+                    <div class="profile-image">
+                        <img src="images/person_1.jpg" alt="NGO Photo">
+                    </div>
+                    <div>
+                        <h1 class="card-title text-center">NGO Profile</h1>
+                    </div>
+                    <div class="card-body">
+                        <h3>Organization Details</h3>
+                        <p><strong>Organization Name:</strong> <span id="organizationName">Hope for Tomorrow</span></p>
+                        <p><strong>Registration Number:</strong> <span id="registrationNumber">NGO98765</span></p>
+                        <p><strong>Tax ID/EIN:</strong> <span id="taxIdEin">EIN54321</span></p>
+                        <p><strong>Website URL:</strong> <a href="https://hopefortomorrow.org" target="_blank"
+                                id="websiteUrl">https://hopefortomorrow.org</a></p>
+
+                        <h3>Address</h3>
+                        <p><strong>Address Line 1:</strong> <span id="addressLine1">456 Hope Street</span></p>
+                        <p><strong>Address Line 2:</strong> <span id="addressLine2">Suite 202</span></p>
+                        <p><strong>City:</strong> <span id="city">Hopeville</span></p>
+                        <p><strong>State:</strong> <span id="state">Hope State</span></p>
+                        <p><strong>Zip Code:</strong> <span id="zipCode">12345</span></p>
+                        <p><strong>Country:</strong> <span id="country">Hope Country</span></p>
+
+                        <h3>Primary Contact</h3>
+                        <p><strong>Name:</strong> <span id="primaryContactName">Sarah Johnson</span></p>
+                        <p><strong>Email:</strong> <span id="primaryContactEmail">sarah@hopefortomorrow.org</span></p>
+                        <p><strong>Phone Number:</strong> <span id="primaryContactPhone">+1234567890</span></p>
+
+                        <h3>Secondary Contact</h3>
+                        <p><strong>Name:</strong> <span id="secondaryContactName">Michael Smith</span></p>
+                        <p><strong>Email:</strong> <span id="secondaryContactEmail">michael@hopefortomorrow.org</span>
+                        </p>
+                        <p><strong>Phone Number:</strong> <span id="secondaryContactPhone">+1987654321</span></p>
+                    </div>
+                    <!-- Card Footer with Buttons -->
+                    <div class="card-footer text-center">
+                        <button class="btn btn-primary btn-view-photos ml-2"
+                            onclick="showPhotos(['images/person_1.jpg', 'images/person_2.jpg'])">View Photos</button>
+                        <button class="btn btn-danger" id="deleteAccount" style="border-radius: 5px;">Delete
+                            Account</button>
+                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px;">Edit
+                            Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Modal -->
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="justify-content: center;">
+                    <h5 class="modal-title" id="photoModalLabel">Photos</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="photo-container">
+                        <div class="photo-tile" style="justify-content: center;">
+                            <img src="images/person_6.jpg" alt="Photo 1" class="tile-photo">
+                            <img src="images/person_7.jpg" alt="Photo 1" class="tile-photo">
+                            <img src="photo2.jpg" alt="Photo 2" class="tile-photo" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
+                        <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
+                    </div>
+                </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="justify-content: center;">
+                    <h5 class="modal-title" id="photoModalLabel">Edit Profile</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label for="editOrganizationName">Organization Name</label>
+                            <input type="text" class="form-control" id="editOrganizationName">
+                        </div>
+                        <div class="form-group">
+                            <label for="editRegistrationNumber">Registration Number</label>
+                            <input type="text" class="form-control" id="editRegistrationNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="editTaxIdEin">Tax ID/EIN</label>
+                            <input type="text" class="form-control" id="editTaxIdEin">
+                        </div>
+                        <div class="form-group">
+                            <label for="editWebsiteUrl">Website URL</label>
+                            <input type="text" class="form-control" id="editWebsiteUrl">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddressLine1">Address Line 1</label>
+                            <input type="text" class="form-control" id="editAddressLine1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddressLine2">Address Line 2</label>
+                            <input type="text" class="form-control" id="editAddressLine2">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCity">City</label>
+                            <input type="text" class="form-control" id="editCity">
+                        </div>
+                        <div class="form-group">
+                            <label for="editState">State</label>
+                            <input type="text" class="form-control" id="editState">
+                        </div>
+                        <div class="form-group">
+                            <label for="editZipCode">Zip Code</label>
+                            <input type="text" class="form-control" id="editZipCode">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCountry">Country</label>
+                            <input type="text" class="form-control" id="editCountry">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrimaryContactName">Primary Contact Name</label>
+                            <input type="text" class="form-control" id="editPrimaryContactName">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrimaryContactEmail">Primary Contact Email</label>
+                            <input type="email" class="form-control" id="editPrimaryContactEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrimaryContactPhone">Primary Contact Phone</label>
+                            <input type="text" class="form-control" id="editPrimaryContactPhone">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSecondaryContactName">Secondary Contact Name</label>
+                            <input type="text" class="form-control" id="editSecondaryContactName">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSecondaryContactEmail">Secondary Contact Email</label>
+                            <input type="email" class="form-control" id="editSecondaryContactEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
+                            <input type="text" class="form-control" id="editSecondaryContactPhone">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="ftco-footer ftco-section img">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About Us</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Recent Blog</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a>
+                                </h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a>
+                                </h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Site Links</h2>
+                        <ul class="list-unstyled">
+                            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                            <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                            <li class="nav-item"><a href="restaurant_main_2.html" class="nav-link">NGO</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain
+                                        View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
+                                            210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span
+                                            class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg>
+    </div>
+
+    <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
+    <script>
+        // Delete Account Confirmation
+        document.getElementById('deleteAccount').addEventListener('click', function (e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                // Here you can perform the deletion action
+                alert('Account deleted successfully!'); // Placeholder for actual deletion logic
+            } else {
+                // Cancel action
+                alert('Action canceled.');
+            }
+        });
+    </script>
+    <script>
+
+
+        function showPhotos(photos) {
+            const photoContainer = document.querySelector('.photo-tile');
+            photoContainer.innerHTML = ''; // Clear previous photos
+
+            photos.forEach((photo, index) => {
+                console.log(`Loading photo: ${photo}`); // Debugging line to check photo paths
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = `images/person_${index + 1}`;
+                img.className = 'tile-photo';
+                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
+                photoContainer.appendChild(img);
+            });
+
+            let currentPhotoIndex = 0;
+            const numPhotos = photos.length;
+
+            function updateDisplayedPhoto() {
+                const photos = document.querySelectorAll('.tile-photo');
+                photos.forEach(photo => {
+                    photo.style.display = 'none'; // Hide all photos
+                });
+                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
+            }
+
+            document.querySelector('.btn-next-photo').onclick = function () {
+                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
+                updateDisplayedPhoto(); // Update displayed photo
+            };
+
+            document.querySelector('.btn-previous-photo').onclick = function () {
+                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
+                updateDisplayedPhoto(); // Update displayed photo
+            };
+
+            $('#photoModal').modal('show');
+        }
+    </script>
+    <script>
+        document.getElementById('editAccount').addEventListener('click', function () {
+            // Populate modal fields with current profile data
+            document.getElementById('editOrganizationName').value = document.getElementById('organizationName').textContent;
+            document.getElementById('editRegistrationNumber').value = document.getElementById('registrationNumber').textContent;
+            document.getElementById('editTaxIdEin').value = document.getElementById('taxIdEin').textContent;
+            document.getElementById('editWebsiteUrl').value = document.getElementById('websiteUrl').textContent;
+            document.getElementById('editAddressLine1').value = document.getElementById('addressLine1').textContent;
+            document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent;
+            document.getElementById('editCity').value = document.getElementById('city').textContent;
+            document.getElementById('editState').value = document.getElementById('state').textContent;
+            document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
+            document.getElementById('editCountry').value = document.getElementById('country').textContent;
+            document.getElementById('editPrimaryContactName').value = document.getElementById('primaryContactName').textContent;
+            document.getElementById('editPrimaryContactEmail').value = document.getElementById('primaryContactEmail').textContent;
+            document.getElementById('editPrimaryContactPhone').value = document.getElementById('primaryContactPhone').textContent;
+            document.getElementById('editSecondaryContactName').value = document.getElementById('secondaryContactName').textContent;
+            document.getElementById('editSecondaryContactEmail').value = document.getElementById('secondaryContactEmail').textContent;
+            document.getElementById('editSecondaryContactPhone').value = document.getElementById('secondaryContactPhone').textContent;
+
+            // Show the modal
+            $('#editProfileModal').modal('show');
+        });
+
+        document.getElementById('editProfileForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Update profile data
+            document.getElementById('organizationName').textContent = document.getElementById('editOrganizationName').value;
+            document.getElementById('registrationNumber').textContent = document.getElementById('editRegistrationNumber').value;
+            document.getElementById('taxIdEin').textContent = document.getElementById('editTaxIdEin').value;
+            document.getElementById('websiteUrl').textContent = document.getElementById('editWebsiteUrl').value;
+            document.getElementById('addressLine1').textContent = document.getElementById('editAddressLine1').value;
+            document.getElementById('addressLine2').textContent = document.getElementById('editAddressLine2').value;
+            document.getElementById('city').textContent = document.getElementById('editCity').value;
+            document.getElementById('state').textContent = document.getElementById('editState').value;
+            document.getElementById('zipCode').textContent = document.getElementById('editZipCode').value;
+            document.getElementById('country').textContent = document.getElementById('editCountry').value;
+            document.getElementById('primaryContactName').textContent = document.getElementById('editPrimaryContactName').value;
+            document.getElementById('primaryContactEmail').textContent = document.getElementById('editPrimaryContactEmail').value;
+            document.getElementById('primaryContactPhone').textContent = document.getElementById('editPrimaryContactPhone').value;
+            document.getElementById('secondaryContactName').textContent = document.getElementById('editSecondaryContactName').value;
+            document.getElementById('secondaryContactEmail').textContent = document.getElementById('editSecondaryContactEmail').value;
+            document.getElementById('secondaryContactPhone').textContent = document.getElementById('editSecondaryContactPhone').value;
+
+            // Hide the modal
+            $('#editProfileModal').modal('hide');
+        });
+    </script>
+    <script src="js/ngo_cards.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
