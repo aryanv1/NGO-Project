@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
 
 const mailTransporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -11,17 +10,6 @@ const mailTransporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASSWORD
     }
 });
-
-// const handlebarOptions = {
-//     viewEngine: {
-//         extName: '.hbs',
-//         partialsDir: '../backen/hbsTemplates/',
-//         layoutsDir: '../backEND/hbsTemplates/',
-//         defaultLayout: false,
-//     }, viewPath: '../backEND/hbsTemplates/', extName: '.hbs'
-// }
-
-// mailTransporter.use('compile', hbs(handlebarOptions));
 
 mailTransporter.verify((error, success) => {
     if (error) console.log(error);
