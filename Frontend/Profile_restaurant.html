@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Restaurant Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,23 +11,16 @@
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-
     <link rel="stylesheet" href="css/aos.css">
-
     <link rel="stylesheet" href="css/ionicons.min.css">
-
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/index.js"></script>
 
     <style>
         .ftco-navbar-light {
@@ -96,20 +89,24 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index_ngo.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item"><a href="index_restaurant.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about_restaurant.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="gallery_restaurant.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="contact_restaurant.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="ngolist_restaurant.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item"><a href="restaurant_donate.html" class="nav-link">Donate</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Donations
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="food_transations_ngo.html">Incoming Donations</a></li>
-                            <li><a class="dropdown-item" href="accepted_donations_ngo.html">Accepted Donations</a></li>
-                            <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
+                            <li><a class="dropdown-item" href="pending_donations_restaurant.html">Pending Donations</a>
+                            </li>
+                            <li><a class="dropdown-item" href="accepted_donations_restaurant.html">Accepted
+                                    Donations</a></li>
+                            <li><a class="dropdown-item" href="donations_history_restaurant.html">Donations History</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -127,7 +124,6 @@
             </div>
         </div>
     </nav>
-    <!-- END nav -->
 
     <!-- Content -->
     <div class="container" style="margin-top: 8rem;">
@@ -136,43 +132,40 @@
                 <div class="card shadow-lg p-3 mb-5 bg-white rounded">
                     <!-- Profile Photo -->
                     <div class="profile-image">
-                        <img src="images/person_1.jpg" alt="NGO Photo">
+                        <img src="images/person_1.jpg" alt="Restaurant Photo">
                     </div>
                     <div>
-                        <h1 class="card-title text-center">NGO Profile</h1>
+                        <h1 class="card-title text-center">Restaurant Profile</h1>
                     </div>
-                    <div class="card-body">
-                        <h3>Organization Details</h3>
-                        <p><strong>Organization Name:</strong> <span id="organizationName">Hope for Tomorrow</span></p>
-                        <p><strong>Registration Number:</strong> <span id="registrationNumber">NGO98765</span></p>
-                        <p><strong>Tax ID/EIN:</strong> <span id="taxIdEin">EIN54321</span></p>
-                        <p><strong>Website URL:</strong> <a href="https://hopefortomorrow.org" target="_blank"
-                                id="websiteUrl">https://hopefortomorrow.org</a></p>
+                    <div id="card-body" style="padding-left: 20px;">
+                        <p><strong>Username:</strong> <span id="name">JohnDoe</span></p>
+                        <p><strong>Restaurant Name:</strong> <span id="restaurant_name">The Great Restaurant</span></p>
+                        <p><strong>Type:</strong> <span id="type">Restaurant</span></p>
+                        <p><strong>Business License Number:</strong> <span id="business_license_number">123456789</span>
+                        </p>
+                        <p><strong>Website URL:</strong> <a href="https://example.com" target="_blank"
+                                id="website_url">https://example.com</a></p>
 
                         <h3>Address</h3>
-                        <p><strong>Address Line 1:</strong> <span id="addressLine1">456 Hope Street</span></p>
-                        <p><strong>Address Line 2:</strong> <span id="addressLine2">Suite 202</span></p>
-                        <p><strong>City:</strong> <span id="city">Hopeville</span></p>
-                        <p><strong>State:</strong> <span id="state">Hope State</span></p>
-                        <p><strong>Zip Code:</strong> <span id="zipCode">12345</span></p>
-                        <p><strong>Country:</strong> <span id="country">Hope Country</span></p>
+                        <p><strong>Address Line 1:</strong> <span id="address_line_1">123 Main St</span></p>
+                        <p><strong>Address Line 2:</strong> <span id="address_line_2">Suite 400</span></p>
+                        <p><strong>City:</strong> <span id="city">San Francisco</span></p>
+                        <p><strong>State:</strong> <span id="state">California</span></p>
+                        <p><strong>Zip Code:</strong> <span id="zip_code">94103</span></p>
+                        <p><strong>Country:</strong> <span id="country">USA</span></p>
+
+                        <h3>Location</h3>
+                        <p><strong>Latitude:</strong> <span id="latitude">37.7749° N</span></p>
+                        <p><strong>Longitude:</strong> <span id="longitude">122.4194° W</span></p>
 
                         <h3>Primary Contact</h3>
-                        <p><strong>Name:</strong> <span id="primaryContactName">Sarah Johnson</span></p>
-                        <p><strong>Email:</strong> <span id="primaryContactEmail">sarah@hopefortomorrow.org</span></p>
-                        <p><strong>Phone Number:</strong> <span id="primaryContactPhone">+1234567890</span></p>
+                        <p><strong>Name:</strong> <span id="manager_name">Jane Smith</span></p>
+                        <p><strong>Email:</strong> <span id="primary_contact_email">contact@example.com</span></p>
+                        <p><strong>Phone Number:</strong> <span id="primary_contact_phone">123-456-7890</span></p>
 
-                        <h3>Secondary Contact</h3>
-                        <p><strong>Name:</strong> <span id="secondaryContactName">Michael Smith</span></p>
-                        <p><strong>Email:</strong> <span id="secondaryContactEmail">michael@hopefortomorrow.org</span>
-                        </p>
-                        <p><strong>Phone Number:</strong> <span id="secondaryContactPhone">+1987654321</span></p>
-
-                        <h3>Certificates</h3>
-                        <p><strong>Registration Certificate:</strong> <a href="path/to/registration_certificate.pdf"
-                                id="registrationCertificate" target="_blank">View Certificate</a></p>
-                        <p><strong>Tax Exemption Certificate:</strong> <a href="path/to/tax_exemption_certificate.pdf"
-                                id="taxExemptionCertificate" target="_blank">View Certificate</a></p>
+                        <h3>Food Handler's Permit</h3>
+                        <p><strong>Permit:</strong> <a href="path/to/permit.pdf" id="food_handlers_permit"
+                                target="_blank">View Permit</a></p>
                     </div>
                     <!-- Card Footer with Buttons -->
                     <div class="text-center">
@@ -201,9 +194,9 @@
                 <div class="modal-body">
                     <div class="photo-container">
                         <div class="photo-tile" style="justify-content: center;">
-                            <img src="images/person_6.jpg" alt="Photo 1" class="tile-photo">
-                            <img src="images/person_7.jpg" alt="Photo 1" class="tile-photo">
-                            <img src="photo2.jpg" alt="Photo 2" class="tile-photo" style="display: none;">
+                            <img src="images/person_2.jpg" alt="Photo 1" class="tile-photo">
+                            <img src="images/person_3.jpg" alt="Photo 2" class="tile-photo">
+                            <img src="images/person_6.jpg" alt="Photo 3" class="tile-photo" style="display: none;">
                         </div>
                     </div>
                     <div class="text-center mt-3">
@@ -229,16 +222,20 @@
                 <div class="modal-body">
                     <form id="editProfileForm">
                         <div class="form-group">
-                            <label for="editOrganizationName">Organization Name</label>
-                            <input type="text" class="form-control" id="editOrganizationName">
+                            <label for="editName">Username</label>
+                            <input type="text" class="form-control" id="editName">
                         </div>
                         <div class="form-group">
-                            <label for="editRegistrationNumber">Registration Number</label>
-                            <input type="text" class="form-control" id="editRegistrationNumber">
+                            <label for="editRestaurantName">Restaurant Name</label>
+                            <input type="text" class="form-control" id="editRestaurantName">
                         </div>
                         <div class="form-group">
-                            <label for="editTaxIdEin">Tax ID/EIN</label>
-                            <input type="text" class="form-control" id="editTaxIdEin">
+                            <label for="editType">Type</label>
+                            <input type="text" class="form-control" id="editType">
+                        </div>
+                        <div class="form-group">
+                            <label for="editBusinessLicenseNumber">Business License Number</label>
+                            <input type="text" class="form-control" id="editBusinessLicenseNumber">
                         </div>
                         <div class="form-group">
                             <label for="editWebsiteUrl">Website URL</label>
@@ -269,8 +266,16 @@
                             <input type="text" class="form-control" id="editCountry">
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactName">Primary Contact Name</label>
-                            <input type="text" class="form-control" id="editPrimaryContactName">
+                            <label for="editLatitude">Latitude</label>
+                            <input type="text" class="form-control" id="editLatitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="editLongitude">Longitude</label>
+                            <input type="text" class="form-control" id="editLongitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="editManagerName">Primary Contact Name</label>
+                            <input type="text" class="form-control" id="editManagerName">
                         </div>
                         <div class="form-group">
                             <label for="editPrimaryContactEmail">Primary Contact Email</label>
@@ -281,39 +286,12 @@
                             <input type="text" class="form-control" id="editPrimaryContactPhone">
                         </div>
                         <div class="form-group">
-                            <label for="editSecondaryContactName">Secondary Contact Name</label>
-                            <input type="text" class="form-control" id="editSecondaryContactName">
-                        </div>
-                        <div class="form-group">
-                            <label for="editSecondaryContactEmail">Secondary Contact Email</label>
-                            <input type="email" class="form-control" id="editSecondaryContactEmail">
-                        </div>
-                        <div class="form-group">
-                            <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
-                            <input type="text" class="form-control" id="editSecondaryContactPhone">
-                        </div>
-                        <div class="form-group">
-                            <label for="editRegistrationCertificate">Registration Certificate URL</label>
+                            <label for="editFoodHandlersPermit">Food Handler's Permit URL</label>
                             <input type="file" class="form-control" style="padding-top: 0.75rem;"
-                                id="registration_certificate" name="registration_certificate" accept="application/pdf"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="photos">NGO Photos (Maximum 3)</label>
-                            <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
-                                id="photos" name="photos" accept="image/*" multiple required>
-                            <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
-                                3 photos.</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="editTaxExemptionCertificate">Tax Exemption Certificate URL</label>
-                            <input type="file" class="form-control" style="padding-top: 0.75rem;"
-                                id="tax_exemption_certificate" name="tax_exemption_certificate" accept="application/pdf"
-                                required>
+                                id="food_handlers_permit" name="food_handlers_permit" accept="application/pdf" required>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
-                                Changes</button>
+                            <button type="submit" class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -417,8 +395,6 @@
                 stroke="#F96D00" />
         </svg>
     </div>
-
-    <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
     <script>
         // Delete Account Confirmation
         document.getElementById('deleteAccount').addEventListener('click', function (e) {
@@ -431,143 +407,6 @@
                 alert('Action canceled.');
             }
         });
-    </script>
-    <script>
-
-
-        function showPhotos(photos) {
-            const photoContainer = document.querySelector('.photo-tile');
-            photoContainer.innerHTML = ''; // Clear previous photos
-
-            photos.forEach((photo, index) => {
-                console.log(`Loading photo: ${photo}`); // Debugging line to check photo paths
-                const img = document.createElement('img');
-                img.src = photo;
-                img.alt = `images/person_${index + 1}`;
-                img.className = 'tile-photo';
-                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
-                photoContainer.appendChild(img);
-            });
-
-            let currentPhotoIndex = 0;
-            const numPhotos = photos.length;
-
-            function updateDisplayedPhoto() {
-                const photos = document.querySelectorAll('.tile-photo');
-                photos.forEach(photo => {
-                    photo.style.display = 'none'; // Hide all photos
-                });
-                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
-            }
-
-            document.querySelector('.btn-next-photo').onclick = function () {
-                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
-                updateDisplayedPhoto(); // Update displayed photo
-            };
-
-            document.querySelector('.btn-previous-photo').onclick = function () {
-                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
-                updateDisplayedPhoto(); // Update displayed photo
-            };
-
-            $('#photoModal').modal('show');
-        }
-    </script>
-    <script>
-        function openEditModal() {
-            // Get the current profile data
-            document.getElementById('editOrganizationName').value = document.getElementById('organizationName').textContent;
-            document.getElementById('editRegistrationNumber').value = document.getElementById('registrationNumber').textContent;
-            document.getElementById('editTaxIdEin').value = document.getElementById('taxIdEin').textContent;
-            document.getElementById('editWebsiteUrl').value = document.getElementById('websiteUrl').textContent;
-            document.getElementById('editAddressLine1').value = document.getElementById('addressLine1').textContent;
-            document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent;
-            document.getElementById('editCity').value = document.getElementById('city').textContent;
-            document.getElementById('editState').value = document.getElementById('state').textContent;
-            document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
-            document.getElementById('editCountry').value = document.getElementById('country').textContent;
-            document.getElementById('editPrimaryContactName').value = document.getElementById('primaryContactName').textContent;
-            document.getElementById('editPrimaryContactEmail').value = document.getElementById('primaryContactEmail').textContent;
-            document.getElementById('editPrimaryContactPhone').value = document.getElementById('primaryContactPhone').textContent;
-            document.getElementById('editSecondaryContactName').value = document.getElementById('secondaryContactName').textContent;
-            document.getElementById('editSecondaryContactEmail').value = document.getElementById('secondaryContactEmail').textContent;
-            document.getElementById('editSecondaryContactPhone').value = document.getElementById('secondaryContactPhone').textContent;
-
-            // Clear the file inputs
-            document.getElementById('registration_certificate').value = '';
-            document.getElementById('tax_exemption_certificate').value = '';
-            document.getElementById('photos').value = '';
-
-            // Show the modal
-            $('#editProfileModal').modal('show');
-        }
-
-        function saveProfile(event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Update the profile data with the new values from the modal
-            document.getElementById('organizationName').textContent = document.getElementById('editOrganizationName').value;
-            document.getElementById('registrationNumber').textContent = document.getElementById('editRegistrationNumber').value;
-            document.getElementById('taxIdEin').textContent = document.getElementById('editTaxIdEin').value;
-            document.getElementById('websiteUrl').textContent = document.getElementById('editWebsiteUrl').value;
-            document.getElementById('addressLine1').textContent = document.getElementById('editAddressLine1').value;
-            document.getElementById('addressLine2').textContent = document.getElementById('editAddressLine2').value;
-            document.getElementById('city').textContent = document.getElementById('editCity').value;
-            document.getElementById('state').textContent = document.getElementById('editState').value;
-            document.getElementById('zipCode').textContent = document.getElementById('editZipCode').value;
-            document.getElementById('country').textContent = document.getElementById('editCountry').value;
-            document.getElementById('primaryContactName').textContent = document.getElementById('editPrimaryContactName').value;
-            document.getElementById('primaryContactEmail').textContent = document.getElementById('editPrimaryContactEmail').value;
-            document.getElementById('primaryContactPhone').textContent = document.getElementById('editPrimaryContactPhone').value;
-            document.getElementById('secondaryContactName').textContent = document.getElementById('editSecondaryContactName').value;
-            document.getElementById('secondaryContactEmail').textContent = document.getElementById('editSecondaryContactEmail').value;
-            document.getElementById('secondaryContactPhone').textContent = document.getElementById('editSecondaryContactPhone').value;
-
-            // Handle file inputs
-            const registrationCertificateFile = document.getElementById('registration_certificate').files[0];
-            const taxExemptionCertificateFile = document.getElementById('tax_exemption_certificate').files[0];
-            const photosFiles = document.getElementById('photos').files;
-
-            if (registrationCertificateFile) {
-                const registrationCertificateUrl = URL.createObjectURL(registrationCertificateFile);
-                // Display or handle the registration certificate file as needed
-                console.log('Registration Certificate URL:', registrationCertificateUrl);
-            }
-
-            if (taxExemptionCertificateFile) {
-                const taxExemptionCertificateUrl = URL.createObjectURL(taxExemptionCertificateFile);
-                // Display or handle the tax exemption certificate file as needed
-                console.log('Tax Exemption Certificate URL:', taxExemptionCertificateUrl);
-            }
-
-            if (photosFiles.length > 3) {
-                document.getElementById('photo-error').style.display = 'block';
-            } else {
-                document.getElementById('photo-error').style.display = 'none';
-                const photoUrls = Array.from(photosFiles).map(file => URL.createObjectURL(file));
-                // Display or handle the photos as needed
-                console.log('Photo URLs:', photoUrls);
-            }
-
-            // Hide the modal
-            $('#editProfileModal').modal('hide');
-        }
-
-        // Attach the event handler to the Edit Account button
-        document.getElementById('editAccount').addEventListener('click', openEditModal);
-
-    </script>
-    <script>
-        document.getElementById('photos').addEventListener('change', function (event) {
-            const files = event.target.files;
-            if (files.length > 3) {
-                document.getElementById('photo-error').style.display = 'block';
-                event.target.value = '';
-            } else {
-                document.getElementById('photo-error').style.display = 'none';
-            }
-        });
-
     </script>
     <script src="js/ngo_cards.js"></script>
     <script src="js/jquery.min.js"></script>
@@ -586,6 +425,145 @@
     <script src="js/scrollax.min.js"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
+
+
+    <script>
+        function openEditModal() {
+            // Retrieve current profile data and populate the modal fields
+            document.getElementById('editName').value = document.getElementById('name').textContent;
+            document.getElementById('editRestaurantName').value = document.getElementById('restaurant_name').textContent;
+            document.getElementById('editType').value = document.getElementById('type').textContent;
+            document.getElementById('editBusinessLicenseNumber').value = document.getElementById('business_license_number').textContent;
+            document.getElementById('editWebsiteUrl').value = document.getElementById('website_url').textContent;
+            document.getElementById('editAddressLine1').value = document.getElementById('address_line_1').textContent;
+            document.getElementById('editAddressLine2').value = document.getElementById('address_line_2').textContent;
+            document.getElementById('editCity').value = document.getElementById('city').textContent;
+            document.getElementById('editState').value = document.getElementById('state').textContent;
+            document.getElementById('editZipCode').value = document.getElementById('zip_code').textContent;
+            document.getElementById('editCountry').value = document.getElementById('country').textContent;
+            document.getElementById('editLatitude').value = document.getElementById('latitude').textContent;
+            document.getElementById('editLongitude').value = document.getElementById('longitude').textContent;
+            document.getElementById('editManagerName').value = document.getElementById('manager_name').textContent;
+            document.getElementById('editPrimaryContactEmail').value = document.getElementById('primary_contact_email').textContent;
+            document.getElementById('editPrimaryContactPhone').value = document.getElementById('primary_contact_phone').textContent;
+
+            // Clear the file input
+            document.getElementById('food_handlers_permit').value = '';
+
+            // Show the modal
+            $('#editProfileModal').modal('show');
+        }
+
+        function saveProfile() {
+            // Gather updated values from the modal form
+            const newName = document.getElementById('editName').value;
+            const newRestaurantName = document.getElementById('editRestaurantName').value;
+            const newType = document.getElementById('editType').value;
+            const newBusinessLicenseNumber = document.getElementById('editBusinessLicenseNumber').value;
+            const newWebsiteUrl = document.getElementById('editWebsiteUrl').value;
+            const newAddressLine1 = document.getElementById('editAddressLine1').value;
+            const newAddressLine2 = document.getElementById('editAddressLine2').value;
+            const newCity = document.getElementById('editCity').value;
+            const newState = document.getElementById('editState').value;
+            const newZipCode = document.getElementById('editZipCode').value;
+            const newCountry = document.getElementById('editCountry').value;
+            const newLatitude = document.getElementById('editLatitude').value;
+            const newLongitude = document.getElementById('editLongitude').value;
+            const newManagerName = document.getElementById('editManagerName').value;
+            const newPrimaryContactEmail = document.getElementById('editPrimaryContactEmail').value;
+            const newPrimaryContactPhone = document.getElementById('editPrimaryContactPhone').value;
+
+            // Handle the file input for Food Handler's Permit
+            const foodHandlersPermitFile = document.getElementById('food_handlers_permit').files[0];
+            if (foodHandlersPermitFile) {
+                // Process the file as needed (e.g., upload to server, display a preview)
+                console.log('Food Handler\'s Permit File:', foodHandlersPermitFile);
+            }
+
+            // Update the profile data on the page (for demonstration purposes)
+            document.getElementById('name').textContent = newName;
+            document.getElementById('restaurant_name').textContent = newRestaurantName;
+            document.getElementById('type').textContent = newType;
+            document.getElementById('business_license_number').textContent = newBusinessLicenseNumber;
+            document.getElementById('website_url').textContent = newWebsiteUrl;
+            document.getElementById('address_line_1').textContent = newAddressLine1;
+            document.getElementById('address_line_2').textContent = newAddressLine2;
+            document.getElementById('city').textContent = newCity;
+            document.getElementById('state').textContent = newState;
+            document.getElementById('zip_code').textContent = newZipCode;
+            document.getElementById('country').textContent = newCountry;
+            document.getElementById('latitude').textContent = newLatitude;
+            document.getElementById('longitude').textContent = newLongitude;
+            document.getElementById('manager_name').textContent = newManagerName;
+            document.getElementById('primary_contact_email').textContent = newPrimaryContactEmail;
+            document.getElementById('primary_contact_phone').textContent = newPrimaryContactPhone;
+
+            // Hide the modal
+            $('#editProfileModal').modal('hide');
+        }
+
+        // Attach the event handler to the Edit Account button
+        document.getElementById('editAccount').addEventListener('click', openEditModal);
+
+    </script>
+    <script>
+        var currentPhotoIndex = 0;
+        var photos = [];
+
+        function showPhotos(photoUrls) {
+            photos = photoUrls;
+            currentPhotoIndex = 0;
+            updatePhotoDisplay();
+            $('#photoModal').modal('show');
+        }
+
+        function updatePhotoDisplay() {
+            $('.tile-photo').hide();
+            if (photos[currentPhotoIndex]) {
+                $('.tile-photo').eq(currentPhotoIndex).attr('src', photos[currentPhotoIndex]).show();
+            }
+        }
+
+        $('.btn-previous-photo').click(function () {
+            if (currentPhotoIndex > 0) {
+                currentPhotoIndex--;
+                updatePhotoDisplay();
+            }
+        });
+
+        $('.btn-next-photo').click(function () {
+            if (currentPhotoIndex < photos.length - 1) {
+                currentPhotoIndex++;
+                updatePhotoDisplay();
+            }
+        });
+
+        $('#editAccount').click(function () {
+            $('#editProfileModal').modal('show');
+        });
+
+        $('#deleteAccount').click(function () {
+            $('#deleteAccountModal').modal('show');
+        });
+
+        $('#saveProfileChanges').click(function () {
+            $('#restaurantName').text($('#editRestaurantName').val());
+            $('#address').text($('#editAddress').val());
+            $('#contact').text($('#editContact').val());
+            $('#email').text($('#editEmail').val());
+            $('#websiteUrl').attr('href', $('#editWebsiteUrl').val()).text($('#editWebsiteUrl').val());
+            $('#weekdayHours').text($('#editWeekdayHours').val());
+            $('#saturdayHours').text($('#editSaturdayHours').val());
+            $('#sundayHours').text($('#editSundayHours').val());
+            $('#editProfileModal').modal('hide');
+        });
+
+        $('#confirmDeleteAccount').click(function () {
+            // Add your account deletion logic here
+            alert('Account deleted!');
+            $('#deleteAccountModal').modal('hide');
+        });
+    </script>
 
 </body>
 
