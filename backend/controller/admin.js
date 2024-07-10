@@ -6,9 +6,9 @@ const jwt = require("jsonwebtoken");
 
 const adminlogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const admin_detail = await admin.findOne({ username: username });
+    const admin_detail = await admin.findOne({ username: email });
     if (!admin_detail) {
       return res.status(400).json({ message: "Invalid username." });
     }
@@ -19,7 +19,7 @@ const adminlogin = async (req, res) => {
     }
 
     const token = jwt.sign({ id: admin_detail._id }, process.env.JWT_SECRET, {
-      expiresIn: "2d",
+      expiresIn: "5d",
     });
 
     res.status(200).json({
@@ -151,6 +151,15 @@ const verifyRestaurant = async (req, res) => {
   }
 };
 
+const getAllngos = async (req, res) => {
+  try {
+    const ngos = await NGO.find();
+    res.status(200).json({ ngos });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getAllUnverifiedNGOs = async (req, res) => {
   try {
     const ngos = await Unverified_NGOs.find();
@@ -160,10 +169,42 @@ const getAllUnverifiedNGOs = async (req, res) => {
   }
 };
 
+const getAllVolunteers = async (req, res) => {
+  try {
+    const volunteers = await Volunteer.find();
+    res.status(200).json(volunteers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getAllUnverifiedVolunteers = async (req, res) => {
   try {
     const volunteers = await Unverified_Individuals.find();
     res.status(200).json(volunteers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteVolunteerById = async (req, res) => {
+    const {id} = req.params;
+    console.log(id);
+    try {
+      const deletedVolunteer = await Volunteer.findByIdAndDelete(id);
+      if (!deletedVolunteer) {
+        return res.status(404).json({ message: "Volunteer not found" });
+      }
+      res.status(200).json({ message: "Volunteer deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+};
+
+const getAllRestaurants = async (req, res) => {
+  try {
+    const restaurants = await Restaurant.find();
+    res.status(200).json({ restaurants });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -186,4 +227,8 @@ module.exports = {
   getAllUnverifiedNGOs,
   getAllUnverifiedVolunteers,
   getAllUnverifiedRestaurants,
+  getAllngos,
+  getAllVolunteers,
+  getAllRestaurants,
+  deleteVolunteerById,
 };

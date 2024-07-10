@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         const result = await response.json();
 
-        if (response.ok) {
+        if (response.status == 200) {
             // Handle successful login, e.g., redirect to another page
             localStorage.setItem('authToken', result.token);
             alert("Login Successful");
@@ -29,7 +29,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             let redirectPath = '';
             switch (userType) {
                 case 'admin':
-                    redirectPath = '/frontend/admin_Ind.html';
+                    redirectPath = '/frontend/index_admin.html';
                     break;
                 case 'ngo':
                     redirectPath = '/frontend/index_ngo.html';

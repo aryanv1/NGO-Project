@@ -8,6 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -118,55 +119,129 @@
         </div>
     </nav>
     <!-- END nav -->
-
+    
+    
     <!-- Search Bar -->
     <div class="container my-4" style="padding-top: 5rem">
         <div class="input-group">
             <input type="text" id="searchInput" class="form-control" placeholder="Search for NGOs..."
-                style="border-radius: 5px;">
+            style="border-radius: 5px;">
             <button id="clearButton" class="btn btn-secondary" type="button"
-                style="border-radius: 5px; margin-left: 10px;">Clear</button>
+            style="border-radius: 5px; margin-left: 10px;">Clear</button>
         </div>
     </div>
-
+    
     <div class="container" style="margin-top: 2rem">
-        <!-- Individual Verification Card -->
-        <div class="container mt-2">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 class="card-title">Full Name: John Doe</h5>
-                                    <p class="card-text">Email: john@example.com</p>
-                                    <p class="card-text">Phone Number: 123-456-7890</p>
-                                    <p class="card-text">Date of Birth: 01-01-1990</p>
-                                    <p class="card-text">Current Work Status: Employed</p>
-                                    <p class="card-text">Address Line 1: 123 Main St</p>
-                                    <p class="card-text">Address Line 2: Apt 4B</p>
+        <div id="volunteer-container"></div>
+    </div>
+   
+    <script>
+        const BACKEND_URL = "http://localhost:3000"; // Backend URL
+        let volunteers = []; // Global variable to store volunteer data
+
+        async function fetchVolunteers() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/admin/getallvolunteers`, {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    }
+                });
+                if (response.status !== 200) {
+                    alert('Failed to fetch volunteers data');
+                    return;
+                }
+                volunteers = await response.json();
+                displayVolunteers(); 
+                
+            } catch (error) {
+                console.error(error);
+                alert('Error fetching data'); // Handle error
+            }
+        }
+
+        function displayVolunteers() {
+            const container = document.getElementById('volunteer-container');
+            container.innerHTML = ''; // Clear previous content
+
+            volunteers.forEach(volunteer => {
+                const volunteerCard = `
+                    <div class="container mt-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="card-title">Full Name: ${volunteer.full_name}</h5>
+                                                <p class="card-text">Email: ${volunteer.email_address}</p>
+                                                <p class="card-text">Phone Number: ${volunteer.phone_number}</p>
+                                                <p class="card-text">Date of Birth: ${new Date(volunteer.date_of_birth).toLocaleDateString()}</p>
+                                                <p class="card-text">Current Work Status: ${volunteer.current_work_status}</p>
+                                                <p class="card-text">Address Line 1: ${volunteer.home_address.address_line_1}</p>
+                                                <p class="card-text">Address Line 2: ${volunteer.home_address.address_line_2 || ''}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="card-text">City: ${volunteer.home_address.city}</p>
+                                                <p class="card-text">State: ${volunteer.home_address.state}</p>
+                                                <p class="card-text">Zip Code: ${volunteer.home_address.zip_code}</p>
+                                                <p class="card-text">Country: ${volunteer.home_address.country}</p>
+                                                <p class="card-text">Latitude: ${volunteer.home_address.geo_location.latitude}</p>
+                                                <p class="card-text">Longitude: ${volunteer.home_address.geo_location.longitude}</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                                onclick="deleteVolunteer('${volunteer._id}')">Delete
+                                                Volunteer</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p class="card-text">City: City</p>
-                                    <p class="card-text">State: State</p>
-                                    <p class="card-text">Zip Code: 12345</p>
-                                    <p class="card-text">Country: Country</p>
-                                    <p class="card-text">Latitude: 12.3456</p>
-                                    <p class="card-text">Longitude: 78.9012</p>
-                                </div>
-                            </div>
-                            <div class="text-center mt-3">
-                                <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                    onclick="verifyIndividual(this)">Delete
-                                    Volunteer</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </div>`;
+                container.insertAdjacentHTML('beforeend', volunteerCard);
+            });
+        }
 
-    </div>
+        async function deleteVolunteer(id) {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/admin/deletevolunteer/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    },
+                });
+                if (response.status === 200) {
+                    const volunteerCard = document.getElementById(`volunteer-${id}`);
+                    if (volunteerCard) {
+                        volunteerCard.remove();
+                    }
+                    alert('Volunteer deleted successfully'); 
+                } else {
+                    const data = await response.json();
+                    alert(`Error: ${data.message}`); // Display error message from the response
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Error deleting volunteer'); // Handle error
+            }
+        }
+
+        window.onload = fetchVolunteers();
+    </script>
+    <!-- <script>
+        function deleteVolunteer(button) {
+            button.textContent = 'Deleted';
+            button.classList.remove('btn-success');
+            button.classList.add('btn-secondary');
+            button.disabled = true;
+        }
+    </script> -->
 
     <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
@@ -262,14 +337,6 @@
     </footer>
     <!-- Footer End -->
 
-    <script>
-        function verifyIndividual(button) {
-            button.textContent = 'Verified';
-            button.classList.remove('btn-success');
-            button.classList.add('btn-secondary');
-            button.disabled = true;
-        }
-    </script>
     <script>
         document.getElementById('logoutLink').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action

@@ -9,6 +9,10 @@ const {
   getAllUnverifiedNGOs,
   getAllUnverifiedVolunteers,
   getAllUnverifiedRestaurants,
+  getAllngos,
+  getAllVolunteers,
+  getAllRestaurants,
+  deleteVolunteerById,
 } = require("../controller/admin");
 const {authenticateMiddleWare} = require('../middleware/auth');
 
@@ -19,5 +23,9 @@ router.route("/verifyrestaurant").post(authenticateMiddleWare,verifyRestaurant);
 router.route("/getallunverifiedngos").get(authenticateMiddleWare,getAllUnverifiedNGOs);
 router.route("/getallunverifiedvolunteers").get(authenticateMiddleWare,getAllUnverifiedVolunteers);
 router.route("/getallunverifiedrestaurants").get(authenticateMiddleWare,getAllUnverifiedRestaurants);
+router.route('/getallngos').get(authenticateMiddleWare,getAllngos);
+router.route('/getallvolunteers').get(authenticateMiddleWare,getAllVolunteers);
+router.route('/getallrestaurants').get(authenticateMiddleWare,getAllRestaurants);
+router.route('/deletevolunteer/:id').delete(authenticateMiddleWare,deleteVolunteerById);
 
 module.exports = router;
