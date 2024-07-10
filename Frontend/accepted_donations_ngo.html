@@ -322,7 +322,7 @@
             const newInput = document.createElement('input');
             newInput.type = 'tel';
             newInput.className = 'form-control phone-input';
-            newInput.name = 'phone_numbers[]';
+            newInput.name = 'phone_numbers';
             phoneNumbersDiv.appendChild(newInput);
         }
     </script>
@@ -346,7 +346,7 @@
 
                 const result = await response.json();
                 console.log("THis is my response ",result);
-                if (response.ok) {
+                if (response.status == 200) {
                     alert('Donation verified successfully!');
                     $('#acceptFormModal').modal('hide');
                     fetchFoodTransactions();

@@ -236,6 +236,7 @@ const createFoodTransactionLog = async (req, res) => {
       phone_numbers,
     } = req.body;
 
+    console.log(req.body);
     if (!mongoose.isValidObjectId(transactionId)) {
       return res.status(400).json({ error: "Invalid transaction ID format" });
     }
@@ -245,11 +246,13 @@ const createFoodTransactionLog = async (req, res) => {
     }
 
     let volunteer_id =[];
-    for(temp of phone_numbers)
-    {
-        const volunteer1 = (await Volunteer.findOne({ phone_number : temp}));
-        if(volunteer1)
-          volunteer_id.push(volunteer1._id);
+    if(phone_numbers){
+      for(phone of phone_numbers)
+      {
+          const volunteer1 = await Volunteer.findOne({ phone_number : phone});
+          if(volunteer1)
+            volunteer_id.push(volunteer1._id);
+      }
     }
 
     const photoUrls = [];
@@ -265,7 +268,7 @@ const createFoodTransactionLog = async (req, res) => {
         photoUrls.push(photoUrl);
       }
     }
-
+    
     const transactionLog = new FoodTransactionLogs({
       donor: transaction.donor,
       foodItems: transaction.foodItems,
@@ -274,7 +277,7 @@ const createFoodTransactionLog = async (req, res) => {
       packaged: transaction.packaged,
       pickupLocation: transaction.pickupLocation,
       contactPerson: transaction.contactPerson,
-      food_photos: transaction.photos,
+      food_photos: transaction.food_photos,
       additionalNotes: transaction.additionalNotes,
       ngo: transaction.ngo,
       distribution_photos : photoUrls,
