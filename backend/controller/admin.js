@@ -78,9 +78,10 @@ const verifyngo = async (req, res) => {
 const verifyVolunteer = async (req, res) => {
   try {
     const { vol_id } = req.body;
-
     const vol_data = await Unverified_Individuals.findOne({ _id: vol_id });
-    
+    if (!vol_data) {
+      return res.status(404).json({ message: "Volunteer not found" });
+    }
     const data = new Volunteer({
       full_name: vol_data.full_name,
       date_of_birth: vol_data.date_of_birth,
@@ -95,7 +96,7 @@ const verifyVolunteer = async (req, res) => {
 
     await Unverified_Individuals.deleteOne({ _id : vol_id });
 
-    res.status(201).send();
+    return res.status(201).send();
   } catch (error) {
     if (error.code == 11000) {
       const dup = Object.keys(error.keyValue)[0];
@@ -154,7 +155,7 @@ const verifyRestaurant = async (req, res) => {
 const getAllngos = async (req, res) => {
   try {
     const ngos = await NGO.find();
-    res.status(200).json({ ngos });
+    res.status(200).json(ngos);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -163,7 +164,7 @@ const getAllngos = async (req, res) => {
 const getAllUnverifiedNGOs = async (req, res) => {
   try {
     const ngos = await Unverified_NGOs.find();
-    res.status(200).json({ ngos });
+    res.status(200).json(ngos);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -204,7 +205,7 @@ const deleteVolunteerById = async (req, res) => {
 const getAllRestaurants = async (req, res) => {
   try {
     const restaurants = await Restaurant.find();
-    res.status(200).json({ restaurants });
+    res.status(200).json(restaurants);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -213,7 +214,20 @@ const getAllRestaurants = async (req, res) => {
 const getAllUnverifiedRestaurants = async (req, res) => {
   try {
     const restaurants = await Unverified_Restaurants.find();
-    res.status(200).json({ restaurants });
+    res.status(200).json(restaurants);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteRestaurantById = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const deleted = await Restaurant.findByIdAndDelete(id);
+    if (!deleted) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    res.status(200).json({ message: "Restaurant deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -231,4 +245,5 @@ module.exports = {
   getAllVolunteers,
   getAllRestaurants,
   deleteVolunteerById,
+  deleteRestaurantById,
 };

@@ -202,7 +202,7 @@ const updateRestaurantDetails = async (req,res)=> {
 
 const deleteRestaurant = async (req, res) => {
 
-  const restaurantId = req.user.id;
+  const {restaurantId} = req.user.id;
   
   // Check if the ID is a valid ObjectId
   if (!mongoose.isValidObjectId(restaurantId)) {

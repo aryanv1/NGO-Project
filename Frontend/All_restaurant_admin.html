@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>All Restaurants</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
 
@@ -22,7 +23,6 @@
 
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
-
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
@@ -60,6 +60,9 @@
             .text-center.mt-3 {
                 margin-top: 1rem !important;
             }
+        }
+        .card {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -129,45 +132,162 @@
         </div>
     </div>
 
-    <!-- Individual Verification Card -->
     <div class="container" style="margin-top: 2rem">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="card-title">Username: abc123</h5>
-                                <p class="card-text">Restaurant Name: Sunshine</p>
-                                <p class="card-text">Type: Restaurant</p>
-                                <p class="card-text">Business License Number: 12345</p>
-                                <p class="card-text">Website URL: cricbuzz.com</p>
-                                <p class="card-text">Manager Name: Kaleshbhai</p>
-                                <p class="card-text">Primary Contact Email: abc@gmail.com</p>
-                                <p class="card-text">Primary Contact Phone: 98767898722</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="card-text">Address Line 1: 123 Main St</p>
-                                <p class="card-text">Address Line 2: Apt 4B</p>
-                                <p class="card-text">City: City</p>
-                                <p class="card-text">State: State</p>
-                                <p class="card-text">Zip Code: 12345</p>
-                                <p class="card-text">Country: Country</p>
-                                <p class="card-text">Latitude: 12.3456</p>
-                                <p class="card-text">Longitude: 78.9012</p>
-                            </div>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                onclick="verifyRestaurant(this)">Delete
-                                Restaurant</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="restaurant-container"></div>
     </div>
 
+<script>
+    const BACKEND_URL = "http://localhost:3000"; // Backend URL
+    let restaurants = []; // Global variable to store restaurant data
+
+    async function fetchRestaurants() {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch(`${BACKEND_URL}/admin/getallrestaurants`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token,
+                }
+            });
+            if (response.status !== 200) {
+                alert('Failed to fetch restaurants data');
+                return;
+            }
+            restaurants = await response.json();
+            displayRestaurants(); 
+
+        } catch (error) {
+            console.error(error);
+            alert('Error fetching data'); // Handle error
+        }
+    }
+
+    function viewFoodHandlersPermit(url) {
+        window.open(url, '_blank'); // Opens the URL in a new tab/window
+    }
+
+    function redirectToWebsite(websiteUrl) {
+        window.open(websiteUrl, '_blank'); // Opens the website URL in a new tab/window
+    }
+
+    function viewLocationOnMap(latitude, longitude) {
+        const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+        window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+    }
+    
+    function displayRestaurants() {
+        const container = document.getElementById('restaurant-container');
+        container.innerHTML = ''; // Clear previous content
+
+        restaurants.forEach(restaurant => {
+            const restaurantCard = `
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title">Restaurant Name: ${restaurant.name}</h5>
+                                            <p class="card-text">Type: ${restaurant.type}</p>
+                                            <p class="card-text">Manager Name: ${restaurant.manager_name}</p>
+                                            <p class="card-text">Business License Number: ${restaurant.business_license_number}</p>
+                                            <p class="card-text">Website:
+                                                ${restaurant.website_url ?
+                                                    `<a href="javascript:void(0);" 
+                                                    onclick="redirectToWebsite('${restaurant.website_url}')">
+                                                    ${restaurant.website_url}
+                                                </a>`
+                                                : "Not Avaialable"}
+                                            </p>
+                                            <p class="card-text">Email: ${restaurant.primary_contact_email}</p>
+                                            <p class="card-text">Phone: ${restaurant.primary_contact_phone}</p>
+                                             <p class="card-text">Food Handlers Permit: 
+                                                ${restaurant.food_handlers_permit ? 
+                                                    `<a href="javascript:void(0);" 
+                                                        onclick="viewFoodHandlersPermit('${restaurant.food_handlers_permit}')">
+                                                        Click here to view
+                                                    </a>` 
+                                                    : 'Not available'}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="card-text">Address Line 1: ${restaurant.physical_address.address_line_1}</p>
+                                            <p class="card-text">Address Line 2: ${restaurant.physical_address.address_line_2 || ''}</p>
+                                            <p class="card-text">City: ${restaurant.physical_address.city}</p>
+                                            <p class="card-text">State: ${restaurant.physical_address.state}</p>
+                                            <p class="card-text">Zip Code: ${restaurant.physical_address.zip_code}</p>
+                                            <p class="card-text">Country: ${restaurant.physical_address.country}</p>
+                                             <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${restaurant.physical_address.geo_location.latitude}, ${restaurant.physical_address.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                            onclick="deleteRestaurant('${restaurant._id}')">Delete Restaurant</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', restaurantCard);
+        });
+    }
+
+    async function deleteRestaurant(id) {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch(`${BACKEND_URL}/admin/deleterestaurant/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token,
+                },
+            });
+            if (response.status === 200) {
+                const restaurantCard = document.getElementById('restaurant-container');
+                restaurantCard.innerHTML = ''; // Clear current content
+                fetchRestaurants(); // Reload the list after deletion
+                alert('Restaurant deleted successfully');
+            }else {
+                alert('Failed to delete restaurant');
+            }
+            } catch (error) {
+                console.error(error);
+                alert('Error deleting restaurant');
+            }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await fetchRestaurants(); // Fetch restaurants on page load
+    });
+    const searchInput = document.getElementById('searchInput');
+    const clearButton = document.getElementById('clearButton');
+
+    searchInput.addEventListener('keyup', () => {
+        const searchString = searchInput.value.toLowerCase();
+        const filteredRestaurants = restaurants.filter((restaurant) => {
+            return (
+                restaurant.name.toLowerCase().includes(searchString) ||
+                restaurant.type.toLowerCase().includes(searchString) ||
+                restaurant.manager_name.toLowerCase().includes(searchString)
+            );
+        });
+        displayRestaurants(filteredRestaurants);
+    });
+
+    clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        displayRestaurants();
+    });
+
+</script>
 
     <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
@@ -178,8 +298,7 @@
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
+                            there live the blind texts.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -249,13 +368,12 @@
             <div class="row">
                 <div class="col-md-12 text-center">
 
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>
                         Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is made with
-                        <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="icon-heart"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                     </p>
                 </div>
             </div>
@@ -263,14 +381,6 @@
     </footer>
     <!-- Footer End -->
 
-    <script>
-        function verifyRestaurant(button) {
-            button.textContent = 'Verified';
-            button.classList.remove('btn-success');
-            button.classList.add('btn-secondary');
-            button.disabled = true;
-        }
-    </script>
     <script>
         document.getElementById('logoutLink').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action

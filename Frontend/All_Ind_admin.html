@@ -217,11 +217,10 @@
                     },
                 });
                 if (response.status === 200) {
-                    const volunteerCard = document.getElementById(`volunteer-${id}`);
-                    if (volunteerCard) {
-                        volunteerCard.remove();
-                    }
-                    alert('Volunteer deleted successfully'); 
+                    const restaurantCard = document.getElementById('volunteer-container');
+                    restaurantCard.innerHTML = ''; // Clear current content
+                    fetchVolunteers(); // Reload the list after deletion
+                    alert('Volunteer deleted successfully');
                 } else {
                     const data = await response.json();
                     alert(`Error: ${data.message}`); // Display error message from the response
@@ -234,14 +233,6 @@
 
         window.onload = fetchVolunteers();
     </script>
-    <!-- <script>
-        function deleteVolunteer(button) {
-            button.textContent = 'Deleted';
-            button.classList.remove('btn-success');
-            button.classList.add('btn-secondary');
-            button.disabled = true;
-        }
-    </script> -->
 
     <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
