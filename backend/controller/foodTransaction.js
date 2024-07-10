@@ -210,8 +210,13 @@ const getTransactionsOfNGO = async (req, res) => {
 
 const getTransactionsOfRestaurant = async (req, res) => {
   try {
-    const getTransactionsOfRestaurant = await FoodTransaction.find({claimed: true , donor : req.user.id});
-    res.status(200).json(getTransactionsOfRestaurant);
+    const getTransactionsOfRestaurant = await FoodTransaction.find({claimed: true , donor : req.user.id})
+      .populate({
+        path: 'ngo',
+        select: 'organization_name primary_contact.email primary_contact.phoneno' // Only select the fields you need
+      });
+      // console.log(getTransactionsOfRestaurant);
+      res.status(200).json(getTransactionsOfRestaurant);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
