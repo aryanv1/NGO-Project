@@ -159,8 +159,31 @@ const getAllFoodLogs = async (req, res) => {
 // for perticular NGO. 
 const getLogsofNGO = async (req, res) => {
   try {
-    const getLogsofNGO = await FoodTransactionLogs.find({ ngo : req.user.id});
-    res.status(200).json(getLogsofNGO);
+    const logs = await FoodTransactionLogs.find({ ngo: req.user.id })
+      .populate({
+        path: 'donor',
+        select: 'name',
+        model: 'Restaurant'
+      })
+      .populate({
+        path: 'ngo',
+        select: 'organization_name',
+        model: 'NGO'
+      })
+      .populate({
+        path: 'volunteer',
+        select: 'phone_number',
+        model: 'Volunteer'
+      });
+
+    const formattedLogs = logs.map(log => ({
+      ...log._doc,
+      donor: log.donor.name,
+      ngo: log.ngo.organization_name,
+      volunteer: log.volunteer.map(v => v.phone_number)
+    }));
+
+    res.status(200).json(formattedLogs);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
