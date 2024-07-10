@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -31,6 +32,34 @@
         .ftco-navbar-light {
             background: #343a40 !important;
             top: 0;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-details {
+            flex: 1;
+        }
+
+        .btn-success {
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .card-details {
+                flex-direction: column;
+            }
+
+            .text-center.mt-3 {
+                margin-top: 1rem !important;
+            }
         }
     </style>
 </head>
@@ -47,21 +76,39 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index_Ind.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_Ind.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item active"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item"><a href="index_admin.html" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="icon-user"></i>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Volunteers
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">View Profile</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="Verification_Ind_admin.html">Pending Verification</a></li>
+                            <li><a class="dropdown-item" href="All_Ind_admin.html">All Volunteers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            NGO
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="Verification_ngo_admin.html">Pending Verification</a></li>
+                            <li><a class="dropdown-item" href="All_ngo_admin.html">All NGOs</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Restaurant
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="Verification_restaurant_admin.html">Pending Verification</a></li>
+                            <li><a class="dropdown-item" href="All_restaurant_admin.html">All Restaurants</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -69,23 +116,86 @@
     </nav>
     <!-- END nav -->
 
-    <!-- Search Bar -->
-    <div class="container my-4" style="padding-top: 5rem">
-        <div class="input-group">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search for NGOs..."
-                style="border-radius: 5px;">
-            <button id="clearButton" class="btn btn-secondary" type="button"
-                style="border-radius: 5px; margin-left: 10px;">Clear</button>
+    <div class="container" style="margin-top: 6rem">
+        <!-- Individual Verification Card -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title">Username: abc123</h5>
+                                    <p class="card-text">Restaurant Name: Sunshine</p>
+                                    <p class="card-text">Type: Restaurant</p>
+                                    <p class="card-text">Business License Number: 12345</p>
+                                    <p class="card-text">Website URL: cricbuzz.com</p>
+                                    <p class="card-text">Manager Name: Kaleshbhai</p>
+                                    <p class="card-text">Primary Contact Email: abc@gmail.com</p>
+                                    <p class="card-text">Primary Contact Phone: 98767898722</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text">Address Line 1: 123 Main St</p>
+                                    <p class="card-text">Address Line 2: Apt 4B</p>
+                                    <p class="card-text">City: City</p>
+                                    <p class="card-text">State: State</p>
+                                    <p class="card-text">Zip Code: 12345</p>
+                                    <p class="card-text">Country: Country</p>
+                                    <p class="card-text">Latitude: 12.3456</p>
+                                    <p class="card-text">Longitude: 78.9012</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-success btn-verify" onclick="verifyRestaurant(this)">Verify
+                                    Restaurant</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Individual Verification Card -->
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title">Username: abc123</h5>
+                                    <p class="card-text">Restaurant Name: Sunshine</p>
+                                    <p class="card-text">Type: Restaurant</p>
+                                    <p class="card-text">Business License Number: 12345</p>
+                                    <p class="card-text">Website URL: cricbuzz.com</p>
+                                    <p class="card-text">Manager Name: Kaleshbhai</p>
+                                    <p class="card-text">Primary Contact Email: abc@gmail.com</p>
+                                    <p class="card-text">Primary Contact Phone: 98767898722</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text">Address Line 1: 123 Main St</p>
+                                    <p class="card-text">Address Line 2: Apt 4B</p>
+                                    <p class="card-text">City: City</p>
+                                    <p class="card-text">State: State</p>
+                                    <p class="card-text">Zip Code: 12345</p>
+                                    <p class="card-text">Country: Country</p>
+                                    <p class="card-text">Latitude: 12.3456</p>
+                                    <p class="card-text">Longitude: 78.9012</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-success btn-verify" onclick="verifyRestaurant(this)">Verify
+                                    Restaurant</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-
-    <div id="ngoContainer" class="container">
-        <div class="row">
-            <!-- NGO cards will be appended here dynamically -->
-        </div>
-    </div>
-
+    <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
         <div class="container">
@@ -94,7 +204,8 @@
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
+                            there live the
+                            blind texts.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -135,11 +246,9 @@
                     <div class="ftco-footer-widget mb-4 ml-md-4">
                         <h2 class="ftco-heading-2">Site Links</h2>
                         <ul class="list-unstyled">
-                            <li class="nav-item"><a href="index_Ind.html" class="nav-link">Home</a></li>
-                            <li class="nav-item"><a href="about_Ind.html" class="nav-link">About</a></li>
-                            <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
-                            <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
-                            <li class="nav-item"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
+                            <li class="nav-item"><a href="admin_Ind.html" class="nav-link">Volunteer</a></li>
+                            <li class="nav-item"><a href="admin_ngo.html" class="nav-link">NGO</a></li>
+                            <li class="nav-item"><a href="admin_restaurant.html" class="nav-link">Restaurant</a></li>
                             <li class="nav-item">
                                 <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
                             </li>
@@ -178,14 +287,16 @@
             </div>
         </div>
     </footer>
+    <!-- Footer End -->
 
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
-        </svg></div>
-
+    <script>
+        function verifyRestaurant(button) {
+            button.textContent = 'Verified';
+            button.classList.remove('btn-success');
+            button.classList.add('btn-secondary');
+            button.disabled = true;
+        }
+    </script>
     <script>
         document.getElementById('logoutLink').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action
@@ -195,7 +306,6 @@
             }
         });
     </script>
-    <script src="js/ngo_cards.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -210,11 +320,10 @@
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/jquery.timepicker.min.js"></script>
     <script src="js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
-    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
-
 </body>
 
 </html>
