@@ -128,7 +128,7 @@ const createFoodTransaction = async (req, res) => {
 };
 
 // Get Available Food Transactions
-const getAvailableFoodTransactions = async (req, res) => {
+const getAvailableFoodTransactions_NGO = async (req, res) => {
   try {
     const availableTransactions = await FoodTransaction.find({ claimed: false }).populate('donor', 'name');
     res.status(200).json(availableTransactions);
@@ -210,14 +210,34 @@ const getTransactionsOfNGO = async (req, res) => {
 
 const getTransactionsOfRestaurant = async (req, res) => {
   try {
-    const getTransactionsOfRestaurant = await FoodTransaction.find({ donor : req.user.id});
+    const getTransactionsOfRestaurant = await FoodTransaction.find({claimed: true , donor : req.user.id});
     res.status(200).json(getTransactionsOfRestaurant);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
+const getPendingFoodTransactions_restaurant = async (req, res) => {
+  try {
+    const availableTransactions = await FoodTransaction.find({
+      claimed: false,
+      donor: req.user.id
+    });
+    res.status(200).json(availableTransactions);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
+const deleteFoodRequest = async(req,res) => {
+  try {
+    const { transactionId } = req.body;
+    await FoodTransaction.findByIdAndDelete(transactionId);
+    res.status(200).json({ message: 'Donation request deleted successfully' });
+  } catch (error) {
+      res.status(500).json({ error: 'Failed to delete donation request' });
+  }
+}
 // Claim Food Transaction
 const claimFoodTransaction = async (req, res) => {
   try {
@@ -320,7 +340,7 @@ const createFoodTransactionLog = async (req, res) => {
 
 module.exports = {
   createFoodTransaction,
-  getAvailableFoodTransactions,
+  getAvailableFoodTransactions_NGO,
   getAllFoodLogs,
   claimFoodTransaction,
   createFoodTransactionLog,
@@ -328,4 +348,6 @@ module.exports = {
   getLogsofRestaurant,
   getTransactionsOfNGO,
   getTransactionsOfRestaurant,
+  deleteFoodRequest,
+  getPendingFoodTransactions_restaurant,
 };

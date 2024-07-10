@@ -8,7 +8,7 @@ const {
 
 const {
   createFoodTransaction,
-  getAvailableFoodTransactions,
+  getAvailableFoodTransactions_NGO,
   getAllFoodLogs,
   claimFoodTransaction,
   createFoodTransactionLog,
@@ -16,6 +16,8 @@ const {
   getLogsofRestaurant,
   getTransactionsOfNGO,
   getTransactionsOfRestaurant,
+  deleteFoodRequest,
+  getPendingFoodTransactions_restaurant
 } = require("../controller/foodTransaction");
 
 // To see all logs details
@@ -31,16 +33,22 @@ router
 router.route("/create").post(authenticateMiddleWare_for_restaurant, createFoodTransaction);
 router
   .route("/available")
-  .get(authenticateMiddleWare_for_ngo, getAvailableFoodTransactions);
+  .get(authenticateMiddleWare_for_ngo, getAvailableFoodTransactions_NGO);
 
 // Records
 router
   .route("/foodtransactions/ngo")
   .get(authenticateMiddleWare_for_ngo, getTransactionsOfNGO);
 router
-  .route("/foodtransactions/restaurant")
+  .route("/foodtransactions/restaurant/pending")
+  .get(authenticateMiddleWare_for_restaurant, getPendingFoodTransactions_restaurant);
+
+  router
+  .route("/foodtransactions/restaurant/claimed")
   .get(authenticateMiddleWare_for_restaurant, getTransactionsOfRestaurant);
 
+// Delete a request 
+router.route('/delete').delete(authenticateMiddleWare_for_restaurant,deleteFoodRequest);
 // Claim button functionality.
 router
   .route("/claimstatusupdate")
