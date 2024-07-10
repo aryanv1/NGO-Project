@@ -267,25 +267,6 @@
     document.addEventListener('DOMContentLoaded', async () => {
         await fetchRestaurants(); // Fetch restaurants on page load
     });
-    const searchInput = document.getElementById('searchInput');
-    const clearButton = document.getElementById('clearButton');
-
-    searchInput.addEventListener('keyup', () => {
-        const searchString = searchInput.value.toLowerCase();
-        const filteredRestaurants = restaurants.filter((restaurant) => {
-            return (
-                restaurant.name.toLowerCase().includes(searchString) ||
-                restaurant.type.toLowerCase().includes(searchString) ||
-                restaurant.manager_name.toLowerCase().includes(searchString)
-            );
-        });
-        displayRestaurants(filteredRestaurants);
-    });
-
-    clearButton.addEventListener('click', () => {
-        searchInput.value = '';
-        displayRestaurants();
-    });
 
 </script>
 
