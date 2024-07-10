@@ -2,7 +2,7 @@ const FoodTransaction = require("../models/foodTransaction");
 const FoodTransactionLogs = require('../models/foodTrasnactionLogs');
 const {Restaurant} = require("../models/restaurant");
 const {NGO} = require("../models/ngo");
-const Volunteer = require('../models/individual');
+const {Volunteer} = require('../models/individual');
 const docsUpload = require("../blob/docsUpload");
 const mongoose = require("mongoose");
 const sendReport = require('../SMTP/foodrequest');
@@ -233,29 +233,28 @@ const createFoodTransactionLog = async (req, res) => {
       transactionId,
       description,
       peopleServed,
-      volunteer,
+      phone_numbers,
     } = req.body;
 
     if (!mongoose.isValidObjectId(transactionId)) {
       return res.status(400).json({ error: "Invalid transaction ID format" });
     }
-
     const transaction = await FoodTransaction.findById(transactionId);
     if (!transaction) {
       return res.status(400).json({ error: "Transaction not found" });
     }
 
     let volunteer_id =[];
-    for(temp of volunteer)
+    for(temp of phone_numbers)
     {
-        const volunteer1 = (await Volunteer.findOne({ phone_number : temp}))._id;
-        volunteer_id.push(volunteer1);
-
+        const volunteer1 = (await Volunteer.findOne({ phone_number : temp}));
+        if(volunteer1)
+          volunteer_id.push(volunteer1._id);
     }
 
     const photoUrls = [];
 
-    for (const photo of req.files.photos) {
+    for (const photo of req.files.distribution_photos) {
       if (photo) {
         const fileName = photo.mimetype;
         const photoUrl = await docsUpload(
@@ -267,7 +266,6 @@ const createFoodTransactionLog = async (req, res) => {
       }
     }
 
-    
     const transactionLog = new FoodTransactionLogs({
       donor: transaction.donor,
       foodItems: transaction.foodItems,

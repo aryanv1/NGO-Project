@@ -48,7 +48,7 @@ router
 
 // Completion form
 router
-  .route("/completion")
+  .route("/verifycompletion")
   .post(authenticateMiddleWare_for_ngo, createFoodTransactionLog);
 
 module.exports = router;
