@@ -4,6 +4,7 @@ const {
   authenticationMiddleware,
   authenticateMiddleWare_for_ngo,
   authenticateMiddleWare_for_restaurant,
+  authenticateMiddleWare_for_volunteer
 } = require("../middleware/auth");
 
 const {
@@ -14,6 +15,7 @@ const {
   createFoodTransactionLog,
   getLogsofNGO,
   getLogsofRestaurant,
+  getLogsofVolunteer,
   getTransactionsOfNGO,
   getTransactionsOfRestaurant,
   deleteFoodRequest,
@@ -28,6 +30,7 @@ router.route("/foodlogs/ngo").get(authenticateMiddleWare_for_ngo, getLogsofNGO);
 router
   .route("/foodlogs/restaurant")
   .get(authenticateMiddleWare_for_restaurant, getLogsofRestaurant);
+  router.route("/foodlogs/volunteer").get(authenticateMiddleWare_for_volunteer, getLogsofVolunteer);
 
 // food transactions details
 router.route("/create").post(authenticateMiddleWare_for_restaurant, createFoodTransaction);

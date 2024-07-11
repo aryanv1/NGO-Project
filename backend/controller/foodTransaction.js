@@ -220,6 +220,37 @@ const getLogsofRestaurant = async (req, res) => {
   }
 };
 
+const getLogsofVolunteer = async (req, res) => {
+  try {
+    const logs = await FoodTransactionLogs.find({ volunteer: req.user.id })
+      .populate({
+        path: 'donor',
+        select: 'name',
+        model: 'Restaurant'
+      })
+      .populate({
+        path: 'ngo',
+        select: 'organization_name',
+        model: 'NGO'
+      })
+      .populate({
+        path: 'volunteer',
+        select: 'phone_number',
+        model: 'Volunteer'
+      });
+
+    const formattedLogs = logs.map(log => ({
+      ...log._doc,
+      donor: log.donor.name,
+      ngo: log.ngo.organization_name,
+      volunteer: log.volunteer.map(v => v.phone_number)
+    }));
+
+    res.status(200).json(formattedLogs);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 const getTransactionsOfNGO = async (req, res) => {
   try {
@@ -373,6 +404,7 @@ module.exports = {
   createFoodTransactionLog,
   getLogsofNGO,
   getLogsofRestaurant,
+  getLogsofVolunteer,
   getTransactionsOfNGO,
   getTransactionsOfRestaurant,
   deleteFoodRequest,

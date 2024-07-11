@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Food Donation Requests</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .ftco-navbar-light {
+            background: #343a40 !important;
+            top: 0;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-details {
+            flex: 1;
+        }
+
+        .btn-success {
+            border-radius: 4px;
+        }
+
+        .photo-container {
+            max-width: 90%;
+            /* Adjust as needed */
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .photo-tile {
+            display: flex;
+            flex-wrap: nowrap;
+            /* Ensure photos stay in a row */
+        }
+
+        .tile-photo {
+            max-width: 100%;
+            /* Ensures each photo fits within its container */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin-right: 10px;
+            /* Space between photos */
+        }
+
+        .bold-label {
+            font-weight: 700;
+            /* Bolder than normal bold */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+          <a class="navbar-brand" href="index_Ind.html">Welfare</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+    
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a href="index_Ind.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="about_Ind.html" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
+              <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
+              <li class="nav-item"><a href="donation_histroy_individual.html" class="nav-link">My Work</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="icon-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="#">View Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!-- END nav -->
+
+    <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem"></div>
+
+    <div class="modal fade" id="acceptFormModal" tabindex="-1" role="dialog" aria-labelledby="acceptFormModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="acceptFormModalLabel">Accept Distribution Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>NGO Name:</strong> <span id="NameOfNGO"></span></p>
+                <p><strong>People Served:</strong> <span id="modalPeopleServed"></span></p>
+                <p><strong>Volunteer Phones:</strong> <span id="modalVolunteerPhones"></span></p>
+                <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+                <p><strong>Review Notes:</strong> <span id="modalReviewNotes"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<!-- Photo Modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="justify-content: center;">
+                <h5 class="modal-title" id="photoModalLabel">Photos</h5>
+            </div>
+            <div class="modal-body">
+                <div class="photo-container">
+                    <div class="photo-tile"></div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
+                    <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const BACKEND_URL = "http://localhost:3000";
+        let foodTransactions = []; // Global variable to store food transactions
+
+        async function fetchFoodTransactions() {
+            const token = localStorage.getItem('authToken');
+            try {
+                const response = await fetch(`${BACKEND_URL}/foodtransaction/foodlogs/volunteer`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Error fetching data');
+                }
+                foodTransactions = await response.json(); // Assign fetched data to global variable
+                displayFoodTransactions(); // Call function to display transactions
+            } catch (error) {
+                console.error(error);
+                alert('Error fetching data'); // Handle error
+            }
+        }
+
+        function displayFoodTransactions() {
+            const container = document.getElementById('foodTransactionsContainer');
+            container.innerHTML = ''; // Clear previous content
+
+            foodTransactions.forEach(transaction => {
+                const card = document.createElement('div');
+                card.classList.add('card', 'mb-4');
+                card.innerHTML = `
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="card-title">Food Items: ${transaction.foodItems.join(', ')}</h5>
+                                <p class="card-text">Quantity: ${transaction.quantity}</p>
+                                <p class="card-text">Category: ${transaction.foodtype}</p>
+                                <p class="card-text">Packaged: ${transaction.packaged ? 'Yes' : 'No'}</p>
+                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}, ${transaction.pickupLocation.address.city}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-text">Contact Person Name: ${transaction.contactPerson.name}</p>
+                                <p class="card-text">Contact Person Phone: ${transaction.contactPerson.phone}</p>
+                                <p class="card-text">Restaurant Name : ${transaction.donor}</p>
+                                <p class="card-text">Additional Notes: ${transaction.additionalNotes}</p>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-success btn-accept" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
+                            <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function showAcceptForm(transactionId) {
+            const transaction = foodTransactions.find(trans => trans._id === transactionId);
+
+            if (!transaction) {
+                console.error(`Transaction with ID ${transactionId} not found.`);
+                return;
+            }
+
+            // Populate modal with transaction details
+            
+            document.getElementById('NameOfNGO').textContent = transaction.ngo;
+            document.getElementById('modalDescription').textContent = transaction.description;
+            document.getElementById('modalPeopleServed').textContent = transaction.peopleServed;
+            const volunteerPhonesElement = document.getElementById('modalVolunteerPhones');
+            if (transaction.volunteer.length > 0) {
+                volunteerPhonesElement.textContent = transaction.volunteer.join(', ');
+            } else {
+                // volunteerPhonesElement.textContent = 'No volunteers participated';
+                // Alternatively, to hide the field:
+                document.getElementById('modalVolunteerPhones').parentNode.style.display = 'none';
+            }
+            document.getElementById('modalReviewNotes').textContent = transaction.reviewNotes || "No Review Notes Provided";
+
+            $('#acceptFormModal').modal('show');
+        }
+
+        function showPhotos(photos) {
+            const photoContainer = document.querySelector('.photo-tile');
+            photoContainer.innerHTML = '';
+            photos.forEach(photo => {
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = 'Photo';
+                img.classList.add('tile-photo');
+                photoContainer.appendChild(img);
+            });
+            $('#photoModal').modal('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchFoodTransactions();
+
+            let currentPhotoIndex = 0;
+            const photoContainer = document.querySelector('.photo-tile');
+
+            function updateDisplayedPhoto() {
+                const photos = photoContainer.querySelectorAll('.tile-photo');
+                photos.forEach(photo => photo.style.display = 'none');
+                if (photos.length > 0) {
+                    photos[currentPhotoIndex].style.display = 'block';
+                }
+            }
+
+            document.querySelector('.btn-next-photo').addEventListener('click', function () {
+                const photos = photoContainer.querySelectorAll('.tile-photo');
+                if (photos.length > 0) {
+                    currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+                    updateDisplayedPhoto();
+                }
+            });
+
+            document.querySelector('.btn-previous-photo').addEventListener('click', function () {
+                const photos = photoContainer.querySelectorAll('.tile-photo');
+                if (photos.length > 0) {
+                    currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+                    updateDisplayedPhoto();
+                }
+            });
+        });
+    </script>
+    <footer class="ftco-footer ftco-section img">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About Us</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the
+                            blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Recent Blog</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a>
+                                </h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a>
+                                </h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Site Links</h2>
+                        <ul class="list-unstyled">
+                            <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
+                            <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
+                            <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
+                            <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
+                            <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+                            <li class="nav-item"><a href="volunteer_find.html" class="nav-link">Volunteers</a></li>
+                            <li class="nav-item active"><a href="food_transations_ngo.html"
+                                    class="nav-link">Donations</a></li>
+                            <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted
+                                    Donations</a>
+                            </li>
+                            <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations
+                                    History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain
+                                        View, San
+                                        Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
+                                            210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span
+                                            class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with
+                        <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script>
+        document.getElementById('logoutLink').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link action
+            var confirmation = confirm('Are you sure you want to logout?');
+            if (confirmation) {
+                window.location.href = 'index.html'; // Redirect to the logout page
+            }
+        });
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
