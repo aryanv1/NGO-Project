@@ -245,6 +245,11 @@
         window.open(websiteUrl, '_blank'); // Opens the website URL in a new tab/window
     }
 
+    function viewLocationOnMap(latitude, longitude) {
+        const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+        window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+    }
+
     function displayNGOs() {
         const container = document.getElementById('ngo-container');
         container.innerHTML = ''; // Clear previous content

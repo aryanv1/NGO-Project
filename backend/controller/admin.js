@@ -40,7 +40,7 @@ const verifyngo = async (req, res) => {
     const { ngo_id } = req.body;
 
     const ngo_data = await Unverified_NGOs.findOne({ _id: ngo_id });
-    console.log(ngo_data);
+    // console.log(ngo_data);
     const data = new NGO({
       organization_name: ngo_data.organization_name,
       registration_number: ngo_data.registration_number,
