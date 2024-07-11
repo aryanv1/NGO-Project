@@ -222,7 +222,7 @@ const loginVolunteer = async (req, res) => {
     if (!volunteer) {
       return res.status(400).json({ message: "Invalid email" });
     }
-
+    
     const isMatch = await bcrypt.compare(password, volunteer.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });

@@ -43,16 +43,6 @@ unverifiedSchema.pre("save", async function (next) {
   next();
 });
 
-// Password hashing middleware for update
-restaurantSchema.pre("findOneAndUpdate", async function (next) {
-  const update = this.getUpdate();
-  if (update.password) {
-    const salt = await bcrypt.genSalt(10);
-    update.password = await bcrypt.hash(update.password, salt);
-  }
-  next();
-});
-
 // Method to compare password
 restaurantSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);

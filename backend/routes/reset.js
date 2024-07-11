@@ -1,8 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { createReset, applyReset } = require('../controller/resetcontroller');
+const {
+  createReset,
+  verifyReset,
+  applyReset,
+} = require("../controller/resetcontroller");
 
-router.post('/api/reset-password', createReset);
-router.post('/api/reset-password/confirm', applyReset);
+router.route('/sendmail').post(createReset);
+router.route('/checkotp').post(verifyReset);
+router.route('/updatepassword').post(applyReset);
 
 module.exports = router;
