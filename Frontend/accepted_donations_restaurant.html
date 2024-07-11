@@ -233,7 +233,6 @@
 
                 if(response.status == 200){
                     const data = await response.json();
-                    console.log(data);
                     createDonationCards(data);
                 }
                 // add condition for directing to guest/login page if token is expired.

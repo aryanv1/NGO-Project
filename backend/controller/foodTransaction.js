@@ -1,5 +1,5 @@
-const FoodTransaction = require("../models/foodTransaction");
-const FoodTransactionLogs = require('../models/foodTrasnactionLogs');
+const {FoodTransaction} = require("../models/foodTransaction");
+const {FoodTransactionLogs} = require('../models/foodTrasnactionLogs');
 const {Restaurant} = require("../models/restaurant");
 const {NGO} = require("../models/ngo");
 const {Volunteer} = require('../models/individual');
@@ -132,25 +132,6 @@ const getAvailableFoodTransactions_NGO = async (req, res) => {
   try {
     const availableTransactions = await FoodTransaction.find({ claimed: false }).populate('donor', 'name');
     res.status(200).json(availableTransactions);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const getAllFoodLogs = async (req, res) => {
-  try {
-
-    // const pipe = [{
-    //   $project:{
-    //     ngo:1,
-    //     donor:1,
-    //     _id:0
-    //   }
-    // }];
-
-    // const allFoodLogs = await FoodTransactionLogs.aggregate(pipe);
-    const allFoodLogs = await FoodTransactionLogs.find();
-    res.status(200).json(allFoodLogs);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -399,7 +380,6 @@ const createFoodTransactionLog = async (req, res) => {
 module.exports = {
   createFoodTransaction,
   getAvailableFoodTransactions_NGO,
-  getAllFoodLogs,
   claimFoodTransaction,
   createFoodTransactionLog,
   getLogsofNGO,

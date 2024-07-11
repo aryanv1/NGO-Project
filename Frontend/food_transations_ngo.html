@@ -163,12 +163,12 @@
                         'Authorization': token
                     }
                 });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch available food transactions');
-                }
-
+                
                 const data = await response.json();
+                if (response.status !== 200) {
+                    alert(`Error: ${data.message}`); 
+                    return;
+                }
                 createDonationCards(data);
             } catch (error) {
                 console.error('Error fetching food transactions:', error);

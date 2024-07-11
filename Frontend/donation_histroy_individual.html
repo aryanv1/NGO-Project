@@ -180,8 +180,10 @@
                         'Authorization': token
                     }
                 });
-                if (!response.ok) {
-                    throw new Error('Error fetching data');
+                if (response.status !== 200) {
+                    const data = await response.json();
+                    alert(`Error: ${data.message}`); 
+                    return;
                 }
                 foodTransactions = await response.json(); // Assign fetched data to global variable
                 displayFoodTransactions(); // Call function to display transactions

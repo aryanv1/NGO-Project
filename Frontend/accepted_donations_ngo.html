@@ -223,9 +223,10 @@
                 }
                 else 
                 {
-                    alert('Failed to fetch food transactions.');
+                    const data = await response.json();
+                    alert(`Error: ${data.message}`); 
+                    // alert('Failed to fetch food transactions.');
                 }
-
             } catch (error) {
                 console.error('Error fetching food transactions:', error);
             }

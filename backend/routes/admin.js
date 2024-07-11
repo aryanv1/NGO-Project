@@ -15,6 +15,7 @@ const {
   deleteVolunteerById,
   deleteRestaurantById,
   deleteNGOById,
+  getAllFoodLogs
 } = require("../controller/admin");
 const {authenticateMiddleWare} = require('../middleware/auth');
 
@@ -39,5 +40,7 @@ router.route('/getallrestaurants').get(authenticateMiddleWare,getAllRestaurants)
 router.route('/deletevolunteer/:id').delete(authenticateMiddleWare,deleteVolunteerById);
 router.route('/deleterestaurant/:id').delete(authenticateMiddleWare,deleteRestaurantById);
 router.route('/deletengo/:id').delete(authenticateMiddleWare,deleteNGOById);
+
+router.route('/getallfoodlogs').get(authenticateMiddleWare,getAllFoodLogs);
 
 module.exports = router;

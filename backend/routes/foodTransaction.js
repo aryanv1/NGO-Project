@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {
-  authenticationMiddleware,
   authenticateMiddleWare_for_ngo,
   authenticateMiddleWare_for_restaurant,
   authenticateMiddleWare_for_volunteer
@@ -10,7 +9,6 @@ const {
 const {
   createFoodTransaction,
   getAvailableFoodTransactions_NGO,
-  getAllFoodLogs,
   claimFoodTransaction,
   createFoodTransactionLog,
   getLogsofNGO,
@@ -21,10 +19,6 @@ const {
   deleteFoodRequest,
   getPendingFoodTransactions_restaurant
 } = require("../controller/foodTransaction");
-
-// To see all logs details
-router.route("/getallfoodlogs").get(getAllFoodLogs);
-
 
 router.route("/foodlogs/ngo").get(authenticateMiddleWare_for_ngo, getLogsofNGO);
 router

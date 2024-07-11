@@ -2,6 +2,7 @@ const admin = require("../models/admin");
 const { NGO, Unverified_NGOs } = require("../models/ngo");
 const { Volunteer, Unverified_Individuals } = require("../models/individual");
 const { Restaurant, Unverified_Restaurants } = require("../models/restaurant");
+const FoodTransactionLogs = require('../models/foodTrasnactionLogs');
 const jwt = require("jsonwebtoken");
 
 const adminlogin = async (req, res) => {
@@ -246,6 +247,37 @@ const deleteRestaurantById = async (req, res) => {
   }
 };
 
+const getAllFoodLogs = async (req, res) => {
+  try {
+    const allFoodLogs = await FoodTransactionLogs.find()
+    .populate({
+      path: 'donor',
+      select: 'name',
+      model: 'Restaurant'
+    })
+    .populate({
+      path: 'ngo',
+      select: 'organization_name',
+      model: 'NGO'
+    })
+    .populate({
+      path: 'volunteer',
+      select: 'phone_number',
+      model: 'Volunteer'
+    });
+
+    const formattedLogs = allFoodLogs.map(log => ({
+      ...log._doc,
+      donor: log.donor.name,
+      ngo: log.ngo.organization_name,
+     volunteer: log.volunteer.map(v => v.phone_number)
+    }));
+
+    return res.status(200).json(formattedLogs);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 module.exports = {
   adminlogin,
   verifyngo,
@@ -260,4 +292,5 @@ module.exports = {
   deleteVolunteerById,
   deleteRestaurantById,
   deleteNGOById,
+  getAllFoodLogs,
 };
