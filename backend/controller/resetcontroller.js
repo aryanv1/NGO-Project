@@ -1,6 +1,7 @@
-const {NGO} = require("../models/ngo");
+const { NGO } = require("../models/ngo");
+const { Restaurant } = require('../models/restaurant');
+const { Volunteer } = require('../models/individual');
 const Reset = require("../models/resetModel");
-
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
@@ -24,17 +25,27 @@ const generateOTP = () => {
     return OTP;
 };
 
-const createReset = async (req, res)=> {
-    const { ngo_email } = req.body;
-    
+const createReset = async (req, res) => {
+    const { userType, email } = req.body;
+    let user;
+
     try {
-        const user = await NGO.findOne({ "primary_contact.email" : ngo_email });
-        if (!user) return res.status(400).json({ message: "NGO not found" });
-        console.log(user);
-        const email = user.primary_contact.email;
+        if (userType === 'ngo') {
+            user = await NGO.findOne({ "primary_contact.email": email });
+        } else if (userType === 'restaurant') {
+            user = await Restaurant.findOne({ "username": email });
+            email = user.primary_contact_email;
+        } else if (userType === 'volunteer') {
+            user = await Volunteer.findOne({ "email_address": email });
+        }
+
+        if (!user) return res.status(400).json({ message: `${userType.charAt(0).toUpperCase() + userType.slice(1)} not found` });
+
+        await Reset.deleteOne({ userId: user._id });
+
         const otp = generateOTP();
         const reset = await Reset.create({ userId: user._id, otp });
-        
+
         await transporter.sendMail({
             from: process.env.SMTP_EMAIL,
             to: email,
@@ -42,41 +53,45 @@ const createReset = async (req, res)=> {
             html: `<p>Use this OTP to reset your password: <b>${otp}</b></p>
                    <p>This OTP will expire in 1 hour</p>`
         });
-        
+
         return res.status(200).json({ message: "OTP sent to email", resetId: reset._id });
     } catch (error) {
-        if (error.code === 11000) {
-            return res.status(400).json({ message: "Reset request already exists" });
-        } else {
-            return res.status(500).json({ message: "Error creating reset request", error: error.message });
-        }
+        return res.status(500).json({ message: "Error creating reset request", error: error.message });
     }
-}
+};
 
-const applyReset = async (req, res)=> {
-    const { otp, resetId, password } = req.body;
-    
+const applyReset = async (req, res) => {
+    const { userType, otp, resetId, password } = req.body;
+    let user;
+
     try {
         const reset = await Reset.findById(resetId);
         if (!reset) return res.status(400).json({ message: "OTP expired" });
-        
+
         if (reset.otp !== otp) return res.status(400).json({ message: "OTP is incorrect" });
-        
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        
-        const user = await NGO.findByIdAndUpdate(reset.userId, { password: hashedPassword }, { new: true });
-        if (!user) return res.status(400).json({ message: "NGO not found" });
-        
+
+        if (userType === 'ngo') {
+            user = await NGO.findByIdAndUpdate(reset.userId, { password: hashedPassword }, { new: true });
+        } else if (userType === 'restaurant') {
+            user = await Restaurant.findByIdAndUpdate(reset.userId, { password: hashedPassword }, { new: true });
+        } else if (userType === 'volunteer') {
+            user = await Volunteer.findByIdAndUpdate(reset.userId, { password: hashedPassword }, { new: true });
+        }
+
+        if (!user) return res.status(400).json({ message: `${userType.charAt(0).toUpperCase() + userType.slice(1)} not found` });
+
         await Reset.findByIdAndDelete(resetId);
-        
-        return res.status(200).json({ message: "Password reset successfully", user });
+
+        return res.status(200).json({ message: "Password reset successfully" });
     } catch (error) {
         return res.status(500).json({ message: "Error applying reset", error: error.message });
     }
-}
+};
 
 module.exports = {
     createReset,
-    applyReset,
+    applyReset
 };

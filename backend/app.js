@@ -9,6 +9,7 @@ const volunteerRoutes = require('./routes/volunteer.js');
 const restaurantRoutes = require('./routes/restaurants.js');
 const foodTransaction = require('./routes/foodTransaction.js');
 const adminRoutes = require('./routes/admin.js'); 
+const resetRoute = require('./routes/reset.js');
 const fileUpload = require("express-fileupload");
 
 require('dotenv').config();
@@ -34,6 +35,7 @@ app.use('/volunteer', volunteerRoutes);
 app.use('/restaurant',restaurantRoutes);
 app.use('/foodtransaction',foodTransaction);
 app.use('/admin',adminRoutes);
+app.use('/reset',resetRoute);
 
 //routes 
 app.get('/',(req,res) => {
