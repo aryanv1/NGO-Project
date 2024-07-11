@@ -179,6 +179,14 @@
             const container = document.getElementById('foodTransactionsContainer');
             container.innerHTML = '';
 
+            if (donations.length === 0) {
+                const noRequestsMessage = document.createElement('p');
+                noRequestsMessage.textContent = 'No food requests available';
+                noRequestsMessage.className = 'text-center mt-5';
+                container.appendChild(noRequestsMessage);
+                return;
+            }
+
             donations.forEach(donation => {
                 const card = document.createElement('div');
                 card.className = 'card mb-4';
@@ -396,7 +404,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/ngo_cards.js"></script>
+    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

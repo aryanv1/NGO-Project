@@ -1,5 +1,5 @@
-const {FoodTransaction} = require("../models/foodTransaction");
-const {FoodTransactionLogs} = require('../models/foodTrasnactionLogs');
+const FoodTransaction = require("../models/foodTransaction");
+const FoodTransactionLogs = require('../models/foodTrasnactionLogs');
 const {Restaurant} = require("../models/restaurant");
 const {NGO} = require("../models/ngo");
 const {Volunteer} = require('../models/individual');
@@ -130,7 +130,7 @@ const createFoodTransaction = async (req, res) => {
 // Get Available Food Transactions
 const getAvailableFoodTransactions_NGO = async (req, res) => {
   try {
-    const availableTransactions = await FoodTransaction.find({ claimed: false }).populate('donor', 'name');
+    const availableTransactions = await FoodTransaction.find({claimed:false}).populate('donor', 'name');
     res.status(200).json(availableTransactions);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -315,10 +315,9 @@ const createFoodTransactionLog = async (req, res) => {
       transactionId,
       description,
       peopleServed,
-      phone_numbers,
+      reviewNotes,
     } = req.body;
 
-    console.log(req.body);
     if (!mongoose.isValidObjectId(transactionId)) {
       return res.status(400).json({ error: "Invalid transaction ID format" });
     }
@@ -328,8 +327,12 @@ const createFoodTransactionLog = async (req, res) => {
     }
 
     let volunteer_id =[];
-    if(phone_numbers){
-      for(phone of phone_numbers)
+    const phoneNumbersArray = Array.isArray(req.body.phone_numbers) 
+      ? req.body.phone_numbers 
+      : [req.body.phone_numbers];
+
+    if(phoneNumbersArray){
+      for(const phone of phoneNumbersArray)
       {
           const volunteer1 = await Volunteer.findOne({ phone_number : phone});
           if(volunteer1)
@@ -339,7 +342,11 @@ const createFoodTransactionLog = async (req, res) => {
 
     const photoUrls = [];
 
-    for (const photo of req.files.distribution_photos) {
+    const distributionPhotos = Array.isArray(req.files.distribution_photos) 
+    ? req.files.distribution_photos 
+    : [req.files.distribution_photos];
+
+    for (const photo of distributionPhotos) {
       if (photo) {
         const fileName = photo.mimetype;
         const photoUrl = await docsUpload(
@@ -366,6 +373,7 @@ const createFoodTransactionLog = async (req, res) => {
       description,
       peopleServed,
       volunteer : volunteer_id,
+      reviewNotes : reviewNotes || '',
     });
 
     await transactionLog.save();

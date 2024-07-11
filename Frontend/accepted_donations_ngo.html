@@ -304,7 +304,7 @@
                         </div>
                         <div class="form-group">
                             <label for="reviewNotes">Thanks Notes</label>
-                            <textarea class="form-control" id="reviewNotes" rows="5"></textarea>
+                            <textarea class="form-control" id="reviewNotes" rows="5"  name="reviewNotes"></textarea>
                         </div>
                     </form>
                 </div>
@@ -345,7 +345,6 @@
                 });
 
                 const result = await response.json();
-                console.log("THis is my response ",result);
                 if (response.status == 200) {
                     alert('Donation verified successfully!');
                     $('#acceptFormModal').modal('hide');
