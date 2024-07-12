@@ -301,8 +301,8 @@
         if (response.status === 201) {
           const ngoCard = document.getElementById('ngo-container');
           ngoCard.innerHTML = '';
-          fetchNGOs();
           alert('NGO Verified successfully');
+          fetchNGOs();
         } else {
           const data = await response.json();
           alert(`Error: ${data.message}`);
