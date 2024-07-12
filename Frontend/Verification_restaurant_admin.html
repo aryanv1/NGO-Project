@@ -61,6 +61,7 @@
                 margin-top: 1rem !important;
             }
         }
+
         .card {
             margin-bottom: 20px;
         }
@@ -125,8 +126,10 @@
     <!-- Search Bar -->
     <div class="container my-4" style="padding-top: 5rem">
         <div class="input-group">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search Here..." style="border-radius: 5px;">
-            <button id="clearButton" class="btn btn-secondary" type="button" style="border-radius: 5px; margin-left: 10px;">Clear</button>
+            <input type="text" id="searchInput" class="form-control" placeholder="Search Here..."
+                style="border-radius: 5px;">
+            <button id="clearButton" class="btn btn-secondary" type="button"
+                style="border-radius: 5px; margin-left: 10px;">Clear</button>
         </div>
     </div>
 
@@ -134,52 +137,52 @@
         <div id="restaurant-container"></div>
     </div>
 
-<script>
-    const BACKEND_URL = "http://localhost:3000"; // Backend URL
-    let restaurants = []; // Global variable to store restaurant data
+    <script>
+        const BACKEND_URL = "http://localhost:3000"; // Backend URL
+        let restaurants = []; // Global variable to store restaurant data
 
-    async function fetchRestaurants() {
-        try {
-            const token = localStorage.getItem('authToken');
-            const response = await fetch(`${BACKEND_URL}/admin/getallunverifiedrestaurants`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token,
+        async function fetchRestaurants() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/admin/getallunverifiedrestaurants`, {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    }
+                });
+                if (response.status !== 200) {
+                    alert('Failed to fetch restaurants data');
+                    return;
                 }
-            });
-            if (response.status !== 200) {
-                alert('Failed to fetch restaurants data');
-                return;
+                restaurants = await response.json();
+                displayRestaurants();
+
+            } catch (error) {
+                console.error(error);
+                alert('Error fetching data'); // Handle error
             }
-            restaurants = await response.json();
-            displayRestaurants(); 
-
-        } catch (error) {
-            console.error(error);
-            alert('Error fetching data'); // Handle error
         }
-    }
 
-    function viewFoodHandlersPermit(url) {
-        window.open(url, '_blank'); // Opens the URL in a new tab/window
-    }
+        function viewFoodHandlersPermit(url) {
+            window.open(url, '_blank'); // Opens the URL in a new tab/window
+        }
 
-    function redirectToWebsite(websiteUrl) {
-        window.open(websiteUrl, '_blank'); // Opens the website URL in a new tab/window
-    }
+        function redirectToWebsite(websiteUrl) {
+            window.open(websiteUrl, '_blank'); // Opens the website URL in a new tab/window
+        }
 
-    function viewLocationOnMap(latitude, longitude) {
-        const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-        window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
-    }
-    
-    function displayRestaurants() {
-        const container = document.getElementById('restaurant-container');
-        container.innerHTML = ''; // Clear previous content
+        function viewLocationOnMap(latitude, longitude) {
+            const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
 
-        restaurants.forEach(restaurant => {
-            const restaurantCard = `
+        function displayRestaurants() {
+            const container = document.getElementById('restaurant-container');
+            container.innerHTML = ''; // Clear previous content
+
+            restaurants.forEach(restaurant => {
+                const restaurantCard = `
                 <div class="container mt-2">
                     <div class="row">
                         <div class="col-md-12">
@@ -193,19 +196,19 @@
                                             <p class="card-text">Business License Number: ${restaurant.business_license_number}</p>
                                             <p class="card-text">Website:
                                                 ${restaurant.website_url ?
-                                                    `<a href="javascript:void(0);" 
+                        `<a href="javascript:void(0);" 
                                                     onclick="redirectToWebsite('${restaurant.website_url}')">
                                                     ${restaurant.website_url}
                                                 </a>`
-                                                : "Not Avaialable"}
+                        : "Not Avaialable"}
                                             </p>
                                                 <p class="card-text">Food Handlers Permit: 
-                                                ${restaurant.food_handlers_permit ? 
-                                                    `<a href="javascript:void(0);" 
+                                                ${restaurant.food_handlers_permit ?
+                        `<a href="javascript:void(0);" 
                                                         onclick="viewFoodHandlersPermit('${restaurant.food_handlers_permit}')">
                                                         Click here to view
-                                                    </a>` 
-                                                    : 'Not available'}
+                                                    </a>`
+                        : 'Not available'}
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
@@ -229,107 +232,91 @@
                         </div>
                     </div>
                 </div>`;
-            container.insertAdjacentHTML('beforeend', restaurantCard);
-        });
-    }
+                container.insertAdjacentHTML('beforeend', restaurantCard);
+            });
+        }
 
-    function formatAddress(address) {
-        return `
+        function formatAddress(address) {
+            return `
             ${address.address_line_1}, ${address.address_line_2 ? address.address_line_2 + ', ' : ''}
             ${address.city}, ${address.state}, ${address.zip_code}, ${address.country}
         `;
-    }
+        }
 
-    async function VerifyRestaurant(rest_id) {
-        const temp = { rest_id : rest_id}
-        const formData = new FormData();
-        formData.append('rest_id', rest_id);
-        try {
-            const token = localStorage.getItem('authToken');
-            const response = await fetch(`${BACKEND_URL}/admin/verifyrestaurant`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': token,
-                },
-                body : formData,
-            });
-            if (response.status === 201) {
-                const restaurantCard = document.getElementById('restaurant-container');
-                restaurantCard.innerHTML = ''; // Clear current content
-                fetchRestaurants(); // Reload the list after deletion
-                alert('Restaurant Verified successfully');
-            }else {
-                alert('Failed to verify restaurant');
-            }
+        async function VerifyRestaurant(rest_id) {
+            const temp = { rest_id: rest_id }
+            const formData = new FormData();
+            formData.append('rest_id', rest_id);
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/admin/verifyrestaurant`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token,
+                    },
+                    body: formData,
+                });
+                if (response.status === 201) {
+                    const restaurantCard = document.getElementById('restaurant-container');
+                    restaurantCard.innerHTML = ''; // Clear current content
+                    fetchRestaurants(); // Reload the list after deletion
+                    alert('Restaurant Verified successfully');
+                } else {
+                    alert('Failed to verify restaurant');
+                }
             } catch (error) {
                 console.error(error);
                 alert('Error verifying restaurant');
             }
-    }
+        }
 
-    document.addEventListener('DOMContentLoaded', async () => {
-        await fetchRestaurants(); // Fetch restaurants on page load
-    });
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchRestaurants(); // Fetch restaurants on page load
+        });
 
-</script>
+    </script>
 
     <!-- Footer Start -->
-    <footer class="ftco-footer ftco-section img">
+    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
         <div class="overlay"></div>
         <div class="container">
-            <div class="row mb-5">
+            <div class="row mb-1">
                 <div class="col-md-3">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
+                        <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
+                            minimizing waste, and
+                            helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Recent Blog</h2>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a>
-                                </h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a>
-                                </h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="ftco-footer-widget mb-4 ml-md-4">
-                        <h2 class="ftco-heading-2">Site Links</h2>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
+                        <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li class="nav-item"><a href="admin_Ind.html" class="nav-link">Volunteer</a></li>
-                            <li class="nav-item"><a href="admin_ngo.html" class="nav-link">NGO</a></li>
-                            <li class="nav-item"><a href="admin_restaurant.html" class="nav-link">Restaurant</a></li>
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
-                            </li>
+                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Support Network</li>
+                            <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
+                            <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Testimonials</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <div class="text">
+                                <h3 class="heading" style="color: white;">"This organization has changed my life!" -
+                                    Jane Doe
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-4 d-flex">
+                            <div class="text">
+                                <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
+                                    Smith
+                                </h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -337,28 +324,17 @@
                         <h2 class="ftco-heading-2">Have a Questions?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain
-                                        View, San
-                                        Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
-                                            210</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span
-                                            class="text">info@yourdomain.com</span></a></li>
+                                <li><span class="icon icon-map-marker"></span><span class="text"
+                                        style="color: white;">203 Fake St. Mountain
+                                        View, San Francisco, California, USA</span></li>
+                                <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
+                                        3929
+                                        210</span></li>
+                                <li><span class="icon icon-envelope"></span><span class="text"
+                                        style="color: white;">info@yourdomain.com</span></li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-
-                    <p>
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    </p>
                 </div>
             </div>
         </div>
