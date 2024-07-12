@@ -206,7 +206,16 @@
         stroke="#F96D00" />
     </svg></div>
 
-
+  <script>
+    document.getElementById('logoutLink').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default link action
+      var confirmation = confirm('Are you sure you want to logout?');
+      if (confirmation) {
+        localStorage.clear();
+        window.location.href = 'index.html'; // Redirect to the logout page
+      }
+    });
+  </script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>

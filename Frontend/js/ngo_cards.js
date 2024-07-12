@@ -60,10 +60,19 @@ function displayNGOs(ngos) {
     const rowDiv = ngoContainer.querySelector('.row');
     rowDiv.innerHTML = ''; // Clear existing content
 
+    if (ngos.length === 0) {
+        const message = document.createElement('div');
+        message.className = 'message-card'; // Apply custom message-card class
+        message.textContent = 'No Pending Requests';
+
+        ngoContainer.appendChild(message);
+        return;
+    }
+
     ngos.forEach((ngo, index) => {
         const ngoCard = document.createElement('div');
         ngoCard.className = 'col-md-4';
-
+        
         ngoCard.innerHTML = `
             <div class="card mb-4">
                 <img src="${ngo.ngo_photos[0] || 'https://via.placeholder.com/150'}" height="300rem" width="140px" class="card-img-top" alt="NGO Image">
