@@ -61,6 +61,15 @@
                 margin-top: 1rem !important;
             }
         }
+
+        .message-card {
+            text-align: center;
+            font-size: xx-large;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 1000px;
+            /* Set minimum height */
+        }
     </style>
 </head>
 
@@ -163,6 +172,15 @@
             const container = document.getElementById('volunteer-container');
             container.innerHTML = ''; // Clear previous content
 
+            if (volunteers.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message-card'; // Apply custom message-card class
+                message.textContent = 'No Pending Requests';
+
+                container.appendChild(message);
+                return;
+            }
+
             volunteers.forEach(volunteer => {
                 const volunteerCard = `
                     <div class="container mt-2">
@@ -190,8 +208,8 @@
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
-                                            <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                                onclick="VerifyVolunteer('${volunteer._id}')">Verify Volunteer</button>
+                                            <button class="btn btn-success btn-verify" style="border-radius: 5px;"
+                                                    onclick="confirmVerifyVolunteer('${volunteer._id}')">Verify Volunteer</button>
                                         </div>
                                     </div>
                                 </div>
@@ -237,6 +255,19 @@
 
         window.onload = fetchVolunteers();
     </script>
+
+    <script>
+        function confirmVerifyVolunteer(volunteerId) {
+            if (confirm("Are you sure you want to verify this volunteer?")) {
+                // Call your VerifyVolunteer function here
+                VerifyVolunteer(volunteerId);
+            } else {
+                // Optional: Provide feedback or take other action if the user cancels
+                console.log("Verification canceled.");
+            }
+        }
+    </script>
+    
     <!-- Footer Start -->
     <footer class="ftco-footer ftco-section img" style="height: 25rem;">
         <div class="overlay"></div>

@@ -65,6 +65,15 @@
         .card {
             margin-bottom: 20px;
         }
+
+        .message-card {
+            text-align: center;
+            font-size: xx-large;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 1000px;
+            /* Set minimum height */
+        }
     </style>
 </head>
 
@@ -181,6 +190,15 @@
             const container = document.getElementById('restaurant-container');
             container.innerHTML = ''; // Clear previous content
 
+            if (restaurants.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message-card'; // Apply custom message-card class
+                message.textContent = 'No Restaurants/Community Halls';
+
+                container.appendChild(message);
+                return;
+            }
+
             restaurants.forEach(restaurant => {
                 const restaurantCard = `
                 <div class="container mt-2">
@@ -230,7 +248,7 @@
                                     </div>
                                     <div class="text-center mt-3">
                                         <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                            onclick="deleteRestaurant('${restaurant._id}')">Delete Restaurant</button>
+                                                onclick="confirmDeleteRestaurant('${restaurant._id}')">Delete Restaurant</button>
                                     </div>
                                 </div>
                             </div>
@@ -269,6 +287,18 @@
             await fetchRestaurants(); // Fetch restaurants on page load
         });
 
+    </script>
+
+    <script>
+        function confirmDeleteRestaurant(restaurantId) {
+            if (confirm("Are you sure you want to delete this restaurant?")) {
+                // Call your deleteRestaurant function here
+                deleteRestaurant(restaurantId);
+            } else {
+                // Optional: Provide feedback or take other action if the user cancels
+                console.log("Deletion canceled.");
+            }
+        }
     </script>
 
     <!-- Footer Start -->

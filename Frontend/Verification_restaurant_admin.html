@@ -65,6 +65,15 @@
         .card {
             margin-bottom: 20px;
         }
+
+        .message-card {
+            text-align: center;
+            font-size: xx-large;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 1000px;
+            /* Set minimum height */
+        }
     </style>
 </head>
 
@@ -181,6 +190,15 @@
             const container = document.getElementById('restaurant-container');
             container.innerHTML = ''; // Clear previous content
 
+            if (restaurants.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message-card'; // Apply custom message-card class
+                message.textContent = 'No Pending Requests';
+
+                container.appendChild(message);
+                return;
+            }
+
             restaurants.forEach(restaurant => {
                 const restaurantCard = `
                 <div class="container mt-2">
@@ -224,8 +242,8 @@
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                            onclick="VerifyRestaurant('${restaurant._id}')">Verify Restaurant</button>
+                                        <button class="btn btn-success btn-verify" style="border-radius: 5px;"
+                                                onclick="confirmVerifyRestaurant('${restaurant._id}')">Verify Restaurant</button>
                                     </div>
                                 </div>
                             </div>
@@ -274,6 +292,18 @@
             await fetchRestaurants(); // Fetch restaurants on page load
         });
 
+    </script>
+
+    <script>
+        function confirmVerifyRestaurant(restaurantId) {
+            if (confirm("Are you sure you want to verify this restaurant?")) {
+                // Call your VerifyRestaurant function here
+                VerifyRestaurant(restaurantId);
+            } else {
+                // Optional: Provide feedback or take other action if the user cancels
+                console.log("Verification canceled.");
+            }
+        }
     </script>
 
     <!-- Footer Start -->

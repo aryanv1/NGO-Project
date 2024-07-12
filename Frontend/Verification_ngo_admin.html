@@ -60,6 +60,15 @@
         margin-top: 1rem !important;
       }
     }
+
+    .message-card {
+      text-align: center;
+      font-size: xx-large;
+      padding: 20px;
+      margin-top: 20px;
+      min-height: 1000px;
+      /* Set minimum height */
+    }
   </style>
 </head>
 
@@ -194,6 +203,15 @@
       const container = document.getElementById('ngo-container');
       container.innerHTML = ''; // Clear previous content
 
+      if (ngos.length === 0) {
+        const message = document.createElement('div');
+        message.className = 'message-card'; // Apply custom message-card class
+        message.textContent = 'No Pending Requests';
+
+        container.appendChild(message);
+        return;
+      }
+
       ngos.forEach(ngo => {
         const ngoCard = `
                 <div class="container mt-2">
@@ -253,9 +271,9 @@
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                            onclick="VerifyNGO('${ngo._id}')">Verify NGO</button>
-                                    </div>
+                                      <button class="btn btn-success btn-verify" style="border-radius: 5px;"
+                                              onclick="confirmVerifyNGO('${ngo._id}')">Verify NGO</button>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -299,6 +317,18 @@
       await fetchNGOs(); // Fetch NGOs on page load
     });
 
+  </script>
+
+  <script>
+    function confirmVerifyNGO(ngoId) {
+      if (confirm("Are you sure you want to verify this NGO?")) {
+        // Call your VerifyNGO function here
+        VerifyNGO(ngoId);
+      } else {
+        // Optional: Provide feedback or take other action if the user cancels
+        console.log("Verification canceled.");
+      }
+    }
   </script>
 
 
