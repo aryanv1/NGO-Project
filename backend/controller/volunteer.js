@@ -86,7 +86,7 @@ const getAvailableVolunteers = async (req, res) => {
     if (!ngo) {
       return res.status(404).json({ message: 'NGO not found' });
     }
-    console.log(ngo);
+
     const { latitude, longitude } = ngo.physical_addresses.geo_location;
     console.log(latitude ,longitude);
     const maxDistance = 25; // 25 km radius in meters
@@ -94,7 +94,7 @@ const getAvailableVolunteers = async (req, res) => {
     const availableVolunteers = await Volunteer.find({
       "home_address.geo_location": {
         $geoWithin: {
-          $centerSphere: [[longitude, latitude], maxDistance / 6378.1] // 25 km radius
+          $centerSphere: [[latitude, longitude], maxDistance / 6378.1] // 25 km radius
         }
       },
     })
