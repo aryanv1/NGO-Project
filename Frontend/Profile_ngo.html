@@ -88,7 +88,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index_ngo.html">Welfare</a>
+            <a class="navbar-brand" href="index.html">Welfare</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -97,10 +97,11 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
+                    <li class="nav-item "><a href="about_ngo.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item"><a href="Available_Volunteers.html" class="nav-link">Volunteers</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -165,14 +166,18 @@
                         <p><strong>Phone Number:</strong> <span id="secondaryContactPhone"></span></p>
 
                         <h3>Certificates</h3>
-                        <p><strong>Registration Certificate:</strong> <a href="#" id="registrationCertificate" target="_blank">View Certificate</a></p>
-                        <p><strong>Tax Exemption Certificate:</strong> <a href="#" id="taxExemptionCertificate" target="_blank">View Certificate</a></p>
+                        <p><strong>Registration Certificate:</strong> <a href="#" id="registrationCertificate"
+                                target="_blank">View Certificate</a></p>
+                        <p><strong>Tax Exemption Certificate:</strong> <a href="#" id="taxExemptionCertificate"
+                                target="_blank">View Certificate</a></p>
                     </div>
                     <!-- Card Footer with Buttons -->
                     <div class="text-center">
                         <button class="btn btn-primary btn-view-photos ml-2" style="margin: 1rem;">View Photos</button>
-                        <button class="btn btn-danger" id="deleteAccount" style="border-radius: 5px; margin: 1rem;">Delete Account</button>
-                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;" >Edit Account</button>
+                        <button class="btn btn-danger" id="deleteAccount"
+                            style="border-radius: 5px; margin: 1rem;">Delete Account</button>
+                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;">Edit
+                            Account</button>
                     </div>
                 </div>
             </div>
@@ -180,7 +185,8 @@
     </div>
 
     <!-- Photo Modal -->
-    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="justify-content: center;">
@@ -203,8 +209,9 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="justify-content: center;">
@@ -247,19 +254,22 @@
                         <div class="form-group">
                             <label for="editlocation">Location</label>
                             <div class="location-field">
-                            <div class="form-row">
-                                <div class="col">
-                                <input type="number" class="form-control" style="border-radius: 5px" id="editlatitude" name="editlatitude"
-                                    placeholder="Latitude" step="any" required />
-                                </div>
-                                <div class="col">
-                                    <input type="number" class="form-control" style="border-radius: 5px" id="editlongitude"
-                                        name="editlongitude" placeholder="Longitude" step="any" required />
-                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" style="border-radius: 5px"
+                                            id="editlatitude" name="editlatitude" placeholder="Latitude" step="any"
+                                            required />
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" style="border-radius: 5px"
+                                            id="editlongitude" name="editlongitude" placeholder="Longitude" step="any"
+                                            required />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px" onclick="getLocation()">
+                        <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px"
+                            onclick="getLocation()">
                             Get Location
                         </button>
                         <div class="form-group">
@@ -294,7 +304,8 @@
                                 3 photos.</p>
                         </div> -->
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
+                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
+                                Changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -320,7 +331,7 @@
                 });
                 const ngo = await response.json();
                 if (response.status !== 200) {
-                    alert(`Error: ${ngo.message}`); 
+                    alert(`Error: ${ngo.message}`);
                     return;
                 }
 
@@ -328,7 +339,7 @@
                 document.getElementById('organizationName').textContent = ngo.organization_name;
                 document.getElementById('registrationNumber').textContent = ngo.registration_number;
                 document.getElementById('taxIdEin').textContent = ngo.tax_id_ein;
-                
+
                 const websiteUrlElement = document.getElementById('websiteUrl');
                 if (ngo.website_url) {
                     websiteUrlElement.textContent = ngo.website_url;
@@ -350,10 +361,10 @@
                 document.getElementById('primaryContactEmail').textContent = ngo.primary_contact.email;
                 document.getElementById('primaryContactPhone').textContent = ngo.primary_contact.phoneno;
 
-                if(ngo.secondary_contact){
+                if (ngo.secondary_contact) {
                     document.getElementById('secondaryContactName').textContent = ngo.secondary_contact.name ? ngo.secondary_contact.name : 'N/A';
                     document.getElementById('secondaryContactEmail').textContent = ngo.secondary_contact.email ? ngo.secondary_contact.email : 'N/A';
-                    document.getElementById('secondaryContactPhone').textContent = ngo.secondary_contact.phoneno? ngo.secondary_contact.phoneno :'N/A';
+                    document.getElementById('secondaryContactPhone').textContent = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : 'N/A';
                 }
 
                 const registrationCertificateElement = document.getElementById('registrationCertificate');
@@ -375,7 +386,7 @@
                 }
 
                 const photoButton = document.querySelector('.btn-view-photos');
-                photoButton.onclick = function() {
+                photoButton.onclick = function () {
                     showPhotos(ngo.ngo_photos);
                 };
 
@@ -398,8 +409,8 @@
                         document.getElementById('editSecondaryContactEmail').value = ngo.secondary_contact.email ? ngo.secondary_contact.email : '';
                         document.getElementById('editSecondaryContactPhone').value = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : '';
                     }
-                $('#editProfileModal').modal('show');
-        });
+                    $('#editProfileModal').modal('show');
+                });
             } catch (error) {
                 console.error('Error fetching NGO profile:', error);
             }
@@ -410,24 +421,24 @@
     <script>
         async function saveProfile(event) {
             event.preventDefault(); // Prevent form submission
-            
+
             const primaryContactEmail = document.getElementById('editPrimaryContactEmail').value;
             const primaryContactPhone = document.getElementById('editPrimaryContactPhone').value;
-            
+
             const secondaryContactEmail = document.getElementById('editSecondaryContactEmail').value;
             const secondaryContactPhone = document.getElementById('editSecondaryContactPhone').value;
-            
+
             // Frontend validation for unique primary and secondary contacts
             if (secondaryContactEmail && secondaryContactEmail === primaryContactEmail) {
                 alert('Secondary contact email must be different from primary contact email.');
                 return;
             }
-            
+
             if (secondaryContactPhone && secondaryContactPhone === primaryContactPhone) {
                 alert('Secondary contact phone must be different from primary contact phone.');
                 return;
             }
-            
+
             const updatedNGO = {
                 organization_name: document.getElementById('editOrganizationName').value,
                 website_url: document.getElementById('editWebsiteUrl').value,
@@ -438,9 +449,9 @@
                     state: document.getElementById('editState').value,
                     zip_code: document.getElementById('editZipCode').value,
                     country: document.getElementById('editCountry').value,
-                    geo_location : {
-                        latitude : document.getElementById('editlatitude').value,
-                        longitude : document.getElementById('editlongitude').value,
+                    geo_location: {
+                        latitude: document.getElementById('editlatitude').value,
+                        longitude: document.getElementById('editlongitude').value,
                     }
                 }),
                 primary_contact: JSON.stringify({
@@ -449,7 +460,7 @@
                     phoneno: document.getElementById('editPrimaryContactPhone').value,
                 }),
             };
-            
+
             if (secondaryContactEmail || secondaryContactPhone) {
                 updatedNGO.secondary_contact = JSON.stringify({
                     name: document.getElementById('editSecondaryContactName').value,
@@ -472,38 +483,37 @@
             //     formData.append('photos', element)
             // }
             const BACKEND_URL = "http://localhost:3000";
-            try{
+            try {
                 const token = localStorage.getItem('authToken');
                 if (!token) {
                     alert('Authorization token is missing. Please log in again.');
                     return;
                 }
-                
+
                 const response = await fetch(`${BACKEND_URL}/ngo/updatedetails`, {
                     method: "PATCH",
                     headers: {
                         'Authorization': token,
                     },
-                    body:formData
+                    body: formData
                 });
-                if(response.status !== 200)
-                {
+                if (response.status !== 200) {
                     const data = await response.json();
-                    alert(`Error: ${data.message}`); 
+                    alert(`Error: ${data.message}`);
                     return;
                 }
-                else{
+                else {
                     alert('Profile updated successfully');
                     $('#editProfileModal').modal('hide');
                     fetchProfileData();
                 }
             }
-            catch(error){
+            catch (error) {
                 console.error(error);
                 alert('Error fetching data');
             }
-    }
-    document.addEventListener('DOMContentLoaded', fetchProfileData);
+        }
+        document.addEventListener('DOMContentLoaded', fetchProfileData);
     </script>
 
     <footer class="ftco-footer ftco-section img">
@@ -603,7 +613,7 @@
     </div>
 
     <script>
-        const BACKEND_URL = "http://localhost:3000"; 
+        const BACKEND_URL = "http://localhost:3000";
 
         document.getElementById('deleteAccount').addEventListener('click', async function (e) {
             e.preventDefault();
@@ -621,7 +631,7 @@
                             'Authorization': token,
                         },
                     });
-    
+
                     if (response.status === 200) {
                         alert('Account deleted successfully');
                         window.location.href = 'index.html';
@@ -689,27 +699,27 @@
             }
         }
 
-    function showPosition(position) {
-        document.getElementById('editlatitude').value = position.coords.latitude;
-        document.getElementById('editlongitude').value = position.coords.longitude;
-    }
-
-    function showError(error) {
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                alert("User denied the request for Geolocation.");
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert("Location information is unavailable.");
-                break;
-            case error.TIMEOUT:
-                alert("The request to get user location timed out.");
-                break;
-            case error.UNKNOWN_ERROR:
-                alert("An unknown error occurred.");
-                break;
+        function showPosition(position) {
+            document.getElementById('editlatitude').value = position.coords.latitude;
+            document.getElementById('editlongitude').value = position.coords.longitude;
         }
-    }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
     </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>

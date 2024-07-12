@@ -125,6 +125,7 @@
             margin-right: 10px;
             /* Space between photos */
         }
+
         .bold-text {
             font-weight: 700;
         }
@@ -151,7 +152,7 @@
                     <li class="nav-item"><a href="contact_restaurant.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="ngolist_restaurant.html" class="nav-link">NGO</a></li>
                     <li class="nav-item"><a href="restaurant_donate.html" class="nav-link">Donate</a></li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Donations
@@ -171,7 +172,7 @@
                             <i class="icon-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">View Profile</a>
+                            <a class="dropdown-item" href="Profile_restaurant.html">View Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
                         </div>
@@ -184,13 +185,14 @@
 
     <!-- <p class="card-text">Latitude: ${donation.pickupLocation.geo_location.latitude}</p>
     <p class="card-text">Longitude: ${donation.pickupLocation.geo_location.longitude}</p> -->
-    
+
     <div id="foodTransactionsContainer" class="container" style="margin-top: 6rem">
         <!-- Food transactions will be dynamically inserted here -->
     </div>
 
     <!-- Photo Modal -->
-    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content" style="align-items: center;">
                 <div class="modal-header">
@@ -231,12 +233,12 @@
                     }
                 });
 
-                if(response.status == 200){
+                if (response.status == 200) {
                     const data = await response.json();
                     createDonationCards(data);
                 }
                 // add condition for directing to guest/login page if token is expired.
-                else{
+                else {
                     alert('Failed to fetch food transactions. Please try again later.');
                 }
             } catch (error) {
@@ -293,7 +295,7 @@
     </script>
 
     <script>
-            
+
         function showPhotos(photos) {
             const photoContainer = document.querySelector('.photo-tile');
             photoContainer.innerHTML = ''; // Clear previous photos

@@ -141,12 +141,13 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item "><a href="index_ngo.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
+                    <li class="nav-item "><a href="about_ngo.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item"><a href="Available_Volunteers.html" class="nav-link">Volunteers</a></li>
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Donations
@@ -163,7 +164,7 @@
                             <i class="icon-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">View Profile</a>
+                            <a class="dropdown-item" href="Profile_ngo.html">View Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
                         </div>
@@ -179,7 +180,8 @@
     </div>
 
     <!-- Photo Modal -->
-    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content" style="align-items: center;">
                 <div class="modal-header">
@@ -216,15 +218,14 @@
                     }
                 });
 
-                if (response.status==200) {
+                if (response.status == 200) {
                     const data = await response.json();
                     createDonationCards(data);
                     // console.log(data);
                 }
-                else 
-                {
+                else {
                     const data = await response.json();
-                    alert(`Error: ${data.message}`); 
+                    alert(`Error: ${data.message}`);
                     // alert('Failed to fetch food transactions.');
                 }
             } catch (error) {
@@ -274,7 +275,8 @@
         }
     </script>
 
-    <div class="modal fade" id="acceptFormModal" tabindex="-1" role="dialog" aria-labelledby="acceptFormModalLabel" aria-hidden="true">
+    <div class="modal fade" id="acceptFormModal" tabindex="-1" role="dialog" aria-labelledby="acceptFormModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content" style="padding: 0px;">
                 <div class="modal-header" style="justify-content: center;">
@@ -285,11 +287,13 @@
                         <input type="hidden" id="transactionId" name="transactionId">
                         <div class="form-group">
                             <label for="distribution_photos">Distribution Photos</label>
-                            <input type="file" class="form-control-file" id="distribution_photos" name="distribution_photos" multiple>
+                            <input type="file" class="form-control-file" id="distribution_photos"
+                                name="distribution_photos" multiple>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control" id="description" rows="5" name="description" required></textarea>
+                            <textarea class="form-control" id="description" rows="5" name="description"
+                                required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="peopleServed">People Served</label>
@@ -300,11 +304,12 @@
                             <div id="phone_numbers">
                                 <input type="tel" class="form-control phone-input" name="phone_numbers">
                             </div>
-                            <button type="button" class="btn btn-white" style="border-radius: 5px;" onclick="addPhoneNumber()">Add Another Phone Number</button>
+                            <button type="button" class="btn btn-white" style="border-radius: 5px;"
+                                onclick="addPhoneNumber()">Add Another Phone Number</button>
                         </div>
                         <div class="form-group">
                             <label for="reviewNotes">Thanks Notes</label>
-                            <textarea class="form-control" id="reviewNotes" rows="5"  name="reviewNotes"></textarea>
+                            <textarea class="form-control" id="reviewNotes" rows="5" name="reviewNotes"></textarea>
                         </div>
                     </form>
                 </div>
@@ -359,9 +364,9 @@
         }
 
         document.getElementById('acceptForm').addEventListener('submit', submitAcceptForm);
-    </script> 
+    </script>
     <script>
-    function showPhotos(photos) {
+        function showPhotos(photos) {
             const photoContainer = document.querySelector('.photo-tile');
             photoContainer.innerHTML = ''; // Clear previous photos
 
@@ -404,8 +409,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- <script src="js/ngo_cards.js"></script> --> 
-     <!-- Above change is made while merging with backend. -->
+    <!-- <script src="js/ngo_cards.js"></script> -->
+    <!-- Above change is made while merging with backend. -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

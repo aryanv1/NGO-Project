@@ -127,35 +127,35 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-          <a class="navbar-brand" href="index.html">Welfare</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
-          </button>
-    
-          <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="index_Ind.html" class="nav-link">Home</a></li>
-              <li class="nav-item"><a href="about_Ind.html" class="nav-link">About</a></li>
-              <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
-              <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
-              <li class="nav-item"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
-              <li class="nav-item"><a href="donation_histroy_individual.html" class="nav-link">My Work</a></li>
-              <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-user"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                  <a class="dropdown-item" href="Profile_Ind.html">View Profile</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
-                </div>
-              </li>
-            </ul>
-          </div>
+            <a class="navbar-brand" href="index.html">Welfare</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="index_Ind.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about_Ind.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
+                    <li class="nav-item"><a href="donation_histroy_individual.html" class="nav-link">My Work</a></li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="Profile_Ind.html">View Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
     <!-- END nav -->
 
     <!-- Content -->
@@ -255,23 +255,27 @@
                         <div class="form-group">
                             <label for="editlocation">Location</label>
                             <div class="location-field">
-                            <div class="form-row">
-                                <div class="col">
-                                <input type="number" class="form-control" style="border-radius: 5px" id="editlatitude" name="editlatitude"
-                                    placeholder="Latitude" step="any" required />
-                                </div>
-                                <div class="col">
-                                    <input type="number" class="form-control" style="border-radius: 5px" id="editlongitude"
-                                        name="editlongitude" placeholder="Longitude" step="any" required />
-                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" style="border-radius: 5px"
+                                            id="editlatitude" name="editlatitude" placeholder="Latitude" step="any"
+                                            required />
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" style="border-radius: 5px"
+                                            id="editlongitude" name="editlongitude" placeholder="Longitude" step="any"
+                                            required />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px" onclick="getLocation()">
+                        <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px"
+                            onclick="getLocation()">
                             Get Location
                         </button>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
+                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
+                                Changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -393,106 +397,105 @@
                 });
                 const volunteer = await response.json();
                 if (response.status !== 200) {
-                    alert(`Error: ${volunteer.message}`); 
+                    alert(`Error: ${volunteer.message}`);
                     return;
                 }
 
-            document.getElementById('fullName').textContent = volunteer.full_name;
-            document.getElementById('emailAddress').textContent = volunteer.email_address;
-            document.getElementById('phoneNumber').textContent = volunteer.phone_number;
-            document.getElementById('dateOfBirth').textContent = volunteer.date_of_birth;
-            document.getElementById('workStatus').textContent = volunteer.current_work_status;
-            document.getElementById('addressLine1').textContent = volunteer.home_address.address_line_1;
-            document.getElementById('addressLine2').textContent = volunteer.home_address.address_line_2 ? volunteer.home_address.address_line_2 : 'N/A';
-            document.getElementById('city').textContent = volunteer.home_address.city;
-            document.getElementById('state').textContent = volunteer.home_address.state;
-            document.getElementById('zipCode').textContent = volunteer.home_address.zip_code;
-            document.getElementById('country').textContent = volunteer.home_address.country;
-            document.getElementById('latitude').textContent = volunteer.home_address.geo_location.latitude;
-            document.getElementById('longitude').textContent = volunteer.home_address.geo_location.longitude;
+                document.getElementById('fullName').textContent = volunteer.full_name;
+                document.getElementById('emailAddress').textContent = volunteer.email_address;
+                document.getElementById('phoneNumber').textContent = volunteer.phone_number;
+                document.getElementById('dateOfBirth').textContent = volunteer.date_of_birth;
+                document.getElementById('workStatus').textContent = volunteer.current_work_status;
+                document.getElementById('addressLine1').textContent = volunteer.home_address.address_line_1;
+                document.getElementById('addressLine2').textContent = volunteer.home_address.address_line_2 ? volunteer.home_address.address_line_2 : 'N/A';
+                document.getElementById('city').textContent = volunteer.home_address.city;
+                document.getElementById('state').textContent = volunteer.home_address.state;
+                document.getElementById('zipCode').textContent = volunteer.home_address.zip_code;
+                document.getElementById('country').textContent = volunteer.home_address.country;
+                document.getElementById('latitude').textContent = volunteer.home_address.geo_location.latitude;
+                document.getElementById('longitude').textContent = volunteer.home_address.geo_location.longitude;
             } catch (error) {
                 console.error('Error fetching profile data:', error);
             }
         }
-    
-    function openEditModal() {
-        event.preventDefault();
-        fetchProfileData().then(() => {
-            document.getElementById('editFullName').value = document.getElementById('fullName').textContent;
-            document.getElementById('editPhoneNumber').value = document.getElementById('phoneNumber').textContent;
-            document.getElementById('editWorkStatus').value = document.getElementById('workStatus').textContent;
-            document.getElementById('editAddressLine1').value = document.getElementById('addressLine1').textContent;
-            document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent !== 'N/A' ? document.getElementById('addressLine2').textContent : '';
-            document.getElementById('editCity').value = document.getElementById('city').textContent;
-            document.getElementById('editState').value = document.getElementById('state').textContent;
-            document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
-            document.getElementById('editCountry').value = document.getElementById('country').textContent;
-            document.getElementById('editlatitude').value = document.getElementById('latitude').textContent;
-            document.getElementById('editlongitude').value = document.getElementById('longitude').textContent;
-            $('#editProfileModal').modal('show');
-        });
-    }
-    
-    async function saveProfile(event) {
-        event.preventDefault();
-    
-        const updatedProfile = {
-            full_name : document.getElementById('editFullName').value,
-            phone_number : document.getElementById('editPhoneNumber').value,
-            current_work_status : document.getElementById('editWorkStatus').value,
-            home_address: {
+
+        function openEditModal() {
+            event.preventDefault();
+            fetchProfileData().then(() => {
+                document.getElementById('editFullName').value = document.getElementById('fullName').textContent;
+                document.getElementById('editPhoneNumber').value = document.getElementById('phoneNumber').textContent;
+                document.getElementById('editWorkStatus').value = document.getElementById('workStatus').textContent;
+                document.getElementById('editAddressLine1').value = document.getElementById('addressLine1').textContent;
+                document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent !== 'N/A' ? document.getElementById('addressLine2').textContent : '';
+                document.getElementById('editCity').value = document.getElementById('city').textContent;
+                document.getElementById('editState').value = document.getElementById('state').textContent;
+                document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
+                document.getElementById('editCountry').value = document.getElementById('country').textContent;
+                document.getElementById('editlatitude').value = document.getElementById('latitude').textContent;
+                document.getElementById('editlongitude').value = document.getElementById('longitude').textContent;
+                $('#editProfileModal').modal('show');
+            });
+        }
+
+        async function saveProfile(event) {
+            event.preventDefault();
+
+            const updatedProfile = {
+                full_name: document.getElementById('editFullName').value,
+                phone_number: document.getElementById('editPhoneNumber').value,
+                current_work_status: document.getElementById('editWorkStatus').value,
+                home_address: {
                     address_line_1: document.getElementById('editAddressLine1').value,
                     address_line_2: document.getElementById('editAddressLine2').value,
                     city: document.getElementById('editCity').value,
                     state: document.getElementById('editState').value,
                     zip_code: document.getElementById('editZipCode').value,
                     country: document.getElementById('editCountry').value,
-                    geo_location : {
-                        latitude : document.getElementById('editlatitude').value,
-                        longitude : document.getElementById('editlongitude').value,
+                    geo_location: {
+                        latitude: document.getElementById('editlatitude').value,
+                        longitude: document.getElementById('editlongitude').value,
                     }
-            }
-        };
-    
-        try {
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                alert('Authorization token is missing. Please log in again.');
-                return;
-            }
-            const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token,
-                },
-                body: JSON.stringify(updatedProfile)
-            });
+                }
+            };
 
-            if(response.status !== 200)
-            {
-                const data = await response.json();
-                alert(`Error: ${data.message}`); 
-                return;
+            try {
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    return;
+                }
+                const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    },
+                    body: JSON.stringify(updatedProfile)
+                });
+
+                if (response.status !== 200) {
+                    const data = await response.json();
+                    alert(`Error: ${data.message}`);
+                    return;
+                }
+                else {
+                    alert('Profile updated successfully');
+                    $('#editProfileModal').modal('hide');
+                    fetchProfileData();
+                }
+            } catch (error) {
+                console.error('Error saving profile:', error);
             }
-            else{
-                alert('Profile updated successfully');
-                $('#editProfileModal').modal('hide');
-                fetchProfileData();
-            }
-        } catch (error) {
-            console.error('Error saving profile:', error);
         }
-    }
         document.getElementById('editAccount').addEventListener('click', openEditModal);
         document.addEventListener('DOMContentLoaded', fetchProfileData);
     </script>
     <script>
         document.getElementById('deleteAccount').addEventListener('click', async function (e) {
-        e.preventDefault();
-        const BACKEND_URL = "http://localhost:3000"; 
-        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-            try {
+            e.preventDefault();
+            const BACKEND_URL = "http://localhost:3000";
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                try {
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Authorization token is missing. Please log in again.');
@@ -505,7 +508,7 @@
                             'Authorization': token,
                         },
                     });
-    
+
                     if (response.status === 200) {
                         alert('Account deleted successfully');
                         window.location.href = 'index.html';
@@ -517,8 +520,8 @@
                     console.error('Error deleting profile:', error);
                     alert('Error deleting profile'); // Handle error
                 }
-        }
-    });
+            }
+        });
     </script>
 
     <script>
@@ -537,39 +540,39 @@
             });
         }
 
-    // Call the function to initialize the toggle functionality
-    handleAvailabilityToggle();
+        // Call the function to initialize the toggle functionality
+        handleAvailabilityToggle();
 
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }   
-    }
-
-    function showPosition(position) {
-        document.getElementById('editlatitude').value = position.coords.latitude;
-        document.getElementById('editlongitude').value = position.coords.longitude;
-    }
-
-    function showError(error) {
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                alert("User denied the request for Geolocation.");
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert("Location information is unavailable.");
-                break;
-            case error.TIMEOUT:
-                alert("The request to get user location timed out.");
-                break;
-            case error.UNKNOWN_ERROR:
-                alert("An unknown error occurred.");
-                break;
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
         }
-    }
+
+        function showPosition(position) {
+            document.getElementById('editlatitude').value = position.coords.latitude;
+            document.getElementById('editlongitude').value = position.coords.longitude;
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
     </script>
     <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
