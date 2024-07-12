@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/index.js"></script>
+    <!-- <script src="js/index.js"></script> -->
 
     <style>
         .ftco-navbar-light {
@@ -88,7 +88,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
+            <a class="navbar-brand" href="index_ngo.html">Welfare</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -96,7 +96,7 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index_ngo.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
@@ -112,7 +112,7 @@
                             <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="icon-user"></i>
@@ -130,11 +130,10 @@
     <!-- END nav -->
 
     <!-- Content -->
-    <div class="container" style="margin-top: 8rem;">
+    <!-- <div class="container" style="margin-top: 8rem;">
         <div class="row justify-content-center">
             <div class="col-md-8" style="font-size: large;">
                 <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-                    <!-- Profile Photo -->
                     <div class="profile-image">
                         <img src="images/person_1.jpg" alt="NGO Photo">
                     </div>
@@ -174,7 +173,6 @@
                         <p><strong>Tax Exemption Certificate:</strong> <a href="path/to/tax_exemption_certificate.pdf"
                                 id="taxExemptionCertificate" target="_blank">View Certificate</a></p>
                     </div>
-                    <!-- Card Footer with Buttons -->
                     <div class="text-center">
                         <button class="btn btn-primary btn-view-photos ml-2"
                             onclick="showPhotos(['images/person_1.jpg', 'images/person_2.jpg'])"
@@ -188,11 +186,60 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="container" style="margin-top: 8rem;">
+        <div class="row justify-content-center">
+            <div class="col-md-8" style="font-size: large;">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <!-- Profile Photo -->
+                    <div class="profile-image">
+                        <img src="" alt="NGO Photo" id="ngoPhoto">
+                    </div>
+                    <div>
+                        <h1 class="card-title text-center">NGO Profile</h1>
+                    </div>
+                    <div class="card-body">
+                        <h3>Organization Details</h3>
+                        <p><strong>Organization Name:</strong> <span id="organizationName"></span></p>
+                        <p><strong>Registration Number:</strong> <span id="registrationNumber"></span></p>
+                        <p><strong>Tax ID/EIN:</strong> <span id="taxIdEin"></span></p>
+                        <p><strong>Website URL:</strong> <a href="#" target="_blank" id="websiteUrl"></a></p>
+
+                        <h3>Address</h3>
+                        <p><strong>Address Line 1:</strong> <span id="addressLine1"></span></p>
+                        <p><strong>Address Line 2:</strong> <span id="addressLine2"></span></p>
+                        <p><strong>City:</strong> <span id="city"></span></p>
+                        <p><strong>State:</strong> <span id="state"></span></p>
+                        <p><strong>Zip Code:</strong> <span id="zipCode"></span></p>
+                        <p><strong>Country:</strong> <span id="country"></span></p>
+
+                        <h3>Primary Contact</h3>
+                        <p><strong>Name:</strong> <span id="primaryContactName"></span></p>
+                        <p><strong>Email:</strong> <span id="primaryContactEmail"></span></p>
+                        <p><strong>Phone Number:</strong> <span id="primaryContactPhone"></span></p>
+
+                        <h3>Secondary Contact</h3>
+                        <p><strong>Name:</strong> <span id="secondaryContactName"></span></p>
+                        <p><strong>Email:</strong> <span id="secondaryContactEmail"></span></p>
+                        <p><strong>Phone Number:</strong> <span id="secondaryContactPhone"></span></p>
+
+                        <h3>Certificates</h3>
+                        <p><strong>Registration Certificate:</strong> <a href="#" id="registrationCertificate" target="_blank">View Certificate</a></p>
+                        <p><strong>Tax Exemption Certificate:</strong> <a href="#" id="taxExemptionCertificate" target="_blank">View Certificate</a></p>
+                    </div>
+                    <!-- Card Footer with Buttons -->
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-view-photos ml-2" style="margin: 1rem;">View Photos</button>
+                        <button class="btn btn-danger" id="deleteAccount" style="border-radius: 5px; margin: 1rem;">Delete Account</button>
+                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;" >Edit Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Photo Modal -->
-    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="justify-content: center;">
@@ -201,9 +248,7 @@
                 <div class="modal-body">
                     <div class="photo-container">
                         <div class="photo-tile" style="justify-content: center;">
-                            <img src="images/person_6.jpg" alt="Photo 1" class="tile-photo">
-                            <img src="images/person_7.jpg" alt="Photo 1" class="tile-photo">
-                            <img src="photo2.jpg" alt="Photo 2" class="tile-photo" style="display: none;">
+                            <!-- Photos will be inserted dynamically here -->
                         </div>
                     </div>
                     <div class="text-center mt-3">
@@ -217,110 +262,282 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const BACKEND_URL = "http://localhost:3000";
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    return;
+                }
+                const response = await fetch(`${BACKEND_URL}/ngo/byid`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+                const ngo = await response.json();
+                if (response.status !== 200) {
+                    alert(`Error: ${ngo.message}`); 
+                    return;
+                }
 
-    <!-- Edit Profile Modal -->
-    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="justify-content: center;">
-                    <h5 class="modal-title" id="photoModalLabel">Edit Profile</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="editProfileForm">
-                        <div class="form-group">
-                            <label for="editOrganizationName">Organization Name</label>
-                            <input type="text" class="form-control" id="editOrganizationName">
-                        </div>
-                        <div class="form-group">
-                            <label for="editRegistrationNumber">Registration Number</label>
-                            <input type="text" class="form-control" id="editRegistrationNumber">
-                        </div>
-                        <div class="form-group">
-                            <label for="editTaxIdEin">Tax ID/EIN</label>
-                            <input type="text" class="form-control" id="editTaxIdEin">
-                        </div>
-                        <div class="form-group">
-                            <label for="editWebsiteUrl">Website URL</label>
-                            <input type="text" class="form-control" id="editWebsiteUrl">
-                        </div>
-                        <div class="form-group">
-                            <label for="editAddressLine1">Address Line 1</label>
-                            <input type="text" class="form-control" id="editAddressLine1">
-                        </div>
-                        <div class="form-group">
-                            <label for="editAddressLine2">Address Line 2</label>
-                            <input type="text" class="form-control" id="editAddressLine2">
-                        </div>
-                        <div class="form-group">
-                            <label for="editCity">City</label>
-                            <input type="text" class="form-control" id="editCity">
-                        </div>
-                        <div class="form-group">
-                            <label for="editState">State</label>
-                            <input type="text" class="form-control" id="editState">
-                        </div>
-                        <div class="form-group">
-                            <label for="editZipCode">Zip Code</label>
-                            <input type="text" class="form-control" id="editZipCode">
-                        </div>
-                        <div class="form-group">
-                            <label for="editCountry">Country</label>
-                            <input type="text" class="form-control" id="editCountry">
-                        </div>
-                        <div class="form-group">
-                            <label for="editPrimaryContactName">Primary Contact Name</label>
-                            <input type="text" class="form-control" id="editPrimaryContactName">
-                        </div>
-                        <div class="form-group">
-                            <label for="editPrimaryContactEmail">Primary Contact Email</label>
-                            <input type="email" class="form-control" id="editPrimaryContactEmail">
-                        </div>
-                        <div class="form-group">
-                            <label for="editPrimaryContactPhone">Primary Contact Phone</label>
-                            <input type="text" class="form-control" id="editPrimaryContactPhone">
-                        </div>
-                        <div class="form-group">
-                            <label for="editSecondaryContactName">Secondary Contact Name</label>
-                            <input type="text" class="form-control" id="editSecondaryContactName">
-                        </div>
-                        <div class="form-group">
-                            <label for="editSecondaryContactEmail">Secondary Contact Email</label>
-                            <input type="email" class="form-control" id="editSecondaryContactEmail">
-                        </div>
-                        <div class="form-group">
-                            <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
-                            <input type="text" class="form-control" id="editSecondaryContactPhone">
-                        </div>
-                        <div class="form-group">
-                            <label for="editRegistrationCertificate">Registration Certificate URL</label>
-                            <input type="file" class="form-control" style="padding-top: 0.75rem;"
-                                id="registration_certificate" name="registration_certificate" accept="application/pdf"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="photos">NGO Photos (Maximum 3)</label>
-                            <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
-                                id="photos" name="photos" accept="image/*" multiple required>
-                            <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
-                                3 photos.</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="editTaxExemptionCertificate">Tax Exemption Certificate URL</label>
-                            <input type="file" class="form-control" style="padding-top: 0.75rem;"
-                                id="tax_exemption_certificate" name="tax_exemption_certificate" accept="application/pdf"
-                                required>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
-                                Changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-                </div>
+                document.getElementById('ngoPhoto').src = ngo.ngo_photos[0];
+                document.getElementById('organizationName').textContent = ngo.organization_name;
+                document.getElementById('registrationNumber').textContent = ngo.registration_number;
+                document.getElementById('taxIdEin').textContent = ngo.tax_id_ein;
+                
+                const websiteUrlElement = document.getElementById('websiteUrl');
+                if (ngo.website_url) {
+                    websiteUrlElement.textContent = ngo.website_url;
+                    websiteUrlElement.href = ngo.website_url;
+                    websiteUrlElement.style.display = 'inline';
+                } else {
+                    websiteUrlElement.textContent = 'URL not provided';
+                    websiteUrlElement.removeAttribute('href');
+                }
+
+                document.getElementById('addressLine1').textContent = ngo.physical_addresses.address_line_1;
+                document.getElementById('addressLine2').textContent = ngo.physical_addresses.address_line_2 ? ngo.physical_addresses.address_line_2 : 'N/A';
+                document.getElementById('city').textContent = ngo.physical_addresses.city;
+                document.getElementById('state').textContent = ngo.physical_addresses.state;
+                document.getElementById('zipCode').textContent = ngo.physical_addresses.zip_code;
+                document.getElementById('country').textContent = ngo.physical_addresses.country;
+
+                document.getElementById('primaryContactName').textContent = ngo.primary_contact.name;
+                document.getElementById('primaryContactEmail').textContent = ngo.primary_contact.email;
+                document.getElementById('primaryContactPhone').textContent = ngo.primary_contact.phoneno;
+
+                if(ngo.secondary_contact){
+                    document.getElementById('secondaryContactName').textContent = ngo.secondary_contact.name ? ngo.secondary_contact.name : 'N/A';
+                    document.getElementById('secondaryContactEmail').textContent = ngo.secondary_contact.email ? ngo.secondary_contact.email : 'N/A';
+                    document.getElementById('secondaryContactPhone').textContent = ngo.secondary_contact.phoneno? ngo.secondary_contact.phoneno :'N/A';
+                }
+
+                const registrationCertificateElement = document.getElementById('registrationCertificate');
+                if (ngo.registration_certificate) {
+                    registrationCertificateElement.href = ngo.registration_certificate;
+                    registrationCertificateElement.style.display = 'inline';
+                } else {
+                    registrationCertificateElement.textContent = 'No Registration Certificate Provided';
+                    registrationCertificateElement.removeAttribute('href');
+                }
+
+                const taxExemptionCertificateElement = document.getElementById('taxExemptionCertificate');
+                if (ngo.tax_exemption_certificate) {
+                    taxExemptionCertificateElement.setAttribute('href', ngo.tax_exemption_certificate);
+                    taxExemptionCertificateElement.style.display = 'inline';
+                } else {
+                    taxExemptionCertificateElement.textContent = 'No Tax Exemption Certificate Provided';
+                    taxExemptionCertificateElement.removeAttribute('href');
+                }
+
+                const photoButton = document.querySelector('.btn-view-photos');
+                photoButton.onclick = function() {
+                    showPhotos(ngo.ngo_photos);
+                };
+
+                document.getElementById('editAccount').addEventListener('click', () => {
+                    document.getElementById('editOrganizationName').value = ngo.organization_name;
+                    document.getElementById('editWebsiteUrl').value = ngo.website_url;
+                    document.getElementById('editAddressLine1').value = ngo.physical_addresses.address_line_1;
+                    document.getElementById('editAddressLine2').value = ngo.physical_addresses.address_line_2;
+                    document.getElementById('editCity').value = ngo.physical_addresses.city;
+                    document.getElementById('editState').value = ngo.physical_addresses.state;
+                    document.getElementById('editZipCode').value = ngo.physical_addresses.zip_code;
+                    document.getElementById('editCountry').value = ngo.physical_addresses.country;
+                    document.getElementById('editPrimaryContactName').value = ngo.primary_contact.name;
+                    document.getElementById('editPrimaryContactEmail').value = ngo.primary_contact.email;
+                    document.getElementById('editPrimaryContactPhone').value = ngo.primary_contact.phoneno;
+                    if (ngo.secondary_contact) {
+                        document.getElementById('editSecondaryContactName').value = ngo.secondary_contact.name;
+                        document.getElementById('editSecondaryContactEmail').value = ngo.secondary_contact.email;
+                        document.getElementById('editSecondaryContactPhone').value = ngo.secondary_contact.phoneno;
+                    }
+                $('#editProfileModal').modal('show');
+        });
+            } catch (error) {
+                console.error('Error fetching NGO profile:', error);
+            }
+        });
+    </script>
+
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="justify-content: center;">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="editOrganizationName">Organization Name</label>
+                        <input type="text" class="form-control" id="editOrganizationName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editWebsiteUrl">Website URL</label>
+                        <input type="text" class="form-control" id="editWebsiteUrl">
+                    </div>
+                    <div class="form-group">
+                        <label for="editAddressLine1">Address Line 1</label>
+                        <input type="text" class="form-control" id="editAddressLine1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editAddressLine2">Address Line 2</label>
+                        <input type="text" class="form-control" id="editAddressLine2">
+                    </div>
+                    <div class="form-group">
+                        <label for="editCity">City</label>
+                        <input type="text" class="form-control" id="editCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editState">State</label>
+                        <input type="text" class="form-control" id="editState" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editZipCode">Zip Code</label>
+                        <input type="text" class="form-control" id="editZipCode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCountry">Country</label>
+                        <input type="text" class="form-control" id="editCountry" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrimaryContactName">Primary Contact Name</label>
+                        <input type="text" class="form-control" id="editPrimaryContactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrimaryContactEmail">Primary Contact Email</label>
+                        <input type="email" class="form-control" id="editPrimaryContactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrimaryContactPhone">Primary Contact Phone</label>
+                        <input type="text" class="form-control" id="editPrimaryContactPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSecondaryContactName">Secondary Contact Name</label>
+                        <input type="text" class="form-control" id="editSecondaryContactName">
+                    </div>
+                    <div class="form-group">
+                        <label for="editSecondaryContactEmail">Secondary Contact Email</label>
+                        <input type="email" class="form-control" id="editSecondaryContactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
+                        <input type="text" class="form-control" id="editSecondaryContactPhone">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="photos">NGO Photos (Maximum 3)</label>
+                        <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
+                            id="photos" name="photos" accept="image/*" multiple required>
+                        <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
+                            3 photos.</p>
+                    </div> -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+    <script>
+        async function saveProfile(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            const primaryContactEmail = document.getElementById('editPrimaryContactEmail').value;
+            const primaryContactPhone = document.getElementById('editPrimaryContactPhone').value;
+            
+            const secondaryContactEmail = document.getElementById('editSecondaryContactEmail').value;
+            const secondaryContactPhone = document.getElementById('editSecondaryContactPhone').value;
+            
+            // Frontend validation for unique primary and secondary contacts
+            if (secondaryContactEmail && secondaryContactEmail === primaryContactEmail) {
+                alert('Secondary contact email must be different from primary contact email.');
+                return;
+            }
+            
+            if (secondaryContactPhone && secondaryContactPhone === primaryContactPhone) {
+                alert('Secondary contact phone must be different from primary contact phone.');
+                return;
+            }
+            
+            const updatedNGO = {
+                organization_name: document.getElementById('editOrganizationName').value,
+                website_url: document.getElementById('editWebsiteUrl').value,
+                physical_addresses: JSON.stringify({
+                    address_line_1: document.getElementById('editAddressLine1').value,
+                    address_line_2: document.getElementById('editAddressLine2').value,
+                    city: document.getElementById('editCity').value,
+                    state: document.getElementById('editState').value,
+                    zip_code: document.getElementById('editZipCode').value,
+                    country: document.getElementById('editCountry').value,
+                }),
+                primary_contact: JSON.stringify({
+                    name: document.getElementById('editPrimaryContactName').value,
+                    email: document.getElementById('editPrimaryContactEmail').value,
+                    phoneno: document.getElementById('editPrimaryContactPhone').value,
+                }),
+            };
+            
+            if (secondaryContactEmail || secondaryContactPhone) {
+                updatedNGO.secondary_contact = JSON.stringify({
+                    name: document.getElementById('editSecondaryContactName').value,
+                    email: secondaryContactEmail,
+                    phoneno: secondaryContactPhone,
+                });
+            }
+            // const photosFiles = document.getElementById('photos').files;
+
+            const formData = new FormData();
+            formData.append('organization_name', updatedNGO.organization_name);
+            formData.append('website_url', updatedNGO.website_url);
+            formData.append('physical_addresses', updatedNGO.physical_addresses);
+            formData.append('primary_contact', updatedNGO.primary_contact);
+            if (updatedNGO.secondary_contact) {
+                formData.append('secondary_contact', updatedNGO.secondary_contact);
+            }
+
+            // for (const element of photosFiles) {
+            //     formData.append('photos', element)
+            // }
+            const BACKEND_URL = "http://localhost:3000";
+            try{
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    return;
+                }
+                
+                const response = await fetch(`${BACKEND_URL}/ngo/updatedetails`, {
+                    method: "PATCH",
+                    headers: {
+                        'Authorization': token,
+                    },
+                    body:formData
+                });
+                if(response.status !== 200)
+                {
+                    const data = await response.json();
+                    alert(`Error: ${data.message}`); 
+                    return;
+                }
+                else{
+                    alert('Profile updated successfully');
+                    location.reload();
+                }
+            }
+            catch(error){
+                console.error(error);
+                alert('Error fetching data');
+            }
+        $('#editProfileModal').modal('hide');
+        // document.getElementById('editAccount').addEventListener('click', openEditModal);
+    }
+    </script>
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
@@ -418,23 +635,39 @@
         </svg>
     </div>
 
-    <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
     <script>
-        // Delete Account Confirmation
-        document.getElementById('deleteAccount').addEventListener('click', function (e) {
+        const BACKEND_URL = "http://localhost:3000"; 
+
+        document.getElementById('deleteAccount').addEventListener('click', async function (e) {
             e.preventDefault();
             if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                // Here you can perform the deletion action
-                alert('Account deleted successfully!'); // Placeholder for actual deletion logic
-            } else {
-                // Cancel action
-                alert('Action canceled.');
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please log in again.');
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/ngo/byid`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token,
+                        },
+                    });
+    
+                    if (response.status === 200) {
+                        alert('Account deleted successfully');
+                        window.location.href = 'index.html';
+                    } else {
+                        const data = await response.json();
+                        alert(`Error: ${data.message}`); // Display error message from the response
+                    }
+                } catch (error) {
+                    console.error('Error deleting profile:', error);
+                    alert('Error deleting profile'); // Handle error
+                }
             }
         });
-    </script>
-    <script>
-
-
         function showPhotos(photos) {
             const photoContainer = document.querySelector('.photo-tile');
             photoContainer.innerHTML = ''; // Clear previous photos
@@ -472,104 +705,15 @@
 
             $('#photoModal').modal('show');
         }
-    </script>
-    <script>
-        function openEditModal() {
-            // Get the current profile data
-            document.getElementById('editOrganizationName').value = document.getElementById('organizationName').textContent;
-            document.getElementById('editRegistrationNumber').value = document.getElementById('registrationNumber').textContent;
-            document.getElementById('editTaxIdEin').value = document.getElementById('taxIdEin').textContent;
-            document.getElementById('editWebsiteUrl').value = document.getElementById('websiteUrl').textContent;
-            document.getElementById('editAddressLine1').value = document.getElementById('addressLine1').textContent;
-            document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent;
-            document.getElementById('editCity').value = document.getElementById('city').textContent;
-            document.getElementById('editState').value = document.getElementById('state').textContent;
-            document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
-            document.getElementById('editCountry').value = document.getElementById('country').textContent;
-            document.getElementById('editPrimaryContactName').value = document.getElementById('primaryContactName').textContent;
-            document.getElementById('editPrimaryContactEmail').value = document.getElementById('primaryContactEmail').textContent;
-            document.getElementById('editPrimaryContactPhone').value = document.getElementById('primaryContactPhone').textContent;
-            document.getElementById('editSecondaryContactName').value = document.getElementById('secondaryContactName').textContent;
-            document.getElementById('editSecondaryContactEmail').value = document.getElementById('secondaryContactEmail').textContent;
-            document.getElementById('editSecondaryContactPhone').value = document.getElementById('secondaryContactPhone').textContent;
 
-            // Clear the file inputs
-            document.getElementById('registration_certificate').value = '';
-            document.getElementById('tax_exemption_certificate').value = '';
-            document.getElementById('photos').value = '';
-
-            // Show the modal
-            $('#editProfileModal').modal('show');
-        }
-
-        function saveProfile(event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Update the profile data with the new values from the modal
-            document.getElementById('organizationName').textContent = document.getElementById('editOrganizationName').value;
-            document.getElementById('registrationNumber').textContent = document.getElementById('editRegistrationNumber').value;
-            document.getElementById('taxIdEin').textContent = document.getElementById('editTaxIdEin').value;
-            document.getElementById('websiteUrl').textContent = document.getElementById('editWebsiteUrl').value;
-            document.getElementById('addressLine1').textContent = document.getElementById('editAddressLine1').value;
-            document.getElementById('addressLine2').textContent = document.getElementById('editAddressLine2').value;
-            document.getElementById('city').textContent = document.getElementById('editCity').value;
-            document.getElementById('state').textContent = document.getElementById('editState').value;
-            document.getElementById('zipCode').textContent = document.getElementById('editZipCode').value;
-            document.getElementById('country').textContent = document.getElementById('editCountry').value;
-            document.getElementById('primaryContactName').textContent = document.getElementById('editPrimaryContactName').value;
-            document.getElementById('primaryContactEmail').textContent = document.getElementById('editPrimaryContactEmail').value;
-            document.getElementById('primaryContactPhone').textContent = document.getElementById('editPrimaryContactPhone').value;
-            document.getElementById('secondaryContactName').textContent = document.getElementById('editSecondaryContactName').value;
-            document.getElementById('secondaryContactEmail').textContent = document.getElementById('editSecondaryContactEmail').value;
-            document.getElementById('secondaryContactPhone').textContent = document.getElementById('editSecondaryContactPhone').value;
-
-            // Handle file inputs
-            const registrationCertificateFile = document.getElementById('registration_certificate').files[0];
-            const taxExemptionCertificateFile = document.getElementById('tax_exemption_certificate').files[0];
-            const photosFiles = document.getElementById('photos').files;
-
-            if (registrationCertificateFile) {
-                const registrationCertificateUrl = URL.createObjectURL(registrationCertificateFile);
-                // Display or handle the registration certificate file as needed
-                console.log('Registration Certificate URL:', registrationCertificateUrl);
-            }
-
-            if (taxExemptionCertificateFile) {
-                const taxExemptionCertificateUrl = URL.createObjectURL(taxExemptionCertificateFile);
-                // Display or handle the tax exemption certificate file as needed
-                console.log('Tax Exemption Certificate URL:', taxExemptionCertificateUrl);
-            }
-
-            if (photosFiles.length > 3) {
-                document.getElementById('photo-error').style.display = 'block';
-            } else {
-                document.getElementById('photo-error').style.display = 'none';
-                const photoUrls = Array.from(photosFiles).map(file => URL.createObjectURL(file));
-                // Display or handle the photos as needed
-                console.log('Photo URLs:', photoUrls);
-            }
-
-            // Hide the modal
-            $('#editProfileModal').modal('hide');
-        }
-
-        // Attach the event handler to the Edit Account button
-        document.getElementById('editAccount').addEventListener('click', openEditModal);
-
-    </script>
-    <script>
-        document.getElementById('photos').addEventListener('change', function (event) {
-            const files = event.target.files;
-            if (files.length > 3) {
-                document.getElementById('photo-error').style.display = 'block';
-                event.target.value = '';
-            } else {
-                document.getElementById('photo-error').style.display = 'none';
+        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link action
+            var confirmation = confirm('Are you sure you want to logout?');
+            if (confirmation) {
+                window.location.href = 'index.html';
             }
         });
-
     </script>
-    <script src="js/ngo_cards.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

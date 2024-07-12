@@ -29,8 +29,11 @@ const registerNGO = async (req, res) => {
 
     const ngoPhotosUrls = [];
 
-    for (const photo of req.files.photos) {
-      if (photo) {
+    const NGO_photos = Array.isArray(req.files.photos) 
+    ? req.files.photos 
+    : [req.files.photos];
+
+    for (const photo of NGO_photos) {
         const fileName = photo.mimetype;
         const photoUrl = await docsUpload(
           photo.tempFilePath,
@@ -38,7 +41,6 @@ const registerNGO = async (req, res) => {
           fileName
         );
         ngoPhotosUrls.push(photoUrl);
-      }
     }
     // console.log(ngoPhotosUrls);
 
@@ -139,8 +141,8 @@ const getAllngos = async (req, res) => {
 };
 
 const getNGOById = async (req, res) => {
-  const ngoId = req.params.id;
-
+  
+  const ngoId = req.user.id;
   // Check if the ID is a valid ObjectId
   if (!mongoose.isValidObjectId(ngoId)) {
     console.log("Invalid NGO ID.");
@@ -155,7 +157,7 @@ const getNGOById = async (req, res) => {
         .json({ message: `No NGO found with ID : ${ngoId}` });
     }
 
-    res.status(200).json({ ngo });
+    res.status(200).json(ngo);
   } catch (error) {
     console.error("Error fetching NGO:", error);
     return res
@@ -165,6 +167,7 @@ const getNGOById = async (req, res) => {
 };
 
 const updateNGODetails = async (req, res) => {
+  
   const ngoId = req.user.id;
 
   if (!mongoose.isValidObjectId(ngoId)) {
@@ -184,29 +187,49 @@ const updateNGODetails = async (req, res) => {
       physical_addresses: parsed_physical_address,
       primary_contact: parsed_primary_contact,
     };
+    
 
-    if (
-      req.files &&
-      Object.prototype.hasOwnProperty.call(req.files, "recent_annual_report")
-    ) {
-      const file3 = req.files.recent_annual_report;
-
-      const url3 = await docsUpload(file3.tempFilePath, "docs", "");
-      newNGO.recent_annual_report = url3;
-    }
     if (Object.prototype.hasOwnProperty.call(req.body, "secondary_contact")) {
       const secondary_contact = JSON.parse(req.body.secondary_contact);
       newNGO.secondary_contact = secondary_contact;
     }
 
-    console.log(newNGO);
-    const updatedNGO = await NGO.updateOne({ _id: ngoId }, newNGO);
-    console.log(updatedNGO.acknowledged);
-    // if (updatedNGO.acknowledged)
-    res.status(200).send("success!!");
-    // else {
-    //   res.status(500).send("Error updating NGO Details");
+    // const duplicateContact = await NGO.findOne({
+    //   $or: [
+    //     { "primary_contact.email": parsed_primary_contact.email },
+    //     { "primary_contact.phoneno": parsed_primary_contact.phoneno },
+    //     { "secondary_contact.email": parsed_primary_contact.email },
+    //     { "secondary_contact.phoneno": parsed_primary_contact.phoneno },
+    //     { "primary_contact.email": req.body.secondary_contact?.email },
+    //     { "primary_contact.phoneno": req.body.secondary_contact?.phoneno },
+    //     { "secondary_contact.email": req.body.secondary_contact?.email },
+    //     { "secondary_contact.phoneno": req.body.secondary_contact?.phoneno }
+    //   ],
+    //   _id: { $ne: ngoId } // Exclude the current NGO being updated
+    // });
+
+    // if (duplicateContact) {
+    //   return res.status(400).json({ message: "Duplicate email or phone number detected." });
     // }
+
+    // const ngoPhotosUrls = [];
+
+    // const NGO_photos = Array.isArray(req.files.photos) 
+    // ? req.files.photos 
+    // : [req.files.photos];
+
+    // for (const photo of NGO_photos) {
+    //     const fileName = photo.mimetype;
+    //     const photoUrl = await docsUpload(
+    //       photo.tempFilePath,
+    //       "photo",
+    //       fileName
+    //     );
+    //     ngoPhotosUrls.push(photoUrl);
+    // }
+
+    await NGO.updateOne({ _id: ngoId }, newNGO);
+    res.status(200).send("success!!");
   } catch (error) {
     if (error.code == 11000) {
       const dup = Object.keys(error.keyValue)[0];
@@ -223,7 +246,8 @@ const updateNGODetails = async (req, res) => {
 };
 
 const deleteNGO = async (req, res) => {
-  const ngoId = req.params.id;
+  
+  const ngoId = req.user.id;
 
   if (!mongoose.isValidObjectId(ngoId)) {
     console.log("Invalid NGO ID.");

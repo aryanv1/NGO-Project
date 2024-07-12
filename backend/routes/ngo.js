@@ -18,7 +18,7 @@ router.route("/get").get(getAllngos);
 
 router.route('/updatedetails').patch(authenticateMiddleWare_for_ngo, updateNGODetails);
 router
-  .route("/get/:id")
+  .route("/byid")
   .get(authenticateMiddleWare_for_ngo, getNGOById)
   .delete(authenticateMiddleWare_for_ngo, deleteNGO);
 
