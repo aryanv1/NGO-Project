@@ -16,7 +16,7 @@ router.route("/login").post(loginRestaurant);
 router.route("/register").post(registerRestaurant);
 
 // protected routes
-router.route("/get/:id").get(authenticateMiddleWare, getRestaurantById);
+router.route("/getbyid").get(authenticateMiddleWare_for_restaurant, getRestaurantById);
 router.route("/get").get(authenticateMiddleWare, getAllRestaurants);
 
 router.route("/delete").delete(authenticateMiddleWare_for_restaurant, deleteRestaurant);
