@@ -128,65 +128,6 @@
         </div>
     </nav>
     <!-- END nav -->
-
-    <!-- Content -->
-    <!-- <div class="container" style="margin-top: 8rem;">
-        <div class="row justify-content-center">
-            <div class="col-md-8" style="font-size: large;">
-                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-                    <div class="profile-image">
-                        <img src="images/person_1.jpg" alt="NGO Photo">
-                    </div>
-                    <div>
-                        <h1 class="card-title text-center">NGO Profile</h1>
-                    </div>
-                    <div class="card-body">
-                        <h3>Organization Details</h3>
-                        <p><strong>Organization Name:</strong> <span id="organizationName">Hope for Tomorrow</span></p>
-                        <p><strong>Registration Number:</strong> <span id="registrationNumber">NGO98765</span></p>
-                        <p><strong>Tax ID/EIN:</strong> <span id="taxIdEin">EIN54321</span></p>
-                        <p><strong>Website URL:</strong> <a href="https://hopefortomorrow.org" target="_blank"
-                                id="websiteUrl">https://hopefortomorrow.org</a></p>
-
-                        <h3>Address</h3>
-                        <p><strong>Address Line 1:</strong> <span id="addressLine1">456 Hope Street</span></p>
-                        <p><strong>Address Line 2:</strong> <span id="addressLine2">Suite 202</span></p>
-                        <p><strong>City:</strong> <span id="city">Hopeville</span></p>
-                        <p><strong>State:</strong> <span id="state">Hope State</span></p>
-                        <p><strong>Zip Code:</strong> <span id="zipCode">12345</span></p>
-                        <p><strong>Country:</strong> <span id="country">Hope Country</span></p>
-
-                        <h3>Primary Contact</h3>
-                        <p><strong>Name:</strong> <span id="primaryContactName">Sarah Johnson</span></p>
-                        <p><strong>Email:</strong> <span id="primaryContactEmail">sarah@hopefortomorrow.org</span></p>
-                        <p><strong>Phone Number:</strong> <span id="primaryContactPhone">+1234567890</span></p>
-
-                        <h3>Secondary Contact</h3>
-                        <p><strong>Name:</strong> <span id="secondaryContactName">Michael Smith</span></p>
-                        <p><strong>Email:</strong> <span id="secondaryContactEmail">michael@hopefortomorrow.org</span>
-                        </p>
-                        <p><strong>Phone Number:</strong> <span id="secondaryContactPhone">+1987654321</span></p>
-
-                        <h3>Certificates</h3>
-                        <p><strong>Registration Certificate:</strong> <a href="path/to/registration_certificate.pdf"
-                                id="registrationCertificate" target="_blank">View Certificate</a></p>
-                        <p><strong>Tax Exemption Certificate:</strong> <a href="path/to/tax_exemption_certificate.pdf"
-                                id="taxExemptionCertificate" target="_blank">View Certificate</a></p>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-primary btn-view-photos ml-2"
-                            onclick="showPhotos(['images/person_1.jpg', 'images/person_2.jpg'])"
-                            style="margin: 1rem;">View Photos</button>
-                        <button class="btn btn-danger" id="deleteAccount"
-                            style="border-radius: 5px; margin: 1rem;">Delete
-                            Account</button>
-                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;"
-                            onclick="openEditModal()">Edit Account</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="container" style="margin-top: 8rem;">
         <div class="row justify-content-center">
             <div class="col-md-8" style="font-size: large;">
@@ -262,8 +203,108 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="justify-content: center;">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label for="editOrganizationName">Organization Name</label>
+                            <input type="text" class="form-control" id="editOrganizationName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editWebsiteUrl">Website URL</label>
+                            <input type="text" class="form-control" id="editWebsiteUrl">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddressLine1">Address Line 1</label>
+                            <input type="text" class="form-control" id="editAddressLine1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddressLine2">Address Line 2</label>
+                            <input type="text" class="form-control" id="editAddressLine2">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCity">City</label>
+                            <input type="text" class="form-control" id="editCity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editState">State</label>
+                            <input type="text" class="form-control" id="editState" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editZipCode">Zip Code</label>
+                            <input type="text" class="form-control" id="editZipCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCountry">Country</label>
+                            <input type="text" class="form-control" id="editCountry" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editlocation">Location</label>
+                            <div class="location-field">
+                            <div class="form-row">
+                                <div class="col">
+                                <input type="number" class="form-control" style="border-radius: 5px" id="editlatitude" name="editlatitude"
+                                    placeholder="Latitude" step="any" required />
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" style="border-radius: 5px" id="editlongitude"
+                                        name="editlongitude" placeholder="Longitude" step="any" required />
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px" onclick="getLocation()">
+                            Get Location
+                        </button>
+                        <div class="form-group">
+                            <label for="editPrimaryContactName">Primary Contact Name</label>
+                            <input type="text" class="form-control" id="editPrimaryContactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrimaryContactEmail">Primary Contact Email</label>
+                            <input type="email" class="form-control" id="editPrimaryContactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrimaryContactPhone">Primary Contact Phone</label>
+                            <input type="text" class="form-control" id="editPrimaryContactPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editSecondaryContactName">Secondary Contact Name</label>
+                            <input type="text" class="form-control" id="editSecondaryContactName">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSecondaryContactEmail">Secondary Contact Email</label>
+                            <input type="email" class="form-control" id="editSecondaryContactEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
+                            <input type="text" class="form-control" id="editSecondaryContactPhone">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="photos">NGO Photos (Maximum 3)</label>
+                            <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
+                                id="photos" name="photos" accept="image/*" multiple required>
+                            <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
+                                3 photos.</p>
+                        </div> -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        async function fetchProfileData() {
             try {
                 const BACKEND_URL = "http://localhost:3000";
                 const token = localStorage.getItem('authToken');
@@ -342,107 +383,29 @@
                     document.getElementById('editOrganizationName').value = ngo.organization_name;
                     document.getElementById('editWebsiteUrl').value = ngo.website_url;
                     document.getElementById('editAddressLine1').value = ngo.physical_addresses.address_line_1;
-                    document.getElementById('editAddressLine2').value = ngo.physical_addresses.address_line_2;
+                    document.getElementById('editAddressLine2').value = ngo.physical_addresses.address_line_2 ? ngo.physical_addresses.address_line_2 : '';
                     document.getElementById('editCity').value = ngo.physical_addresses.city;
                     document.getElementById('editState').value = ngo.physical_addresses.state;
                     document.getElementById('editZipCode').value = ngo.physical_addresses.zip_code;
                     document.getElementById('editCountry').value = ngo.physical_addresses.country;
+                    document.getElementById('editlatitude').value = ngo.physical_addresses.geo_location.latitude;
+                    document.getElementById('editlongitude').value = ngo.physical_addresses.geo_location.longitude;
                     document.getElementById('editPrimaryContactName').value = ngo.primary_contact.name;
                     document.getElementById('editPrimaryContactEmail').value = ngo.primary_contact.email;
                     document.getElementById('editPrimaryContactPhone').value = ngo.primary_contact.phoneno;
                     if (ngo.secondary_contact) {
-                        document.getElementById('editSecondaryContactName').value = ngo.secondary_contact.name;
-                        document.getElementById('editSecondaryContactEmail').value = ngo.secondary_contact.email;
-                        document.getElementById('editSecondaryContactPhone').value = ngo.secondary_contact.phoneno;
+                        document.getElementById('editSecondaryContactName').value = ngo.secondary_contact.name ? ngo.secondary_contact.name : '';
+                        document.getElementById('editSecondaryContactEmail').value = ngo.secondary_contact.email ? ngo.secondary_contact.email : '';
+                        document.getElementById('editSecondaryContactPhone').value = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : '';
                     }
                 $('#editProfileModal').modal('show');
         });
             } catch (error) {
                 console.error('Error fetching NGO profile:', error);
             }
-        });
+        }
     </script>
 
-<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="justify-content: center;">
-                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-            </div>
-            <div class="modal-body">
-                <form id="editProfileForm">
-                    <div class="form-group">
-                        <label for="editOrganizationName">Organization Name</label>
-                        <input type="text" class="form-control" id="editOrganizationName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editWebsiteUrl">Website URL</label>
-                        <input type="text" class="form-control" id="editWebsiteUrl">
-                    </div>
-                    <div class="form-group">
-                        <label for="editAddressLine1">Address Line 1</label>
-                        <input type="text" class="form-control" id="editAddressLine1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editAddressLine2">Address Line 2</label>
-                        <input type="text" class="form-control" id="editAddressLine2">
-                    </div>
-                    <div class="form-group">
-                        <label for="editCity">City</label>
-                        <input type="text" class="form-control" id="editCity" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editState">State</label>
-                        <input type="text" class="form-control" id="editState" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editZipCode">Zip Code</label>
-                        <input type="text" class="form-control" id="editZipCode" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editCountry">Country</label>
-                        <input type="text" class="form-control" id="editCountry" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editPrimaryContactName">Primary Contact Name</label>
-                        <input type="text" class="form-control" id="editPrimaryContactName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editPrimaryContactEmail">Primary Contact Email</label>
-                        <input type="email" class="form-control" id="editPrimaryContactEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editPrimaryContactPhone">Primary Contact Phone</label>
-                        <input type="text" class="form-control" id="editPrimaryContactPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editSecondaryContactName">Secondary Contact Name</label>
-                        <input type="text" class="form-control" id="editSecondaryContactName">
-                    </div>
-                    <div class="form-group">
-                        <label for="editSecondaryContactEmail">Secondary Contact Email</label>
-                        <input type="email" class="form-control" id="editSecondaryContactEmail">
-                    </div>
-                    <div class="form-group">
-                        <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
-                        <input type="text" class="form-control" id="editSecondaryContactPhone">
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="photos">NGO Photos (Maximum 3)</label>
-                        <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
-                            id="photos" name="photos" accept="image/*" multiple required>
-                        <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
-                            3 photos.</p>
-                    </div> -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
     <script>
         async function saveProfile(event) {
@@ -475,6 +438,10 @@
                     state: document.getElementById('editState').value,
                     zip_code: document.getElementById('editZipCode').value,
                     country: document.getElementById('editCountry').value,
+                    geo_location : {
+                        latitude : document.getElementById('editlatitude').value,
+                        longitude : document.getElementById('editlongitude').value,
+                    }
                 }),
                 primary_contact: JSON.stringify({
                     name: document.getElementById('editPrimaryContactName').value,
@@ -527,15 +494,16 @@
                 }
                 else{
                     alert('Profile updated successfully');
-                    location.reload();
+                    $('#editProfileModal').modal('hide');
+                    fetchProfileData();
                 }
             }
             catch(error){
                 console.error(error);
                 alert('Error fetching data');
             }
-        $('#editProfileModal').modal('hide');
     }
+    document.addEventListener('DOMContentLoaded', fetchProfileData);
     </script>
 
     <footer class="ftco-footer ftco-section img">
@@ -712,6 +680,36 @@
                 window.location.href = 'index.html';
             }
         });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+    function showPosition(position) {
+        document.getElementById('editlatitude').value = position.coords.latitude;
+        document.getElementById('editlongitude').value = position.coords.longitude;
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
     </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>

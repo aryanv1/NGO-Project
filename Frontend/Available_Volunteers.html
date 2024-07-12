@@ -40,33 +40,46 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index_ngo.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item"><a href="food_transations_ngo.html" class="nav-link">Donations</a></li>
-                    <li class="nav-item active"><a href="volunteer_find.html" class="nav-link">Volunteers</a></li>
-                    <li class="nav-item"><a href="accepted_donations_ngo.html" class="nav-link">Accepted
-                            Donations</a>
-                    </li>
-                    <li class="nav-item"><a href="donations_history_ngo.html" class="nav-link">Donations History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
-                    </li>
+          <a class="navbar-brand" href="index.html">Welfare</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+    
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a href="index_ngo.html" class="nav-link">Home</a></li>
+              <li class="nav-item "><a href="about_ngo.html" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
+              <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
+              <li class="nav-item active"><a href="Available_Volunteers.html" class="nav-link">Volunteers</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Donations
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="food_transations_ngo.html">Incoming Donations</a></li>
+                  <li><a class="dropdown-item" href="accepted_donations_ngo.html">Accepted Donations</a></li>
+                  <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
                 </ul>
-            </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="icon-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="Profile_ngo.html">View Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
     <!-- END nav -->
 
     <section class="ftco-section ftco-volunteers">
@@ -82,9 +95,16 @@
         </div>
     </section>
     <script>
+        const BACKEND_URL = "http://localhost:3000"; 
         async function fetchVolunteers() {
             try {
-                const response = await fetch('/http://localhost:3000/volunteer/getallvolunteers/available');
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/volunteer/getallvolunteers/available`,{
+                    method : "GET",
+                    headers : {
+                       'Authorization': token
+                    }
+                });
                 const volunteers = await response.json();
                 const container = document.getElementById('volunteers-container');
                 
