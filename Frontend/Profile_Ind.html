@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/index.js"></script>
 
     <style>
         .ftco-navbar-light {
@@ -58,23 +57,6 @@
         }
 
         .card-footer button {
-            margin-right: 10px;
-        }
-
-        .photo-container {
-            max-width: 90%;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .photo-tile {
-            display: flex;
-            flex-wrap: nowrap;
-        }
-
-        .tile-photo {
-            max-width: 100%;
-            height: auto;
             margin-right: 10px;
         }
 
@@ -145,45 +127,35 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index_ngo.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about_ngo.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="gallery_ngo.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="contact_ngo.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="ngolist_ngo.html" class="nav-link">NGO</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Donations
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="food_transations_ngo.html">Incoming Donations</a></li>
-                            <li><a class="dropdown-item" href="accepted_donations_ngo.html">Accepted Donations</a></li>
-                            <li><a class="dropdown-item" href="donations_history_ngo.html">Donations History</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="icon-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">View Profile</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="index.html">Welfare</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+    
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="index_Ind.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="about_Ind.html" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="gallery_Ind.html" class="nav-link">Gallery</a></li>
+              <li class="nav-item"><a href="contact_Ind.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="ngolist_Ind.html" class="nav-link">NGO</a></li>
+              <li class="nav-item"><a href="donation_histroy_individual.html" class="nav-link">My Work</a></li>
+              <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="icon-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="Profile_Ind.html">View Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="index.html" id="logoutLinkNavbar">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
     <!-- END nav -->
 
     <!-- Content -->
@@ -191,32 +163,28 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-                    <!-- Profile Photo -->
-                    <div class="profile-image">
-                        <img src="images/person_1.jpg" alt="Profile Photo">
-                    </div>
                     <div>
                         <h1 class="card-title text-center">Profile</h1>
                     </div>
                     <div class="card-body">
                         <h3>Personal Details</h3>
-                        <p><strong>Full Name:</strong> <span id="fullName">John Doe</span></p>
-                        <p><strong>Email:</strong> <span id="emailAddress">john.doe@example.com</span></p>
-                        <p><strong>Phone Number:</strong> <span id="phoneNumber">+1234567890</span></p>
-                        <p><strong>Date of Birth:</strong> <span id="dateOfBirth">1990-01-01</span></p>
-                        <p><strong>Current Work Status:</strong> <span id="workStatus">Employed</span></p>
+                        <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+                        <p><strong>Email:</strong> <span id="emailAddress"></span></p>
+                        <p><strong>Phone Number:</strong> <span id="phoneNumber"></span></p>
+                        <p><strong>Date of Birth:</strong> <span id="dateOfBirth"></span></p>
+                        <p><strong>Current Work Status:</strong> <span id="workStatus"></span></p>
 
                         <h3>Home Address</h3>
-                        <p><strong>Address Line 1:</strong> <span id="addressLine1">123 Main St</span></p>
-                        <p><strong>Address Line 2:</strong> <span id="addressLine2">Apt 4B</span></p>
-                        <p><strong>City:</strong> <span id="city">Metropolis</span></p>
-                        <p><strong>State:</strong> <span id="state">New York</span></p>
-                        <p><strong>Zip Code:</strong> <span id="zipCode">12345</span></p>
-                        <p><strong>Country:</strong> <span id="country">USA</span></p>
+                        <p><strong>Address Line 1:</strong> <span id="addressLine1"></span></p>
+                        <p><strong>Address Line 2:</strong> <span id="addressLine2"></span></p>
+                        <p><strong>City:</strong> <span id="city"></span></p>
+                        <p><strong>State:</strong> <span id="state"></span></p>
+                        <p><strong>Zip Code:</strong> <span id="zipCode"></span></p>
+                        <p><strong>Country:</strong> <span id="country"></span></p>
 
                         <h3>Location</h3>
-                        <p><strong>Latitude:</strong> <span id="latitude">40.7128</span></p>
-                        <p><strong>Longitude:</strong> <span id="longitude">-74.0060</span></p>
+                        <p><strong>Latitude:</strong> <span id="latitude"></span></p>
+                        <p><strong>Longitude:</strong> <span id="longitude"></span></p>
                     </div>
                     <!-- Card Footer with Buttons -->
                     <div class="text-center">
@@ -226,45 +194,13 @@
                                 <span class="slider round"></span>
                             </label>
                             <label for="availabilityMode" class="availability-label mt-3">Availability Mode</label>
-                            <!-- Javscript of it is at end-->
                         </div>
-                        <button class="btn btn-primary btn-view-photos ml-2"
-                            onclick="showPhotos(['images/person_1.jpg', 'images/person_2.jpg'])"
-                            style="margin: 1rem;">View Photos</button>
                         <button class="btn btn-danger" id="deleteAccount"
                             style="border-radius: 5px; margin: 1rem;">Delete
                             Account</button>
                         <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;">Edit
                             Account</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Photo Modal -->
-    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="justify-content: center;">
-                    <h5 class="modal-title" id="photoModalLabel">Photos</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="photo-container">
-                        <div class="photo-tile" style="justify-content: center;">
-                            <img src="images/person_6.jpg" alt="Photo 1" class="tile-photo">
-                            <img src="images/person_7.jpg" alt="Photo 1" class="tile-photo">
-                            <img src="photo2.jpg" alt="Photo 2" class="tile-photo" style="display: none;">
-                        </div>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button type="button" class="btn btn-secondary btn-previous-photo">Previous</button>
-                        <button type="button" class="btn btn-secondary btn-next-photo ml-2">Next</button>
-                    </div>
-                </div>
-                <div class="modal-footer" style="justify-content: center;">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -282,50 +218,60 @@
                     <form id="editProfileForm">
                         <div class="form-group">
                             <label for="editFullName">Full Name</label>
-                            <input type="text" class="form-control" id="editFullName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editEmailAddress">Email</label>
-                            <input type="email" class="form-control" id="editEmailAddress" required>
+                            <input type="text" class="form-control" id="editFullName" required />
                         </div>
                         <div class="form-group">
                             <label for="editPhoneNumber">Phone Number</label>
-                            <input type="text" class="form-control" id="editPhoneNumber" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editDateOfBirth">Date of Birth</label>
-                            <input type="date" class="form-control" id="editDateOfBirth" required>
+                            <input type="number" class="form-control" id="editPhoneNumber" required />
                         </div>
                         <div class="form-group">
                             <label for="editWorkStatus">Current Work Status</label>
-                            <input type="text" class="form-control" id="editWorkStatus" required>
+                            <input type="text" class="form-control" id="editWorkStatus" required />
                         </div>
                         <div class="form-group">
                             <label for="editAddressLine1">Address Line 1</label>
-                            <input type="text" class="form-control" id="editAddressLine1" required>
+                            <input type="text" class="form-control" id="editAddressLine1" required />
                         </div>
                         <div class="form-group">
                             <label for="editAddressLine2">Address Line 2</label>
-                            <input type="text" class="form-control" id="editAddressLine2">
+                            <input type="text" class="form-control" id="editAddressLine2" />
                         </div>
                         <div class="form-group">
                             <label for="editCity">City</label>
-                            <input type="text" class="form-control" id="editCity" required>
+                            <input type="text" class="form-control" id="editCity" required />
                         </div>
                         <div class="form-group">
                             <label for="editState">State</label>
-                            <input type="text" class="form-control" id="editState" required>
+                            <input type="text" class="form-control" id="editState" required />
                         </div>
                         <div class="form-group">
                             <label for="editZipCode">Zip Code</label>
-                            <input type="text" class="form-control" id="editZipCode" required>
+                            <input type="text" class="form-control" id="editZipCode" required />
                         </div>
                         <div class="form-group">
                             <label for="editCountry">Country</label>
-                            <input type="text" class="form-control" id="editCountry" required>
+                            <input type="text" class="form-control" id="editCountry" required />
                         </div>
+                        <div class="form-group">
+                            <label for="editlocation">Location</label>
+                            <div class="location-field">
+                            <div class="form-row">
+                                <div class="col">
+                                <input type="number" class="form-control" style="border-radius: 5px" id="editlatitude" name="editlatitude"
+                                    placeholder="Latitude" step="any" required />
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" style="border-radius: 5px" id="editlongitude"
+                                        name="editlongitude" placeholder="Longitude" step="any" required />
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px" onclick="getLocation()">
+                            Get Location
+                        </button>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -430,100 +376,151 @@
         </svg>
     </div>
 
-    <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
     <script>
-        // Delete Account Confirmation
-        document.getElementById('deleteAccount').addEventListener('click', function (e) {
-            e.preventDefault();
-            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                // Here you can perform the deletion action
-                alert('Account deleted successfully!'); // Placeholder for actual deletion logic
-            } else {
-                // Cancel action
-                alert('Action canceled.');
-            }
-        });
-    </script>
-    <script>
-        function showPhotos(photos) {
-            const photoContainer = document.querySelector('.photo-tile');
-            photoContainer.innerHTML = ''; // Clear previous photos
-
-            photos.forEach((photo, index) => {
-                console.log(`Loading photo: ${photo}`); // Debugging line to check photo paths
-                const img = document.createElement('img');
-                img.src = photo;
-                img.alt = `images/person_${index + 1}`;
-                img.className = 'tile-photo';
-                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
-                photoContainer.appendChild(img);
-            });
-
-            let currentPhotoIndex = 0;
-            const numPhotos = photos.length;
-
-            function updateDisplayedPhoto() {
-                const photos = document.querySelectorAll('.tile-photo');
-                photos.forEach(photo => {
-                    photo.style.display = 'none'; // Hide all photos
+        const BACKEND_URL = "http://localhost:3000";
+        async function fetchProfileData() {
+            try {
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    return;
+                }
+                const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': token
+                    }
                 });
-                photos[currentPhotoIndex].style.display = 'block'; // Show current photo
+                const volunteer = await response.json();
+                if (response.status !== 200) {
+                    alert(`Error: ${volunteer.message}`); 
+                    return;
+                }
+
+            document.getElementById('fullName').textContent = volunteer.full_name;
+            document.getElementById('emailAddress').textContent = volunteer.email_address;
+            document.getElementById('phoneNumber').textContent = volunteer.phone_number;
+            document.getElementById('dateOfBirth').textContent = volunteer.date_of_birth;
+            document.getElementById('workStatus').textContent = volunteer.current_work_status;
+            document.getElementById('addressLine1').textContent = volunteer.home_address.address_line_1;
+            document.getElementById('addressLine2').textContent = volunteer.home_address.address_line_2 ? volunteer.home_address.address_line_2 : 'N/A';
+            document.getElementById('city').textContent = volunteer.home_address.city;
+            document.getElementById('state').textContent = volunteer.home_address.state;
+            document.getElementById('zipCode').textContent = volunteer.home_address.zip_code;
+            document.getElementById('country').textContent = volunteer.home_address.country;
+            document.getElementById('latitude').textContent = volunteer.home_address.geo_location.latitude;
+            document.getElementById('longitude').textContent = volunteer.home_address.geo_location.longitude;
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
             }
-
-            document.querySelector('.btn-next-photo').onclick = function () {
-                currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
-                updateDisplayedPhoto(); // Update displayed photo
-            };
-
-            document.querySelector('.btn-previous-photo').onclick = function () {
-                currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
-                updateDisplayedPhoto(); // Update displayed photo
-            };
-
-            $('#photoModal').modal('show');
         }
-    </script>
-    <script>
-        document.getElementById('editAccount').addEventListener('click', function () {
-            // Populate modal fields with current profile data
+    
+    function openEditModal() {
+        event.preventDefault();
+        fetchProfileData().then(() => {
             document.getElementById('editFullName').value = document.getElementById('fullName').textContent;
-            document.getElementById('editEmailAddress').value = document.getElementById('emailAddress').textContent;
             document.getElementById('editPhoneNumber').value = document.getElementById('phoneNumber').textContent;
-            document.getElementById('editDateOfBirth').value = document.getElementById('dateOfBirth').textContent;
             document.getElementById('editWorkStatus').value = document.getElementById('workStatus').textContent;
             document.getElementById('editAddressLine1').value = document.getElementById('addressLine1').textContent;
-            document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent;
+            document.getElementById('editAddressLine2').value = document.getElementById('addressLine2').textContent !== 'N/A' ? document.getElementById('addressLine2').textContent : '';
             document.getElementById('editCity').value = document.getElementById('city').textContent;
             document.getElementById('editState').value = document.getElementById('state').textContent;
             document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
             document.getElementById('editCountry').value = document.getElementById('country').textContent;
-
-            // Show the modal
+            document.getElementById('editlatitude').value = document.getElementById('latitude').textContent;
+            document.getElementById('editlongitude').value = document.getElementById('longitude').textContent;
             $('#editProfileModal').modal('show');
         });
+    }
+    
+    async function saveProfile(event) {
+        event.preventDefault();
+    
+        const updatedProfile = {
+            full_name : document.getElementById('editFullName').value,
+            phone_number : document.getElementById('editPhoneNumber').value,
+            current_work_status : document.getElementById('editWorkStatus').value,
+            home_address: {
+                    address_line_1: document.getElementById('editAddressLine1').value,
+                    address_line_2: document.getElementById('editAddressLine2').value,
+                    city: document.getElementById('editCity').value,
+                    state: document.getElementById('editState').value,
+                    zip_code: document.getElementById('editZipCode').value,
+                    country: document.getElementById('editCountry').value,
+                    geo_location : {
+                        latitude : document.getElementById('editlatitude').value,
+                        longitude : document.getElementById('editlongitude').value,
+                    }
+            }
+        };
+    
+        try {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('Authorization token is missing. Please log in again.');
+                return;
+            }
+            const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token,
+                },
+                body: JSON.stringify(updatedProfile)
+            });
 
-        document.getElementById('editProfileForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Update profile data
-            document.getElementById('fullName').textContent = document.getElementById('editFullName').value;
-            document.getElementById('emailAddress').textContent = document.getElementById('editEmailAddress').value;
-            document.getElementById('phoneNumber').textContent = document.getElementById('editPhoneNumber').value;
-            document.getElementById('dateOfBirth').textContent = document.getElementById('editDateOfBirth').value;
-            document.getElementById('workStatus').textContent = document.getElementById('editWorkStatus').value;
-            document.getElementById('addressLine1').textContent = document.getElementById('editAddressLine1').value;
-            document.getElementById('addressLine2').textContent = document.getElementById('editAddressLine2').value;
-            document.getElementById('city').textContent = document.getElementById('editCity').value;
-            document.getElementById('state').textContent = document.getElementById('editState').value;
-            document.getElementById('zipCode').textContent = document.getElementById('editZipCode').value;
-            document.getElementById('country').textContent = document.getElementById('editCountry').value;
-            document.getElementById('latitude').textContent = document.getElementById('editLatitude').value;
-            document.getElementById('longitude').textContent = document.getElementById('editLongitude').value;
-
-            // Hide the modal
-            $('#editProfileModal').modal('hide');
-        });
+            if(response.status !== 200)
+            {
+                const data = await response.json();
+                alert(`Error: ${data.message}`); 
+                return;
+            }
+            else{
+                alert('Profile updated successfully');
+                $('#editProfileModal').modal('hide');
+                fetchProfileData();
+            }
+        } catch (error) {
+            console.error('Error saving profile:', error);
+        }
+    }
+        document.getElementById('editAccount').addEventListener('click', openEditModal);
+        document.addEventListener('DOMContentLoaded', fetchProfileData);
     </script>
+    <script>
+        document.getElementById('deleteAccount').addEventListener('click', async function (e) {
+        e.preventDefault();
+        const BACKEND_URL = "http://localhost:3000"; 
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please log in again.');
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/volunteer/delete`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token,
+                        },
+                    });
+    
+                    if (response.status === 200) {
+                        alert('Account deleted successfully');
+                        window.location.href = 'index.html';
+                    } else {
+                        const data = await response.json();
+                        alert(`Error: ${data.message}`); // Display error message from the response
+                    }
+                } catch (error) {
+                    console.error('Error deleting profile:', error);
+                    alert('Error deleting profile'); // Handle error
+                }
+        }
+    });
+    </script>
+
     <script>
         function handleAvailabilityToggle() {
             var toggleSwitch = document.getElementById('availabilityMode');
@@ -540,10 +537,41 @@
             });
         }
 
-        // Call the function to initialize the toggle functionality
-        handleAvailabilityToggle();
+    // Call the function to initialize the toggle functionality
+    handleAvailabilityToggle();
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }   
+    }
+
+    function showPosition(position) {
+        document.getElementById('editlatitude').value = position.coords.latitude;
+        document.getElementById('editlongitude').value = position.coords.longitude;
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
     </script>
-    <script src="js/ngo_cards.js"></script>
+    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

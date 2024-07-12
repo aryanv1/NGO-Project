@@ -183,51 +183,51 @@
                     <form id="editProfileForm">
                         <div class="form-group">
                             <label for="editName">Username</label>
-                            <input type="text" class="form-control" id="editName" required>
+                            <input type="text" class="form-control" id="editName" required />
                         </div>
                         <div class="form-group">
                             <label for="editType">Type</label>
-                            <input type="text" class="form-control" id="editType" required>
+                            <input type="text" class="form-control" id="editType" required />
                         </div>
                         <div class="form-group">
                             <label for="editWebsiteUrl">Website URL</label>
-                            <input type="text" class="form-control" id="editWebsiteUrl">
+                            <input type="text" class="form-control" id="editWebsiteUrl" />
                         </div>
                         <div class="form-group">
                             <label for="editManagerName">Primary Contact Name</label>
-                            <input type="text" class="form-control" id="editManagerName" required>
+                            <input type="text" class="form-control" id="editManagerName" required />
                         </div>
                         <div class="form-group">
                             <label for="editPrimaryContactEmail">Primary Contact Email</label>
-                            <input type="email" class="form-control" id="editPrimaryContactEmail" required>
+                            <input type="email" class="form-control" id="editPrimaryContactEmail" required />
                         </div>
                         <div class="form-group">
                             <label for="editPrimaryContactPhone">Primary Contact Phone</label>
-                            <input type="text" class="form-control" id="editPrimaryContactPhone" required>
+                            <input type="text" class="form-control" id="editPrimaryContactPhone" required />
                         </div>
                         <div class="form-group">
                             <label for="editAddressLine1">Address Line 1</label>
-                            <input type="text" class="form-control" id="editAddressLine1" required>
+                            <input type="text" class="form-control" id="editAddressLine1" required />
                         </div>
                         <div class="form-group">
                             <label for="editAddressLine2">Address Line 2</label>
-                            <input type="text" class="form-control" id="editAddressLine2">
+                            <input type="text" class="form-control" id="editAddressLine2" />
                         </div>
                         <div class="form-group">
                             <label for="editCity">City</label>
-                            <input type="text" class="form-control" id="editCity" required>
+                            <input type="text" class="form-control" id="editCity" required />
                         </div>
                         <div class="form-group">
                             <label for="editState">State</label>
-                            <input type="text" class="form-control" id="editState" required>
+                            <input type="text" class="form-control" id="editState" required />
                         </div>
                         <div class="form-group">
                             <label for="editZipCode">Zip Code</label>
-                            <input type="text" class="form-control" id="editZipCode" required>
+                            <input type="text" class="form-control" id="editZipCode" required />
                         </div>
                         <div class="form-group">
                             <label for="editCountry">Country</label>
-                            <input type="text" class="form-control" id="editCountry" required>
+                            <input type="text" class="form-control" id="editCountry" required />
                         </div>
                         <div class="form-group">
                             <label for="editlocation">Location</label>
@@ -554,7 +554,6 @@ function showError(error) {
     }
 }
 </script>
-    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -571,65 +570,6 @@ function showError(error) {
     <script src="js/scrollax.min.js"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
-
-    <!-- <script>
-        var currentPhotoIndex = 0;
-        var photos = [];
-
-        function showPhotos(photoUrls) {
-            photos = photoUrls;
-            currentPhotoIndex = 0;
-            updatePhotoDisplay();
-            $('#photoModal').modal('show');
-        }
-
-        function updatePhotoDisplay() {
-            $('.tile-photo').hide();
-            if (photos[currentPhotoIndex]) {
-                $('.tile-photo').eq(currentPhotoIndex).attr('src', photos[currentPhotoIndex]).show();
-            }
-        }
-
-        $('.btn-previous-photo').click(function () {
-            if (currentPhotoIndex > 0) {
-                currentPhotoIndex--;
-                updatePhotoDisplay();
-            }
-        });
-
-        $('.btn-next-photo').click(function () {
-            if (currentPhotoIndex < photos.length - 1) {
-                currentPhotoIndex++;
-                updatePhotoDisplay();
-            }
-        });
-
-        $('#editAccount').click(function () {
-            $('#editProfileModal').modal('show');
-        });
-
-        $('#deleteAccount').click(function () {
-            $('#deleteAccountModal').modal('show');
-        });
-
-        $('#saveProfileChanges').click(function () {
-            $('#restaurantName').text($('#editRestaurantName').val());
-            $('#address').text($('#editAddress').val());
-            $('#contact').text($('#editContact').val());
-            $('#email').text($('#editEmail').val());
-            $('#websiteUrl').attr('href', $('#editWebsiteUrl').val()).text($('#editWebsiteUrl').val());
-            $('#weekdayHours').text($('#editWeekdayHours').val());
-            $('#saturdayHours').text($('#editSaturdayHours').val());
-            $('#sundayHours').text($('#editSundayHours').val());
-            $('#editProfileModal').modal('hide');
-        });
-
-        $('#confirmDeleteAccount').click(function () {
-            // Add your account deletion logic here
-            alert('Account deleted!');
-            $('#deleteAccountModal').modal('hide');
-        });
-    </script> -->
 
 </body>
 

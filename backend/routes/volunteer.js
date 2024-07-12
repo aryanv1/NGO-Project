@@ -20,8 +20,8 @@ router.route("/login").post(loginVolunteer);
 router.route("/getallvolunteers").get(authenticateMiddleWare, getAllVolunteers);
 router.route("/getallvolunteers/available").get(authenticateMiddleWare_for_ngo, getAvailableVolunteers);
 router
-  .route("/:id")
-  .get(authenticateMiddleWare, getVolunteerById)
+  .route("/getbyid")
+  .get(authenticateMiddleWare_for_volunteer, getVolunteerById)
   .patch(authenticateMiddleWare_for_volunteer, updateVolunteerById);
 router.route('/delete').delete(authenticateMiddleWare_for_volunteer,deleteVolunteerById);
 router

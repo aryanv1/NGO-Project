@@ -107,13 +107,9 @@ const getAvailableVolunteers = async (req, res) => {
   }
 };
 
-// Function to get a single volunteer by ID
-//working
 const getVolunteerById = async (req, res, next) => {
-  const vol_id = req.params.id;
-  console.log("Received volunteer ID:", vol_id);
+  const vol_id = req.user.id;
 
-  // Check if ID is a valid ObjectId
   if (!mongoose.isValidObjectId(vol_id)) {
     console.log("Received invalid ID:");
     return res.status(400).json({ message: "Invalid volunteer ID format" });
@@ -121,15 +117,13 @@ const getVolunteerById = async (req, res, next) => {
 
   try {
     const volunteer = await Volunteer.findOne({ _id: vol_id });
-
     if (!volunteer) {
       console.log("No volunteer found with ID:", vol_id);
       return res
         .status(404)
         .json({ message: `No volunteer with id : ${vol_id}` });
     }
-    console.log("Volunteer found:", volunteer);
-    res.status(200).json({ volunteer });
+    res.status(200).json(volunteer);
   } catch (error) {
     console.error("Error fetching volunteer:", error);
     return res
@@ -140,29 +134,30 @@ const getVolunteerById = async (req, res, next) => {
 
 // Function to update a volunteer by ID
 const updateVolunteerById = async (req, res) => {
+  const vol_id = req.user.id;
+
+  if (!mongoose.isValidObjectId(vol_id)) {
+    console.log("Received invalid ID:");
+    return res.status(400).json({ message: "Invalid volunteer ID format" });
+  }
   try {
     const {
       full_name,
       phone_number,
       current_work_status,
+      home_address,
     } = req.body;
-    // console.log(req.body);
-
-    // Update volunteer in database
-    const updatedVolunteer = await Volunteer.updateOne(
-      {_id: req.params.id},
+    await Volunteer.updateOne(
+      {_id: vol_id},
       {
         full_name,
         phone_number,
         current_work_status,
+        home_address,
       }
     );
-
-    // Send updated volunteer details
     res.status(200).send();
-
   } catch (error) {
-    // Handle errors
     if (error.code == 11000) {
       const dup = Object.keys(error.keyValue)[0];
       res.status(400).json({
@@ -180,9 +175,9 @@ const updateVolunteerById = async (req, res) => {
 // Function to update availability status of volunteer.
 const updateVolunteerAvailability = async(req,res)=> {
   try {
-    const vol_id = req.params.id;
+    const vol_id = req.user.id;
     const {availability_mode } = req.body;
-    const updatedVolunteer = await Volunteer.updateOne(
+    await Volunteer.updateOne(
       {_id: vol_id},
       {
         availability_mode,
@@ -202,8 +197,7 @@ const updateVolunteerAvailability = async(req,res)=> {
 // To check.
 const deleteVolunteerById = async (req, res) => {
   try {
-    console.log(req.user);
-    const deletedVolunteer = await Volunteer.findByIdAndDelete(req.user._id);
+    const deletedVolunteer = await Volunteer.findByIdAndDelete(req.user.id);
     if (!deletedVolunteer) {
       return res.status(404).json({ message: "Volunteer not found" });
     }
