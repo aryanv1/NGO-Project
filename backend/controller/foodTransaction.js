@@ -75,7 +75,11 @@ const createFoodTransaction = async (req, res) => {
 
     const photoUrls = [];
 
-    for (const photo of req.files.photos) {
+    const distributionPhotos = Array.isArray(req.files.photos) 
+    ? req.files.photos 
+    : [req.files.photos];
+
+    for (const photo of distributionPhotos) {
       if (photo) {
         const fileName = photo.mimetype;
         const photoUrl = await docsUpload(

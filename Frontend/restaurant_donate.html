@@ -238,11 +238,10 @@
             });
 
             const result = await response.json();
-            console.log(result);
 
             if (response.ok) {
               alert('Food donation created successfully');
-              window.location.href = '/Frontend/index.html';
+              window.location.assign('index_restaurant.html');
             } else {
               alert(result.message);
             }
