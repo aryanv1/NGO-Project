@@ -284,7 +284,6 @@
 
             const form = event.target;
             const formData = new FormData(form);
-
             const homeAddress = {
                 address_line_1: formData.get('address_line_1'),
                 address_line_2: formData.get('address_line_2'),
@@ -309,19 +308,20 @@
 
                 if (response.status == 201) {
                     alert("Registration successful");
-                    window.location.href = '/Frontend/index.html';
+                    window.location.assign('index.html');
                 } else {
+                    const result = await response.json();
                     console.error('Server responded with an error:', result);
                     alert(result.message);
                 }
             } catch (error) {
-                // console.error('Fetch error:', error);
+                console.error('Fetch error:', error);
                 alert('An error occurred. Please try again later.');
             }
         });
 
     </script>
-    <script src="js/ngo_cards.js"></script>
+    <script src="js/get_location.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

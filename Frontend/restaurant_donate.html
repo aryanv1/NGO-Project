@@ -219,13 +219,13 @@
           formData.set('packaged', packaged);
 
           // Prepare food photos array
-          const photos = formData.getAll('photos');
-          if (photos.length > 5) {
-            document.getElementById('photo-error').style.display = 'block';
-            return;
-          } else {
-            document.getElementById('photo-error').style.display = 'none';
-          }
+          // const photos = formData.getAll('photos');
+          // if (photos.length > 5) {
+          //   document.getElementById('photo-error').style.display = 'block';
+          //   return;
+          // } else {
+          //   document.getElementById('photo-error').style.display = 'none';
+          // }
 
           try {
             const token = localStorage.getItem('authToken');
@@ -238,11 +238,10 @@
             });
 
             const result = await response.json();
-            console.log(result);
 
             if (response.ok) {
               alert('Food donation created successfully');
-              window.location.href = '/Frontend/index.html';
+              window.location.assign('index_restaurant.html');
             } else {
               alert(result.message);
             }

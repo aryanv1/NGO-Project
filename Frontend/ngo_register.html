@@ -389,7 +389,7 @@
 
                 if (response.ok) {
                     alert("Registration successful");
-                    window.location.href = '/Frontend/index.html';
+                    window.location.assign('index.html');
                 } else {
                     alert(result.message);
                 }
@@ -444,7 +444,7 @@
 
     </script>
     <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
-    <!-- <script src="js/ngo_cards.js"></script> -->
+    <script src="js/get_location.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

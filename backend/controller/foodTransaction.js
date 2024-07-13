@@ -36,16 +36,12 @@ const createFoodTransaction = async (req, res) => {
       };
     }
 
-    // console.log("-------------  Parsed DATA -------------------");
-    // console.log(`Parsed contact  : ${parsed_contactPerson}`);
-    // console.log("-------------  Parsed DATA -------------------");
-
     if (pickupLocation) {
-      console.log("Pick up location");
+      // console.log("Pick up location");
       parsed_pickup_location = JSON.parse(pickupLocation);
     } else if (donor) {
       const restaurant = await Restaurant.findById(donor);
-      if (!donor) {
+      if (!restaurant) {
         return res.status(404).json({
           message: "Restaurant not found",
         });
@@ -69,13 +65,13 @@ const createFoodTransaction = async (req, res) => {
       });
     }
 
-    // console.log("-------------  Parsed DATA -------------------");
-    // console.log(`Parsed pick-up Location : ${parsed_pickup_location}`);
-    // console.log("-------------  Parsed DATA -------------------");
-
     const photoUrls = [];
 
-    for (const photo of req.files.photos) {
+    const distributionPhotos = Array.isArray(req.files.photos) 
+    ? req.files.photos 
+    : [req.files.photos];
+
+    for (const photo of distributionPhotos) {
       if (photo) {
         const fileName = photo.mimetype;
         const photoUrl = await docsUpload(
