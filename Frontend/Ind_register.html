@@ -79,21 +79,28 @@
                                     name="email_address" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password">Password <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" style="border-radius: 5px;" id="password"
-                                    name="password" placeholder="Enter Password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirm_password">Re-enter Password</label>
-                                <input type="password" class="form-control" style="border-radius: 5px;"
-                                    id="confirm_password" name="confirm_password" placeholder="Re-Enter Password"
+                                    name="password" placeholder="Password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                                    title="Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character."
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="number" class="form-control" style="border-radius: 5px;" id="phone_number"
-                                    name="phone_number" placeholder="Enter Phone Number" required>
+                                <label for="password">Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" style="border-radius: 5px;" id="password"
+                                    name="password" placeholder="Password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                                    title="Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character."
+                                    required>
                             </div>
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" style="border-radius: 5px;" id="phone_number"
+                                    name="phone_number" placeholder="Enter Phone Number" pattern="[0-9]{10}"
+                                    title="Phone number should be 10 digits" required>
+                            </div>
+
                             <div class="form-group">
                                 <label for="date_of_birth">Date of Birth</label>
                                 <input type="date" class="form-control" style="border-radius: 5px;" id="date_of_birth"
@@ -278,7 +285,7 @@
         </svg></div>
 
     <script>
-        
+
         document.getElementById('registerForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
