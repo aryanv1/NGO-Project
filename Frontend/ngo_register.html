@@ -182,8 +182,7 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px;"
-                                onclick="getLocation()">Get
-                                Location</button>
+                                onclick="getLocation()">Get Location</button>
                             <h2>Primary Contact</h2>
                             <div class="form-group">
                                 <label for="primary_contact_name">Name</label>
@@ -381,7 +380,7 @@
 
                 if (response.ok) {
                     alert("Registration successful");
-                    window.location.href = '/Frontend/index.html';
+                    window.location.assign('index.html');
                 } else {
                     alert(result.message);
                 }
@@ -403,7 +402,7 @@
 
     </script>
     <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
-    <script src="js/ngo_cards.js"></script>
+    <script src="js/get_location.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

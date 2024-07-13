@@ -3,6 +3,7 @@ const {Volunteer,Unverified_Individuals} = require("../models/individual");
 const {NGO} = require('../models/ngo');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
+const sendRegistrationMail = require('../SMTP/registration_individual');
 // Function to create a new volunteer // Working
 const createVolunteer = async (req, res) => {
   try {
@@ -16,7 +17,6 @@ const createVolunteer = async (req, res) => {
       current_work_status,
       home_address,
     } = req.body;
-
 
     const parsed_dob = new Date(date_of_birth);
 
@@ -51,8 +51,8 @@ const createVolunteer = async (req, res) => {
       });
     }
 
-    const savedVolunteer = await newVolunteer.save();
-    console.log(savedVolunteer.password);
+    await newVolunteer.save();
+    sendRegistrationMail(newVolunteer);
     res.status(201).send();
   } catch (error) {
     if (error.code == 11000) {
@@ -88,7 +88,7 @@ const getAvailableVolunteers = async (req, res) => {
     }
 
     const { latitude, longitude } = ngo.physical_addresses.geo_location;
-    console.log(latitude ,longitude);
+    // console.log(latitude ,longitude);
     const maxDistance = 25; // 25 km radius in meters
 
     const availableVolunteers = await Volunteer.find({
@@ -98,8 +98,8 @@ const getAvailableVolunteers = async (req, res) => {
         }
       },
     })
-    // .select('full_name email_address phone_number');
-    console.log(availableVolunteers);
+    .select('full_name email_address phone_number');
+    // console.log(availableVolunteers);
 
     res.status(200).json(availableVolunteers);
   } catch (error) {
