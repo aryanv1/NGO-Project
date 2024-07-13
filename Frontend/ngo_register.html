@@ -69,24 +69,29 @@
                         <h1 class="mb-4" style="text-align: center;">NGO Registration</h1>
                         <form id="registerForm">
                             <div class="form-group">
-                                <label for="organization_name">Organization Name</label>
+                                <label for="organization_name">Organization Name <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
                                     id="organization_name" name="organization_name"
                                     placeholder="Enter Organization Name" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password">Password <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" style="border-radius: 5px;" id="password"
-                                    placeholder="Password" name="password" required>
+                                    name="password" placeholder="Password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                                    title="Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character."
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="registration_number">Registration Number</label>
+                                <label for="registration_number">Registration Number <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
                                     id="registration_number" name="registration_number"
                                     placeholder="Enter Registration Number" required>
                             </div>
                             <div class="form-group">
-                                <label for="tax_id_ein">Tax ID/EIN</label>
+                                <label for="tax_id_ein">Tax ID/EIN <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="tax_id_ein"
                                     name="tax_id_ein" placeholder="Enter Tax ID/EIN" required>
                             </div>
@@ -97,7 +102,7 @@
                             </div>
                             <h2>Physical Address</h2>
                             <div class="form-group">
-                                <label for="address_line_1">Address</label>
+                                <label for="address_line_1">Address <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control"
                                     style="border-radius: 5px; margin-bottom: 0.5rem;" id="address_line_1"
                                     name="address_line_1" placeholder="Enter Address Line 1" required>
@@ -105,12 +110,12 @@
                                     name="address_line_2" placeholder="Enter Address Line 2">
                             </div>
                             <div class="form-group">
-                                <label for="city">City</label>
+                                <label for="city">City <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="city"
                                     name="city" placeholder="Enter City" required>
                             </div>
                             <div class="form-group">
-                                <label for="state">State</label>
+                                <label for="state">State <span class="text-danger">*</span></label>
                                 <select class="form-control" style="border-radius: 5px;" id="state" name="state"
                                     required>
                                     <option value="" disabled selected>Select State</option>
@@ -153,19 +158,18 @@
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="zip_code">Zip Code</label>
+                                <label for="zip_code">Zip Code <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="zip_code"
                                     name="zip_code" placeholder="Enter Zip Code" required>
                             </div>
                             <div class="form-group">
-                                <label for="country">Country</label>
+                                <label for="country">Country <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="country"
                                     name="country" placeholder="Enter Country" required>
                             </div>
                             <div class="form-group">
-                                <label for="location">Location</label>
+                                <label for="location">Location <span class="text-danger">*</span></label>
                                 <div class="location-field">
                                     <div class="form-row">
                                         <div class="col">
@@ -182,26 +186,27 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px;"
-                                onclick="getLocation()">Get
-                                Location</button>
+                                onclick="getLocation()">Get Location</button>
                             <h2>Primary Contact</h2>
                             <div class="form-group">
-                                <label for="primary_contact_name">Name</label>
+                                <label for="primary_contact_name">Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
                                     id="primary_contact_name" name="primary_contact[name]" placeholder="Enter Name"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="primary_contact_email">Email</label>
+                                <label for="primary_contact_email">Email <span class="text-danger">*</span></label>
                                 <input type="email" class="form-control" style="border-radius: 5px;"
                                     id="primary_contact_email" name="primary_contact[email]" placeholder="Enter Email"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="primary_contact_phoneno">Phone Number</label>
-                                <input type="text" class="form-control" style="border-radius: 5px;"
+                                <label for="primary_contact_phoneno">Phone Number <span
+                                        class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" style="border-radius: 5px;"
                                     id="primary_contact_phoneno" name="primary_contact[phoneno]"
-                                    placeholder="Enter Phone Number" required>
+                                    placeholder="Enter Phone Number" pattern="[0-9]{10}"
+                                    title="Phone number should be 10 digits" required>
                             </div>
                             <h2>Secondary Contact</h2>
                             <div class="form-group">
@@ -223,7 +228,7 @@
                             </div>
                             <h2>Documents</h2>
                             <div class="form-group">
-                                <label for="photos">NGO Photos (Maximum 3)</label>
+                                <label for="photos">NGO Photos (Maximum 3) <span class="text-danger">*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="photos" name="photos"
                                     accept="image/*" multiple required>
@@ -231,13 +236,15 @@
                                     3 photos.</p>
                             </div>
                             <div class="form-group">
-                                <label for="registration_certificate">Registration Certificate</label>
+                                <label for="registration_certificate">Registration Certificate <span
+                                        class="text-danger">*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="registration_certificate"
                                     name="registration_certificate" accept="application/pdf" required>
                             </div>
                             <div class="form-group">
-                                <label for="tax_exemption_certificate">Tax Exemption Certificate</label>
+                                <label for="tax_exemption_certificate">Tax Exemption Certificate <span
+                                        class="text-danger">*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="tax_exemption_certificate"
                                     name="tax_exemption_certificate" accept="application/pdf" required>
@@ -257,6 +264,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Register End -->
 
     </div>
@@ -401,9 +409,42 @@
             }
         });
 
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            document.getElementById('latitude').value = position.coords.latitude;
+            console.log(position.coords.latitude);
+            document.getElementById('longitude').value = position.coords.longitude;
+            console.log(position.coords.longitude);
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+
     </script>
     <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
-    <script src="js/ngo_cards.js"></script>
+    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

@@ -69,22 +69,24 @@
                         <h1 class="mb-4" style="text-align: center;">Restaurant/Community Hall Registration</h1>
                         <form id="registerForm">
                             <div class="form-group">
-                                <label for="name">Username</label>
+                                <label for="name">Username <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="name"
                                     name="username" placeholder="Enter Name" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password">Password <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" style="border-radius: 5px;" id="password"
-                                    name="password" placeholder="Enter Password" required>
+                                    name="password" placeholder="Enter Password" required
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters">
                             </div>
                             <div class="form-group">
-                                <label for="restaurant_name">Restaurant Name</label>
+                                <label for="restaurant_name">Restaurant Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="restaurant_name"
                                     name="name" placeholder="Enter Restaurant Name" required>
                             </div>
                             <div class="form-group">
-                                <label for="type">Type</label>
+                                <label for="type">Type <span class="text-danger">*</span></label>
                                 <select class="form-control" style="border-radius: 5px;" id="type" name="type" required>
                                     <option value="none" selected disabled hidden>Select Type</option>
                                     <option value="Restaurant">Restaurant</option>
@@ -94,7 +96,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="business_license_number">Business License Number</label>
+                                <label for="business_license_number">Business License Number <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
                                     id="business_license_number" name="business_license_number"
                                     placeholder="Enter Business License Number" required>
@@ -105,24 +108,27 @@
                                     name="website_url" placeholder="Enter Website URL">
                             </div>
                             <div class="form-group">
-                                <label for="manager_name">Manager Name</label>
+                                <label for="manager_name">Manager Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="manager_name"
                                     name="manager_name" placeholder="Enter Manager Name" required>
                             </div>
                             <div class="form-group">
-                                <label for="primary_contact_email">Primary Contact Email</label>
+                                <label for="primary_contact_email">Primary Contact Email <span
+                                        class="text-danger">*</span></label>
                                 <input type="email" class="form-control" style="border-radius: 5px;"
                                     id="primary_contact_email" name="primary_contact_email"
                                     placeholder="Enter Primary Contact Email" required>
                             </div>
                             <div class="form-group">
-                                <label for="primary_contact_phone">Primary Contact Phone</label>
+                                <label for="primary_contact_phone">Primary Contact Phone <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
                                     id="primary_contact_phone" name="primary_contact_phone"
-                                    placeholder="Enter Primary Contact Phone" required>
+                                    placeholder="Enter Primary Contact Phone" required pattern="\d{10}"
+                                    title="Must contain 10 digits">
                             </div>
                             <div class="form-group">
-                                <label for="address_line_1">Address</label>
+                                <label for="address_line_1">Address <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control"
                                     style="border-radius: 5px; margin-bottom: 0.5rem;" id="address_line_1"
                                     name="address_line_1" placeholder="Enter Address Line 1" required>
@@ -130,7 +136,7 @@
                                     name="address_line_2" placeholder="Enter Address Line 2">
                             </div>
                             <div class="form-group">
-                                <label for="location">Location</label>
+                                <label for="location">Location <span class="text-danger">*</span></label>
                                 <div class="location-field">
                                     <div class="form-row">
                                         <div class="col">
@@ -149,12 +155,12 @@
                             <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px;"
                                 onclick="getLocation()">Get Location</button>
                             <div class="form-group">
-                                <label for="city">City</label>
+                                <label for="city">City <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="city"
                                     name="city" placeholder="Enter City" required>
                             </div>
                             <div class="form-group">
-                                <label for="state">State</label>
+                                <label for="state">State <span class="text-danger">*</span></label>
                                 <select class="form-control" style="border-radius: 5px;" id="state" name="state"
                                     required>
                                     <option value="" disabled selected>Select State</option>
@@ -197,19 +203,19 @@
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="zip_code">Zip Code</label>
+                                <label for="zip_code">Zip Code <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="zip_code"
                                     name="zip_code" placeholder="Enter Zip Code" required>
                             </div>
                             <div class="form-group">
-                                <label for="country">Country</label>
+                                <label for="country">Country <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="country"
                                     name="country" placeholder="Enter Country" required>
                             </div>
                             <div class="form-group">
-                                <label for="food_handlers_permit">Food Handler's Permit</label>
+                                <label for="food_handlers_permit">Food Handler's Permit <span
+                                        class="text-danger">*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="food_handlers_permit"
                                     name="food_handlers_permit" accept="application/pdf" required>
@@ -223,6 +229,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Register End -->
     </div>
 
