@@ -43,29 +43,6 @@
             margin: auto;
         }
 
-        .star-rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: left;
-        }
-
-        .star-rating input[type="radio"] {
-            display: none;
-        }
-
-        .star-rating label {
-            color: #ccc;
-            font-size: 2em;
-            padding: 0 0.1em;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .star-rating input[type="radio"]:checked~label,
-        .star-rating input[type="radio"]:checked~label~label {
-            color: #f5b301;
-        }
-
         .form-control {
             font-size: 1rem;
             /* Adjust the font size of form controls */
@@ -125,6 +102,26 @@
             /* Maintain aspect ratio */
             margin-right: 10px;
             /* Space between photos */
+        }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem; 
+            margin: 0 auto; 
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .phone-link {
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -205,86 +202,6 @@
         </div>
     </div>
 
-
-    <script>
-        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
-          event.preventDefault(); // Prevent the default link action
-          var confirmation = confirm('Are you sure you want to logout?');
-          if (confirmation) {
-            localStorage.clear();
-            window.location.href = 'index.html'; // Redirect to the logout page
-          }
-        });
-      </script>
-    <script>
-        const BACKEND_URL = "http://localhost:3000"; // Update this with your actual backend URL
-
-        async function fetchFoodTransactions() {
-            try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch(`${BACKEND_URL}/foodtransaction/foodtransactions/ngo`, {
-                    method: "GET",
-                    headers: {
-                        'Authorization': token
-                    }
-                });
-
-                if (response.status == 200) {
-                    const data = await response.json();
-                    createDonationCards(data);
-                    // console.log(data);
-                }
-                else {
-                    const data = await response.json();
-                    alert(`Error: ${data.message}`);
-                }
-            } catch (error) {
-                console.error('Error fetching food transactions:', error);
-            }
-        }
-
-        function showAcceptForm(donationId) {
-            document.getElementById('transactionId').value = donationId;
-            $('#acceptFormModal').modal('show');
-        }
-
-        function createDonationCards(donations) {
-            const container = document.getElementById('foodTransactionsContainer');
-            container.innerHTML = '';
-
-            donations.forEach(donation => {
-                const card = document.createElement('div');
-                card.className = 'card mb-4';
-                card.innerHTML = `
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5 class="card-title">Food: ${donation.foodItems.join(', ')}</h5>
-                            <p class="card-text">Quantity: ${donation.quantity}</p>
-                            <p class="card-text">Category: ${donation.foodtype}</p>
-                            <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
-                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}, ${donation.pickupLocation.address.city}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="card-text">Latitude: ${donation.pickupLocation.geo_location.latitude}</p>
-                            <p class="card-text">Longitude: ${donation.pickupLocation.geo_location.longitude}</p>
-                            <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
-                            <p class="card-text">Contact Phone: ${donation.contactPerson.phone}</p>
-                            <p class="card-text">Donor: ${donation.donor.name}</p>
-                            <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
-                        </div>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept" onclick="showAcceptForm('${donation._id}')">Verify Donation</button>
-                        <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
-                    </div>
-                </div>
-            `;
-                container.appendChild(card);
-            });
-        }
-    </script>
-
     <div class="modal fade" id="acceptFormModal" tabindex="-1" role="dialog" aria-labelledby="acceptFormModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -294,25 +211,26 @@
                 </div>
                 <div class="modal-body">
                     <form id="acceptForm">
-                        <input type="hidden" id="transactionId" name="transactionId">
+                        <input type="hidden" id="transactionId" name="transactionId"/>
                         <div class="form-group">
-                            <label for="distribution_photos">Distribution Photos</label>
-                            <input type="file" class="form-control-file" id="distribution_photos"
-                                name="distribution_photos" multiple>
+                            <label for="distribution_photos">Distribution Photos (Maximum 5)<span class="text-danger">*</span></label>
+                            <input type="file" class="form-control-file" style="border-radius: 5px; padding-top: 0.75rem;" id="distribution_photos"
+                                name="distribution_photos"  accept="image/*" multiple required/>
+                            <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of 5 photos.</p>
                         </div>
                         <div class="form-group">
-                            <label for="description">Description</label>
+                            <label for="description">Distribution Details <span class="text-danger">*</span></label>
                             <textarea class="form-control" id="description" rows="5" name="description"
-                                required></textarea>
+                                required/></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="peopleServed">People Served</label>
-                            <input type="number" class="form-control" id="peopleServed" name="peopleServed" required>
+                            <label for="peopleServed">People Served <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="peopleServed" name="peopleServed" required/>
                         </div>
                         <div class="form-group">
-                            <label for="phone_numbers">Volunteer Phone Number</label>
-                            <div id="phone_numbers">
-                                <input type="tel" class="form-control phone-input" name="phone_numbers">
+                            <label for="phone_numbers[]">Volunteer Phone Number</label>
+                            <div id="phone_numbers[]">
+                                <input type="tel" id="phone_numbers" class="form-control phone-input" name="phone_numbers">
                             </div>
                             <button type="button" class="btn btn-white" style="border-radius: 5px;"
                                 onclick="addPhoneNumber()">Add Another Phone Number</button>
@@ -330,7 +248,7 @@
             </div>
         </div>
     </div>
-
+    
     <footer class="ftco-footer ftco-section img" style="height: 25rem;">
         <div class="overlay"></div>
         <div class="container">
@@ -395,25 +313,122 @@
     </footer>
 
     <script>
-        function addPhoneNumber() {
-            const phoneNumbersDiv = document.getElementById('phone_numbers');
-            const newInput = document.createElement('input');
-            newInput.type = 'tel';
-            newInput.className = 'form-control phone-input';
-            newInput.name = 'phone_numbers';
-            phoneNumbersDiv.appendChild(newInput);
+        const BACKEND_URL = "http://localhost:3000"; // Update this with your actual backend URL
+
+        async function fetchFoodTransactions() {
+            try {
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
+                    return;
+                }
+                const response = await fetch(`${BACKEND_URL}/foodtransaction/foodtransactions/ngo`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+
+                if (response.status == 200) {
+                    const data = await response.json();
+                    createDonationCards(data);
+                }
+                else if(response.status === 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                }
+                else {
+                    const data = await response.json();
+                    alert(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                alert('Error fetching data');
+                console.error('Error fetching food transactions:', error);
+            }
+        }
+
+        function showAcceptForm(donationId) {
+            document.getElementById('transactionId').value = donationId;
+            $('#acceptFormModal').modal('show');
+        }
+
+        function viewLocationOnMap(latitude, longitude) {
+            const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
+
+        function createDonationCards(donations) {
+            const container = document.getElementById('foodTransactionsContainer');
+            container.innerHTML = '';
+
+            if (donations.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message-card'; 
+                message.textContent = 'No Pending Requests';
+                container.appendChild(message);
+                return;
+            }
+            
+            donations.forEach(donation => {
+                const card = document.createElement('div');
+                card.className = 'card mb-4';
+                card.innerHTML = `
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">Food: ${donation.foodItems.join(', ')}</h5>
+                            <p class="card-text">Quantity: ${donation.quantity}</p>
+                            <p class="card-text">Category: ${donation.foodtype}</p>
+                            <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
+                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}${donation.pickupLocation.address.address_line_2 ? ', ' + donation.pickupLocation.address.address_line_2 : ''}, ${donation.pickupLocation.address.city}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${donation.pickupLocation.geo_location.latitude},${donation.pickupLocation.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
+                            <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
+                            <p class="card-text">
+                                Contact Phone: <a href="tel:${donation.contactPerson.phone}" class="phone-link">${donation.contactPerson.phone}</a>
+                            </p>
+                            <p class="card-text">Restaurant Name: ${donation.donor.name}</p>
+                            <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success btn-accept" onclick="showAcceptForm('${donation._id}')">Verify Donation</button>
+                        <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
+                    </div>
+                </div>
+            `;
+                container.appendChild(card);
+            });
         }
     </script>
+
+
     <script>
         async function submitAcceptForm(event) {
             event.preventDefault(); // Prevent the default form submission behavior
 
             const form = document.getElementById('acceptForm');
+            if (!form.checkValidity()) {
+                alert('Please fill out all required fields.');
+                return; 
+            }
             const formData = new FormData(form);
-            const token = localStorage.getItem('authToken');
-
             try {
-                console.log(formData);
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                        alert('Authorization token is missing. Please login');
+                        window.location.href = 'Login.html';
+                        return;
+                }
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/verifycompletion`, {
                     method: 'POST',
                     headers: {
@@ -422,13 +437,21 @@
                     body: formData
                 });
 
-                const result = await response.json();
                 if (response.status == 200) {
                     alert('Donation verified successfully!');
                     $('#acceptFormModal').modal('hide');
                     fetchFoodTransactions();
-                } else {
+                }
+                else if(response.status === 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                }
+                else {
+                    const result = await response.json();
                     alert(`Error: ${result.error}`);
+                    console.log(result.error);
                 }
             } catch (error) {
                 console.error('Error submitting accept form:', error);
@@ -437,8 +460,7 @@
         }
 
         document.getElementById('acceptForm').addEventListener('submit', submitAcceptForm);
-    </script>
-    <script>
+
         function showPhotos(photos) {
             const photoContainer = document.querySelector('.photo-tile');
             photoContainer.innerHTML = ''; // Clear previous photos
@@ -476,14 +498,39 @@
             $('#photoModal').modal('show');
         }
 
-        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
+        document.addEventListener('DOMContentLoaded', fetchFoodTransactions());
+
+        document.getElementById('distribution_photos').addEventListener('change', function (event) {
+            const files = event.target.files;
+            if (files.length > 5) {
+                document.getElementById('photo-error').style.display = 'block';
+                event.target.value = '';
+            } else {
+                document.getElementById('photo-error').style.display = 'none';
+            }
+        });
+
+        function addPhoneNumber() {
+            const phoneNumbersDiv = document.getElementById('phone_numbers[]');
+            const newInput = document.createElement('input');
+            newInput.type = 'tel';
+            newInput.className = 'form-control phone-input';
+            newInput.name = 'phone_numbers';
+            newInput.id = id='phone_numbers';
+            phoneNumbersDiv.appendChild(newInput);
+        }
+
+        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent the default link action
+          var confirmation = confirm('Are you sure you want to logout?');
+          if (confirmation) {
+            localStorage.clear();
+            window.location.assign('index.html'); // Redirect to the logout page
+          }
+        });
     </script>
-
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- <script src="js/ngo_cards.js"></script> -->
-    <!-- Above change is made while merging with backend. -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

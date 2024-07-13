@@ -27,7 +27,6 @@ Physical Address:
   City: ${restaurant.physical_address.city}
   State: ${restaurant.physical_address.state}
   Zip Code: ${restaurant.physical_address.zip_code}
-  Country: ${restaurant.physical_address.country}
   Location: https://www.google.com/maps?q=${restaurant.physical_address.geo_location.latitude},${restaurant.physical_address.geo_location.longitude}
 
 Documents:

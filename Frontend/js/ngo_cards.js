@@ -43,12 +43,13 @@ window.addEventListener('load', async () => {
         const response = await fetch('http://localhost:3000/ngo/get'); // Update with the correct backend URL
         const data = await response.json();
         if (response.status === 200) {
-            displayNGOs(data.ngos);
             setupSearch(data.ngos);
+            displayNGOs(data.ngos);
         } else {
-            console.error('Failed to fetch NGOs:', data.message);
+            alert(`Error: ${data.message}`);
         }
     } catch (error) {
+        alert(`Error: ${error}`);
         console.error('Error fetching NGOs:', error);
     }
 });
@@ -62,7 +63,7 @@ function displayNGOs(ngos) {
         const message = document.createElement('div');
         message.className = 'message-card'; // Apply custom message-card class
         message.textContent = 'No Pending Requests';
-
+        
         ngoContainer.appendChild(message);
         return;
     }
@@ -73,7 +74,7 @@ function displayNGOs(ngos) {
         
         ngoCard.innerHTML = `
             <div class="card mb-4">
-                <img src="${ngo.ngo_photos[0] || 'https://via.placeholder.com/150'}" height="300rem" width="140px" class="card-img-top" alt="NGO Image">
+                <img src="${ngo.ngo_photos[0]}" height="300rem" width="140px" class="card-img-top" alt="NGO Image">
                 <div class="card-body">
                     <h5 class="card-title">${ngo.organization_name}</h5>
                     <p class="card-text">Manager Name: ${ngo.primary_contact.name}</p>
@@ -135,6 +136,6 @@ function setupSearch(ngos) {
 function formatAddress(address) {
     return `
         ${address.address_line_1}, ${address.address_line_2 ? address.address_line_2 + ', ' : ''}
-        ${address.city}, ${address.state}, ${address.zip_code}, ${address.country}
+        ${address.city}, ${address.state}, ${address.zip_code}
     `;
 }

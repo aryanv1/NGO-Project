@@ -33,6 +33,35 @@
             background: #343a40 !important;
             top: 0;
         }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem; 
+            margin: 0 auto; 
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .phone-link {
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+        .email-link {
+            text-decoration: none; /* Remove underline from link */
+            font-weight: bold; /* Make the email address bold */
+            transition: color 0.3s ease;
+        }
+
+        .email-link:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
     </style>
 </head>
 
@@ -99,6 +128,11 @@
         async function fetchVolunteers() {
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please login');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/volunteer/getallvolunteers/available`, {
                     method: "GET",
                     headers: {
@@ -106,8 +140,28 @@
                     }
                 });
                 const volunteers = await response.json();
-                const container = document.getElementById('volunteers-container');
+                if(response.status === 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
+                else if(response.status !== 200){
+                    alert(`Error: ${volunteers.message}`);
+                    return;
+                }
 
+                const container = document.getElementById('volunteers-container');
+                container.innerHTML = '';
+
+                if (volunteers.length === 0) {
+                    const message = document.createElement('div');
+                    message.className = 'message-card'; 
+                    message.textContent = 'No Pending Requests';
+                    container.appendChild(message);
+                    return;
+                }
                 volunteers.forEach(volunteer => {
                     const card = document.createElement('div');
                     card.className = 'col-md-4';
@@ -116,8 +170,8 @@
                             <div class="card-body">
                                 <div class="card-details">
                                     <h3 class="card-title">${volunteer.full_name}</h3>
-                                    <p class="card-text">Phone: ${volunteer.phone_number}</p>
-                                    <p class="card-text">Email: ${volunteer.email_address}</p>
+                                    <p class="card-text">Phone: <a href="tel:${volunteer.phone_number}" class="phone-link">${volunteer.phone_number}</a></p>
+                                    <p class="card-text">Email: <a href="mailto:${volunteer.email_address}" class="email-link">${volunteer.email_address}</a></p>
                                 </div>
                             </div>
                         </div>
@@ -126,10 +180,11 @@
                 });
             } catch (error) {
                 console.error('Error fetching volunteers:', error);
+                alert(`Error fetching volunteers`);
             }
         }
 
-        fetchVolunteers();
+         document.addEventListener('DOMContentLoaded', fetchVolunteers);
     </script>
 
 

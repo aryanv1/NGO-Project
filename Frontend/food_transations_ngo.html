@@ -72,6 +72,26 @@
             margin-right: 10px;
             /* Space between photos */
         }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem; 
+            margin: 0 auto; 
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .phone-link {
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -159,6 +179,11 @@
         async function fetchFoodTransactions() {
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please login');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/available`, {
                     method: "GET",
                     headers: {
@@ -167,14 +192,27 @@
                 });
 
                 const data = await response.json();
-                if (response.status !== 200) {
+                if(response.status === 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
+                else if (response.status !== 200) {
                     alert(`Error: ${data.message}`);
                     return;
                 }
                 createDonationCards(data);
             } catch (error) {
+                alert(`Error fetching food transactions : ${error}`);
                 console.error('Error fetching food transactions:', error);
             }
+        }
+
+        function viewLocationOnMap(latitude, longitude) {
+            const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
         }
 
         function createDonationCards(donations) {
@@ -182,10 +220,10 @@
             container.innerHTML = '';
 
             if (donations.length === 0) {
-                const noRequestsMessage = document.createElement('p');
-                noRequestsMessage.textContent = 'No food requests available';
-                noRequestsMessage.className = 'text-center mt-5';
-                container.appendChild(noRequestsMessage);
+                const message = document.createElement('div');
+                message.className = 'message-card'; 
+                message.textContent = 'No Pending Requests';
+                container.appendChild(message);
                 return;
             }
 
@@ -200,19 +238,27 @@
                             <p class="card-text">Quantity: ${donation.quantity}</p>
                             <p class="card-text">Category: ${donation.foodtype}</p>
                             <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
-                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}, ${donation.pickupLocation.address.city}</p>
+                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}
+                                ${donation.pickupLocation.address.address_line_2 ? ', ' + donation.pickupLocation.address.address_line_2 : '' }, 
+                                ${donation.pickupLocation.address.city}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="card-text">Latitude: ${donation.pickupLocation.geo_location.latitude}</p>
-                            <p class="card-text">Longitude: ${donation.pickupLocation.geo_location.longitude}</p>
+                            <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${donation.pickupLocation.geo_location.latitude},${donation.pickupLocation.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
                             <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
-                            <p class="card-text">Contact Phone: ${donation.contactPerson.phone}</p>
+                            <p class="card-text">
+                                Contact Phone: <a href="tel:${donation.contactPerson.phone}" class="phone-link">${donation.contactPerson.phone}</a>
+                            </p>
                             <p class="card-text">Donor: ${donation.donor.name}</p>
                             <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept" onclick="claimDonation('${donation._id}', this)">Accept Donation</button>
+                        <button class="btn btn-success btn-accept" onclick="claimDonation('${donation._id}')">Accept Donation</button>
                         <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
                     </div>
                 </div>
@@ -221,10 +267,14 @@
             });
         }
 
-        async function claimDonation(transactionId, button) {
+        async function claimDonation(transactionId) {
             try {
                 const token = localStorage.getItem('authToken');
-                console.log(token);
+                if (!token) {
+                    alert('Authorization token is missing. Please login');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/claimstatusupdate`, {
                     method: "PATCH",
                     headers: {
@@ -235,8 +285,19 @@
                 });
                 if (response.status == 200){
                     alert('Donation claimed successfully');
-                    const card = button.closest('.card');
-                    card.remove();
+                    fetchFoodTransactions();
+                }
+                else if(response.status === 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
+                else{
+                    const data = await response.json();
+                    alert(`${data.message}`);
+                    return;
                 }
             } catch (error) {
                 console.error('Error claiming donation:', error);
@@ -351,11 +412,11 @@
     <!-- Footer End -->
 
     <!-- loader -->
-    <!-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                 stroke="#F96D00" />
-        </svg></div> -->
+        </svg></div>
     <script>
         document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action

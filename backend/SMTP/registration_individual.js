@@ -21,9 +21,7 @@ const sendRegistrationMail = async (volunteer) => {
     City: ${volunteer.home_address.city}
     State: ${volunteer.home_address.state}
     Zip Code: ${volunteer.home_address.zip_code}
-    Country: ${volunteer.home_address.country}
-    Latitude: ${volunteer.home_address.geo_location.latitude}
-    Longitude: ${volunteer.home_address.geo_location.longitude}
+    Location: https://www.google.com/maps?q=${volunteer.home_address.geo_location.latitude},${volunteer.home_address.geo_location.latitude}
   
   We will contact you shortly to verify your registration details. In the meantime, please be patient and feel free to reach out to us if you have any questions.
   

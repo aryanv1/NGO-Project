@@ -31,7 +31,6 @@ Physical Address:
   City: ${ngo.physical_addresses.city}
   State: ${ngo.physical_addresses.state}
   Zip Code: ${ngo.physical_addresses.zip_code}
-  Country: ${ngo.physical_addresses.country}
   Location: https://www.google.com/maps?q=${ngo.physical_addresses.geo_location.latitude},${ngo.physical_addresses.geo_location.longitude}
 
 We will contact you shortly to verify your registration details. In the meantime, please be patient and feel free to reach out to us if you have any questions.

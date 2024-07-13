@@ -43,9 +43,10 @@ const TransactionLog = new mongoose.Schema({
     type : [mongoose.Schema.Types.ObjectId],
     ref : 'Volunteer',
   },
-  // Verification/Rating and reviewNotes  can be used to maintain communication between restaurant and NGO. 
-  ratings: { type: Number },
   reviewNotes : { type : String },
+
+  // Verification/Rating  can be used to maintain communication between restaurant and NGO. 
+  ratings: { type: Number },
 }, { timestamps: true });
 
 const FoodTransactionLogs = mongoose.model('FoodTransactionLogs', TransactionLog);

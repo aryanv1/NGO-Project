@@ -88,8 +88,7 @@ const getAvailableVolunteers = async (req, res) => {
     }
 
     const { latitude, longitude } = ngo.physical_addresses.geo_location;
-    // console.log(latitude ,longitude);
-    const maxDistance = 25; // 25 km radius in meters
+    const maxDistance = 25; 
 
     const availableVolunteers = await Volunteer.find({
       "home_address.geo_location": {
@@ -97,9 +96,9 @@ const getAvailableVolunteers = async (req, res) => {
           $centerSphere: [[latitude, longitude], maxDistance / 6378.1] // 25 km radius
         }
       },
+      'availability_mode' : 'true',
     })
     .select('full_name email_address phone_number');
-    // console.log(availableVolunteers);
 
     res.status(200).json(availableVolunteers);
   } catch (error) {

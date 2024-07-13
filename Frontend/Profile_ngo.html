@@ -153,7 +153,6 @@
                         <p><strong>City:</strong> <span id="city"></span></p>
                         <p><strong>State:</strong> <span id="state"></span></p>
                         <p><strong>Zip Code:</strong> <span id="zipCode"></span></p>
-                        <p><strong>Country:</strong> <span id="country"></span></p>
 
                         <h3>Primary Contact</h3>
                         <p><strong>Name:</strong> <span id="primaryContactName"></span></p>
@@ -220,7 +219,7 @@
                 <div class="modal-body">
                     <form id="editProfileForm">
                         <div class="form-group">
-                            <label for="editOrganizationName">Organization Name</label>
+                            <label for="editOrganizationName">Organization Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editOrganizationName" required>
                         </div>
                         <div class="form-group">
@@ -228,7 +227,7 @@
                             <input type="text" class="form-control" id="editWebsiteUrl">
                         </div>
                         <div class="form-group">
-                            <label for="editAddressLine1">Address Line 1</label>
+                            <label for="editAddressLine1">Address Line 1<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editAddressLine1" required>
                         </div>
                         <div class="form-group">
@@ -236,23 +235,59 @@
                             <input type="text" class="form-control" id="editAddressLine2">
                         </div>
                         <div class="form-group">
-                            <label for="editCity">City</label>
+                            <label for="editCity">City<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editCity" required>
                         </div>
                         <div class="form-group">
-                            <label for="editState">State</label>
-                            <input type="text" class="form-control" id="editState" required>
+                            <label for="editState">State<span class="text-danger">*</span></label>
+                            <select class="form-control" style="border-radius: 5px;" id="editState" name="editState"
+                                required>
+                                <option value="" disabled selected>Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and
+                                    Daman and Diu</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="editZipCode">Zip Code</label>
+                            <label for="editZipCode">Zip Code<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editZipCode" required>
                         </div>
                         <div class="form-group">
-                            <label for="editCountry">Country</label>
-                            <input type="text" class="form-control" id="editCountry" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location<span class="text-danger">*</span></label>
                             <div class="location-field">
                                 <div class="form-row">
                                     <div class="col">
@@ -273,15 +308,15 @@
                             Get Location
                         </button>
                         <div class="form-group">
-                            <label for="editPrimaryContactName">Primary Contact Name</label>
+                            <label for="editPrimaryContactName">Primary Contact Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editPrimaryContactName" required>
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactEmail">Primary Contact Email</label>
+                            <label for="editPrimaryContactEmail">Primary Contact Email<span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="editPrimaryContactEmail" required>
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactPhone">Primary Contact Phone</label>
+                            <label for="editPrimaryContactPhone">Primary Contact Phone<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editPrimaryContactPhone" required>
                         </div>
                         <div class="form-group">
@@ -296,13 +331,13 @@
                             <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
                             <input type="text" class="form-control" id="editSecondaryContactPhone">
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="photos">NGO Photos (Maximum 3)</label>
+                        <div class="form-group">
+                            <label for="photos">Replace your photos (Maximum 3)</label>
                             <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
                                 id="photos" name="photos" accept="image/*" multiple required>
                             <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
                                 3 photos.</p>
-                        </div> -->
+                        </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
                                 Changes</button>
@@ -330,11 +365,17 @@
                     }
                 });
                 const ngo = await response.json();
-                if (response.status !== 200) {
+                if(response.status == 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
+                else if (response.status !== 200) {
                     alert(`Error: ${ngo.message}`);
                     return;
                 }
-
                 document.getElementById('ngoPhoto').src = ngo.ngo_photos[0];
                 document.getElementById('organizationName').textContent = ngo.organization_name;
                 document.getElementById('registrationNumber').textContent = ngo.registration_number;
@@ -355,7 +396,6 @@
                 document.getElementById('city').textContent = ngo.physical_addresses.city;
                 document.getElementById('state').textContent = ngo.physical_addresses.state;
                 document.getElementById('zipCode').textContent = ngo.physical_addresses.zip_code;
-                document.getElementById('country').textContent = ngo.physical_addresses.country;
 
                 document.getElementById('primaryContactName').textContent = ngo.primary_contact.name;
                 document.getElementById('primaryContactEmail').textContent = ngo.primary_contact.email;
@@ -398,7 +438,6 @@
                     document.getElementById('editCity').value = ngo.physical_addresses.city;
                     document.getElementById('editState').value = ngo.physical_addresses.state;
                     document.getElementById('editZipCode').value = ngo.physical_addresses.zip_code;
-                    document.getElementById('editCountry').value = ngo.physical_addresses.country;
                     document.getElementById('editlatitude').value = ngo.physical_addresses.geo_location.latitude;
                     document.getElementById('editlongitude').value = ngo.physical_addresses.geo_location.longitude;
                     document.getElementById('editPrimaryContactName').value = ngo.primary_contact.name;
@@ -448,7 +487,6 @@
                     city: document.getElementById('editCity').value,
                     state: document.getElementById('editState').value,
                     zip_code: document.getElementById('editZipCode').value,
-                    country: document.getElementById('editCountry').value,
                     geo_location: {
                         latitude: document.getElementById('editlatitude').value,
                         longitude: document.getElementById('editlongitude').value,
@@ -468,8 +506,7 @@
                     phoneno: secondaryContactPhone,
                 });
             }
-            // const photosFiles = document.getElementById('photos').files;
-
+            
             const formData = new FormData();
             formData.append('organization_name', updatedNGO.organization_name);
             formData.append('website_url', updatedNGO.website_url);
@@ -478,10 +515,12 @@
             if (updatedNGO.secondary_contact) {
                 formData.append('secondary_contact', updatedNGO.secondary_contact);
             }
+            
+            const photosFiles = document.getElementById('photos').files;
+            for(const element of photosFiles) {
+                formData.append('photos', element)
+            }
 
-            // for (const element of photosFiles) {
-            //     formData.append('photos', element)
-            // }
             const BACKEND_URL = "http://localhost:3000";
             try {
                 const token = localStorage.getItem('authToken');
@@ -489,7 +528,6 @@
                     alert('Authorization token is missing. Please log in again.');
                     return;
                 }
-
                 const response = await fetch(`${BACKEND_URL}/ngo/updatedetails`, {
                     method: "PATCH",
                     headers: {
@@ -513,7 +551,7 @@
                 alert('Error fetching data');
             }
         }
-        document.addEventListener('DOMContentLoaded', fetchProfileData);
+        document.addEventListener('DOMContentLoaded', fetchProfileData());
     </script>
 
     <footer class="ftco-footer ftco-section img" style="height: 25rem;">
@@ -607,7 +645,6 @@
                             'Authorization': token,
                         },
                     });
-
                     if (response.status === 200) {
                         alert('Account deleted successfully');
                         localStorage.clear();

@@ -245,7 +245,6 @@ const getTransactionsOfRestaurant = async (req, res) => {
         path: 'ngo',
         select: 'organization_name primary_contact.email primary_contact.phoneno' // Only select the fields you need
       });
-      // console.log(getTransactionsOfRestaurant);
       res.status(200).json(getTransactionsOfRestaurant);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -292,9 +291,8 @@ const claimFoodTransaction = async (req, res) => {
     if (!transaction || transaction.claimed) {
       return res
         .status(400)
-        .json({ error: "Transaction not available or already claimed" });
+        .json({ message : "Transaction is already claimed" });
     }
-
     transaction.claimed = true;
     transaction.ngo = ngoId;
     await transaction.save();
@@ -335,7 +333,6 @@ const createFoodTransactionLog = async (req, res) => {
             volunteer_id.push(volunteer1._id);
       }
     }
-
     const photoUrls = [];
 
     const distributionPhotos = Array.isArray(req.files.distribution_photos) 

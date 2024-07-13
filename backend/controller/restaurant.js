@@ -39,9 +39,6 @@ const registerRestaurant = async (req, res) => {
       food_handlers_permit: url,
     });
 
-    // console.log(newRestaurant);
-
-    // Check for duplicates
     const temp = await Restaurant.findOne({
       $or: [
         { username: newRestaurant.username },
@@ -161,9 +158,23 @@ const updateRestaurantDetails = async (req, res) => {
       primary_contact_phone,
       physical_address,
     } = req.body;
-    // const parsed_physical_address = JSON.parse(physical_address);
-    const parsed_physical_address = physical_address;
-    console.log(parsed_physical_address);
+
+    const existingRestaurant = await Restaurant.findOne({
+        $or: [
+          { primary_contact_email },
+          { primary_contact_phone }
+        ],
+        _id: { $ne: restaurantId }
+      });
+
+      if (existingRestaurant) {
+        if (existingRestaurant.primary_contact_email === primary_contact_email) {
+          return res.status(400).json({ message: "Duplicate email entry detected." });
+        } else if (existingRestaurant.primary_contact_phone === primary_contact_phone) {
+          return res.status(400).json({ message: "Duplicate phone number entry detected." });
+        }
+      }
+
     await Restaurant.updateOne(
       { _id: restaurantId },
       {
@@ -173,7 +184,7 @@ const updateRestaurantDetails = async (req, res) => {
         manager_name,
         primary_contact_email,
         primary_contact_phone,
-        physical_address: parsed_physical_address,
+        physical_address,
       }
     );
     res.status(200).send("success!!");
@@ -194,8 +205,7 @@ const updateRestaurantDetails = async (req, res) => {
 
 const deleteRestaurant = async (req, res) => {
   const { restaurantId } = req.user.id;
-
-  // Check if the ID is a valid ObjectId
+  
   if (!mongoose.isValidObjectId(restaurantId)) {
     console.log("Invalid restaurant ID format.");
     return res.status(400).json({ message: "Invalid restaurant ID format" });

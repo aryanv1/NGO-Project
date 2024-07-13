@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Food Donation Requests</title>
+    <title>Food Donation History</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -76,6 +76,26 @@
         .bold-label {
             font-weight: 700;
             /* Bolder than normal bold */
+        }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem; 
+            margin: 0 auto; 
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .phone-link {
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -185,6 +205,11 @@
 
         async function fetchFoodTransactions() {
             const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('Authorization token is missing. Please log in again.');
+                window.location.href = 'Login.html';
+                return;
+            }
             try {
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/foodlogs/ngo`, {
                     method: "GET",
@@ -192,13 +217,20 @@
                         'Authorization': token
                     }
                 });
-                if (response.status !== 200) {
+                if(response.status === 401)
+                {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
+                else if (response.status !== 200) {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
                     return;
                 }
-                foodTransactions = await response.json(); // Assign fetched data to global variable
-                displayFoodTransactions(); // Call function to display transactions
+                foodTransactions = await response.json();
+                displayFoodTransactions();
             } catch (error) {
                 console.error(error);
                 alert('Error fetching data'); // Handle error
@@ -209,6 +241,15 @@
             const container = document.getElementById('foodTransactionsContainer');
             container.innerHTML = ''; // Clear previous content
 
+            if(foodTransactions.length == 0)
+            {
+                const message = document.createElement('div');
+                message.className = 'message-card'; 
+                message.textContent = 'No Pending Requests';
+                container.appendChild(message);
+                return;
+            }
+            
             foodTransactions.forEach(transaction => {
                 const card = document.createElement('div');
                 card.classList.add('card', 'mb-4');
@@ -220,7 +261,7 @@
                                 <p class="card-text">Quantity: ${transaction.quantity}</p>
                                 <p class="card-text">Category: ${transaction.foodtype}</p>
                                 <p class="card-text">Packaged: ${transaction.packaged ? 'Yes' : 'No'}</p>
-                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}, ${transaction.pickupLocation.address.city}</p>
+                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}${transaction.pickupLocation.address.address_line_2 ? ', ' + transaction.pickupLocation.address.address_line_2 : ''}, ${transaction.pickupLocation.address.city}</p>
                             </div>
                             <div class="col-md-6">
                                 <p class="card-text">Contact Person Name: ${transaction.contactPerson.name}</p>
@@ -247,20 +288,18 @@
                 return;
             }
 
-            // Populate modal with transaction details
-
             document.getElementById('NameOfNGO').textContent = transaction.ngo;
             document.getElementById('modalDescription').textContent = transaction.description;
             document.getElementById('modalPeopleServed').textContent = transaction.peopleServed;
             const volunteerPhonesElement = document.getElementById('modalVolunteerPhones');
-            if (transaction.volunteer.length > 0) {
+            if (transaction.contactPerson.phone.length !== 0) {
                 volunteerPhonesElement.textContent = transaction.volunteer.join(', ');
             } else {
                 // volunteerPhonesElement.textContent = 'No volunteers participated';
                 // Alternatively, to hide the field:
                 document.getElementById('modalVolunteerPhones').parentNode.style.display = 'none';
             }
-            document.getElementById('modalReviewNotes').textContent = transaction.reviewNotes || "No Review Notes Provided";
+            document.getElementById('modalReviewNotes').textContent = transaction.reviewNotes || "No thanks Notes Provided";
 
             $('#acceptFormModal').modal('show');
         }
