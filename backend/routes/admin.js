@@ -15,7 +15,10 @@ const {
   deleteVolunteerById,
   deleteRestaurantById,
   deleteNGOById,
-  getAllFoodLogs
+  getAllFoodLogs,
+  deleteUnverifiedNGOById,
+  deleteUnverifiedVolunteerById,
+  deleteUnverifiedRestaurantById,
 } = require("../controller/admin");
 const {authenticateMiddleWare} = require('../middleware/auth');
 
@@ -40,6 +43,11 @@ router.route('/getallrestaurants').get(authenticateMiddleWare,getAllRestaurants)
 router.route('/deletevolunteer/:id').delete(authenticateMiddleWare,deleteVolunteerById);
 router.route('/deleterestaurant/:id').delete(authenticateMiddleWare,deleteRestaurantById);
 router.route('/deletengo/:id').delete(authenticateMiddleWare,deleteNGOById);
+
+// Delete from unverified list
+router.route('/deleteunverifiedvolunteer/:id').delete(authenticateMiddleWare,deleteUnverifiedVolunteerById);
+router.route('/deleteunverifiedrestaurant/:id').delete(authenticateMiddleWare,deleteUnverifiedRestaurantById);
+router.route('/deleteunverifiedngo/:id').delete(authenticateMiddleWare,deleteUnverifiedNGOById);
 
 router.route('/getallfoodlogs').get(authenticateMiddleWare,getAllFoodLogs);
 

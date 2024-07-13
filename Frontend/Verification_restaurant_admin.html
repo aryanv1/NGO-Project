@@ -214,19 +214,19 @@
                                             <p class="card-text">Business License Number: ${restaurant.business_license_number}</p>
                                             <p class="card-text">Website:
                                                 ${restaurant.website_url ?
-                        `<a href="javascript:void(0);" 
+                                                `<a href="javascript:void(0);" 
                                                     onclick="redirectToWebsite('${restaurant.website_url}')">
                                                     ${restaurant.website_url}
                                                 </a>`
-                        : "Not Avaialable"}
+                                                : "Not Avaialable"}
                                             </p>
                                                 <p class="card-text">Food Handlers Permit: 
                                                 ${restaurant.food_handlers_permit ?
-                        `<a href="javascript:void(0);" 
+                                                    `<a href="javascript:void(0);" 
                                                         onclick="viewFoodHandlersPermit('${restaurant.food_handlers_permit}')">
                                                         Click here to view
                                                     </a>`
-                        : 'Not available'}
+                                                    : 'Not available'}
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
@@ -244,6 +244,10 @@
                                     <div class="text-center mt-3">
                                         <button class="btn btn-success btn-verify" style="border-radius: 5px;"
                                                 onclick="confirmVerifyRestaurant('${restaurant._id}')">Verify Restaurant</button>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                                onclick="confirmDeleteRestaurant('${restaurant._id}')">Delete Restaurant</button>
                                     </div>
                                 </div>
                             </div>
@@ -288,20 +292,44 @@
             }
         }
 
+        async function deleteRestaurant(id) {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/admin/deleteunverifiedrestaurant/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    },
+                });
+                if (response.status === 200) {
+                    const restaurantCard = document.getElementById('restaurant-container');
+                    restaurantCard.innerHTML = ''; // Clear current content
+                    fetchRestaurants(); // Reload the list after deletion
+                    alert('Restaurant deleted successfully');
+                } else {
+                    alert('Failed to delete restaurant');
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Error deleting restaurant');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             await fetchRestaurants(); // Fetch restaurants on page load
         });
 
     </script>
-
     <script>
         function confirmVerifyRestaurant(restaurantId) {
             if (confirm("Are you sure you want to verify this restaurant?")) {
-                // Call your VerifyRestaurant function here
                 VerifyRestaurant(restaurantId);
-            } else {
-                // Optional: Provide feedback or take other action if the user cancels
-                console.log("Verification canceled.");
+            }
+        }
+        function confirmDeleteRestaurant(restaurantId) {
+            if (confirm("Are you sure you want to delete this restaurant?")){
+                deleteRestaurant(restaurantId);
             }
         }
     </script>
@@ -370,14 +398,13 @@
         </div>
     </footer>
     <!-- Footer End -->
-
     <script>
         document.getElementById('logoutLink').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link action
+            event.preventDefault(); 
             var confirmation = confirm('Are you sure you want to logout?');
             if (confirmation) {
                 localStorage.clear();
-                window.location.href = 'index.html'; // Redirect to the logout page
+                window.location.href = 'index.html';
             }
         });
     </script>

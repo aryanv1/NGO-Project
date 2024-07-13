@@ -226,11 +226,11 @@
                                             <p class="card-text">Tax ID EIN: ${ngo.tax_id_ein}</p>
                                             <p class="card-text">Website: 
                                                 ${ngo.website_url ?
-            `<a href="javascript:void(0);" 
+                                                    `<a href="javascript:void(0);" 
                                                         onclick="redirectToWebsite('${ngo.website_url}')">
                                                         ${ngo.website_url}
                                                     </a>`
-            : "Not Available"}
+                                                    : "Not Available"}
                                             </p>
                                             <p class="card-text">Primary Contact: ${ngo.primary_contact.name}</p>
                                             <p class="card-text">Email: ${ngo.primary_contact.email}</p>
@@ -262,18 +262,22 @@
                                             </p>
                                             <p class="card-text">Recent Annual Report: 
                                                 ${ngo.recent_annual_report ?
-            `<a href="javascript:void(0);" 
+                                                    `<a href="javascript:void(0);" 
                                                         onclick="viewAnnualReport('${ngo.recent_annual_report}')">
                                                         Click here to view
                                                     </a>`
-            : 'Not available'}
+                                                    : 'Not available'}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
                                       <button class="btn btn-success btn-verify" style="border-radius: 5px;"
                                               onclick="confirmVerifyNGO('${ngo._id}')">Verify NGO</button>
-                                  </div>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                                onclick="confirmDelete('${ngo._id}')">Delete NGO</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -313,6 +317,30 @@
       }
     }
 
+    async function deleteNGO(id) {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${BACKEND_URL}/admin/deleteunverifiedngo/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token,
+          },
+        });
+        if (response.status === 200) {
+          const ngoCard = document.getElementById('ngo-container');
+          ngoCard.innerHTML = ''; // Clear current content
+          fetchNGOs(); // Reload the list after deletion
+          alert('NGO deleted successfully');
+        } else {
+          alert('Failed to delete NGO');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Error deleting NGO');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       await fetchNGOs(); // Fetch NGOs on page load
     });
@@ -322,11 +350,12 @@
   <script>
     function confirmVerifyNGO(ngoId) {
       if (confirm("Are you sure you want to verify this NGO?")) {
-        // Call your VerifyNGO function here
         VerifyNGO(ngoId);
-      } else {
-        // Optional: Provide feedback or take other action if the user cancels
-        console.log("Verification canceled.");
+      }
+    }
+    function confirmDelete(ngoId) {
+      if (confirm("Are you sure you want to delete this NGO?")) {
+        deleteNGO(ngoId);
       }
     }
   </script>

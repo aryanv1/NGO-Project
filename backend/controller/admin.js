@@ -184,6 +184,19 @@ const deleteNGOById = async (req, res) => {
   }
 };
 
+const deleteUnverifiedNGOById = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const deleted = await Unverified_NGOs.findByIdAndDelete(id);
+    if (!deleted) {
+      return res.status(404).json({ message: "NGO not found" });
+    }
+    res.status(200).json({ message: "Request deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getAllVolunteers = async (req, res) => {
   try {
     const volunteers = await Volunteer.find();
@@ -216,6 +229,20 @@ const deleteVolunteerById = async (req, res) => {
     }
 };
 
+const deleteUnverifiedVolunteerById = async (req, res) => {
+  const {id} = req.params;
+  console.log(id);
+  try {
+    const deletedVolunteer = await Unverified_Individuals.findByIdAndDelete(id);
+    if (!deletedVolunteer) {
+      return res.status(404).json({ message: "Volunteer not found" });
+    }
+    res.status(200).json({ message: "Request deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getAllRestaurants = async (req, res) => {
   try {
     const restaurants = await Restaurant.find();
@@ -238,6 +265,19 @@ const deleteRestaurantById = async (req, res) => {
   const {id} = req.params;
   try {
     const deleted = await Restaurant.findByIdAndDelete(id);
+    if (!deleted) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    res.status(200).json({ message: "Restaurant deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteUnverifiedRestaurantById = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const deleted = await Unverified_Restaurants.findByIdAndDelete(id);
     if (!deleted) {
       return res.status(404).json({ message: "Restaurant not found" });
     }
@@ -293,4 +333,7 @@ module.exports = {
   deleteRestaurantById,
   deleteNGOById,
   getAllFoodLogs,
+  deleteUnverifiedNGOById,
+  deleteUnverifiedVolunteerById,
+  deleteUnverifiedRestaurantById,
 };

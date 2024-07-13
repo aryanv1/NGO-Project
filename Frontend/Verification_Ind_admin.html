@@ -211,6 +211,10 @@
                                             <button class="btn btn-success btn-verify" style="border-radius: 5px;"
                                                     onclick="confirmVerifyVolunteer('${volunteer._id}')">Verify Volunteer</button>
                                         </div>
+                                        <div class="text-center mt-3">
+                                            <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                                    onclick="confirmDeleteVolunteer('${volunteer._id}')">Delete Request</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,17 +256,44 @@
             }
         }
 
+        async function deleteVolunteer(id) {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${BACKEND_URL}/admin/deleteunverifiedvolunteer/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    },
+                });
+                if (response.status === 200) {
+                    const restaurantCard = document.getElementById('volunteer-container');
+                    alert('Volunteer deleted successfully');
+                    restaurantCard.innerHTML = ''; // Clear current content
+                    fetchVolunteers(); // Reload the list after deletion
+                } else {
+                    const data = await response.json();
+                    alert(`Error: ${data.message}`); // Display error message from the response
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Error deleting volunteer'); // Handle error
+            }
+        }
+
         window.onload = fetchVolunteers();
     </script>
 
     <script>
         function confirmVerifyVolunteer(volunteerId) {
             if (confirm("Are you sure you want to verify this volunteer?")) {
-                // Call your VerifyVolunteer function here
                 VerifyVolunteer(volunteerId);
-            } else {
-                // Optional: Provide feedback or take other action if the user cancels
-                console.log("Verification canceled.");
+            }
+        }
+
+        function confirmDeleteVolunteer(volunteerId) {
+            if (confirm("Are you sure you want to delete this volunteer?")) {
+                deleteVolunteer(volunteerId);
             }
         }
     </script>
