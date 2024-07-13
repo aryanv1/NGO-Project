@@ -138,15 +138,14 @@
   <!-- END nav -->
 
   <!-- Search Bar -->
-  <div class="container my-4" style="padding-top: 5rem">
+  <div class="container my-5" style="padding-top: 5rem">
     <div class="input-group">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search for NGOs..."
-        style="border-radius: 5px" />
-      <button id="clearButton" class="btn btn-secondary" type="button" style="border-radius: 5px; margin-left: 10px">
-        Clear
-      </button>
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for Volunteers ..."
+            style="border-radius: 1rem;">
+        <button id="clearButton" class="btn btn-secondary" type="button"
+            style="border-radius: 1rem; margin-left: 1vw;">Clear</button>
     </div>
-  </div>
+</div>
 
   <div class="container" style="margin-top: 2rem">
     <div id="ngo-container"></div>
@@ -171,6 +170,7 @@
           return;
         }
         ngos = await response.json();
+        setupSearch();
         displayNGOs(); // Display NGOs after fetching
       } catch (error) {
         console.error(error);
@@ -287,11 +287,96 @@
       });
     }
 
+    function displayFilteredNGOs(filteredNGOs) {
+      const container = document.getElementById('ngo-container');
+      container.innerHTML = ''; // Clear previous content
+
+      if (filteredNGOs.length === 0) {
+        const message = document.createElement('div');
+        message.className = 'message-card'; // Apply custom message-card class
+        message.textContent = 'No Pending Requests';
+
+        container.appendChild(message);
+        return;
+      }
+
+      filteredNGOs.forEach(ngo => {
+        const ngoCard = `
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title">NGO Name: ${ngo.organization_name}</h5>
+                                            <p class="card-text">Registration Number: ${ngo.registration_number}</p>
+                                            <p class="card-text">Tax ID EIN: ${ngo.tax_id_ein}</p>
+                                            <p class="card-text">Website: 
+                                                ${ngo.website_url ?
+                                                    `<a href="javascript:void(0);" 
+                                                        onclick="redirectToWebsite('${ngo.website_url}')">
+                                                        ${ngo.website_url}
+                                                    </a>`
+                                                    : "Not Available"}
+                                            </p>
+                                            <p class="card-text">Primary Contact: ${ngo.primary_contact.name}</p>
+                                            <p class="card-text">Email: ${ngo.primary_contact.email}</p>
+                                            <p class="card-text">Phone: ${ngo.primary_contact.phoneno}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="card-text">Address Line 1: ${ngo.physical_addresses.address_line_1}</p>
+                                            <p class="card-text">Address Line 2: ${ngo.physical_addresses.address_line_2 || ''}</p>
+                                            <p class="card-text">City: ${ngo.physical_addresses.city}</p>
+                                            <p class="card-text">State: ${ngo.physical_addresses.state}</p>
+                                            <p class="card-text">Zip Code: ${ngo.physical_addresses.zip_code}</p>
+                                            <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${ngo.physical_addresses.geo_location.latitude}, ${ngo.physical_addresses.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
+                                            <p class="card-text">Registration Certificate: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewRegistrationCertificate('${ngo.registration_certificate}')">
+                                                    Click here to view
+                                                </a>
+                                            </p>
+                                            <p class="card-text">Tax Exemption Certificate: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewTaxExemptionCertificate('${ngo.tax_exemption_certificate}')">
+                                                    Click here to view
+                                                </a>
+                                            </p>
+                                            <p class="card-text">Recent Annual Report: 
+                                                ${ngo.recent_annual_report ?
+                                                    `<a href="javascript:void(0);" 
+                                                        onclick="viewAnnualReport('${ngo.recent_annual_report}')">
+                                                        Click here to view
+                                                    </a>`
+                                                    : 'Not available'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                      <button class="btn btn-success btn-verify" style="border-radius: 5px;"
+                                              onclick="confirmVerifyNGO('${ngo._id}')">Verify NGO</button>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                                onclick="confirmDelete('${ngo._id}')">Delete NGO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        container.insertAdjacentHTML('beforeend', ngoCard);
+      });
+    }
+
     async function VerifyNGO(ngo_id) {
       try {
-        const temp = {
-          ngo_id: ngo_id
-        }
         const formData = new FormData();
         formData.append('ngo_id', ngo_id);
         const token = localStorage.getItem('authToken');
@@ -305,6 +390,8 @@
         if (response.status === 201) {
           const ngoCard = document.getElementById('ngo-container');
           ngoCard.innerHTML = '';
+          const searchInput = document.getElementById('searchInput');
+          searchInput.value = '';
           alert('NGO Verified successfully');
           fetchNGOs();
         } else {
@@ -328,10 +415,12 @@
           },
         });
         if (response.status === 200) {
-          const ngoCard = document.getElementById('ngo-container');
-          ngoCard.innerHTML = ''; // Clear current content
-          fetchNGOs(); // Reload the list after deletion
           alert('NGO deleted successfully');
+          const ngoCard = document.getElementById('ngo-container');
+          ngoCard.innerHTML = ''; 
+          const searchInput = document.getElementById('searchInput');
+          searchInput.value = '';
+          fetchNGOs();
         } else {
           alert('Failed to delete NGO');
         }
@@ -358,6 +447,22 @@
         deleteNGO(ngoId);
       }
     }
+    function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const clearButton = document.getElementById('clearButton');
+
+            // Perform search on each input event
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                const filteredNGOs = ngos.filter(ngo => ngo.organization_name.toLowerCase().includes(query));
+                displayFilteredNGOs(filteredNGOs);
+            });
+
+            clearButton.addEventListener('click', () => {
+                searchInput.value = '';
+                displayNGOs(); 
+            });
+        }
   </script>
 
 
