@@ -2,7 +2,7 @@ const { NGO, Unverified_NGOs } = require("../models/ngo");
 const docsUpload = require("../blob/docsUpload");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-
+const sendRegistrationMail = require('../SMTP/registration_ngo');
 const registerNGO = async (req, res) => {
   try {
     const {
@@ -42,7 +42,6 @@ const registerNGO = async (req, res) => {
         );
         ngoPhotosUrls.push(photoUrl);
     }
-    // console.log(ngoPhotosUrls);
 
     const newNGO = new Unverified_NGOs({
       organization_name,
@@ -64,7 +63,6 @@ const registerNGO = async (req, res) => {
       newNGO.secondary_contact = secondary_contact;
     }
 
-    // console.log(newNGO);
     const temp = await NGO.findOne({
       $or: [
         { "primary_contact.email": newNGO.primary_contact.email },
@@ -79,7 +77,7 @@ const registerNGO = async (req, res) => {
     }
 
     await newNGO.save();
-
+    sendRegistrationMail(newNGO);
     res.status(201).json({
       message: "NGO registered successfully",
       ngo: newNGO,

@@ -24,8 +24,8 @@ const contactSchema = new mongoose.Schema({
 
 const contactSchema2 = new mongoose.Schema({
   name: { type: String },
-  email: { type: String ,unique : true},
-  phoneno: { type: String , unique :true},
+  email: { type: String },
+  phoneno: { type: String},
 });
 
 const ngoObj = {
