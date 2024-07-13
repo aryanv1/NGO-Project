@@ -346,7 +346,6 @@
 
             const form = event.target;
             const formData = new FormData(form);
-            console.log(formData);
             const physicalAddresses = {
                 address_line_1: formData.get('address_line_1'),
                 address_line_2: formData.get('address_line_2'),
@@ -385,7 +384,6 @@
                 });
 
                 const result = await response.json();
-                console.log(result);
 
                 if (response.ok) {
                     alert("Registration successful");
@@ -408,40 +406,6 @@
                 document.getElementById('photo-error').style.display = 'none';
             }
         });
-
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
-
-        function showPosition(position) {
-            document.getElementById('latitude').value = position.coords.latitude;
-            console.log(position.coords.latitude);
-            document.getElementById('longitude').value = position.coords.longitude;
-            console.log(position.coords.longitude);
-        }
-
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    alert("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    alert("An unknown error occurred.");
-                    break;
-            }
-        }
-
-
     </script>
     <!-- This below file ngo_cards.js is for maunal script of geolocation. -->
     <script src="js/get_location.js"></script>

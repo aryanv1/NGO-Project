@@ -207,7 +207,7 @@
 
 
     <script>
-        document.getElementById('logoutLink').addEventListener('click', function (event) {
+        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
           event.preventDefault(); // Prevent the default link action
           var confirmation = confirm('Are you sure you want to logout?');
           if (confirmation) {
@@ -237,7 +237,6 @@
                 else {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
-                    // alert('Failed to fetch food transactions.');
                 }
             } catch (error) {
                 console.error('Error fetching food transactions:', error);

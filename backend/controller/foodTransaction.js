@@ -19,13 +19,13 @@ const createFoodTransaction = async (req, res) => {
       contactPerson,
       additionalNotes,
     } = req.body;
-
+    
     const donor = req.user.id;
 
     let parsed_pickup_location = {};
     let parsed_contactPerson = {};
 
-    if (contactPerson) {
+    if (contactPerson && JSON.parse(contactPerson).name && JSON.parse(contactPerson).phone){
       parsed_contactPerson = JSON.parse(contactPerson);
     } 
     else{
@@ -36,8 +36,7 @@ const createFoodTransaction = async (req, res) => {
       };
     }
 
-    if (pickupLocation) {
-      // console.log("Pick up location");
+    if (pickupLocation && JSON.parse(pickupLocation).address.address_line_1 && JSON.parse(pickupLocation).address.city) {
       parsed_pickup_location = JSON.parse(pickupLocation);
     } else if (donor) {
       const restaurant = await Restaurant.findById(donor);
@@ -107,9 +106,10 @@ const createFoodTransaction = async (req, res) => {
     });
 
     const NGOEmails = nearbyNGOs.map(ngo => ngo.primary_contact.email);
-    const restaurant = await Restaurant.findById(donor);
-    sendReport(NGOEmails, restaurant.name , restaurant.manager_name, restaurant.primary_contact_phone);
-
+    if(NGOEmails){
+      const restaurant = await Restaurant.findById(donor);
+      sendReport(NGOEmails, restaurant.name , restaurant.manager_name, restaurant.primary_contact_phone);
+    }
     res.status(201).json({
       message: "Food donation created successfully",
       donation: foodTransaction,

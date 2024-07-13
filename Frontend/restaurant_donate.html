@@ -32,6 +32,20 @@
       background: #343a40 !important;
       top: 0;
     }
+    .checkbox-container {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+  
+    .tooltip-text {
+      font-size: 0.9rem;
+      color: #17a2b8;
+      margin-left: 0.5rem;
+    }
+  
+    .form-group label {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -80,29 +94,24 @@
   </nav>
   <!-- END nav -->
   <div>
-    <div class="container" style="
-          margin-top: 5.5rem;
-          padding-top: 2rem;
-          padding-bottom: 2rem;
-          max-width: 100rem;
-        ">
+    <div class="container" style="margin-top: 5.5rem; padding-top: 2rem; padding-bottom: 2rem; max-width: 100rem;">
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="registration-form bg-light p-5 rounded shadow-lg p-3 mb-5 bg-white rounded">
             <h1 class="mb-4" style="text-align: center">Food Donation Form</h1>
             <form id="foodDonationForm">
               <div class="form-group">
-                <label for="foodItems">Food Items (Eg. Daal, Rice, Roti)</label>
+                <label for="foodItems">Food Items (Eg. Daal, Rice, Roti)<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" style="border-radius: 5px" id="foodItems" name="foodItems"
                   placeholder="Enter Food Items" required />
               </div>
               <div class="form-group">
-                <label for="quantity">Quantity</label>
+                <label for="quantity">Quantity<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" style="border-radius: 5px" id="quantity" name="quantity"
                   placeholder="Enter Quantity" required />
               </div>
               <div class="form-group">
-                <label for="foodtype">Food Category</label>
+                <label for="foodtype">Food Category<span class="text-danger">*</span></label>
                 <select class="form-control" style="border-radius: 5px" id="foodtype" name="foodtype">
                   <option value="disabled" selected disabled>Select</option>
                   <option value="Veg">Veg</option>
@@ -110,57 +119,79 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="packaged">Packaged</label>
+                <label for="packaged">Packaged<span class="text-danger">*</span></label>
                 <select class="form-control" style="border-radius: 5px" id="packaged" name="packaged">
                   <option value="disabled" selected disabled>Select</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="address_line_1">Address</label>
-                <input type="text" class="form-control" style="border-radius: 5px; margin-bottom: 0.5rem;"
-                  id="address_line_1" name="address_line_1" placeholder="Enter Address Line 1" required />
-                <input type="text" class="form-control" style="border-radius: 5px;" id="address_line_2"
-                  name="address_line_2" placeholder="Enter Address Line 2" />
+    
+              <!-- Default Address Checkbox -->
+              <div class="form-group checkbox-container">
+                <input type="checkbox" id="defaultAddress" />
+                <label for="defaultAddress">Use default address</label>
+                <span id="defaultAddressTooltip" class="tooltip-text" style="display: none;">Using default address from your profile</span>
               </div>
-              <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" class="form-control" style="border-radius: 5px;" id="city" name="city"
-                  placeholder="Enter City" required />
-              </div>
-              <div class="form-group">
-                <label for="location">Location</label>
-                <div class="location-field">
-                  <div class="form-row">
-                    <div class="col">
-                      <input type="number" class="form-control" style="border-radius: 5px" id="latitude" name="latitude"
-                        placeholder="Latitude" step="any" required />
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" style="border-radius: 5px" id="longitude"
-                        name="longitude" placeholder="Longitude" step="any" required />
+              <!-- Address Fields -->
+              <div id="addressFields">
+                <div class="form-group">
+                  <label for="address_line_1">Pick-up Location<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" style="border-radius: 5px; margin-bottom: 0.5rem;" id="address_line_1"
+                    name="address_line_1" placeholder="Enter Address Line 1" required />
+                  <input type="text" class="form-control" style="border-radius: 5px;" id="address_line_2" name="address_line_2"
+                    placeholder="Enter Address Line 2" />
+                </div>
+                <div class="form-group">
+                  <label for="city">City<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" style="border-radius: 5px;" id="city" name="city" placeholder="Enter City"
+                    required />
+                </div>
+                <div class="form-group">
+                  <label for="location">Location<span class="text-danger">*</span></label>
+                  <div class="location-field">
+                    <div class="form-row">
+                      <div class="col">
+                        <input type="number" class="form-control" style="border-radius: 5px" id="latitude" name="latitude"
+                          placeholder="Latitude" step="any" required />
+                      </div>
+                      <div class="col">
+                        <input type="number" class="form-control" style="border-radius: 5px" id="longitude" name="longitude"
+                          placeholder="Longitude" step="any" required />
+                      </div>
                     </div>
                   </div>
                 </div>
+                <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px" onclick="getLocation()">
+                  Get Location
+                </button>
               </div>
-              <button type="button" class="btn btn-primary mb-4" style="border-radius: 30px" onclick="getLocation()">
-                Get Location
-              </button>
-              <div class="form-group">
-                <label for="contactPersonName">Contact Person Name</label>
-                <input type="text" class="form-control" style="border-radius: 5px" id="contactPersonName"
-                  name="contactPersonName" placeholder="Enter Contact Person Name" required />
+    
+              <!-- Default Contact Checkbox -->
+              <div class="form-group checkbox-container">
+                <input type="checkbox" id="defaultContact" />
+                <label for="defaultContact">Use default contact details</label>
+                <span id="defaultContactTooltip" class="tooltip-text" style="display: none;">Using default contact details from your profile</span>
               </div>
-              <div class="form-group">
-                <label for="contactPersonPhone">Contact Person Phone</label>
-                <input type="text" class="form-control" style="border-radius: 5px" id="contactPersonPhone"
-                  name="contactPersonPhone" placeholder="Enter Contact Person Phone" required />
+              <!-- Contact Fields -->
+              <div id="contactFields">
+                <div class="form-group">
+                  <label for="contactPersonName">Contact Person Name<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" style="border-radius: 5px" id="contactPersonName" name="contactPersonName"
+                    placeholder="Enter Contact Person Name" required />
+                </div>
+                <div class="form-group">
+                  <label for="contactPersonPhone">Contact Person Phone<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" style="border-radius: 5px" id="contactPersonPhone"
+                    name="contactPersonPhone" placeholder="Enter Contact Person Phone" required />
+                </div>
               </div>
+    
+              <!-- Photos and Additional Notes -->
               <div class="form-group">
-                <label for="photos">Photos (Maximum 5)</label>
-                <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem" id="photos"
-                  name="photos" accept="image/*" multiple required />
+                <label for="photos">Photos (Maximum 5)<span class="text-danger">*</span></label>
+                <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem" id="photos" name="photos"
+                  accept="image/*" multiple required />
                 <p id="photo-error" style="color: red; display: none">
                   You can only upload a maximum of 5 photos.
                 </p>
@@ -179,8 +210,9 @@
           </div>
         </div>
       </div>
-
-      <!-- Register End -->
+    </div>
+  </div>
+<!-- Register End -->
 
       <script>
         const BACKEND_URL = "http://localhost:3000";
@@ -191,7 +223,22 @@
           const formData = new FormData(form);
           console.log(formData);
 
-          // Construct pickupLocation object
+          const useDefaultAddress = document.getElementById('defaultAddress').checked;
+          const useDefaultContact = document.getElementById('defaultContact').checked;
+
+          if (useDefaultAddress) {
+            formData.set('address_line_1', ''); // Set to empty or default value
+            formData.set('address_line_2', '');
+            formData.set('city', '');
+            formData.set('latitude', '');
+            formData.set('longitude', '');
+          }
+
+          if (useDefaultContact) {
+            formData.set('contactPersonName', ''); // Set to empty or default value
+            formData.set('contactPersonPhone', '');
+          }
+
           const pickupLocation = {
             address: {
               address_line_1: formData.get('address_line_1'),
@@ -205,27 +252,15 @@
           };
           formData.append('pickupLocation', JSON.stringify(pickupLocation));
 
-          // Construct contactPerson object
           const contactPerson = {
             name: formData.get('contactPersonName'),
             phone: formData.get('contactPersonPhone'),
           };
           formData.append('contactPerson', JSON.stringify(contactPerson));
 
-          // Construct packaged boolean
           const packaged = formData.get('packaged') === 'true';
 
-          // Append packaged value
           formData.set('packaged', packaged);
-
-          // Prepare food photos array
-          // const photos = formData.getAll('photos');
-          // if (photos.length > 5) {
-          //   document.getElementById('photo-error').style.display = 'block';
-          //   return;
-          // } else {
-          //   document.getElementById('photo-error').style.display = 'none';
-          // }
 
           try {
             const token = localStorage.getItem('authToken');
@@ -323,7 +358,56 @@
       </footer>
 
       <script>
-        document.getElementById('logoutLink').addEventListener('click', function (event) {
+          document.getElementById('defaultAddress').addEventListener('change', function (event) {
+          const isChecked = event.target.checked;
+          const addressFields = document.getElementById('addressFields');
+          const tooltip = document.getElementById('defaultAddressTooltip');
+
+          const addressLine1 = document.getElementById('address_line_1');
+          const addressLine2 = document.getElementById('address_line_2');
+          const city = document.getElementById('city');
+          const latitude = document.getElementById('latitude');
+          const longitude = document.getElementById('longitude');
+
+          if (isChecked) {
+            addressFields.style.display = 'none';
+            addressLine1.removeAttribute('required');
+            addressLine2.removeAttribute('required');
+            city.removeAttribute('required');
+            latitude.removeAttribute('required');
+            longitude.removeAttribute('required');
+          } else {
+            addressFields.style.display = 'block';
+            addressLine1.setAttribute('required', 'required');
+            addressLine2.setAttribute('required', 'required');
+            city.setAttribute('required', 'required');
+            latitude.setAttribute('required', 'required');
+            longitude.setAttribute('required', 'required');
+          }
+          tooltip.style.display = isChecked ? 'inline' : 'none';
+        });
+
+        document.getElementById('defaultContact').addEventListener('change', function (event) {
+          const isChecked = event.target.checked;
+          const contactFields = document.getElementById('contactFields');
+          const tooltip = document.getElementById('defaultContactTooltip');
+
+          const contactPersonName = document.getElementById('contactPersonName');
+          const contactPersonPhone = document.getElementById('contactPersonPhone');
+
+          if (isChecked) {
+            contactFields.style.display = 'none';
+            contactPersonName.removeAttribute('required');
+            contactPersonPhone.removeAttribute('required');
+          } else {
+            contactFields.style.display = 'block';
+            contactPersonName.setAttribute('required', 'required');
+            contactPersonPhone.setAttribute('required', 'required');
+          }
+          tooltip.style.display = isChecked ? 'inline' : 'none';
+        });
+
+        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
           event.preventDefault(); // Prevent the default link action
           var confirmation = confirm('Are you sure you want to logout?');
           if (confirmation) {
@@ -332,8 +416,8 @@
           }
         });
       </script>
-      <script src="js/ngo_cards.js"></script>
-      <script src="js/ngo_cards.js"></script>
+     
+      <script src="js/get_location.js"></script>
       <script src="js/jquery.min.js"></script>
       <script src="js/jquery-migrate-3.0.1.min.js"></script>
       <script src="js/popper.min.js"></script>

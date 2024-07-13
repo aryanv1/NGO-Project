@@ -103,6 +103,7 @@
         .card-body {
             display: flex;
             flex-direction: column;
+            margin: 1rem;
         }
 
         .card-details {
@@ -281,7 +282,7 @@
     </footer>
 
     <script>
-        document.getElementById('logoutLink').addEventListener('click', function (event) {
+        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action
             var confirmation = confirm('Are you sure you want to logout?');
             if (confirmation) {
@@ -348,8 +349,8 @@
                             <p class="card-text">Quantity: ${donation.quantity}</p>
                             <p class="card-text">Category: ${donation.foodtype}</p>
                             <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
-                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1},
-                                ${donation.pickupLocation.address.address_line_2 || 'None'}, 
+                            <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1} ,
+                                ${donation.pickupLocation.address.address_line_2  || ''},
                                 ${donation.pickupLocation.address.city}</p>
                         </div>
                         <div class="col-md-6">
@@ -434,11 +435,10 @@
             $('#photoModal').modal('show');
         }
 
-        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
+        document.addEventListener('DOMContentLoaded', fetchFoodTransactions());
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

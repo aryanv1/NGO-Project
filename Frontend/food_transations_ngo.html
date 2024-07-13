@@ -233,13 +233,11 @@
                     },
                     body: JSON.stringify({ transactionId }),
                 });
-                console.log(response);
-
-                if (response.status == 200)
+                if (response.status == 200){
                     alert('Donation claimed successfully');
-
-                const card = button.closest('.card');
-                card.remove();
+                    const card = button.closest('.card');
+                    card.remove();
+                }
             } catch (error) {
                 console.error('Error claiming donation:', error);
                 alert('Error claiming donation');
@@ -359,7 +357,7 @@
                 stroke="#F96D00" />
         </svg></div> -->
     <script>
-        document.getElementById('logoutLink').addEventListener('click', function (event) {
+        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action
             var confirmation = confirm('Are you sure you want to logout?');
             if (confirmation) {
@@ -371,7 +369,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

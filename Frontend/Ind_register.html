@@ -307,7 +307,6 @@
             formData.append('home_address', JSON.stringify(homeAddress));
 
             try {
-                console.log(formData);
                 const response = await fetch('http://localhost:3000/volunteer/create', {
                     method: 'POST',
                     body: formData
