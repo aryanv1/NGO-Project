@@ -98,7 +98,7 @@ const getAvailableVolunteers = async (req, res) => {
       },
       'availability_mode' : 'true',
     })
-    .select('full_name email_address phone_number');
+    .select('full_name email_address phone_number home_address.geo_location');
 
     res.status(200).json(availableVolunteers);
   } catch (error) {

@@ -131,6 +131,10 @@
     </section>
     <script>
         const BACKEND_URL = "http://localhost:3000";
+        function viewLocationOnMap(latitude, longitude) {
+            const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
         async function fetchVolunteers() {
             try {
                 const token = localStorage.getItem('authToken');
@@ -169,14 +173,20 @@
                 }
                 volunteers.forEach(volunteer => {
                     const card = document.createElement('div');
-                    card.className = 'col-md-4';
+                    card.className = 'col-12 col-sm-12 col-md-6 mb-4'; 
                     card.innerHTML = `
-                        <div class="card mb-4">
+                         <div class="card h-100">
                             <div class="card-body">
                                 <div class="card-details">
                                     <h3 class="card-title">${volunteer.full_name}</h3>
                                     <p class="card-text">Phone: <a href="tel:${volunteer.phone_number}" class="phone-link">${volunteer.phone_number}</a></p>
                                     <p class="card-text">Email: <a href="mailto:${volunteer.email_address}" class="email-link">${volunteer.email_address}</a></p>
+                                    <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${volunteer.home_address.geo_location.latitude},${volunteer.home_address.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
                                 </div>
                             </div>
                         </div>

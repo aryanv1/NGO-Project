@@ -100,7 +100,7 @@ const createFoodTransaction = async (req, res) => {
     const nearbyNGOs = await NGO.find({
       'physical_addresses.geo_location': {
         $geoWithin: {
-          $centerSphere: [[longitude, latitude], 25 / 6378.1] // 25 km radius
+          $centerSphere: [[latitude, longitude], 25 / 6378.1] // 25 km radius
         }
       }
     });

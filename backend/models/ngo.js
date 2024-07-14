@@ -64,6 +64,8 @@ unverifiedSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+addressSchema.index({ geo_location: "2dsphere" });
+
 // Create the model
 const NGO = mongoose.model("NGO", ngoSchema);
 const Unverified_NGOs = mongoose.model("Unverified_NGOs", unverifiedSchema);
