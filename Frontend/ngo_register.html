@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Welfare - Register NGO</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -161,11 +161,6 @@
                                 <label for="zip_code">Zip Code <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="zip_code"
                                     name="zip_code" placeholder="Enter Zip Code" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="country">Country <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" style="border-radius: 5px;" id="country"
-                                    name="country" placeholder="Enter Country" required>
                             </div>
                             <div class="form-group">
                                 <label for="location">Location <span class="text-danger">*</span></label>
@@ -349,7 +344,6 @@
                     city: formData.get('city'),
                     state: formData.get('state'),
                     zip_code: formData.get('zip_code'),
-                    country: formData.get('country'),
                     geo_location: {
                         latitude: formData.get('latitude'),
                         longitude: formData.get('longitude'),
@@ -382,14 +376,15 @@
 
                     const result = await response.json();
 
-                    if (response.ok) {
-                        alert("Registration successful");
+                    if (response.status === 201) {
+                        alert("Registration successful, Check your mailbox.");
                         window.location.assign('index.html');
                     } else {
                         alert(result.message);
                     }
                 } catch (error) {
                     alert('An error occurred. Please try again later.');
+                    console.log(error);
                 }
             });
         </script>

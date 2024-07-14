@@ -62,8 +62,9 @@ function displayNGOs(ngos) {
     if (ngos.length === 0) {
         const message = document.createElement('div');
         message.className = 'message-card'; // Apply custom message-card class
-        message.textContent = 'No Pending Requests';
-        
+        message.textContent = 'No NGO found';
+        message.id = 'empty-message';
+
         ngoContainer.appendChild(message);
         return;
     }
@@ -119,9 +120,12 @@ function displayNGOs(ngos) {
 function setupSearch(ngos) {
     const searchInput = document.getElementById('searchInput');
     const clearButton = document.getElementById('clearButton');
-
     // Perform search on each input event
     searchInput.addEventListener('input', () => {
+        const existingMessage = document.getElementById('empty-message');
+        if (existingMessage) {
+            ngoContainer.removeChild(existingMessage);
+        }
         const query = searchInput.value.toLowerCase();
         const filteredNGOs = ngos.filter(ngo => ngo.organization_name.toLowerCase().includes(query));
         displayNGOs(filteredNGOs);
@@ -129,7 +133,7 @@ function setupSearch(ngos) {
 
     clearButton.addEventListener('click', () => {
         searchInput.value = '';
-        displayNGOs(ngos); // Display all NGOs
+        displayNGOs(ngos); 
     });
 }
 

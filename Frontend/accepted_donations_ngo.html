@@ -341,7 +341,7 @@
                 else if (response.status === 401) {
                     alert('Not authorised to access this route');
                     localStorage.clear();
-                    window.location.assign('index.html');
+                    window.location.assign('Login.html');
                 }
                 else {
                     const data = await response.json();
@@ -370,7 +370,7 @@
             if (donations.length === 0) {
                 const message = document.createElement('div');
                 message.className = 'message-card';
-                message.textContent = 'No Pending Requests';
+                message.textContent = 'No Pending donations';
                 container.appendChild(message);
                 return;
             }
@@ -399,7 +399,7 @@
                             <p class="card-text">
                                 Contact Phone: <a href="tel:${donation.contactPerson.phone}" class="phone-link">${donation.contactPerson.phone}</a>
                             </p>
-                            <p class="card-text">Restaurant Name: ${donation.donor.name}</p>
+                            <p class="card-text">Donor Name: ${donation.donor.name}</p>
                             <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
                         </div>
                     </div>

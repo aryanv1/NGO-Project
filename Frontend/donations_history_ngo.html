@@ -155,7 +155,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="acceptFormModalLabel">Accept Distribution Form</h5>
+                    <h5 class="modal-title" id="acceptFormModalLabel">Distribution Form of NGO</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -165,7 +165,7 @@
                     <p><strong>People Served:</strong> <span id="modalPeopleServed"></span></p>
                     <p><strong>Volunteer Phones:</strong> <span id="modalVolunteerPhones"></span></p>
                     <p><strong>Description:</strong> <span id="modalDescription"></span></p>
-                    <p><strong>Review Notes:</strong> <span id="modalReviewNotes"></span></p>
+                    <p><strong>Thanks Note:</strong> <span id="modalReviewNotes"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -222,10 +222,10 @@
                 if (response.status === 401) {
                     alert('Not authorised to access this route');
                     localStorage.clear();
-                    window.location.assign('index.html');
+                    window.location.assign('Login.html');
                     return;
                 }
-                else if (response.status !== 200) {
+                if(response.status !== 200) {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
                     return;
@@ -245,7 +245,7 @@
             if (foodTransactions.length == 0) {
                 const message = document.createElement('div');
                 message.className = 'message-card';
-                message.textContent = 'No Pending Requests';
+                message.textContent = 'No donation histroy';
                 container.appendChild(message);
                 return;
             }
@@ -266,7 +266,7 @@
                             <div class="col-md-6">
                                 <p class="card-text">Contact Person Name: ${transaction.contactPerson.name}</p>
                                 <p class="card-text">Contact Person Phone: ${transaction.contactPerson.phone}</p>
-                                <p class="card-text">Restaurant Name : ${transaction.donor}</p>
+                                <p class="card-text">Donor Name : ${transaction.donor}</p>
                                 <p class="card-text">Additional Notes: ${transaction.additionalNotes}</p>
                             </div>
                         </div>

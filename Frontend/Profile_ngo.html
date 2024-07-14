@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Welfare - NGO Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -27,8 +27,6 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <script src="js/index.js"></script> -->
-
     <style>
         .ftco-navbar-light {
             background: #343a40 !important;
@@ -169,6 +167,8 @@
                                 target="_blank">View Certificate</a></p>
                         <p><strong>Tax Exemption Certificate:</strong> <a href="#" id="taxExemptionCertificate"
                                 target="_blank">View Certificate</a></p>
+                        <p><strong>Recent Annual Report:</strong> <a href="#" id="recent_annual_report"
+                                target="_blank">View Certificate</a></p>
                     </div>
                     <!-- Card Footer with Buttons -->
                     <div class="text-center">
@@ -225,7 +225,8 @@
                         </div>
                         <div class="form-group">
                             <label for="editWebsiteUrl">Website URL</label>
-                            <input type="text" class="form-control" id="editWebsiteUrl">
+                            <input type="url" class="form-control" style="border-radius: 5px;" id="editWebsiteUrl"
+                                    name="website_url" placeholder="Enter Website URL">
                         </div>
                         <div class="form-group">
                             <label for="editAddressLine1">Address Line 1<span class="text-danger">*</span></label>
@@ -335,13 +336,19 @@
                             <label for="editSecondaryContactPhone">Secondary Contact Phone</label>
                             <input type="text" class="form-control" id="editSecondaryContactPhone">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
+                            <label for="edit_recent_annual_report">Recent Annual Report<span class="text-danger">(Pdf only)</span></label>
+                            <input type="file" class="form-control"
+                                style="border-radius: 5px; padding-top: 0.75rem;" id="edit_recent_annual_report"
+                                name="edit_recent_annual_report" accept="application/pdf">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label for="photos">Replace your photos (Maximum 3)</label>
                             <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem;"
                                 id="photos" name="photos" accept="image/*" multiple required>
                             <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of
                                 3 photos.</p>
-                        </div>
+                        </div> -->
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
                                 Changes</button>
@@ -427,6 +434,14 @@
                     taxExemptionCertificateElement.textContent = 'No Tax Exemption Certificate Provided';
                     taxExemptionCertificateElement.removeAttribute('href');
                 }
+                const recent_annual_reportElement = document.getElementById('recent_annual_report');
+                if (ngo.recent_annual_report) {
+                    recent_annual_reportElement.setAttribute('href', ngo.recent_annual_report);
+                    recent_annual_reportElement.style.display = 'inline';
+                } else {
+                    recent_annual_reportElement.textContent = 'No Certificate Provided';
+                    recent_annual_reportElement.removeAttribute('href');
+                }
 
                 const photoButton = document.querySelector('.btn-view-photos');
                 photoButton.onclick = function () {
@@ -463,6 +478,12 @@
     <script>
         async function saveProfile(event) {
             event.preventDefault(); // Prevent form submission
+
+            const form = document.getElementById('editProfileForm');
+            if (!form.checkValidity()) {
+                alert('Check all the required fields.');
+                return;
+            }
 
             const primaryContactEmail = document.getElementById('editPrimaryContactEmail').value;
             const primaryContactPhone = document.getElementById('editPrimaryContactPhone').value;
@@ -502,12 +523,17 @@
                 }),
             };
 
-            if (secondaryContactEmail || secondaryContactPhone) {
+            const secondaryContactName =document.getElementById('editSecondaryContactName').value;
+            if (secondaryContactEmail && secondaryContactPhone && secondaryContactName) {
                 updatedNGO.secondary_contact = JSON.stringify({
-                    name: document.getElementById('editSecondaryContactName').value,
+                    name: secondaryContactName,
                     email: secondaryContactEmail,
                     phoneno: secondaryContactPhone,
                 });
+            }
+            else if(secondaryContactEmail || secondaryContactPhone || secondaryContactName){
+                alert('Fill all the secondary contact details.');
+                return;
             }
 
             const formData = new FormData();
@@ -519,10 +545,10 @@
                 formData.append('secondary_contact', updatedNGO.secondary_contact);
             }
 
-            const photosFiles = document.getElementById('photos').files;
-            for (const element of photosFiles) {
-                formData.append('photos', element)
-            }
+            // const photosFiles = document.getElementById('photos').files;
+            // for (const element of photosFiles) {
+            //     formData.append('photos', element)
+            // }
 
             const BACKEND_URL = "http://localhost:3000";
             try {
@@ -538,6 +564,12 @@
                     },
                     body: formData
                 });
+                if (response.status === 401) {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('Login.html');
+                    return;
+                }
                 if (response.status !== 200) {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
@@ -554,7 +586,7 @@
                 alert('Error fetching data');
             }
         }
-        document.addEventListener('DOMContentLoaded', fetchProfileData());
+        document.addEventListener('DOMContentLoaded', fetchProfileData);
     </script>
 
     <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">

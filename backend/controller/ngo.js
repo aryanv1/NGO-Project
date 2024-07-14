@@ -191,31 +191,10 @@ const updateNGODetails = async (req, res) => {
       newNGO.secondary_contact = secondary_contact;
     }
 
-    // const duplicateContact = await NGO.findOne({
-    //   $or: [
-    //     { "primary_contact.email": parsed_primary_contact.email },
-    //     { "primary_contact.phoneno": parsed_primary_contact.phoneno },
-    //     { "secondary_contact.email": parsed_primary_contact.email },
-    //     { "secondary_contact.phoneno": parsed_primary_contact.phoneno },
-    //     { "primary_contact.email": req.body.secondary_contact?.email },
-    //     { "primary_contact.phoneno": req.body.secondary_contact?.phoneno },
-    //     { "secondary_contact.email": req.body.secondary_contact?.email },
-    //     { "secondary_contact.phoneno": req.body.secondary_contact?.phoneno }
-    //   ],
-    //   _id: { $ne: ngoId }
-    // });
     const duplicateContact = await NGO.findOne({
       $or: [
         { "primary_contact.email": parsed_primary_contact.email },
         { "primary_contact.phoneno": parsed_primary_contact.phoneno },
-        { "secondary_contact.email": parsed_primary_contact.email },
-        { "secondary_contact.phoneno": parsed_primary_contact.phoneno },
-        ...(req.body.secondary_contact ? [
-          { "primary_contact.email": req.body.secondary_contact.email },
-          { "primary_contact.phoneno": req.body.secondary_contact.phoneno },
-          { "secondary_contact.email": req.body.secondary_contact.email },
-          { "secondary_contact.phoneno": req.body.secondary_contact.phoneno }
-        ] : [])
       ],
       _id: { $ne: ngoId }
     });
@@ -223,25 +202,26 @@ const updateNGODetails = async (req, res) => {
     if (duplicateContact) {
       return res.status(400).json({ message: "Duplicate email or phone number detected." });
     }
-    console.log(`length = ${req.files.photos.length}`);
-    if(req.files.photos.length !==0)
-    {
-      const ngoPhotosUrls = [];
-      const NGO_photos = Array.isArray(req.files.photos) 
-        ? req.files.photos 
-        : [req.files.photos];
 
-          for (const photo of NGO_photos) {
-            const fileName = photo.mimetype;
-            const photoUrl = await docsUpload(
-              photo.tempFilePath,
-              "photo",
-              fileName
-            );
-            ngoPhotosUrls.push(photoUrl);
-        }
-        newNGO.ngo_photos = ngoPhotosUrls;
-    }
+    // console.log(`length = ${req.files.photos.length}`);
+    // if(req.files.photos.length !==0)
+    // {
+    //   const ngoPhotosUrls = [];
+    //   const NGO_photos = Array.isArray(req.files.photos) 
+    //     ? req.files.photos 
+    //     : [req.files.photos];
+
+    //       for (const photo of NGO_photos) {
+    //         const fileName = photo.mimetype;
+    //         const photoUrl = await docsUpload(
+    //           photo.tempFilePath,
+    //           "photo",
+    //           fileName
+    //         );
+    //         ngoPhotosUrls.push(photoUrl);
+    //     }
+    //     newNGO.ngo_photos = ngoPhotosUrls;
+    // }
     
     await NGO.updateOne({ _id: ngoId }, newNGO);
     res.status(200).send("success!!");
