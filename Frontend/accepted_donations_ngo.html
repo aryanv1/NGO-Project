@@ -103,20 +103,22 @@
             margin-right: 10px;
             /* Space between photos */
         }
+
         .message-card {
             text-align: center;
             font-size: 2rem;
-            padding: 3rem; 
-            margin: 0 auto; 
+            padding: 3rem;
+            margin: 0 auto;
             min-height: 60vh;
             display: flex;
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
         .phone-link {
-            text-decoration: none; 
-            font-weight: bold; 
+            text-decoration: none;
+            font-weight: bold;
             transition: color 0.3s ease;
         }
 
@@ -130,7 +132,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
+            <a class="navbar-brand" href="index_ngo.html">Welfare</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -211,26 +213,30 @@
                 </div>
                 <div class="modal-body">
                     <form id="acceptForm">
-                        <input type="hidden" id="transactionId" name="transactionId"/>
+                        <input type="hidden" id="transactionId" name="transactionId" />
                         <div class="form-group">
-                            <label for="distribution_photos">Distribution Photos (Maximum 5)<span class="text-danger">*</span></label>
-                            <input type="file" class="form-control-file" style="border-radius: 5px; padding-top: 0.75rem;" id="distribution_photos"
-                                name="distribution_photos"  accept="image/*" multiple required/>
-                            <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of 5 photos.</p>
+                            <label for="distribution_photos">Distribution Photos (Maximum 5)<span
+                                    class="text-danger">*</span></label>
+                            <input type="file" class="form-control-file"
+                                style="border-radius: 5px; padding-top: 0.75rem;" id="distribution_photos"
+                                name="distribution_photos" accept="image/*" multiple required />
+                            <p id="photo-error" style="color: red; display: none;">You can only upload a maximum of 5
+                                photos.</p>
                         </div>
                         <div class="form-group">
                             <label for="description">Distribution Details <span class="text-danger">*</span></label>
                             <textarea class="form-control" id="description" rows="5" name="description"
-                                required/></textarea>
+                                required /></textarea>
                         </div>
                         <div class="form-group">
                             <label for="peopleServed">People Served <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" id="peopleServed" name="peopleServed" required/>
+                            <input type="number" class="form-control" id="peopleServed" name="peopleServed" required />
                         </div>
                         <div class="form-group">
                             <label for="phone_numbers[]">Volunteer Phone Number</label>
                             <div id="phone_numbers[]">
-                                <input type="tel" id="phone_numbers" class="form-control phone-input" name="phone_numbers">
+                                <input type="tel" id="phone_numbers" class="form-control phone-input"
+                                    name="phone_numbers">
                             </div>
                             <button type="button" class="btn btn-white" style="border-radius: 5px;"
                                 onclick="addPhoneNumber()">Add Another Phone Number</button>
@@ -248,60 +254,58 @@
             </div>
         </div>
     </div>
-    
-    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+
+    <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-1">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
-                            minimizing waste, and
-                            helping our community. Learn more about our mission and how you can get involved.</p>
+                            minimizing waste,
+                            and helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
                         <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Collaboration</li>
                             <li><span class="icon icon-check"></span> Support Network</li>
                             <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
                             <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Testimonials</h2>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"This organization has changed my life!" -
-                                    Jane Doe
-                                </h3>
+                                    Jane Doe</h3>
                             </div>
                         </div>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
-                                    Smith
-                                </h3>
+                                    Smith</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span class="icon icon-map-marker"></span><span class="text"
-                                        style="color: white;">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
+                                        style="color: white;">203 Fake St.
+                                        Mountain View, San Francisco, California, USA</span></li>
                                 <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
-                                        3929
-                                        210</span></li>
+                                        3929 210</span>
+                                </li>
                                 <li><span class="icon icon-envelope"></span><span class="text"
                                         style="color: white;">info@yourdomain.com</span></li>
                             </ul>
@@ -334,8 +338,7 @@
                     const data = await response.json();
                     createDonationCards(data);
                 }
-                else if(response.status === 401)
-                {
+                else if (response.status === 401) {
                     alert('Not authorised to access this route');
                     localStorage.clear();
                     window.location.assign('index.html');
@@ -366,12 +369,12 @@
 
             if (donations.length === 0) {
                 const message = document.createElement('div');
-                message.className = 'message-card'; 
+                message.className = 'message-card';
                 message.textContent = 'No Pending Requests';
                 container.appendChild(message);
                 return;
             }
-            
+
             donations.forEach(donation => {
                 const card = document.createElement('div');
                 card.className = 'card mb-4';
@@ -419,15 +422,15 @@
             const form = document.getElementById('acceptForm');
             if (!form.checkValidity()) {
                 alert('Please fill out all required fields.');
-                return; 
+                return;
             }
             const formData = new FormData(form);
             try {
                 const token = localStorage.getItem('authToken');
                 if (!token) {
-                        alert('Authorization token is missing. Please login');
-                        window.location.href = 'Login.html';
-                        return;
+                    alert('Authorization token is missing. Please login');
+                    window.location.href = 'Login.html';
+                    return;
                 }
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/verifycompletion`, {
                     method: 'POST',
@@ -442,8 +445,7 @@
                     $('#acceptFormModal').modal('hide');
                     fetchFoodTransactions();
                 }
-                else if(response.status === 401)
-                {
+                else if (response.status === 401) {
                     alert('Not authorised to access this route');
                     localStorage.clear();
                     window.location.assign('index.html');
@@ -516,17 +518,17 @@
             newInput.type = 'tel';
             newInput.className = 'form-control phone-input';
             newInput.name = 'phone_numbers';
-            newInput.id = id='phone_numbers';
+            newInput.id = id = 'phone_numbers';
             phoneNumbersDiv.appendChild(newInput);
         }
 
         document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
-          event.preventDefault(); // Prevent the default link action
-          var confirmation = confirm('Are you sure you want to logout?');
-          if (confirmation) {
-            localStorage.clear();
-            window.location.assign('index.html'); // Redirect to the logout page
-          }
+            event.preventDefault(); // Prevent the default link action
+            var confirmation = confirm('Are you sure you want to logout?');
+            if (confirmation) {
+                localStorage.clear();
+                window.location.assign('index.html'); // Redirect to the logout page
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

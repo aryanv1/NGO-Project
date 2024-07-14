@@ -61,16 +61,17 @@
                 margin-top: 1rem !important;
             }
         }
+
         .message-card {
             text-align: center;
             font-size: 2rem;
-            padding: 3rem; 
-            margin: 0 auto; 
+            padding: 3rem;
+            margin: 0 auto;
             min-height: 60vh;
             display: flex;
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -329,11 +330,11 @@
                 });
                 if (response.status === 200) {
                     const restaurantCard = document.getElementById('volunteer-container');
-                    restaurantCard.innerHTML = ''; 
+                    restaurantCard.innerHTML = '';
                     alert('Volunteer deleted successfully');
                     const searchInput = document.getElementById('searchInput');
                     searchInput.value = '';
-                    fetchVolunteers(); 
+                    fetchVolunteers();
                 } else {
                     const data = await response.json();
                     alert(`Error: ${data.message}`); // Display error message from the response
@@ -371,65 +372,63 @@
 
             clearButton.addEventListener('click', () => {
                 searchInput.value = '';
-                displayVolunteers(); 
+                displayVolunteers();
             });
         }
     </script>
-    
+
     <!-- Footer Start -->
-    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+    <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-1">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
-                            minimizing waste, and
-                            helping our community. Learn more about our mission and how you can get involved.</p>
+                            minimizing waste,
+                            and helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
                         <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Collaboration</li>
                             <li><span class="icon icon-check"></span> Support Network</li>
                             <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
                             <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Testimonials</h2>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"This organization has changed my life!" -
-                                    Jane Doe
-                                </h3>
+                                    Jane Doe</h3>
                             </div>
                         </div>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
-                                    Smith
-                                </h3>
+                                    Smith</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span class="icon icon-map-marker"></span><span class="text"
-                                        style="color: white;">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
+                                        style="color: white;">203 Fake St.
+                                        Mountain View, San Francisco, California, USA</span></li>
                                 <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
-                                        3929
-                                        210</span></li>
+                                        3929 210</span>
+                                </li>
                                 <li><span class="icon icon-envelope"></span><span class="text"
                                         style="color: white;">info@yourdomain.com</span></li>
                             </ul>

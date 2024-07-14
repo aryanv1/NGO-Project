@@ -32,17 +32,18 @@
       background: #343a40 !important;
       top: 0;
     }
+
     .checkbox-container {
       margin-bottom: 1rem;
       font-size: 1.25rem;
     }
-  
+
     .tooltip-text {
       font-size: 0.9rem;
       color: #17a2b8;
       margin-left: 0.5rem;
     }
-  
+
     .form-group label {
       font-weight: bold;
     }
@@ -52,7 +53,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Welfare</a>
+      <a class="navbar-brand" href="index_restaurant.html">Welfare</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
@@ -126,38 +127,39 @@
                   <option value="false">No</option>
                 </select>
               </div>
-    
+
               <!-- Default Address Checkbox -->
               <div class="form-group checkbox-container">
                 <input type="checkbox" id="defaultAddress" />
                 <label for="defaultAddress">Use default address</label>
-                <span id="defaultAddressTooltip" class="tooltip-text" style="display: none;">Using default address from your profile</span>
+                <span id="defaultAddressTooltip" class="tooltip-text" style="display: none;">Using default address from
+                  your profile</span>
               </div>
               <!-- Address Fields -->
               <div id="addressFields">
                 <div class="form-group">
                   <label for="address_line_1">Pick-up Location<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" style="border-radius: 5px; margin-bottom: 0.5rem;" id="address_line_1"
-                    name="address_line_1" placeholder="Enter Address Line 1" required />
-                  <input type="text" class="form-control" style="border-radius: 5px;" id="address_line_2" name="address_line_2"
-                    placeholder="Enter Address Line 2" />
+                  <input type="text" class="form-control" style="border-radius: 5px; margin-bottom: 0.5rem;"
+                    id="address_line_1" name="address_line_1" placeholder="Enter Address Line 1" required />
+                  <input type="text" class="form-control" style="border-radius: 5px;" id="address_line_2"
+                    name="address_line_2" placeholder="Enter Address Line 2" />
                 </div>
                 <div class="form-group">
                   <label for="city">City<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" style="border-radius: 5px;" id="city" name="city" placeholder="Enter City"
-                    required />
+                  <input type="text" class="form-control" style="border-radius: 5px;" id="city" name="city"
+                    placeholder="Enter City" required />
                 </div>
                 <div class="form-group">
                   <label for="location">Location<span class="text-danger">*</span></label>
                   <div class="location-field">
                     <div class="form-row">
                       <div class="col">
-                        <input type="number" class="form-control" style="border-radius: 5px" id="latitude" name="latitude"
-                          placeholder="Latitude" step="any" required />
+                        <input type="number" class="form-control" style="border-radius: 5px" id="latitude"
+                          name="latitude" placeholder="Latitude" step="any" required />
                       </div>
                       <div class="col">
-                        <input type="number" class="form-control" style="border-radius: 5px" id="longitude" name="longitude"
-                          placeholder="Longitude" step="any" required />
+                        <input type="number" class="form-control" style="border-radius: 5px" id="longitude"
+                          name="longitude" placeholder="Longitude" step="any" required />
                       </div>
                     </div>
                   </div>
@@ -166,19 +168,20 @@
                   Get Location
                 </button>
               </div>
-    
+
               <!-- Default Contact Checkbox -->
               <div class="form-group checkbox-container">
                 <input type="checkbox" id="defaultContact" />
                 <label for="defaultContact">Use default contact details</label>
-                <span id="defaultContactTooltip" class="tooltip-text" style="display: none;">Using default contact details from your profile</span>
+                <span id="defaultContactTooltip" class="tooltip-text" style="display: none;">Using default contact
+                  details from your profile</span>
               </div>
               <!-- Contact Fields -->
               <div id="contactFields">
                 <div class="form-group">
                   <label for="contactPersonName">Contact Person Name<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" style="border-radius: 5px" id="contactPersonName" name="contactPersonName"
-                    placeholder="Enter Contact Person Name" required />
+                  <input type="text" class="form-control" style="border-radius: 5px" id="contactPersonName"
+                    name="contactPersonName" placeholder="Enter Contact Person Name" required />
                 </div>
                 <div class="form-group">
                   <label for="contactPersonPhone">Contact Person Phone<span class="text-danger">*</span></label>
@@ -186,12 +189,12 @@
                     name="contactPersonPhone" placeholder="Enter Contact Person Phone" required />
                 </div>
               </div>
-    
+
               <!-- Photos and Additional Notes -->
               <div class="form-group">
                 <label for="photos">Photos (Maximum 5)<span class="text-danger">*</span></label>
-                <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem" id="photos" name="photos"
-                  accept="image/*" multiple required />
+                <input type="file" class="form-control" style="border-radius: 5px; padding-top: 0.75rem" id="photos"
+                  name="photos" accept="image/*" multiple required />
                 <p id="photo-error" style="color: red; display: none">
                   You can only upload a maximum of 5 photos.
                 </p>
@@ -212,230 +215,226 @@
       </div>
     </div>
   </div>
-<!-- Register End -->
+  <!-- Register End -->
 
-      <script>
-        const BACKEND_URL = "http://localhost:3000";
-        document.getElementById('foodDonationForm').addEventListener('submit', async function (event) {
-          event.preventDefault();
+  <script>
+    const BACKEND_URL = "http://localhost:3000";
+    document.getElementById('foodDonationForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
 
-          const form = event.target;
-          const formData = new FormData(form);
-          console.log(formData);
+      const form = event.target;
+      const formData = new FormData(form);
+      console.log(formData);
 
-          const useDefaultAddress = document.getElementById('defaultAddress').checked;
-          const useDefaultContact = document.getElementById('defaultContact').checked;
+      const useDefaultAddress = document.getElementById('defaultAddress').checked;
+      const useDefaultContact = document.getElementById('defaultContact').checked;
 
-          if (useDefaultAddress) {
-            formData.set('address_line_1', ''); // Set to empty or default value
-            formData.set('address_line_2', '');
-            formData.set('city', '');
-            formData.set('latitude', '');
-            formData.set('longitude', '');
-          }
+      if (useDefaultAddress) {
+        formData.set('address_line_1', ''); // Set to empty or default value
+        formData.set('address_line_2', '');
+        formData.set('city', '');
+        formData.set('latitude', '');
+        formData.set('longitude', '');
+      }
 
-          if (useDefaultContact) {
-            formData.set('contactPersonName', ''); // Set to empty or default value
-            formData.set('contactPersonPhone', '');
-          }
+      if (useDefaultContact) {
+        formData.set('contactPersonName', ''); // Set to empty or default value
+        formData.set('contactPersonPhone', '');
+      }
 
-          const pickupLocation = {
-            address: {
-              address_line_1: formData.get('address_line_1'),
-              address_line_2: formData.get('address_line_2'),
-              city: formData.get('city'),
-            },
-            geo_location: {
-              latitude: formData.get('latitude'),
-              longitude: formData.get('longitude'),
-            },
-          };
-          formData.append('pickupLocation', JSON.stringify(pickupLocation));
+      const pickupLocation = {
+        address: {
+          address_line_1: formData.get('address_line_1'),
+          address_line_2: formData.get('address_line_2'),
+          city: formData.get('city'),
+        },
+        geo_location: {
+          latitude: formData.get('latitude'),
+          longitude: formData.get('longitude'),
+        },
+      };
+      formData.append('pickupLocation', JSON.stringify(pickupLocation));
 
-          const contactPerson = {
-            name: formData.get('contactPersonName'),
-            phone: formData.get('contactPersonPhone'),
-          };
-          formData.append('contactPerson', JSON.stringify(contactPerson));
+      const contactPerson = {
+        name: formData.get('contactPersonName'),
+        phone: formData.get('contactPersonPhone'),
+      };
+      formData.append('contactPerson', JSON.stringify(contactPerson));
 
-          const packaged = formData.get('packaged') === 'true';
+      const packaged = formData.get('packaged') === 'true';
 
-          formData.set('packaged', packaged);
+      formData.set('packaged', packaged);
 
-          try {
-            const token = localStorage.getItem('authToken');
-            const response = await fetch(`${BACKEND_URL}/foodtransaction/create`, {
-              method: 'POST',
-              headers: {
-                'Authorization': token
-              },
-              body: formData,
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-              alert('Food donation created successfully');
-              window.location.assign('index_restaurant.html');
-            } else {
-              alert(result.message);
-            }
-          } catch (error) {
-            alert('An error occurred. Please try again later.');
-          }
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${BACKEND_URL}/foodtransaction/create`, {
+          method: 'POST',
+          headers: {
+            'Authorization': token
+          },
+          body: formData,
         });
 
-        document.getElementById('photos').addEventListener('change', function (event) {
-          const files = event.target.files;
-          if (files.length > 5) {
-            document.getElementById('photo-error').style.display = 'block';
-            event.target.value = '';
-          } else {
-            document.getElementById('photo-error').style.display = 'none';
-          }
-        });
-      </script>
+        const result = await response.json();
+
+        if (response.ok) {
+          alert('Food donation created successfully');
+          window.location.assign('index_restaurant.html');
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        alert('An error occurred. Please try again later.');
+      }
+    });
+
+    document.getElementById('photos').addEventListener('change', function (event) {
+      const files = event.target.files;
+      if (files.length > 5) {
+        document.getElementById('photo-error').style.display = 'block';
+        event.target.value = '';
+      } else {
+        document.getElementById('photo-error').style.display = 'none';
+      }
+    });
+  </script>
 
 
-      <footer class="ftco-footer ftco-section img" style="height: 25rem;">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row mb-1">
-            <div class="col-md-3">
-              <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">About Us</h2>
-                <p style="color: white;">We are dedicated to redistributing surplus food to those in need, minimizing
-                  waste, and
-                  helping our community. Learn more about our mission and how you can get involved.</p>
+  <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row mb-1">
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">About Us</h2>
+            <p style="color: white;">We are dedicated to redistributing surplus food to those in need, minimizing waste,
+              and helping our community. Learn more about our mission and how you can get involved.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
+            <h2 class="ftco-heading-2">Our Services</h2>
+            <ul class="list-unstyled">
+              <li><span class="icon icon-check"></span> Collaboration</li>
+              <li><span class="icon icon-check"></span> Support Network</li>
+              <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
+              <li><span class="icon icon-check"></span> Community Interactions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Testimonials</h2>
+            <div class="block-21 mb-4 d-flex">
+              <div class="text">
+                <h3 class="heading" style="color: white;">"This organization has changed my life!" - Jane Doe</h3>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
-                <h2 class="ftco-heading-2">Our Services</h2>
-                <ul class="list-unstyled">
-                  <li><span class="icon icon-check"></span> Collaboaration</li>
-                  <li><span class="icon icon-check"></span> Support Network</li>
-                  <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
-                  <li><span class="icon icon-check"></span> Community Interactions</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">Testimonials</h2>
-                <div class="block-21 mb-4 d-flex">
-                  <div class="text">
-                    <h3 class="heading" style="color: white;">"This organization has changed my life!" - Jane Doe
-                    </h3>
-                  </div>
-                </div>
-                <div class="block-21 mb-4 d-flex">
-                  <div class="text">
-                    <h3 class="heading" style="color: white;">"Incredible impact on our community." - John Smith
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">Have a Questions?</h2>
-                <div class="block-23 mb-3">
-                  <ul>
-                    <li><span class="icon icon-map-marker"></span><span class="text" style="color: white;">203 Fake St.
-                        Mountain
-                        View, San Francisco, California, USA</span></li>
-                    <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392 3929
-                        210</span></li>
-                    <li><span class="icon icon-envelope"></span><span class="text"
-                        style="color: white;">info@yourdomain.com</span></li>
-                  </ul>
-                </div>
+            <div class="block-21 mb-4 d-flex">
+              <div class="text">
+                <h3 class="heading" style="color: white;">"Incredible impact on our community." - John Smith</h3>
               </div>
             </div>
           </div>
         </div>
-      </footer>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Have a Question?</h2>
+            <div class="block-23 mb-3">
+              <ul class="list-unstyled">
+                <li><span class="icon icon-map-marker"></span><span class="text" style="color: white;">203 Fake St.
+                    Mountain View, San Francisco, California, USA</span></li>
+                <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392 3929 210</span>
+                </li>
+                <li><span class="icon icon-envelope"></span><span class="text"
+                    style="color: white;">info@yourdomain.com</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-      <script>
-          document.getElementById('defaultAddress').addEventListener('change', function (event) {
-          const isChecked = event.target.checked;
-          const addressFields = document.getElementById('addressFields');
-          const tooltip = document.getElementById('defaultAddressTooltip');
+  <script>
+    document.getElementById('defaultAddress').addEventListener('change', function (event) {
+      const isChecked = event.target.checked;
+      const addressFields = document.getElementById('addressFields');
+      const tooltip = document.getElementById('defaultAddressTooltip');
 
-          const addressLine1 = document.getElementById('address_line_1');
-          const addressLine2 = document.getElementById('address_line_2');
-          const city = document.getElementById('city');
-          const latitude = document.getElementById('latitude');
-          const longitude = document.getElementById('longitude');
+      const addressLine1 = document.getElementById('address_line_1');
+      const addressLine2 = document.getElementById('address_line_2');
+      const city = document.getElementById('city');
+      const latitude = document.getElementById('latitude');
+      const longitude = document.getElementById('longitude');
 
-          if (isChecked) {
-            addressFields.style.display = 'none';
-            addressLine1.removeAttribute('required');
-            addressLine2.removeAttribute('required');
-            city.removeAttribute('required');
-            latitude.removeAttribute('required');
-            longitude.removeAttribute('required');
-          } else {
-            addressFields.style.display = 'block';
-            addressLine1.setAttribute('required', 'required');
-            addressLine2.setAttribute('required', 'required');
-            city.setAttribute('required', 'required');
-            latitude.setAttribute('required', 'required');
-            longitude.setAttribute('required', 'required');
-          }
-          tooltip.style.display = isChecked ? 'inline' : 'none';
-        });
+      if (isChecked) {
+        addressFields.style.display = 'none';
+        addressLine1.removeAttribute('required');
+        addressLine2.removeAttribute('required');
+        city.removeAttribute('required');
+        latitude.removeAttribute('required');
+        longitude.removeAttribute('required');
+      } else {
+        addressFields.style.display = 'block';
+        addressLine1.setAttribute('required', 'required');
+        addressLine2.setAttribute('required', 'required');
+        city.setAttribute('required', 'required');
+        latitude.setAttribute('required', 'required');
+        longitude.setAttribute('required', 'required');
+      }
+      tooltip.style.display = isChecked ? 'inline' : 'none';
+    });
 
-        document.getElementById('defaultContact').addEventListener('change', function (event) {
-          const isChecked = event.target.checked;
-          const contactFields = document.getElementById('contactFields');
-          const tooltip = document.getElementById('defaultContactTooltip');
+    document.getElementById('defaultContact').addEventListener('change', function (event) {
+      const isChecked = event.target.checked;
+      const contactFields = document.getElementById('contactFields');
+      const tooltip = document.getElementById('defaultContactTooltip');
 
-          const contactPersonName = document.getElementById('contactPersonName');
-          const contactPersonPhone = document.getElementById('contactPersonPhone');
+      const contactPersonName = document.getElementById('contactPersonName');
+      const contactPersonPhone = document.getElementById('contactPersonPhone');
 
-          if (isChecked) {
-            contactFields.style.display = 'none';
-            contactPersonName.removeAttribute('required');
-            contactPersonPhone.removeAttribute('required');
-          } else {
-            contactFields.style.display = 'block';
-            contactPersonName.setAttribute('required', 'required');
-            contactPersonPhone.setAttribute('required', 'required');
-          }
-          tooltip.style.display = isChecked ? 'inline' : 'none';
-        });
+      if (isChecked) {
+        contactFields.style.display = 'none';
+        contactPersonName.removeAttribute('required');
+        contactPersonPhone.removeAttribute('required');
+      } else {
+        contactFields.style.display = 'block';
+        contactPersonName.setAttribute('required', 'required');
+        contactPersonPhone.setAttribute('required', 'required');
+      }
+      tooltip.style.display = isChecked ? 'inline' : 'none';
+    });
 
-        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
-          event.preventDefault(); // Prevent the default link action
-          var confirmation = confirm('Are you sure you want to logout?');
-          if (confirmation) {
-            localStorage.clear();
-            window.location.href = 'index.html'; // Redirect to the logout page
-          }
-        });
-      </script>
-     
-      <script src="js/get_location.js"></script>
-      <script src="js/jquery.min.js"></script>
-      <script src="js/jquery-migrate-3.0.1.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/jquery.easing.1.3.js"></script>
-      <script src="js/jquery.waypoints.min.js"></script>
-      <script src="js/jquery.stellar.min.js"></script>
-      <script src="js/owl.carousel.min.js"></script>
-      <script src="js/jquery.magnific-popup.min.js"></script>
-      <script src="js/aos.js"></script>
-      <script src="js/jquery.animateNumber.min.js"></script>
-      <script src="js/bootstrap-datepicker.js"></script>
-      <script src="js/jquery.timepicker.min.js"></script>
-      <script src="js/scrollax.min.js"></script>
-      <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-      <script src="js/google-map.js"></script>
-      <script src="js/main.js"></script>
+    document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default link action
+      var confirmation = confirm('Are you sure you want to logout?');
+      if (confirmation) {
+        localStorage.clear();
+        window.location.href = 'index.html'; // Redirect to the logout page
+      }
+    });
+  </script>
+
+  <script src="js/get_location.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/jquery.timepicker.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

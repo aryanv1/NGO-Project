@@ -216,19 +216,19 @@
                                             <p class="card-text">Business License Number: ${restaurant.business_license_number}</p>
                                             <p class="card-text">Website:
                                                 ${restaurant.website_url ?
-                                                `<a href="javascript:void(0);" 
+                        `<a href="javascript:void(0);" 
                                                     onclick="redirectToWebsite('${restaurant.website_url}')">
                                                     ${restaurant.website_url}
                                                 </a>`
-                                                : "Not Avaialable"}
+                        : "Not Avaialable"}
                                             </p>
                                                 <p class="card-text">Food Handlers Permit: 
                                                 ${restaurant.food_handlers_permit ?
-                                                    `<a href="javascript:void(0);" 
+                        `<a href="javascript:void(0);" 
                                                         onclick="viewFoodHandlersPermit('${restaurant.food_handlers_permit}')">
                                                         Click here to view
                                                     </a>`
-                                                    : 'Not available'}
+                        : 'Not available'}
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
@@ -288,19 +288,19 @@
                                             <p class="card-text">Business License Number: ${restaurant.business_license_number}</p>
                                             <p class="card-text">Website:
                                                 ${restaurant.website_url ?
-                                                `<a href="javascript:void(0);" 
+                        `<a href="javascript:void(0);" 
                                                     onclick="redirectToWebsite('${restaurant.website_url}')">
                                                     ${restaurant.website_url}
                                                 </a>`
-                                                : "Not Avaialable"}
+                        : "Not Avaialable"}
                                             </p>
                                                 <p class="card-text">Food Handlers Permit: 
                                                 ${restaurant.food_handlers_permit ?
-                                                    `<a href="javascript:void(0);" 
+                        `<a href="javascript:void(0);" 
                                                         onclick="viewFoodHandlersPermit('${restaurant.food_handlers_permit}')">
                                                         Click here to view
                                                     </a>`
-                                                    : 'Not available'}
+                        : 'Not available'}
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
@@ -356,7 +356,7 @@
                     restaurantCard.innerHTML = '';
                     const searchInput = document.getElementById('searchInput');
                     searchInput.value = '';
-                    fetchRestaurants(); 
+                    fetchRestaurants();
                     alert('Restaurant Verified successfully');
                 } else {
                     alert('Failed to verify restaurant');
@@ -382,7 +382,7 @@
                     restaurantCard.innerHTML = '';
                     const searchInput = document.getElementById('searchInput');
                     searchInput.value = '';
-                    fetchRestaurants(); 
+                    fetchRestaurants();
                     alert('Restaurant deleted successfully');
                 } else {
                     alert('Failed to delete restaurant');
@@ -405,7 +405,7 @@
             }
         }
         function confirmDeleteRestaurant(restaurantId) {
-            if (confirm("Are you sure you want to delete this restaurant?")){
+            if (confirm("Are you sure you want to delete this restaurant?")) {
                 deleteRestaurant(restaurantId);
             }
         }
@@ -422,65 +422,63 @@
 
             clearButton.addEventListener('click', () => {
                 searchInput.value = '';
-                displayNGOs(); 
+                displayNGOs();
             });
         }
     </script>
 
     <!-- Footer Start -->
-    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+    <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-1">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
-                            minimizing waste, and
-                            helping our community. Learn more about our mission and how you can get involved.</p>
+                            minimizing waste,
+                            and helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
                         <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Collaboration</li>
                             <li><span class="icon icon-check"></span> Support Network</li>
                             <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
                             <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Testimonials</h2>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"This organization has changed my life!" -
-                                    Jane Doe
-                                </h3>
+                                    Jane Doe</h3>
                             </div>
                         </div>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
-                                    Smith
-                                </h3>
+                                    Smith</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span class="icon icon-map-marker"></span><span class="text"
-                                        style="color: white;">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
+                                        style="color: white;">203 Fake St.
+                                        Mountain View, San Francisco, California, USA</span></li>
                                 <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
-                                        3929
-                                        210</span></li>
+                                        3929 210</span>
+                                </li>
                                 <li><span class="icon icon-envelope"></span><span class="text"
                                         style="color: white;">info@yourdomain.com</span></li>
                             </ul>
@@ -493,7 +491,7 @@
     <!-- Footer End -->
     <script>
         document.getElementById('logoutLink').addEventListener('click', function (event) {
-            event.preventDefault(); 
+            event.preventDefault();
             var confirmation = confirm('Are you sure you want to logout?');
             if (confirmation) {
                 localStorage.clear();

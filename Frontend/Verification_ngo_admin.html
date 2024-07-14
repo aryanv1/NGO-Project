@@ -76,67 +76,67 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index_admin.html">Welfare</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
-        </button>
+      <a class="navbar-brand" href="index_admin.html">Welfare</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
 
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="index_admin.html" class="nav-link">Home</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Volunteers
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="Verification_Ind_admin.html">Pending Verification</a>
-                        </li>
-                        <li><a class="dropdown-item" href="All_Ind_admin.html">All Volunteers</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        NGO
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="Verification_ngo_admin.html">Pending Verification</a>
-                        </li>
-                        <li><a class="dropdown-item" href="All_ngo_admin.html">All NGOs</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Restaurant
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="Verification_restaurant_admin.html">Pending
-                                Verification</a></li>
-                        <li><a class="dropdown-item" href="All_restaurant_admin.html">All Restaurants</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="donation_histroy_admin.html" class="nav-link">Food Logs</a></li>
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
-                </li>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="index_admin.html" class="nav-link">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Volunteers
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="Verification_Ind_admin.html">Pending Verification</a>
+              </li>
+              <li><a class="dropdown-item" href="All_Ind_admin.html">All Volunteers</a></li>
             </ul>
-        </div>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              NGO
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="Verification_ngo_admin.html">Pending Verification</a>
+              </li>
+              <li><a class="dropdown-item" href="All_ngo_admin.html">All NGOs</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Restaurant
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="Verification_restaurant_admin.html">Pending
+                  Verification</a></li>
+              <li><a class="dropdown-item" href="All_restaurant_admin.html">All Restaurants</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="donation_histroy_admin.html" class="nav-link">Food Logs</a></li>
+          <li class="nav-item">
+            <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
   <!-- END nav -->
 
   <!-- Search Bar -->
   <div class="container my-5" style="padding-top: 5rem">
     <div class="input-group">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search for Volunteers ..."
-            style="border-radius: 1rem;">
-        <button id="clearButton" class="btn btn-secondary" type="button"
-            style="border-radius: 1rem; margin-left: 1vw;">Clear</button>
+      <input type="text" id="searchInput" class="form-control" placeholder="Search for Volunteers ..."
+        style="border-radius: 1rem;">
+      <button id="clearButton" class="btn btn-secondary" type="button"
+        style="border-radius: 1rem; margin-left: 1vw;">Clear</button>
     </div>
-</div>
+  </div>
 
   <div class="container" style="margin-top: 2rem">
     <div id="ngo-container"></div>
@@ -217,11 +217,11 @@
                                             <p class="card-text">Tax ID EIN: ${ngo.tax_id_ein}</p>
                                             <p class="card-text">Website: 
                                                 ${ngo.website_url ?
-                                                    `<a href="javascript:void(0);" 
+            `<a href="javascript:void(0);" 
                                                         onclick="redirectToWebsite('${ngo.website_url}')">
                                                         ${ngo.website_url}
                                                     </a>`
-                                                    : "Not Available"}
+            : "Not Available"}
                                             </p>
                                             <p class="card-text">Primary Contact: ${ngo.primary_contact.name}</p>
                                             <p class="card-text">Email: ${ngo.primary_contact.email}</p>
@@ -253,11 +253,11 @@
                                             </p>
                                             <p class="card-text">Recent Annual Report: 
                                                 ${ngo.recent_annual_report ?
-                                                    `<a href="javascript:void(0);" 
+            `<a href="javascript:void(0);" 
                                                         onclick="viewAnnualReport('${ngo.recent_annual_report}')">
                                                         Click here to view
                                                     </a>`
-                                                    : 'Not available'}
+            : 'Not available'}
                                             </p>
                                         </div>
                                     </div>
@@ -305,11 +305,11 @@
                                             <p class="card-text">Tax ID EIN: ${ngo.tax_id_ein}</p>
                                             <p class="card-text">Website: 
                                                 ${ngo.website_url ?
-                                                    `<a href="javascript:void(0);" 
+            `<a href="javascript:void(0);" 
                                                         onclick="redirectToWebsite('${ngo.website_url}')">
                                                         ${ngo.website_url}
                                                     </a>`
-                                                    : "Not Available"}
+            : "Not Available"}
                                             </p>
                                             <p class="card-text">Primary Contact: ${ngo.primary_contact.name}</p>
                                             <p class="card-text">Email: ${ngo.primary_contact.email}</p>
@@ -341,11 +341,11 @@
                                             </p>
                                             <p class="card-text">Recent Annual Report: 
                                                 ${ngo.recent_annual_report ?
-                                                    `<a href="javascript:void(0);" 
+            `<a href="javascript:void(0);" 
                                                         onclick="viewAnnualReport('${ngo.recent_annual_report}')">
                                                         Click here to view
                                                     </a>`
-                                                    : 'Not available'}
+            : 'Not available'}
                                             </p>
                                         </div>
                                     </div>
@@ -408,7 +408,7 @@
         if (response.status === 200) {
           alert('NGO deleted successfully');
           const ngoCard = document.getElementById('ngo-container');
-          ngoCard.innerHTML = ''; 
+          ngoCard.innerHTML = '';
           const searchInput = document.getElementById('searchInput');
           searchInput.value = '';
           fetchNGOs();
@@ -439,75 +439,71 @@
       }
     }
     function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const clearButton = document.getElementById('clearButton');
+      const searchInput = document.getElementById('searchInput');
+      const clearButton = document.getElementById('clearButton');
 
-            // Perform search on each input event
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.toLowerCase();
-                const filteredNGOs = ngos.filter(ngo => ngo.organization_name.toLowerCase().includes(query));
-                displayFilteredNGOs(filteredNGOs);
-            });
+      // Perform search on each input event
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        const filteredNGOs = ngos.filter(ngo => ngo.organization_name.toLowerCase().includes(query));
+        displayFilteredNGOs(filteredNGOs);
+      });
 
-            clearButton.addEventListener('click', () => {
-                searchInput.value = '';
-                displayNGOs(); 
-            });
-        }
+      clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        displayNGOs();
+      });
+    }
   </script>
 
 
   <!-- Footer Start -->
-  <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+  <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
     <div class="overlay"></div>
     <div class="container">
       <div class="row mb-1">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">About Us</h2>
             <p style="color: white;">We are dedicated to redistributing surplus food to those in need, minimizing waste,
-              and
-              helping our community. Learn more about our mission and how you can get involved.</p>
+              and helping our community. Learn more about our mission and how you can get involved.</p>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
             <h2 class="ftco-heading-2">Our Services</h2>
             <ul class="list-unstyled">
-              <li><span class="icon icon-check"></span> Collaboaration</li>
+              <li><span class="icon icon-check"></span> Collaboration</li>
               <li><span class="icon icon-check"></span> Support Network</li>
               <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
               <li><span class="icon icon-check"></span> Community Interactions</li>
             </ul>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">Testimonials</h2>
             <div class="block-21 mb-4 d-flex">
               <div class="text">
-                <h3 class="heading" style="color: white;">"This organization has changed my life!" - Jane Doe
-                </h3>
+                <h3 class="heading" style="color: white;">"This organization has changed my life!" - Jane Doe</h3>
               </div>
             </div>
             <div class="block-21 mb-4 d-flex">
               <div class="text">
-                <h3 class="heading" style="color: white;">"Incredible impact on our community." - John Smith
-                </h3>
+                <h3 class="heading" style="color: white;">"Incredible impact on our community." - John Smith</h3>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <h2 class="ftco-heading-2">Have a Question?</h2>
             <div class="block-23 mb-3">
-              <ul>
+              <ul class="list-unstyled">
                 <li><span class="icon icon-map-marker"></span><span class="text" style="color: white;">203 Fake St.
-                    Mountain
-                    View, San Francisco, California, USA</span></li>
-                <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392 3929
-                    210</span></li>
+                    Mountain View, San Francisco, California, USA</span></li>
+                <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392 3929 210</span>
+                </li>
                 <li><span class="icon icon-envelope"></span><span class="text"
                     style="color: white;">info@yourdomain.com</span></li>
               </ul>

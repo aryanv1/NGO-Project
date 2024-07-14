@@ -138,7 +138,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
+            <a class="navbar-brand" href="index_restaurant.html">Welfare</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -213,59 +213,57 @@
         </div>
     </div>
 
-    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+    <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-1">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
-                            minimizing waste, and
-                            helping our community. Learn more about our mission and how you can get involved.</p>
+                            minimizing waste,
+                            and helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
                         <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Collaboration</li>
                             <li><span class="icon icon-check"></span> Support Network</li>
                             <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
                             <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Testimonials</h2>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"This organization has changed my life!" -
-                                    Jane Doe
-                                </h3>
+                                    Jane Doe</h3>
                             </div>
                         </div>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
-                                    Smith
-                                </h3>
+                                    Smith</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span class="icon icon-map-marker"></span><span class="text"
-                                        style="color: white;">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
+                                        style="color: white;">203 Fake St.
+                                        Mountain View, San Francisco, California, USA</span></li>
                                 <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
-                                        3929
-                                        210</span></li>
+                                        3929 210</span>
+                                </li>
                                 <li><span class="icon icon-envelope"></span><span class="text"
                                         style="color: white;">info@yourdomain.com</span></li>
                             </ul>
@@ -308,8 +306,7 @@
                     const data = await response.json();
                     createDonationCards(data);
                 }
-                else if(response.status == 401)
-                {
+                else if (response.status == 401) {
                     localStorage.clear();
                     alert('Unauthorised to access this route');
                     window.location.href = 'Login.html';
@@ -348,7 +345,7 @@
                             <p class="card-text">Category: ${donation.foodtype}</p>
                             <p class="card-text">Packaged: ${donation.packaged ? 'Yes' : 'No'}</p>
                             <p class="card-text">Pickup Address: ${donation.pickupLocation.address.address_line_1}
-                                ${donation.pickupLocation.address.address_line_2 ? ', ' + donation.pickupLocation.address.address_line_2 : '' }, 
+                                ${donation.pickupLocation.address.address_line_2 ? ', ' + donation.pickupLocation.address.address_line_2 : ''}, 
                                 ${donation.pickupLocation.address.city}</p>
                         </div>
                         <div class="col-md-6">

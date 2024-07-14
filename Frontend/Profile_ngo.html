@@ -88,7 +88,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Welfare</a>
+            <a class="navbar-brand" href="index_ngo.html">Welfare</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -219,7 +219,8 @@
                 <div class="modal-body">
                     <form id="editProfileForm">
                         <div class="form-group">
-                            <label for="editOrganizationName">Organization Name<span class="text-danger">*</span></label>
+                            <label for="editOrganizationName">Organization Name<span
+                                    class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editOrganizationName" required>
                         </div>
                         <div class="form-group">
@@ -308,15 +309,18 @@
                             Get Location
                         </button>
                         <div class="form-group">
-                            <label for="editPrimaryContactName">Primary Contact Name<span class="text-danger">*</span></label>
+                            <label for="editPrimaryContactName">Primary Contact Name<span
+                                    class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editPrimaryContactName" required>
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactEmail">Primary Contact Email<span class="text-danger">*</span></label>
+                            <label for="editPrimaryContactEmail">Primary Contact Email<span
+                                    class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="editPrimaryContactEmail" required>
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactPhone">Primary Contact Phone<span class="text-danger">*</span></label>
+                            <label for="editPrimaryContactPhone">Primary Contact Phone<span
+                                    class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editPrimaryContactPhone" required>
                         </div>
                         <div class="form-group">
@@ -365,8 +369,7 @@
                     }
                 });
                 const ngo = await response.json();
-                if(response.status == 401)
-                {
+                if (response.status == 401) {
                     alert('Not authorised to access this route');
                     localStorage.clear();
                     window.location.assign('index.html');
@@ -506,7 +509,7 @@
                     phoneno: secondaryContactPhone,
                 });
             }
-            
+
             const formData = new FormData();
             formData.append('organization_name', updatedNGO.organization_name);
             formData.append('website_url', updatedNGO.website_url);
@@ -515,9 +518,9 @@
             if (updatedNGO.secondary_contact) {
                 formData.append('secondary_contact', updatedNGO.secondary_contact);
             }
-            
+
             const photosFiles = document.getElementById('photos').files;
-            for(const element of photosFiles) {
+            for (const element of photosFiles) {
                 formData.append('photos', element)
             }
 
@@ -554,59 +557,57 @@
         document.addEventListener('DOMContentLoaded', fetchProfileData());
     </script>
 
-    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+    <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-1">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
-                            minimizing waste, and
-                            helping our community. Learn more about our mission and how you can get involved.</p>
+                            minimizing waste,
+                            and helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
                         <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Collaboration</li>
                             <li><span class="icon icon-check"></span> Support Network</li>
                             <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
                             <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Testimonials</h2>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"This organization has changed my life!" -
-                                    Jane Doe
-                                </h3>
+                                    Jane Doe</h3>
                             </div>
                         </div>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
-                                    Smith
-                                </h3>
+                                    Smith</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span class="icon icon-map-marker"></span><span class="text"
-                                        style="color: white;">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
+                                        style="color: white;">203 Fake St.
+                                        Mountain View, San Francisco, California, USA</span></li>
                                 <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
-                                        3929
-                                        210</span></li>
+                                        3929 210</span>
+                                </li>
                                 <li><span class="icon icon-envelope"></span><span class="text"
                                         style="color: white;">info@yourdomain.com</span></li>
                             </ul>

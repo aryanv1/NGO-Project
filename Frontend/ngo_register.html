@@ -268,59 +268,57 @@
 
     </div>
 
-    <footer class="ftco-footer ftco-section img" style="height: 25rem;">
+    <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-1">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p style="color: white;">We are dedicated to redistributing surplus food to those in need,
-                            minimizing waste, and
-                            helping our community. Learn more about our mission and how you can get involved.</p>
+                            minimizing waste,
+                            and helping our community. Learn more about our mission and how you can get involved.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
                         <h2 class="ftco-heading-2">Our Services</h2>
                         <ul class="list-unstyled">
-                            <li><span class="icon icon-check"></span> Collaboaration</li>
+                            <li><span class="icon icon-check"></span> Collaboration</li>
                             <li><span class="icon icon-check"></span> Support Network</li>
                             <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
                             <li><span class="icon icon-check"></span> Community Interactions</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Testimonials</h2>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"This organization has changed my life!" -
-                                    Jane Doe
-                                </h3>
+                                    Jane Doe</h3>
                             </div>
                         </div>
                         <div class="block-21 mb-4 d-flex">
                             <div class="text">
                                 <h3 class="heading" style="color: white;">"Incredible impact on our community." - John
-                                    Smith
-                                </h3>
+                                    Smith</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 mb-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Have a Question?</h2>
                         <div class="block-23 mb-3">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span class="icon icon-map-marker"></span><span class="text"
-                                        style="color: white;">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
+                                        style="color: white;">203 Fake St.
+                                        Mountain View, San Francisco, California, USA</span></li>
                                 <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392
-                                        3929
-                                        210</span></li>
+                                        3929 210</span>
+                                </li>
                                 <li><span class="icon icon-envelope"></span><span class="text"
                                         style="color: white;">info@yourdomain.com</span></li>
                             </ul>
@@ -329,101 +327,101 @@
                 </div>
             </div>
         </div>
-    </footer>
+        </footer>
 
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen">
-        <svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
-        </svg>
-    </div>
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen">
+            <svg class="circular" width="48px" height="48px">
+                <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+                <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                    stroke="#F96D00" />
+            </svg>
+        </div>
+        <script>
+            document.getElementById('registerForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
 
-            const form = event.target;
-            const formData = new FormData(form);
-            const physicalAddresses = {
-                address_line_1: formData.get('address_line_1'),
-                address_line_2: formData.get('address_line_2'),
-                city: formData.get('city'),
-                state: formData.get('state'),
-                zip_code: formData.get('zip_code'),
-                country: formData.get('country'),
-                geo_location: {
-                    latitude: formData.get('latitude'),
-                    longitude: formData.get('longitude'),
+                const form = event.target;
+                const formData = new FormData(form);
+                const physicalAddresses = {
+                    address_line_1: formData.get('address_line_1'),
+                    address_line_2: formData.get('address_line_2'),
+                    city: formData.get('city'),
+                    state: formData.get('state'),
+                    zip_code: formData.get('zip_code'),
+                    country: formData.get('country'),
+                    geo_location: {
+                        latitude: formData.get('latitude'),
+                        longitude: formData.get('longitude'),
+                    }
+                };
+                // console.log(physicalAddresses)
+                formData.append('physical_addresses', JSON.stringify(physicalAddresses));
+
+                const primaryContact = {
+                    name: formData.get('primary_contact[name]'),
+                    email: formData.get('primary_contact[email]'),
+                    phoneno: formData.get('primary_contact[phoneno]')
+                };
+                formData.append('primary_contact', JSON.stringify(primaryContact));
+
+                const secondaryContact = {
+                    name: formData.get('secondary_contact[name]'),
+                    email: formData.get('secondary_contact[email]'),
+                    phoneno: formData.get('secondary_contact[phoneno]')
+                };
+                if (secondaryContact.name || secondaryContact.email || secondaryContact.phoneno) {
+                    formData.append('secondary_contact', JSON.stringify(secondaryContact));
                 }
-            };
-            // console.log(physicalAddresses)
-            formData.append('physical_addresses', JSON.stringify(physicalAddresses));
+                console.log()
+                try {
+                    const response = await fetch('http://localhost:3000/ngo/register', {
+                        method: 'POST',
+                        body: formData
+                    });
 
-            const primaryContact = {
-                name: formData.get('primary_contact[name]'),
-                email: formData.get('primary_contact[email]'),
-                phoneno: formData.get('primary_contact[phoneno]')
-            };
-            formData.append('primary_contact', JSON.stringify(primaryContact));
+                    const result = await response.json();
 
-            const secondaryContact = {
-                name: formData.get('secondary_contact[name]'),
-                email: formData.get('secondary_contact[email]'),
-                phoneno: formData.get('secondary_contact[phoneno]')
-            };
-            if (secondaryContact.name || secondaryContact.email || secondaryContact.phoneno) {
-                formData.append('secondary_contact', JSON.stringify(secondaryContact));
-            }
-            console.log()
-            try {
-                const response = await fetch('http://localhost:3000/ngo/register', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert("Registration successful");
-                    window.location.assign('index.html');
+                    if (response.ok) {
+                        alert("Registration successful");
+                        window.location.assign('index.html');
+                    } else {
+                        alert(result.message);
+                    }
+                } catch (error) {
+                    alert('An error occurred. Please try again later.');
+                }
+            });
+        </script>
+        <script>
+            document.getElementById('photos').addEventListener('change', function (event) {
+                const files = event.target.files;
+                if (files.length > 3) {
+                    document.getElementById('photo-error').style.display = 'block';
+                    event.target.value = '';
                 } else {
-                    alert(result.message);
+                    document.getElementById('photo-error').style.display = 'none';
                 }
-            } catch (error) {
-                alert('An error occurred. Please try again later.');
-            }
-        });
-    </script>
-    <script>
-        document.getElementById('photos').addEventListener('change', function (event) {
-            const files = event.target.files;
-            if (files.length > 3) {
-                document.getElementById('photo-error').style.display = 'block';
-                event.target.value = '';
-            } else {
-                document.getElementById('photo-error').style.display = 'none';
-            }
-        });
-    </script>
+            });
+        </script>
 
-    <script src="js/get_location.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/jquery.timepicker.min.js"></script>
-    <script src="js/scrollax.min.js"></script>
-    <script src="js/google-map.js"></script>
-    <script src="js/main.js"></script>
+        <script src="js/get_location.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/jquery.timepicker.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="js/google-map.js"></script>
+        <script src="js/main.js"></script>
 
 </body>
 
