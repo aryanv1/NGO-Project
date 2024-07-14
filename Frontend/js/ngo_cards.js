@@ -30,6 +30,11 @@ function showError(error) {
     }
 }
 
+function viewLocationOnMap(latitude, longitude) {
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+   window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+}
+
 window.addEventListener('load', async () => {
     try {
         const response = await fetch('http://localhost:3000/ngo/get'); // Update with the correct backend URL
@@ -63,50 +68,75 @@ function displayNGOs(ngos) {
 
     ngos.forEach((ngo, index) => {
         const ngoCard = document.createElement('div');
-        ngoCard.className = 'col-md-4';
+        ngoCard.className = 'col-12 col-sm-6 col-md-4 mb-4 d-flex';
         
         ngoCard.innerHTML = `
-            <div class="card mb-4">
-                <img src="${ngo.ngo_photos[0]}" height="300rem" width="140px" class="card-img-top" alt="NGO Image">
-                <div class="card-body">
+            <div class="card w-100">
+                <img src="${ngo.ngo_photos[0]}" class="card-img-top img-fluid" alt="NGO Image" style="max-height: 300px;">
+                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">${ngo.organization_name}</h5>
                     <p class="card-text">Manager Name: ${ngo.primary_contact.name}</p>
                     <p class="card-text">Address: ${formatAddress(ngo.physical_addresses)}</p>
                     <p class="card-text">Email: ${ngo.primary_contact.email}</p>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ngoModal${index}" style="display: block; margin: auto;">Additional Information</button>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="ngoModal${index}" tabindex="-1" aria-labelledby="ngoModalLabel${index}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ngoModalLabel${index}">${ngo.organization_name}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>Manager Name:</strong> ${ngo.primary_contact.name}</p>
-                            <p><strong>Contact:</strong> ${ngo.primary_contact.phoneno}</p>
-                            <p><strong>Email:</strong> ${ngo.primary_contact.email}</p>
-                            <p><strong>Address:</strong> ${formatAddress(ngo.physical_addresses)}</p>
-                            <p>Photos:</p>
-                            ${ngo.ngo_photos.map(photo =>
-                    `<img src="${photo}" alt="NGO Photo" style="width: 100px; margin: 5px;">`).join('')
-                    }
-                        </div>
-                        <div class="modal-footer" style="justify-content: center;">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
+                    <p><strong>Contact:</strong> ${ngo.primary_contact.phoneno}</p>
+                    <p><strong>Location :</strong>
+                    <a href="javascript:void(0);" onclick="viewLocationOnMap(${ngo.physical_addresses.geo_location.latitude}, ${ngo.physical_addresses.geo_location.longitude})">Click here to view on map</a>
+                    </p>
+                    <div class="text-center mt-auto">
+                     <button class="btn btn-primary view-photos" data-photos='${JSON.stringify(ngo.ngo_photos)}'>View Photos</button>
+                     </div>
                 </div>
             </div>
         `;
 
         rowDiv.appendChild(ngoCard);
     });
+    document.querySelectorAll('.view-photos').forEach(button => {
+        button.addEventListener('click', () => {
+            const photos = JSON.parse(button.getAttribute('data-photos'));
+            showPhotos(photos);
+        });
+    });
+}
+
+function showPhotos(photos) {
+    const photoContainer = document.querySelector('.photo-tile');
+    photoContainer.innerHTML = ''; // Clear previous photos
+
+    photos.forEach((photo, index) => {
+        console.log(`Loading photo: ${photo}`); // Debugging line to check photo paths
+        const img = document.createElement('img');
+        img.src = photo;
+        img.alt = `images/person_${index + 1}`;
+        img.className = 'tile-photo';
+        if(index === 0){
+            img.style.display = 'block';
+        }
+        photoContainer.appendChild(img);
+    });
+
+    let currentPhotoIndex = 0;
+    const numPhotos = photos.length;
+
+    function updateDisplayedPhoto() {
+        const photos = document.querySelectorAll('.tile-photo');
+        photos.forEach(photo => {
+            photo.style.display = 'none'; // Hide all photos
+        });
+        photos[currentPhotoIndex].style.display = 'block'; // Show current photo
+    }
+
+    document.querySelector('.btn-next-photo').onclick = function () {
+        currentPhotoIndex = (currentPhotoIndex + 1) % numPhotos; // Increment index
+        updateDisplayedPhoto(); // Update displayed photo
+    };
+
+    document.querySelector('.btn-previous-photo').onclick = function () {
+        currentPhotoIndex = (currentPhotoIndex - 1 + numPhotos) % numPhotos; // Decrement index
+        updateDisplayedPhoto(); // Update displayed photo
+    };
+
+    $('#photoModal').modal('show');
 }
 
 function setupSearch(ngos) {
