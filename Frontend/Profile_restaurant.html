@@ -146,11 +146,7 @@
                         <p><strong>City:</strong> <span id="city"></span></p>
                         <p><strong>State:</strong> <span id="state"></span></p>
                         <p><strong>Zip Code:</strong> <span id="zip_code"></span></p>
-                        <p><strong>Country:</strong> <span id="country"></span></p>
-
-                        <h3>Location</h3>
-                        <p><strong>Latitude:</strong> <span id="latitude"></span></p>
-                        <p><strong>Longitude:</strong> <span id="longitude"></span></p>
+                        <p><strong>Location : </strong><span id="location"></span></p>
 
                         <h3>Primary Contact</h3>
                         <p><strong>Name:</strong> <span id="manager_name"></span></p>
@@ -184,31 +180,38 @@
                 <div class="modal-body">
                     <form id="editProfileForm">
                         <div class="form-group">
-                            <label for="editName">Username</label>
+                            <label for="editName">Username<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editName" required />
                         </div>
                         <div class="form-group">
-                            <label for="editType">Type</label>
-                            <input type="text" class="form-control" id="editType" required />
+                            <label for="editType">Type <span class="text-danger">*</span></label>
+                            <select class="form-control" style="border-radius: 5px;" id="editType" name="editType" required>
+                                <option value="none" selected disabled hidden>Select Type</option>
+                                <option value="Restaurant">Restaurant</option>
+                                <option value="Catering Service">Catering Service</option>
+                                <option value="Community Hall">Community Hall</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="editWebsiteUrl">Website URL</label>
-                            <input type="text" class="form-control" id="editWebsiteUrl" />
+                            <input type="url" class="form-control" style="border-radius: 5px;" id="editWebsiteUrl"
+                                    name="website_url" placeholder="Enter Website URL">
                         </div>
                         <div class="form-group">
-                            <label for="editManagerName">Primary Contact Name</label>
+                            <label for="editManagerName">Primary Contact Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editManagerName" required />
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactEmail">Primary Contact Email</label>
+                            <label for="editPrimaryContactEmail">Primary Contact Email<span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="editPrimaryContactEmail" required />
                         </div>
                         <div class="form-group">
-                            <label for="editPrimaryContactPhone">Primary Contact Phone</label>
-                            <input type="text" class="form-control" id="editPrimaryContactPhone" required />
+                            <label for="editPrimaryContactPhone">Primary Contact Phone<span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="editPrimaryContactPhone" required />
                         </div>
                         <div class="form-group">
-                            <label for="editAddressLine1">Address Line 1</label>
+                            <label for="editAddressLine1">Address Line 1<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editAddressLine1" required />
                         </div>
                         <div class="form-group">
@@ -216,34 +219,68 @@
                             <input type="text" class="form-control" id="editAddressLine2" />
                         </div>
                         <div class="form-group">
-                            <label for="editCity">City</label>
+                            <label for="editCity">City<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editCity" required />
                         </div>
                         <div class="form-group">
-                            <label for="editState">State</label>
-                            <input type="text" class="form-control" id="editState" required />
+                            <label for="editState">State<span class="text-danger">*</span></label>
+                            <select class="form-control" style="border-radius: 5px;" id="editState" name="editState"
+                                required>
+                                <option value="" disabled selected>Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and
+                                    Daman and Diu</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="editZipCode">Zip Code</label>
+                            <label for="editZipCode">Zip Code<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editZipCode" required />
                         </div>
                         <div class="form-group">
-                            <label for="editCountry">Country</label>
-                            <input type="text" class="form-control" id="editCountry" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location<span class="text-danger">*</span></label>
                             <div class="location-field">
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" style="border-radius: 5px"
-                                            id="editlatitude" name="editlatitude" placeholder="Latitude" step="any"
-                                            required />
+                                        <input type="text" class="form-control" style="border-radius: 5px" id="editlatitude" name="editlatitude" placeholder="Latitude" 
+                                          pattern="^-?([1-8]?[0-9](\.\d+)?|90(\.0+)?)$"  title="Please enter a valid latitude between -90 and 90." required />
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" style="border-radius: 5px"
-                                            id="editlongitude" name="editlongitude" placeholder="Longitude" step="any"
-                                            required />
+                                      <input type="text" class="form-control" style="border-radius: 5px" id="editlongitude" name="editlongitude" placeholder="Longitude"
+                                       pattern="^-?([1-9]?[0-9]|1[0-7][0-9]|180)(\.\d+)?$" title="Please enter a valid longitude between -180 and 180." required />
                                     </div>
                                 </div>
                             </div>
@@ -262,143 +299,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const BACKEND_URL = "http://localhost:3000";
-        async function fetchProfileData() {
-            try {
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    alert('Authorization token is missing. Please log in again.');
-                    return;
-                }
-                const response = await fetch(`${BACKEND_URL}/restaurant/getbyid`, {
-                    method: "GET",
-                    headers: {
-                        'Authorization': token
-                    }
-                });
-                const restaurant = await response.json();
-                if (response.status !== 200) {
-                    alert(`Error: ${restaurant.message}`);
-                    return;
-                }
-
-                // Populate the profile data
-                document.getElementById('name').textContent = restaurant.username;
-                document.getElementById('restaurant_name').textContent = restaurant.name;
-                document.getElementById('type').textContent = restaurant.type;
-                document.getElementById('business_license_number').textContent = restaurant.business_license_number;
-                document.getElementById('website_url').textContent = restaurant.website_url;
-                const websiteUrlElement = document.getElementById('website_url');
-                if (restaurant.website_url) {
-                    websiteUrlElement.textContent = restaurant.website_url;
-                    websiteUrlElement.href = restaurant.website_url;
-                    websiteUrlElement.style.display = 'inline';
-                } else {
-                    websiteUrlElement.textContent = 'URL not provided';
-                    websiteUrlElement.removeAttribute('href');
-                }
-                document.getElementById('address_line_1').textContent = restaurant.physical_address.address_line_1;
-                document.getElementById('address_line_2').textContent = restaurant.physical_address.address_line_2 ? restaurant.physical_address.address_line_2 : 'N/A';
-                document.getElementById('city').textContent = restaurant.physical_address.city;
-                document.getElementById('state').textContent = restaurant.physical_address.state;
-                document.getElementById('zip_code').textContent = restaurant.physical_address.zip_code;
-                document.getElementById('country').textContent = restaurant.physical_address.country;
-                document.getElementById('latitude').textContent = restaurant.physical_address.geo_location.latitude;
-                document.getElementById('longitude').textContent = restaurant.physical_address.geo_location.longitude;
-                document.getElementById('manager_name').textContent = restaurant.manager_name;
-                document.getElementById('primary_contact_email').textContent = restaurant.primary_contact_email;
-                document.getElementById('primary_contact_phone').textContent = restaurant.primary_contact_phone;
-                document.getElementById('food_handlers_permit').href = restaurant.food_handlers_permit;
-            } catch (error) {
-                console.error('Error fetching profile data:', error);
-            }
-        }
-
-        function openEditModal() {
-            event.preventDefault();
-            fetchProfileData().then(() => {
-                document.getElementById('editName').value = document.getElementById('name').textContent;
-                document.getElementById('editType').value = document.getElementById('type').textContent;
-                document.getElementById('editWebsiteUrl').value = document.getElementById('website_url').textContent !== 'URL not provided' ? document.getElementById('website_url').textContent : '';
-                document.getElementById('editManagerName').value = document.getElementById('manager_name').textContent;
-                document.getElementById('editPrimaryContactEmail').value = document.getElementById('primary_contact_email').textContent;
-                document.getElementById('editPrimaryContactPhone').value = document.getElementById('primary_contact_phone').textContent;
-                document.getElementById('editAddressLine1').value = document.getElementById('address_line_1').textContent;
-                document.getElementById('editAddressLine2').value = document.getElementById('address_line_2').textContent !== 'N/A' ? document.getElementById('address_line_2').textContent : '';
-                document.getElementById('editCity').value = document.getElementById('city').textContent;
-                document.getElementById('editState').value = document.getElementById('state').textContent;
-                document.getElementById('editZipCode').value = document.getElementById('zip_code').textContent;
-                document.getElementById('editCountry').value = document.getElementById('country').textContent;
-                document.getElementById('editlatitude').value = document.getElementById('latitude').textContent;
-                document.getElementById('editlongitude').value = document.getElementById('longitude').textContent;
-                $('#editProfileModal').modal('show');
-            });
-        }
-
-        async function saveProfile(event) {
-            event.preventDefault();
-
-            const updatedProfile = {
-                username: document.getElementById('editName').value,
-                type: document.getElementById('editType').value,
-                website_url: document.getElementById('editWebsiteUrl').value,
-                manager_name: document.getElementById('editManagerName').value,
-                primary_contact_email: document.getElementById('editPrimaryContactEmail').value,
-                primary_contact_phone: document.getElementById('editPrimaryContactPhone').value,
-                physical_address: {
-                    address_line_1: document.getElementById('editAddressLine1').value,
-                    address_line_2: document.getElementById('editAddressLine2').value,
-                    city: document.getElementById('editCity').value,
-                    state: document.getElementById('editState').value,
-                    zip_code: document.getElementById('editZipCode').value,
-                    country: document.getElementById('editCountry').value,
-                    geo_location: {
-                        latitude: document.getElementById('editlatitude').value,
-                        longitude: document.getElementById('editlongitude').value,
-                    }
-                }
-            };
-
-            if (!updatedProfile.username || !updatedProfile.type || !updatedProfile.manager_name ||
-                !updatedProfile.primary_contact_email || !updatedProfile.primary_contact_phone) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            try {
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    alert('Authorization token is missing. Please log in again.');
-                    return;
-                }
-                const response = await fetch(`${BACKEND_URL}/restaurant/updatedetails`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token,
-                    },
-                    body: JSON.stringify(updatedProfile)
-                });
-
-                if (response.status !== 200) {
-                    const data = await response.json();
-                    alert(`Error: ${data.message}`);
-                    return;
-                }
-                else {
-                    alert('Profile updated successfully');
-                    $('#editProfileModal').modal('hide');
-                    fetchProfileData();
-                }
-            } catch (error) {
-                console.error('Error saving profile:', error);
-            }
-        }
-        document.getElementById('editAccount').addEventListener('click', openEditModal);
-        document.addEventListener('DOMContentLoaded', fetchProfileData);
-    </script>
 
     <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
         <div class="overlay"></div>
@@ -471,37 +371,212 @@
     </div>
 
     <script>
-        document.getElementById('deleteAccount').addEventListener('click', async function (e) {
-            e.preventDefault();
-            const BACKEND_URL = "http://localhost:3000";
-            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('editAccount').addEventListener('click', openEditModal);
+            document.getElementById('deleteAccount').addEventListener('click', deleteAccount);
+            document.getElementById('logoutLinkNavbar').addEventListener('click', logoutUser);
+            fetchProfileData();
+        });
+
+        const BACKEND_URL = "http://localhost:3000";
+        let latitude,longitude;
+
+        async function fetchProfileData() {
+            try {
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
+                    return;
+                }
+                const response = await fetch(`${BACKEND_URL}/restaurant/getbyid`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+                if (response.status == 401) {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('Login.html');
+                    return;
+                }
+                const restaurant = await response.json();
+                if (response.status !== 200) {
+                    alert(`Error: ${restaurant.message}`);
+                    return;
+                }
+                updateProfileData(restaurant);
+                
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        }
+
+        function viewLocationOnMap(latitude, longitude) {
+             const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
+
+        function updateProfileData(restaurant) {
+            document.getElementById('name').textContent = restaurant.username;
+            document.getElementById('restaurant_name').textContent = restaurant.name;
+            document.getElementById('type').textContent = restaurant.type;
+            document.getElementById('business_license_number').textContent = restaurant.business_license_number;
+
+            document.getElementById('website_url').textContent = restaurant.website_url;
+            const websiteUrlElement = document.getElementById('website_url');
+            if (restaurant.website_url) {
+                websiteUrlElement.textContent = restaurant.website_url;
+                websiteUrlElement.href = restaurant.website_url;
+                websiteUrlElement.style.display = 'inline';
+            } else {
+                websiteUrlElement.textContent = 'URL not provided';
+                websiteUrlElement.removeAttribute('href');
+            }
+            document.getElementById('address_line_1').textContent = restaurant.physical_address.address_line_1;
+            document.getElementById('address_line_2').textContent = restaurant.physical_address.address_line_2 ? restaurant.physical_address.address_line_2 : 'N/A';
+            document.getElementById('city').textContent = restaurant.physical_address.city;
+            document.getElementById('state').textContent = restaurant.physical_address.state;
+            document.getElementById('zip_code').textContent = restaurant.physical_address.zip_code;
+
+            latitude = restaurant.physical_address.geo_location.latitude;
+            longitude = restaurant.physical_address.geo_location.longitude;
+            document.getElementById('location').innerHTML = `<a href="javascript:void(0);" onclick="viewLocationOnMap(${latitude}, ${longitude})">Click here to view on map</a>`;
+
+            document.getElementById('manager_name').textContent = restaurant.manager_name;
+            document.getElementById('primary_contact_email').textContent = restaurant.primary_contact_email;
+            document.getElementById('primary_contact_phone').textContent = restaurant.primary_contact_phone;
+            document.getElementById('food_handlers_permit').href = restaurant.food_handlers_permit;
+        }
+
+        function openEditModal() {
+            event.preventDefault();
+            fetchProfileData().then(() => {
+                document.getElementById('editName').value = document.getElementById('name').textContent;
+                document.getElementById('editType').value = document.getElementById('type').textContent;
+                document.getElementById('editWebsiteUrl').value = document.getElementById('website_url').textContent !== 'URL not provided' ? document.getElementById('website_url').textContent : '';
+                document.getElementById('editManagerName').value = document.getElementById('manager_name').textContent;
+                document.getElementById('editPrimaryContactEmail').value = document.getElementById('primary_contact_email').textContent;
+                document.getElementById('editPrimaryContactPhone').value = document.getElementById('primary_contact_phone').textContent;
+                document.getElementById('editAddressLine1').value = document.getElementById('address_line_1').textContent;
+                document.getElementById('editAddressLine2').value = document.getElementById('address_line_2').textContent !== 'N/A' ? document.getElementById('address_line_2').textContent : '';
+                document.getElementById('editCity').value = document.getElementById('city').textContent;
+                document.getElementById('editState').value = document.getElementById('state').textContent;
+                document.getElementById('editZipCode').value = document.getElementById('zip_code').textContent;
+                document.getElementById('editlatitude').value = latitude;
+                document.getElementById('editlongitude').value = longitude;
+                $('#editProfileModal').modal('show');
+            });
+        }
+
+        async function saveProfile(event) {
+            event.preventDefault();
+            const form = document.getElementById('editProfileForm');
+            if (!form.checkValidity()) {
+                alert('Check all the required fields.');
+                return;
+            }
+
+            const updatedProfile = {
+                username: document.getElementById('editName').value,
+                type: document.getElementById('editType').value,
+                website_url: document.getElementById('editWebsiteUrl').value,
+                manager_name: document.getElementById('editManagerName').value,
+                primary_contact_email: document.getElementById('editPrimaryContactEmail').value,
+                primary_contact_phone: document.getElementById('editPrimaryContactPhone').value,
+                physical_address: {
+                    address_line_1: document.getElementById('editAddressLine1').value,
+                    address_line_2: document.getElementById('editAddressLine2').value,
+                    city: document.getElementById('editCity').value,
+                    state: document.getElementById('editState').value,
+                    zip_code: document.getElementById('editZipCode').value,
+                    geo_location: {
+                        latitude: document.getElementById('editlatitude').value,
+                        longitude: document.getElementById('editlongitude').value,
+                    }
+                }
+            };
+
+            if (confirm('Are you sure ?')){
                 try {
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Authorization token is missing. Please log in again.');
+                        window.location.href = 'Login.html';
                         return;
                     }
-                    const response = await fetch(`${BACKEND_URL}/restaurant/delete`, {
-                        method: 'DELETE',
+                    const response = await fetch(`${BACKEND_URL}/restaurant/updatedetails`, {
+                        method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': token,
                         },
+                        body: JSON.stringify(updatedProfile)
                     });
 
-                    if (response.status === 200) {
-                        alert('Account deleted successfully');
-                        window.location.href = 'index.html';
-                    } else {
+                    if (response.status === 401) {
+                        alert('Not authorised to access this route');
+                        localStorage.clear();
+                        window.location.assign('Login.html');
+                        return;
+                    }
+                    if (response.status !== 200) {
                         const data = await response.json();
-                        alert(`Error: ${data.message}`); // Display error message from the response
+                        alert(`Error: ${data.message}`);
+                        return;
+                    }
+                    else {
+                        alert('Profile updated successfully');
+                        $('#editProfileModal').modal('hide');
+                        fetchProfileData();
                     }
                 } catch (error) {
-                    console.error('Error deleting profile:', error);
-                    alert('Error deleting profile'); // Handle error
+                    console.error('Error saving profile:', error);
                 }
             }
-        });
+        }
+
+        async function deleteAccount(event){
+            event.preventDefault();
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                const BACKEND_URL = "http://localhost:3000";
+                if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                    try {
+                        const token = localStorage.getItem('authToken');
+                        if (!token) {
+                            alert('Authorization token is missing. Please log in again.');
+                            window.location.href = 'Login.html';
+                            return;
+                        }
+                        const response = await fetch(`${BACKEND_URL}/restaurant/delete`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': token,
+                            },
+                        });
+                        if (response.status === 401) {
+                            alert('Not authorised to access this route');
+                            localStorage.clear();
+                            window.location.assign('Login.html');
+                            return;
+                        }
+                        if (response.status === 200) {
+                            alert('Account deleted successfully');
+                            window.location.href = 'index.html';
+                        } else {
+                            const data = await response.json();
+                            alert(`Error: ${data.message}`); // Display error message from the response
+                        }
+                    } catch (error) {
+                        console.error('Error deleting profile:', error);
+                        alert('Error deleting profile'); // Handle error
+                    }
+                }
+            }
+        }
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -532,16 +607,15 @@
                     break;
             }
         }
-    </script>
-    <script>
-        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link action
+
+        function logoutUser(event) {
+            event.preventDefault(); 
             var confirmation = confirm('Are you sure you want to logout?');
             if (confirmation) {
                 localStorage.clear();
-                window.location.href = 'index.html'; // Redirect to the logout page
+                window.location.href = 'index.html';
             }
-        });
+        }
     </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>

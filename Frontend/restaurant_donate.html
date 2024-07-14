@@ -154,12 +154,12 @@
                   <div class="location-field">
                     <div class="form-row">
                       <div class="col">
-                        <input type="number" class="form-control" style="border-radius: 5px" id="latitude"
-                          name="latitude" placeholder="Latitude" step="any" required />
+                          <input type="text" class="form-control" style="border-radius: 5px" id="latitude" name="latitude" placeholder="Latitude" 
+                            pattern="^-?([1-8]?[0-9](\.\d+)?|90(\.0+)?)$"  title="Please enter a valid latitude between -90 and 90." required />
                       </div>
                       <div class="col">
-                        <input type="number" class="form-control" style="border-radius: 5px" id="longitude"
-                          name="longitude" placeholder="Longitude" step="any" required />
+                        <input type="text" class="form-control" style="border-radius: 5px" id="longitude" name="longitude" placeholder="Longitude"
+                         pattern="^-?([1-9]?[0-9]|1[0-7][0-9]|180)(\.\d+)?$" title="Please enter a valid longitude between -180 and 180." required />
                       </div>
                     </div>
                   </div>
@@ -222,69 +222,70 @@
     document.getElementById('foodDonationForm').addEventListener('submit', async function (event) {
       event.preventDefault();
 
-      const form = event.target;
-      const formData = new FormData(form);
-      console.log(formData);
+      if (confirm('Are you sure you want to submit ?')){
+        const form = event.target;
+        const formData = new FormData(form);
 
-      const useDefaultAddress = document.getElementById('defaultAddress').checked;
-      const useDefaultContact = document.getElementById('defaultContact').checked;
+        const useDefaultAddress = document.getElementById('defaultAddress').checked;
+        const useDefaultContact = document.getElementById('defaultContact').checked;
 
-      if (useDefaultAddress) {
-        formData.set('address_line_1', ''); // Set to empty or default value
-        formData.set('address_line_2', '');
-        formData.set('city', '');
-        formData.set('latitude', '');
-        formData.set('longitude', '');
-      }
-
-      if (useDefaultContact) {
-        formData.set('contactPersonName', ''); // Set to empty or default value
-        formData.set('contactPersonPhone', '');
-      }
-
-      const pickupLocation = {
-        address: {
-          address_line_1: formData.get('address_line_1'),
-          address_line_2: formData.get('address_line_2'),
-          city: formData.get('city'),
-        },
-        geo_location: {
-          latitude: formData.get('latitude'),
-          longitude: formData.get('longitude'),
-        },
-      };
-      formData.append('pickupLocation', JSON.stringify(pickupLocation));
-
-      const contactPerson = {
-        name: formData.get('contactPersonName'),
-        phone: formData.get('contactPersonPhone'),
-      };
-      formData.append('contactPerson', JSON.stringify(contactPerson));
-
-      const packaged = formData.get('packaged') === 'true';
-
-      formData.set('packaged', packaged);
-
-      try {
-        const token = localStorage.getItem('authToken');
-        const response = await fetch(`${BACKEND_URL}/foodtransaction/create`, {
-          method: 'POST',
-          headers: {
-            'Authorization': token
-          },
-          body: formData,
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          alert('Food donation created successfully');
-          window.location.assign('index_restaurant.html');
-        } else {
-          alert(result.message);
+        if (useDefaultAddress) {
+          formData.set('address_line_1', ''); // Set to empty or default value
+          formData.set('address_line_2', '');
+          formData.set('city', '');
+          formData.set('latitude', '');
+          formData.set('longitude', '');
         }
-      } catch (error) {
-        alert('An error occurred. Please try again later.');
+
+        if (useDefaultContact) {
+          formData.set('contactPersonName', ''); // Set to empty or default value
+          formData.set('contactPersonPhone', '');
+        }
+
+        const pickupLocation = {
+          address: {
+            address_line_1: formData.get('address_line_1'),
+            address_line_2: formData.get('address_line_2'),
+            city: formData.get('city'),
+          },
+          geo_location: {
+            latitude: formData.get('latitude'),
+            longitude: formData.get('longitude'),
+          },
+        };
+        formData.append('pickupLocation', JSON.stringify(pickupLocation));
+
+        const contactPerson = {
+          name: formData.get('contactPersonName'),
+          phone: formData.get('contactPersonPhone'),
+        };
+        formData.append('contactPerson', JSON.stringify(contactPerson));
+
+        const packaged = formData.get('packaged') === 'true';
+
+        formData.set('packaged', packaged);
+
+        try {
+          const token = localStorage.getItem('authToken');
+          const response = await fetch(`${BACKEND_URL}/foodtransaction/create`, {
+            method: 'POST',
+            headers: {
+              'Authorization': token
+            },
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert('Food donation created successfully');
+            window.location.assign('pending_donations_restaurant.html');
+          } else {
+            alert(result.message);
+          }
+        } catch (error) {
+          alert('An error occurred. Please try again later.');
+        }
       }
     });
 

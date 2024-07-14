@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>NGO's Food Transactions</title>
+    <title>Accepted Donations</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -128,6 +128,26 @@
 
         .bold-text {
             font-weight: 700;
+        }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone-link {
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -283,9 +303,9 @@
                 window.location.assign('index.html'); // Redirect to the logout page
             }
         });
-    </script>
-    <script>
-        const BACKEND_URL = "http://localhost:3000"; // Update this with your actual backend URL
+
+        const BACKEND_URL = "http://localhost:3000"; 
+        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
 
         async function fetchFoodTransactions() {
             const token = localStorage.getItem('authToken');
@@ -301,7 +321,6 @@
                         'Authorization': token
                     }
                 });
-
                 if (response.status == 200) {
                     const data = await response.json();
                     createDonationCards(data);
@@ -326,8 +345,10 @@
 
             if (donations.length === 0) {
                 const message = document.createElement('div');
-                message.className = 'alert alert-info';
+                message.className = 'message-card';
                 message.textContent = 'No Pending Requests';
+                message.id = 'empty-message';
+
                 container.appendChild(message);
                 return;
             }
@@ -350,14 +371,19 @@
                         </div>
                         <div class="col-md-6">
                             <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
-                            <p class="card-text">Contact Phone: ${donation.contactPerson.phone}</p>
+                            <p class="card-text">
+                                Contact Phone: : <a href="tel:${donation.contactPerson.phone}" class="phone-link">${donation.contactPerson.phone}</a>
+                            </p>
                             <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
                             <p class="card-text">NGO Name: ${donation.ngo.organization_name}</p>
                             <p class="card-text">NGO Email: ${donation.ngo.primary_contact.email}</p>
-                            <p class="card-text">NGO Phone Number: ${donation.ngo.primary_contact.phoneno}</p>
+                            <p class="card-text">
+                                NGO Phoneno : <a href="tel:${donation.ngo.primary_contact.phoneno}" class="phone-link">${donation.ngo.primary_contact.phoneno}</a>
+                            </p>
                         </div>
                     </div>
                     <div class="text-center mt-3">
+                        <button class="btn btn-success btn-accept" onclick="deleteDonation('${donation._id}')">Delete Donation</button>
                         <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
                     </div>
                 </div>
@@ -369,6 +395,43 @@
 
     <script>
 
+        async function deleteDonation(transactionId) {
+            if (confirm('Are you sure you want to delete ?')){
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please log in again.');
+                        window.location.href = 'Login.html';
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/foodtransaction/delete`, {
+                        method: "DELETE",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify({ transactionId }),
+                    });
+
+                    if (response.status === 200) {
+                        alert('Donation request deleted successfully');
+                        fetchFoodTransactions();
+                    }
+                    else if (response.status == 401) {
+                        localStorage.clear();
+                        alert('Unauthorised to access this route');
+                        window.location.href = 'Login.html';
+                    } 
+                    else {
+                        alert('Error deleting donation request');
+                    }
+                } catch (error) {
+                    console.error('Error deleting donation request:', error);
+                    alert('Error deleting donation request');
+                }
+            }
+        }
+        
         function showPhotos(photos) {
             const photoContainer = document.querySelector('.photo-tile');
             photoContainer.innerHTML = ''; // Clear previous photos
@@ -405,8 +468,6 @@
 
             $('#photoModal').modal('show');
         }
-
-        document.addEventListener('DOMContentLoaded', fetchFoodTransactions());
 
     </script>
 

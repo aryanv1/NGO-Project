@@ -289,14 +289,12 @@
                             <div class="location-field">
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" style="border-radius: 5px"
-                                            id="editlatitude" name="editlatitude" placeholder="Latitude" step="any"
-                                            required />
+                                        <input type="text" class="form-control" style="border-radius: 5px" id="editlatitude" name="editlatitude" placeholder="Latitude" 
+                                          pattern="^-?([1-8]?[0-9](\.\d+)?|90(\.0+)?)$"  title="Please enter a valid latitude between -90 and 90." required />
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" style="border-radius: 5px"
-                                            id="editlongitude" name="editlongitude" placeholder="Longitude" step="any"
-                                            required />
+                                      <input type="text" class="form-control" style="border-radius: 5px" id="editlongitude" name="editlongitude" placeholder="Longitude"
+                                       pattern="^-?([1-9]?[0-9]|1[0-7][0-9]|180)(\.\d+)?$" title="Please enter a valid longitude between -180 and 180." required />
                                     </div>
                                 </div>
                             </div>
@@ -490,63 +488,63 @@
 
         async function saveProfile(event) {
             event.preventDefault();
-
             const form = document.getElementById('editProfileForm');
             if (!form.checkValidity()) {
                 alert('Check all the required fields.');
                 return;
             }
-
-            const updatedProfile = {
-                full_name: document.getElementById('editFullName').value,
-                phone_number: document.getElementById('editPhoneNumber').value,
-                current_work_status: document.getElementById('editWorkStatus').value,
-                home_address: {
-                    address_line_1: document.getElementById('editAddressLine1').value,
-                    address_line_2: document.getElementById('editAddressLine2').value,
-                    city: document.getElementById('editCity').value,
-                    state: document.getElementById('editState').value,
-                    zip_code: document.getElementById('editZipCode').value,
-                    geo_location: {
-                        latitude: parseFloat(document.getElementById('editlatitude').value),
-                        longitude: parseFloat(document.getElementById('editlongitude').value),
+            if (confirm('Are you sure ?')){
+                const updatedProfile = {
+                    full_name: document.getElementById('editFullName').value,
+                    phone_number: document.getElementById('editPhoneNumber').value,
+                    current_work_status: document.getElementById('editWorkStatus').value,
+                    home_address: {
+                        address_line_1: document.getElementById('editAddressLine1').value,
+                        address_line_2: document.getElementById('editAddressLine2').value,
+                        city: document.getElementById('editCity').value,
+                        state: document.getElementById('editState').value,
+                        zip_code: document.getElementById('editZipCode').value,
+                        geo_location: {
+                            latitude: parseFloat(document.getElementById('editlatitude').value),
+                            longitude: parseFloat(document.getElementById('editlongitude').value),
+                        }
                     }
-                }
-            };
+                };
 
-            try {
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    alert('Authorization token is missing. Please log in again.');
-                    window.location.href = 'Login.html';
-                    return;
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please log in again.');
+                        window.location.href = 'Login.html';
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token,
+                        },
+                        body: JSON.stringify(updatedProfile)
+                    });
+                    if (response.status === 401) {
+                        alert('Not authorised to access this route');
+                        localStorage.clear();
+                        window.location.assign('Login.html');
+                        return;
+                    }
+                    if (response.status !== 200) {
+                        const data = await response.json();
+                        alert(`Error: ${data.message}`);
+                        return;
+                    }
+                    else {
+                        alert('Profile updated successfully');
+                        $('#editProfileModal').modal('hide');
+                        fetchProfileData();
+                    }
+                } catch (error) {
+                    console.error('Error saving profile:', error);
                 }
-                const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token,
-                    },
-                    body: JSON.stringify(updatedProfile)
-                });
-                if (response.status === 401) {
-                    alert('Not authorised to access this route');
-                    localStorage.clear();
-                    window.location.assign('Login.html');
-                    return;
-                }
-                if (response.status !== 200) {
-                    const data = await response.json();
-                    alert(`Error: ${data.message}`);
-                    return;
-                }
-                else {
-                    alert('Profile updated successfully');
-                    $('#editProfileModal').modal('hide');
-                    fetchProfileData();
-                }
-            } catch (error) {
-                console.error('Error saving profile:', error);
             }
         }
 

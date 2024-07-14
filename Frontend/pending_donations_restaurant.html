@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>NGO's Food Transactions</title>
+    <title>Pending Requests</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
@@ -50,30 +50,6 @@
             max-width: 600px;
             margin: auto;
         }
-
-        .star-rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: left;
-        }
-
-        .star-rating input[type="radio"] {
-            display: none;
-        }
-
-        .star-rating label {
-            color: #ccc;
-            font-size: 2em;
-            padding: 0 0.1em;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .star-rating input[type="radio"]:checked~label,
-        .star-rating input[type="radio"]:checked~label~label {
-            color: #f5b301;
-        }
-
         .form-control {
             font-size: 1rem;
             /* Adjust the font size of form controls */
@@ -134,6 +110,17 @@
             /* Maintain aspect ratio */
             margin-right: 10px;
             /* Space between photos */
+        }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -291,13 +278,17 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         const BACKEND_URL = "http://localhost:3000"; // Update this with your actual backend URL
+
+        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
 
         async function fetchFoodTransactions() {
             const token = localStorage.getItem('authToken');
             if (!token) {
                 alert('Authorization token is missing. Please log in again.');
+                window.location.href = 'Login.html';
                 return;
             }
             try {
@@ -310,10 +301,13 @@
 
                 if (response.status == 200) {
                     const data = await response.json();
-                    console.log(data);
                     createDonationCards(data);
                 }
-                // add condition for directing to guest/login page if token is expired.
+                else if (response.status == 401) {
+                    localStorage.clear();
+                    alert('Unauthorised to access this route');
+                    window.location.href = 'Login.html';
+                }
                 else {
                     alert('Failed to fetch food transactions. Please try again later.');
                 }
@@ -322,6 +316,10 @@
                 alert('Error fetching food transactions.');
             }
         }
+        function viewLocationOnMap(latitude, longitude) {
+            const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
 
         function createDonationCards(donations) {
             const container = document.getElementById('foodTransactionsContainer');
@@ -329,8 +327,10 @@
 
             if (donations.length === 0) {
                 const message = document.createElement('div');
-                message.className = 'alert alert-info';
+                message.className = 'message-card';
                 message.textContent = 'No Pending Requests';
+                message.id = 'empty-message';
+
                 container.appendChild(message);
                 return;
             }
@@ -352,15 +352,21 @@
                                 ${donation.pickupLocation.address.city}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="card-text">Latitude: ${donation.pickupLocation.geo_location.latitude}</p>
-                            <p class="card-text">Longitude: ${donation.pickupLocation.geo_location.longitude}</p>
+                            <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${donation.pickupLocation.geo_location.latitude},${donation.pickupLocation.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
                             <p class="card-text">Contact Person: ${donation.contactPerson.name}</p>
-                            <p class="card-text">Contact Phone: ${donation.contactPerson.phone}</p>
+                            <p class="card-text">
+                                Contact Phone: <a href="tel:${donation.contactPerson.phone}" class="phone-link">${donation.contactPerson.phone}</a>
+                            </p>
                             <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept" onclick="deleteDonation('${donation._id}', this)">Delete Donation</button>
+                        <button class="btn btn-success btn-accept" onclick="deleteDonation('${donation._id}')">Delete Donation</button>
                         <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
                     </div>
                 </div>
@@ -369,29 +375,40 @@
             });
         }
 
-        async function deleteDonation(transactionId, button) {
-            try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch(`${BACKEND_URL}/foodtransaction/delete`, {
-                    method: "DELETE",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token
-                    },
-                    body: JSON.stringify({ transactionId }),
-                });
+        async function deleteDonation(transactionId) {
+            if (confirm('Are you sure you want to delete ?')){
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please log in again.');
+                        window.location.href = 'Login.html';
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/foodtransaction/delete`, {
+                        method: "DELETE",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify({ transactionId }),
+                    });
 
-                if (response.status == 200) {
-                    alert('Donation request deleted successfully');
-
-                    const card = button.closest('.card');
-                    card.remove();
-                } else {
+                    if (response.status === 200) {
+                        alert('Donation request deleted successfully');
+                        fetchFoodTransactions();
+                    }
+                    else if (response.status == 401) {
+                        localStorage.clear();
+                        alert('Unauthorised to access this route');
+                        window.location.href = 'Login.html';
+                    } 
+                    else {
+                        alert('Error deleting donation request');
+                    }
+                } catch (error) {
+                    console.error('Error deleting donation request:', error);
                     alert('Error deleting donation request');
                 }
-            } catch (error) {
-                console.error('Error deleting donation request:', error);
-                alert('Error deleting donation request');
             }
         }
 
@@ -432,8 +449,6 @@
 
             $('#photoModal').modal('show');
         }
-
-        document.addEventListener('DOMContentLoaded', fetchFoodTransactions());
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

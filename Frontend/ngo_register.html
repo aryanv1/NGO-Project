@@ -175,14 +175,12 @@
                                 <div class="location-field">
                                     <div class="form-row">
                                         <div class="col">
-                                            <input type="number" class="form-control" style="border-radius: 5px;"
-                                                id="latitude" name="latitude" placeholder="Latitude" step="any"
-                                                required>
+                                            <input type="text" class="form-control" style="border-radius: 5px" id="latitude" name="latitude" placeholder="Latitude" 
+                                              pattern="^-?([1-8]?[0-9](\.\d+)?|90(\.0+)?)$"  title="Please enter a valid latitude between -90 and 90." required />
                                         </div>
                                         <div class="col">
-                                            <input type="number" class="form-control" style="border-radius: 5px;"
-                                                id="longitude" name="longitude" placeholder="Longitude" step="any"
-                                                required>
+                                          <input type="text" class="form-control" style="border-radius: 5px" id="longitude" name="longitude" placeholder="Longitude"
+                                           pattern="^-?([1-9]?[0-9]|1[0-7][0-9]|180)(\.\d+)?$" title="Please enter a valid longitude between -180 and 180." required />
                                         </div>
                                     </div>
                                 </div>
@@ -343,68 +341,69 @@
         <script>
             document.getElementById('registerForm').addEventListener('submit', async function (event) {
                 event.preventDefault();
-                
-                const newPassword = document.getElementById("password").value;
-                const confirmPassword = document.getElementById("re-password").value;
+                if (confirm('Are you sure you want to submit ?')){
+                    const newPassword = document.getElementById("password").value;
+                    const confirmPassword = document.getElementById("re-password").value;
 
-                if (newPassword !== confirmPassword) {
-                    alert('Passwords do not match');
-                    return;
-                }
-
-                const form = event.target;
-                const formData = new FormData(form);
-                const physicalAddresses = {
-                    address_line_1: formData.get('address_line_1'),
-                    address_line_2: formData.get('address_line_2'),
-                    city: formData.get('city'),
-                    state: formData.get('state'),
-                    zip_code: formData.get('zip_code'),
-                    geo_location: {
-                        latitude: formData.get('latitude'),
-                        longitude: formData.get('longitude'),
+                    if (newPassword !== confirmPassword) {
+                        alert('Passwords do not match');
+                        return;
                     }
-                };
 
-                formData.append('physical_addresses', JSON.stringify(physicalAddresses));
+                    const form = event.target;
+                    const formData = new FormData(form);
+                    const physicalAddresses = {
+                        address_line_1: formData.get('address_line_1'),
+                        address_line_2: formData.get('address_line_2'),
+                        city: formData.get('city'),
+                        state: formData.get('state'),
+                        zip_code: formData.get('zip_code'),
+                        geo_location: {
+                            latitude: formData.get('latitude'),
+                            longitude: formData.get('longitude'),
+                        }
+                    };
 
-                const primaryContact = {
-                    name: formData.get('primary_contact[name]'),
-                    email: formData.get('primary_contact[email]'),
-                    phoneno: formData.get('primary_contact[phoneno]')
-                };
-                formData.append('primary_contact', JSON.stringify(primaryContact));
+                    formData.append('physical_addresses', JSON.stringify(physicalAddresses));
+
+                    const primaryContact = {
+                        name: formData.get('primary_contact[name]'),
+                        email: formData.get('primary_contact[email]'),
+                        phoneno: formData.get('primary_contact[phoneno]')
+                    };
+                    formData.append('primary_contact', JSON.stringify(primaryContact));
 
 
-                const secondaryContact = {
-                    name: formData.get('secondary_contact[name]'),
-                    email: formData.get('secondary_contact[email]'),
-                    phoneno: formData.get('secondary_contact[phoneno]')
-                };
+                    const secondaryContact = {
+                        name: formData.get('secondary_contact[name]'),
+                        email: formData.get('secondary_contact[email]'),
+                        phoneno: formData.get('secondary_contact[phoneno]')
+                    };
 
-                if (secondaryContact.name && secondaryContact.email && secondaryContact.phoneno) {
-                    formData.append('secondary_contact', JSON.stringify(secondaryContact));
-                }
-                else if (secondaryContact.name || secondaryContact.email || secondaryContact.phoneno) {
-                   alert('Please fill all details of secondary contact.')
-                }
-
-                try {
-                    const response = await fetch('http://localhost:3000/ngo/register', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const result = await response.json();
-
-                    if (response.status === 201) {
-                        alert("Registration successful, Please check your mailbox.");
-                        window.location.assign('index.html');
-                    } else {
-                        alert(result.message);
+                    if (secondaryContact.name && secondaryContact.email && secondaryContact.phoneno) {
+                        formData.append('secondary_contact', JSON.stringify(secondaryContact));
                     }
-                } catch (error) {
-                    alert('An error occurred. Please try again later.');
-                    console.log(error);
+                    else if (secondaryContact.name || secondaryContact.email || secondaryContact.phoneno) {
+                    alert('Please fill all details of secondary contact.')
+                    }
+
+                    try {
+                        const response = await fetch('http://localhost:3000/ngo/register', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const result = await response.json();
+
+                        if (response.status === 201) {
+                            alert("Registration successful, Please check your mailbox.");
+                            window.location.assign('index.html');
+                        } else {
+                            alert(result.message);
+                        }
+                    } catch (error) {
+                        alert('An error occurred. Please try again later.');
+                        console.log(error);
+                    }
                 }
             });
         </script>

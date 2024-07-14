@@ -176,7 +176,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        const BACKEND_URL = "http://localhost:3000"; // Update this with your actual backend URL
+        const BACKEND_URL = "http://localhost:3000";
 
         async function fetchFoodTransactions() {
             try {
@@ -196,7 +196,6 @@
                         'Authorization': token
                     }
                 });
-
                 const data = await response.json();
                 if (response.status === 401) {
                     alert('Not authorised to access this route');
@@ -275,39 +274,41 @@
         }
 
         async function claimDonation(transactionId) {
-            try {
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    alert('Authorization token is missing. Please login');
-                    window.location.href = 'Login.html';
-                    return;
+            if (confirm('Confrim claim request?')){
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please login');
+                        window.location.href = 'Login.html';
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/foodtransaction/claimstatusupdate`, {
+                        method: "PATCH",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify({ transactionId }),
+                    });
+                    if (response.status == 200) {
+                        alert('Donation claimed successfully');
+                        fetchFoodTransactions();
+                    }
+                    else if (response.status === 401) {
+                        alert('Not authorised to access this route');
+                        localStorage.clear();
+                        window.location.assign('index.html');
+                        return;
+                    }
+                    else {
+                        const data = await response.json();
+                        alert(`${data.message}`);
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error claiming donation:', error);
+                    alert('Error claiming donation');
                 }
-                const response = await fetch(`${BACKEND_URL}/foodtransaction/claimstatusupdate`, {
-                    method: "PATCH",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token
-                    },
-                    body: JSON.stringify({ transactionId }),
-                });
-                if (response.status == 200) {
-                    alert('Donation claimed successfully');
-                    fetchFoodTransactions();
-                }
-                else if (response.status === 401) {
-                    alert('Not authorised to access this route');
-                    localStorage.clear();
-                    window.location.assign('index.html');
-                    return;
-                }
-                else {
-                    const data = await response.json();
-                    alert(`${data.message}`);
-                    return;
-                }
-            } catch (error) {
-                console.error('Error claiming donation:', error);
-                alert('Error claiming donation');
             }
         }
 

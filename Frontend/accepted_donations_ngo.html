@@ -424,46 +424,47 @@
     <script>
         async function submitAcceptForm(event) {
             event.preventDefault(); // Prevent the default form submission behavior
-
-            const form = document.getElementById('acceptForm');
-            if (!form.checkValidity()) {
-                alert('Please fill out all required fields.');
-                return;
-            }
-            const formData = new FormData(form);
-            try {
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    alert('Authorization token is missing. Please login');
-                    window.location.href = 'Login.html';
+            if (confirm('Are you sure you wanna submit form ?')){
+                const form = document.getElementById('acceptForm');
+                if (!form.checkValidity()) {
+                    alert('Please fill out all required fields.');
                     return;
                 }
-                const response = await fetch(`${BACKEND_URL}/foodtransaction/verifycompletion`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    },
-                    body: formData
-                });
+                const formData = new FormData(form);
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Authorization token is missing. Please login');
+                        window.location.href = 'Login.html';
+                        return;
+                    }
+                    const response = await fetch(`${BACKEND_URL}/foodtransaction/verifycompletion`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
+                        },
+                        body: formData
+                    });
 
-                if (response.status == 200) {
-                    alert('Donation verified successfully!');
-                    $('#acceptFormModal').modal('hide');
-                    fetchFoodTransactions();
+                    if (response.status == 200) {
+                        alert('Donation verified successfully!');
+                        $('#acceptFormModal').modal('hide');
+                        fetchFoodTransactions();
+                    }
+                    else if (response.status === 401) {
+                        alert('Not authorised to access this route');
+                        localStorage.clear();
+                        window.location.assign('index.html');
+                    }
+                    else {
+                        const result = await response.json();
+                        alert(`Error: ${result.error}`);
+                        console.log(result.error);
+                    }
+                } catch (error) {
+                    console.error('Error submitting accept form:', error);
+                    alert('Error submitting accept form.');
                 }
-                else if (response.status === 401) {
-                    alert('Not authorised to access this route');
-                    localStorage.clear();
-                    window.location.assign('index.html');
-                }
-                else {
-                    const result = await response.json();
-                    alert(`Error: ${result.error}`);
-                    console.log(result.error);
-                }
-            } catch (error) {
-                console.error('Error submitting accept form:', error);
-                alert('Error submitting accept form.');
             }
         }
 

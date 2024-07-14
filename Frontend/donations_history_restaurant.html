@@ -244,7 +244,7 @@
             if (foodTransactions.length === 0) {
                 const message = document.createElement('div');
                 message.className = 'message-card'; // Apply custom message-card class
-                message.textContent = 'No NGO found';
+                message.textContent = 'No donation histroy';
                 message.id = 'empty-message';
 
                 ngoContainer.appendChild(message);
@@ -287,8 +287,6 @@
                 console.error(`Transaction with ID ${transactionId} not found.`);
                 return;
             }
-
-            // Populate modal with transaction details
 
             document.getElementById('NameOfNGO').textContent = transaction.ngo;
             document.getElementById('modalDescription').textContent = transaction.description;
