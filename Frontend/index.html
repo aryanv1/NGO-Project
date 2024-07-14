@@ -387,7 +387,12 @@
     </div>
   </footer>
 
-
+  <script>
+    function scrollToSection() {
+    const element = document.getElementById('temp');
+    element.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
@@ -396,7 +401,6 @@
         stroke="#F96D00" />
     </svg></div>
 
-  <script src="js/ngo_cards.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>

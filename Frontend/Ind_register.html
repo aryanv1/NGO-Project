@@ -69,17 +69,17 @@
                         <h1 class="mb-4" style="text-align: center;">Individual Registration</h1>
                         <form id="registerForm">
                             <div class="form-group">
-                                <label for="full_name">Full Name</label>
+                                <label for="full_name">Full Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="full_name"
                                     name="full_name" placeholder="Enter Full Name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email_address">Email</label>
+                                <label for="email_address">Email<span class="text-danger">*</span></label>
                                 <input type="email" class="form-control" style="border-radius: 5px;" id="email_address"
                                     name="email_address" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password <span class="text-danger">*</span></label>
+                                <label for="password">Password<span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" style="border-radius: 5px;" id="password"
                                     name="password" placeholder="Password"
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
@@ -87,9 +87,9 @@
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" style="border-radius: 5px;" id="password"
-                                    name="password" placeholder="Password"
+                                <label for="password">Confrim Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" style="border-radius: 5px;" id="re-password"
+                                    name="re-password" placeholder="Re-enter your password"
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
                                     title="Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character."
                                     required>
@@ -102,19 +102,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="date_of_birth">Date of Birth</label>
+                                <label for="date_of_birth">Date of Birth<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" style="border-radius: 5px;" id="date_of_birth"
                                     name="date_of_birth" required>
                             </div>
                             <div class="form-group">
-                                <label for="current_work_status">Current Work Status</label>
+                                <label for="current_work_status">Current Work Status<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
                                     id="current_work_status" name="current_work_status" placeholder="Enter Work Status"
                                     required>
                             </div>
                             <h4>Home Address</h4>
                             <div class="form-group">
-                                <label for="address_line_1">Address Line 1</label>
+                                <label for="address_line_1">Address Line 1<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="address_line_1"
                                     name="address_line_1" placeholder="Enter Address Line 1" required>
                             </div>
@@ -124,12 +124,12 @@
                                     name="address_line_2" placeholder="Enter Address Line 2">
                             </div>
                             <div class="form-group">
-                                <label for="city">City</label>
+                                <label for="city">City<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="city"
                                     name="city" placeholder="Enter City" required>
                             </div>
                             <div class="form-group">
-                                <label for="state">State</label>
+                                <label for="state">State<span class="text-danger">*</span></label>
                                 <select class="form-control" style="border-radius: 5px;" id="state" name="state"
                                     required>
                                     <option value="" disabled selected>Select State</option>
@@ -172,19 +172,13 @@
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="zip_code">Zip Code</label>
+                                <label for="zip_code">Zip Code<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="zip_code"
                                     name="zip_code" placeholder="Enter Zip Code" required>
                             </div>
                             <div class="form-group">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control" style="border-radius: 5px;" id="country"
-                                    name="country" placeholder="Enter Country" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="location">Location</label>
+                                <label for="location">Location<span class="text-danger">*</span></label>
                                 <div class="location-field">
                                     <div class="form-row">
                                         <div class="col">
@@ -287,6 +281,13 @@
         document.getElementById('registerForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
+            const newPassword = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("re-password").value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
             const form = event.target;
             const formData = new FormData(form);
             const homeAddress = {
@@ -295,7 +296,6 @@
                 city: formData.get('city'),
                 state: formData.get('state'),
                 zip_code: formData.get('zip_code'),
-                country: formData.get('country'),
                 geo_location: {
                     latitude: formData.get('latitude'),
                     longitude: formData.get('longitude')
@@ -309,9 +309,8 @@
                     method: 'POST',
                     body: formData
                 });
-
                 if (response.status == 201) {
-                    alert("Registration successful");
+                    alert("Registration successful, Please check your mailbox.");
                     window.location.assign('index.html');
                 } else {
                     const result = await response.json();

@@ -205,11 +205,11 @@ const getLogsofVolunteer = async (req, res) => {
         select: 'name',
         model: 'Restaurant'
       })
-      .populate({
-        path: 'ngo',
-        select: 'organization_name',
-        model: 'NGO'
-      })
+      // .populate({
+      //   path: 'ngo',
+      //   select: 'organization_name',
+      //   model: 'NGO'
+      // })
       .populate({
         path: 'volunteer',
         select: 'phone_number',

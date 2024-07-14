@@ -30,14 +30,6 @@ function showError(error) {
     }
 }
 
-function scrollToSection() {
-    // Select the element you want to scroll to
-    const element = document.getElementById('temp');
-
-    // Scroll to the element
-    element.scrollIntoView({ behavior: 'smooth' });
-}
-
 window.addEventListener('load', async () => {
     try {
         const response = await fetch('http://localhost:3000/ngo/get'); // Update with the correct backend URL
@@ -132,6 +124,10 @@ function setupSearch(ngos) {
     });
 
     clearButton.addEventListener('click', () => {
+        const existingMessage = document.getElementById('empty-message');
+        if (existingMessage) {
+            ngoContainer.removeChild(existingMessage);
+        }
         searchInput.value = '';
         displayNGOs(ngos); 
     });

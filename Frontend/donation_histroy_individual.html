@@ -77,6 +77,17 @@
             font-weight: 700;
             /* Bolder than normal bold */
         }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -174,7 +185,16 @@
         let foodTransactions = []; // Global variable to store food transactions
 
         async function fetchFoodTransactions() {
+            const existingMessage = document.getElementById('empty-message');
+            if (existingMessage) {
+                ngoContainer.removeChild(existingMessage);
+            }
             const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('Authorization token is missing. Please login');
+                window.location.href = 'Login.html';
+                return;
+            }
             try {
                 const response = await fetch(`${BACKEND_URL}/foodtransaction/foodlogs/volunteer`, {
                     method: "GET",
@@ -182,13 +202,19 @@
                         'Authorization': token
                     }
                 });
+                if (response.status === 401) {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
                 if (response.status !== 200) {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
                     return;
                 }
-                foodTransactions = await response.json(); // Assign fetched data to global variable
-                displayFoodTransactions(); // Call function to display transactions
+                foodTransactions = await response.json();
+                displayFoodTransactions(); 
             } catch (error) {
                 console.error(error);
                 alert('Error fetching data'); // Handle error
@@ -199,6 +225,15 @@
             const container = document.getElementById('foodTransactionsContainer');
             container.innerHTML = ''; // Clear previous content
 
+            if (foodTransactions.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message-card'; // Apply custom message-card class
+                message.textContent = 'No NGO found';
+                message.id = 'empty-message';
+
+                ngoContainer.appendChild(message);
+                return;
+            }
             foodTransactions.forEach(transaction => {
                 const card = document.createElement('div');
                 card.classList.add('card', 'mb-4');
@@ -237,13 +272,11 @@
                 return;
             }
 
-            // Populate modal with transaction details
-
             document.getElementById('NameOfNGO').textContent = transaction.ngo;
             document.getElementById('modalDescription').textContent = transaction.description;
             document.getElementById('modalPeopleServed').textContent = transaction.peopleServed;
             const volunteerPhonesElement = document.getElementById('modalVolunteerPhones');
-            if (transaction.volunteer.length > 0) {
+            if (transaction.contactPerson.phone.length !== 0) {
                 volunteerPhonesElement.textContent = transaction.volunteer.join(', ');
             } else {
                 // volunteerPhonesElement.textContent = 'No volunteers participated';

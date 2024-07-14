@@ -82,6 +82,14 @@
                                     required>
                             </div>
                             <div class="form-group">
+                                <label for="password">Confrim Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" style="border-radius: 5px;" id="re-password"
+                                    name="re-password" placeholder="Re-enter your password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                                    title="Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character."
+                                    required>
+                            </div>
+                            <div class="form-group">
                                 <label for="restaurant_name">Restaurant Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;" id="restaurant_name"
                                     name="name" placeholder="Enter Restaurant Name" required>
@@ -210,13 +218,8 @@
                                     name="zip_code" placeholder="Enter Zip Code" required>
                             </div>
                             <div class="form-group">
-                                <label for="country">Country <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" style="border-radius: 5px;" id="country"
-                                    name="country" placeholder="Enter Country" required>
-                            </div>
-                            <div class="form-group">
                                 <label for="food_handlers_permit">Food Handler's Permit <span
-                                        class="text-danger">*</span></label>
+                                        class="text-danger">(PDF only)*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="food_handlers_permit"
                                     name="food_handlers_permit" accept="application/pdf" required>
@@ -298,9 +301,15 @@
         document.getElementById('registerForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
+            const newPassword = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("re-password").value;
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
             const form = event.target;
             const formData = new FormData(form);
-            console.log(formData);
 
             const physicalAddress = {
                 address_line_1: formData.get('address_line_1'),
@@ -308,7 +317,6 @@
                 city: formData.get('city'),
                 state: formData.get('state'),
                 zip_code: formData.get('zip_code'),
-                country: formData.get('country'),
                 geo_location: {
                     latitude: formData.get('latitude'),
                     longitude: formData.get('longitude')
@@ -326,7 +334,7 @@
                 console.log(result);
 
                 if (response.ok) {
-                    alert("Registration successful");
+                    alert("Registration successful, Please check your mailbox.");
                     window.location.assign('index.html');
                 } else {
                     alert(result.message);

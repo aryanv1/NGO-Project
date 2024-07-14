@@ -83,6 +83,14 @@
                                     required>
                             </div>
                             <div class="form-group">
+                                <label for="password">Confirm Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" style="border-radius: 5px;" id="re-password"
+                                    name="re-password" placeholder="Re-enter your password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                                    title="Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one numeric digit, and one special character."
+                                    required>
+                            </div>
+                            <div class="form-group">
                                 <label for="registration_number">Registration Number <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" style="border-radius: 5px;"
@@ -231,20 +239,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="registration_certificate">Registration Certificate <span
-                                        class="text-danger">*</span></label>
+                                        class="text-danger">(PDF only)*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="registration_certificate"
                                     name="registration_certificate" accept="application/pdf" required>
                             </div>
                             <div class="form-group">
                                 <label for="tax_exemption_certificate">Tax Exemption Certificate <span
-                                        class="text-danger">*</span></label>
+                                        class="text-danger">(PDF only)*</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="tax_exemption_certificate"
                                     name="tax_exemption_certificate" accept="application/pdf" required>
                             </div>
                             <div class="form-group">
-                                <label for="recent_annual_report">Recent Annual Report</label>
+                                <label for="recent_annual_report">Recent Annual Report  <span class="text-danger">(PDF only)</span></label>
                                 <input type="file" class="form-control"
                                     style="border-radius: 5px; padding-top: 0.75rem;" id="recent_annual_report"
                                     name="recent_annual_report" accept="application/pdf">
@@ -335,6 +343,14 @@
         <script>
             document.getElementById('registerForm').addEventListener('submit', async function (event) {
                 event.preventDefault();
+                
+                const newPassword = document.getElementById("password").value;
+                const confirmPassword = document.getElementById("re-password").value;
+
+                if (newPassword !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
 
                 const form = event.target;
                 const formData = new FormData(form);
@@ -349,7 +365,7 @@
                         longitude: formData.get('longitude'),
                     }
                 };
-                // console.log(physicalAddresses)
+
                 formData.append('physical_addresses', JSON.stringify(physicalAddresses));
 
                 const primaryContact = {
@@ -359,25 +375,29 @@
                 };
                 formData.append('primary_contact', JSON.stringify(primaryContact));
 
+
                 const secondaryContact = {
                     name: formData.get('secondary_contact[name]'),
                     email: formData.get('secondary_contact[email]'),
                     phoneno: formData.get('secondary_contact[phoneno]')
                 };
-                if (secondaryContact.name || secondaryContact.email || secondaryContact.phoneno) {
+
+                if (secondaryContact.name && secondaryContact.email && secondaryContact.phoneno) {
                     formData.append('secondary_contact', JSON.stringify(secondaryContact));
                 }
-                console.log()
+                else if (secondaryContact.name || secondaryContact.email || secondaryContact.phoneno) {
+                   alert('Please fill all details of secondary contact.')
+                }
+
                 try {
                     const response = await fetch('http://localhost:3000/ngo/register', {
                         method: 'POST',
                         body: formData
                     });
-
                     const result = await response.json();
 
                     if (response.status === 201) {
-                        alert("Registration successful, Check your mailbox.");
+                        alert("Registration successful, Please check your mailbox.");
                         window.location.assign('index.html');
                     } else {
                         alert(result.message);

@@ -4,10 +4,9 @@ const {NGO} = require('../models/ngo');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 const sendRegistrationMail = require('../SMTP/registration_individual');
-// Function to create a new volunteer // Working
+
 const createVolunteer = async (req, res) => {
   try {
-    // console.log(req.body);
     const {
       full_name,
       date_of_birth,
@@ -65,6 +64,7 @@ const createVolunteer = async (req, res) => {
         message: "Error registering volunteer",
         error: error.message,
       });
+      console.log(error);
     }
   }
 };

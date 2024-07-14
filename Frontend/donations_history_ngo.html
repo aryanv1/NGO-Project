@@ -206,6 +206,12 @@
         let foodTransactions = []; // Global variable to store food transactions
 
         async function fetchFoodTransactions() {
+            
+            const existingMessage = document.getElementById('empty-message');
+            if (existingMessage) {
+                ngoContainer.removeChild(existingMessage);
+            }
+
             const token = localStorage.getItem('authToken');
             if (!token) {
                 alert('Authorization token is missing. Please log in again.');
@@ -246,6 +252,7 @@
                 const message = document.createElement('div');
                 message.className = 'message-card';
                 message.textContent = 'No donation histroy';
+                message.id = 'empty-message';
                 container.appendChild(message);
                 return;
             }

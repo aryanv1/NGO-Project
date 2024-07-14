@@ -321,6 +321,10 @@
 
         async function fetchFoodTransactions() {
             try {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 const token = localStorage.getItem('authToken');
                 if (!token) {
                     alert('Authorization token is missing. Please log in again.');
@@ -371,6 +375,8 @@
                 const message = document.createElement('div');
                 message.className = 'message-card';
                 message.textContent = 'No Pending donations';
+                message.id = 'empty-message';
+
                 container.appendChild(message);
                 return;
             }
@@ -500,7 +506,7 @@
             $('#photoModal').modal('show');
         }
 
-        document.addEventListener('DOMContentLoaded', fetchFoodTransactions());
+        document.addEventListener('DOMContentLoaded', fetchFoodTransactions);
 
         document.getElementById('distribution_photos').addEventListener('change', function (event) {
             const files = event.target.files;

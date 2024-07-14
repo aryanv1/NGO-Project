@@ -81,7 +81,6 @@ const registerNGO = async (req, res) => {
     sendRegistrationMail(newNGO);
     res.status(201).json({
       message: "NGO registered successfully",
-      ngo: newNGO,
     });
   } catch (error) {
     console.log(error);
