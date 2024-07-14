@@ -1,210 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>All NGOs</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <title>All NGOs</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
 
-  <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" />
-  <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
 
-  <link rel="stylesheet" href="css/owl.carousel.min.css" />
-  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
-  <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/aos.css" />
 
-  <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="css/ionicons.min.css" />
 
-  <link rel="stylesheet" href="css/ionicons.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="css/jquery.timepicker.css" />
 
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
-  <link rel="stylesheet" href="css/jquery.timepicker.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/icomoon.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
-  <link rel="stylesheet" href="css/flaticon.css" />
-  <link rel="stylesheet" href="css/icomoon.css" />
-  <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .ftco-navbar-light {
+        background: #343a40 !important;
+        top: 0;
+      }
 
-  <style>
-    .ftco-navbar-light {
-      background: #343a40 !important;
-      top: 0;
-    }
+      .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
 
-    .card {
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card-details {
-      flex: 1;
-    }
-
-    .btn-success {
-      border-radius: 4px;
-    }
-
-    @media (max-width: 768px) {
-      .card-details {
+      .card-body {
+        display: flex;
         flex-direction: column;
       }
 
-      .text-center.mt-3 {
-        margin-top: 1rem !important;
+      .card-details {
+        flex: 1;
       }
-    }
 
-    .message-card {
-      text-align: center;
-      font-size: xx-large;
-      padding: 20px;
-      margin-top: 20px;
-      min-height: 1000px;
-      /* Set minimum height */
-    }
-  </style>
-</head>
+      .btn-success {
+        border-radius: 4px;
+      }
 
-<body>
+      @media (max-width: 768px) {
+        .card-details {
+          flex-direction: column;
+        }
 
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index_admin.html">Welfare</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
+        .text-center.mt-3 {
+          margin-top: 1rem !important;
+        }
+      }
 
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="index_admin.html" class="nav-link">Home</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Volunteers
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="Verification_Ind_admin.html">Pending Verification</a>
-              </li>
-              <li><a class="dropdown-item" href="All_Ind_admin.html">All Volunteers</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              NGO
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="Verification_ngo_admin.html">Pending Verification</a>
-              </li>
-              <li><a class="dropdown-item" href="All_ngo_admin.html">All NGOs</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Restaurant
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="Verification_restaurant_admin.html">Pending
-                  Verification</a></li>
-              <li><a class="dropdown-item" href="All_restaurant_admin.html">All Restaurants</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a href="donation_histroy_admin.html" class="nav-link">Food Logs</a></li>
-          <li class="nav-item">
-            <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
-          </li>
-        </ul>
+      .message-card {
+        text-align: center;
+        font-size: 2rem;
+        padding: 3rem;
+        margin: 0 auto;
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+      id="ftco-navbar"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="index_admin.html">Welfare</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#ftco-nav"
+          aria-controls="ftco-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="index_admin.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Volunteers
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="Verification_Ind_admin.html"
+                    >Pending Verification</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="All_Ind_admin.html"
+                    >All Volunteers</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown active">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                NGO
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="Verification_ngo_admin.html"
+                    >Pending Verification</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="All_ngo_admin.html"
+                    >All NGOs</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Restaurant
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="Verification_restaurant_admin.html"
+                    >Pending Verification</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="All_restaurant_admin.html"
+                    >All Restaurants</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="donation_histroy_admin.html" class="nav-link"
+                >Food Logs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="index.html" class="nav-link" id="logoutLink">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- END nav -->
+
+    <!-- Search Bar -->
+    <div class="container my-5" style="padding-top: 5rem">
+      <div class="input-group">
+        <input
+          type="text"
+          id="searchInput"
+          class="form-control"
+          placeholder="Search for Volunteers ..."
+          style="border-radius: 1rem"
+        />
+        <button
+          id="clearButton"
+          class="btn btn-secondary"
+          type="button"
+          style="border-radius: 1rem; margin-left: 1vw"
+        >
+          Clear
+        </button>
       </div>
     </div>
-  </nav>
-  <!-- END nav -->
 
-  <!-- Search Bar -->
-  <div class="container my-5" style="padding-top: 5rem">
-    <div class="input-group">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search for Volunteers ..."
-        style="border-radius: 1rem;">
-      <button id="clearButton" class="btn btn-secondary" type="button"
-        style="border-radius: 1rem; margin-left: 1vw;">Clear</button>
+    <div class="container" style="margin-top: 2rem">
+      <div id="ngo-container"></div>
     </div>
-  </div>
 
-  <div class="container" style="margin-top: 2rem">
-    <div id="ngo-container"></div>
-  </div>
+    <!-- Replace the existing content in the 'restaurant-container' with NGO details -->
+    <script>
+      const BACKEND_URL = "http://localhost:3000";
+      let ngos = [];
+      async function fetchNGOs() {
+        const existingMessage = document.getElementById("empty-message");
+        if (existingMessage) {
+          ngoContainer.removeChild(existingMessage);
+        }
 
-  <!-- Replace the existing content in the 'restaurant-container' with NGO details -->
-  <script>
-    const BACKEND_URL = "http://localhost:3000";
-    let ngos = [];
-    async function fetchNGOs() {
-      try {
-        const token = localStorage.getItem('authToken');
-        const response = await fetch(`${BACKEND_URL}/admin/getallngos`, {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token,
+        try {
+          const token = localStorage.getItem("authToken");
+          if (!token) {
+            alert("Authorization token is missing. Please login");
+            window.location.href = "Login.html";
+            return;
           }
-        });
-        if (response.status !== 200) {
-          alert('Failed to fetch NGOs data');
+          const response = await fetch(`${BACKEND_URL}/admin/getallngos`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          });
+          if (response.status === 401) {
+            alert("Not authorised to access this route");
+            localStorage.clear();
+            window.location.assign("Login.html");
+            return;
+          }
+          if (response.status !== 200) {
+            const data = await response.json();
+            alert("Failed to fetch NGOs data");
+            console.log(data.message);
+            return;
+          }
+          ngos = await response.json();
+          setupSearch();
+          displayNGOs();
+        } catch (error) {
+          console.error(error);
+          alert("Error fetching NGOs data");
+        }
+      }
+
+      function viewRegistrationCertificate(url) {
+        window.open(url, "_blank"); // Opens the URL in a new tab/window
+      }
+
+      function viewTaxExemptionCertificate(url) {
+        window.open(url, "_blank"); // Opens the URL in a new tab/window
+      }
+
+      function viewAnnualReport(url) {
+        window.open(url, "_blank"); // Opens the URL in a new tab/window
+      }
+
+      function redirectToWebsite(websiteUrl) {
+        window.open(websiteUrl, "_blank"); // Opens the website URL in a new tab/window
+      }
+
+      function viewLocationOnMap(latitude, longitude) {
+        const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+        window.open(mapUrl, "_blank"); // Opens the map URL in a new tab/window
+      }
+
+      function displayNGOs() {
+        const container = document.getElementById("ngo-container");
+        container.innerHTML = ""; // Clear previous content
+
+        if (ngos.length === 0) {
+          const message = document.createElement("div");
+          message.className = "message-card";
+          message.textContent = "No donation histroy";
+          message.id = "empty-message";
+          container.appendChild(message);
           return;
         }
-        ngos = await response.json();
-        setupSearch();
-        displayNGOs();
-      } catch (error) {
-        console.error(error);
-        alert('Error fetching NGOs data');
-      }
-    }
 
-    function viewRegistrationCertificate(url) {
-      window.open(url, '_blank'); // Opens the URL in a new tab/window
-    }
-
-    function viewTaxExemptionCertificate(url) {
-      window.open(url, '_blank'); // Opens the URL in a new tab/window
-    }
-
-    function viewAnnualReport(url) {
-      window.open(url, '_blank'); // Opens the URL in a new tab/window
-    }
-
-    function redirectToWebsite(websiteUrl) {
-      window.open(websiteUrl, '_blank'); // Opens the website URL in a new tab/window
-    }
-
-    function viewLocationOnMap(latitude, longitude) {
-      const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-      window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
-    }
-
-    function displayNGOs() {
-      const container = document.getElementById('ngo-container');
-      container.innerHTML = ''; // Clear previous content
-
-      if (ngos.length === 0) {
-        const message = document.createElement('div');
-        message.className = 'message-card'; // Apply custom message-card class
-        message.textContent = 'No NGOs';
-
-        container.appendChild(message);
-        return;
-      }
-
-      ngos.forEach(ngo => {
-        const ngoCard = `
+        ngos.forEach((ngo) => {
+          const ngoCard = `
                 <div class="container mt-2">
                     <div class="row">
                         <div class="col-md-12">
@@ -212,297 +308,422 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h5 class="card-title">NGO Name: ${ngo.organization_name}</h5>
-                                            <p class="card-text">Registration Number: ${ngo.registration_number}</p>
-                                            <p class="card-text">Tax ID EIN: ${ngo.tax_id_ein}</p>
+                                            <h5 class="card-title">NGO Name: ${
+                                              ngo.organization_name
+                                            }</h5>
+                                            <p class="card-text">Registration Number: ${
+                                              ngo.registration_number
+                                            }</p>
+                                            <p class="card-text">Tax ID EIN: ${
+                                              ngo.tax_id_ein
+                                            }</p>
                                             <p class="card-text">Website: 
-                                                ${ngo.website_url ?
-            `<a href="javascript:void(0);" 
+                                                ${
+                                                  ngo.website_url
+                                                    ? `<a href="javascript:void(0);" 
                                                         onclick="redirectToWebsite('${ngo.website_url}')">
                                                         ${ngo.website_url}
                                                     </a>`
-            : "Not Available"}
+                                                    : "Not Available"
+                                                }
                                             </p>
-                                            <p class="card-text">Primary Contact: ${ngo.primary_contact.name}</p>
-                                            <p class="card-text">Email: ${ngo.primary_contact.email}</p>
-                                            <p class="card-text">Phone: ${ngo.primary_contact.phoneno}</p>
+                                            <p class="card-text">Primary Contact: ${
+                                              ngo.primary_contact.name
+                                            }</p>
+                                            <p class="card-text">Email: ${
+                                              ngo.primary_contact.email
+                                            }</p>
+                                            <p class="card-text">Phone: ${
+                                              ngo.primary_contact.phoneno
+                                            }</p>
                                         </div>
                                         <div class="col-md-6">
-                                            <p class="card-text">Address Line 1: ${ngo.physical_addresses.address_line_1}</p>
-                                            <p class="card-text">Address Line 2: ${ngo.physical_addresses.address_line_2 || ''}</p>
-                                            <p class="card-text">City: ${ngo.physical_addresses.city}</p>
-                                            <p class="card-text">State: ${ngo.physical_addresses.state}</p>
-                                            <p class="card-text">Zip Code: ${ngo.physical_addresses.zip_code}</p>
+                                            <p class="card-text">Address Line 1: ${
+                                              ngo.physical_addresses
+                                                .address_line_1
+                                            }</p>
+                                            <p class="card-text">Address Line 2: ${
+                                              ngo.physical_addresses
+                                                .address_line_2 || ""
+                                            }</p>
+                                            <p class="card-text">City: ${
+                                              ngo.physical_addresses.city
+                                            }</p>
+                                            <p class="card-text">State: ${
+                                              ngo.physical_addresses.state
+                                            }</p>
+                                            <p class="card-text">Zip Code: ${
+                                              ngo.physical_addresses.zip_code
+                                            }</p>
                                             <p class="card-text">Location: 
                                                 <a href="javascript:void(0);" 
-                                                    onclick="viewLocationOnMap(${ngo.physical_addresses.geo_location.latitude}, ${ngo.physical_addresses.geo_location.longitude})">
+                                                    onclick="viewLocationOnMap(${
+                                                      ngo.physical_addresses
+                                                        .geo_location.latitude
+                                                    }, ${
+            ngo.physical_addresses.geo_location.longitude
+          })">
                                                     Click here to view on map
                                                 </a>
                                             </p>
                                             <p class="card-text">Registration Certificate: 
                                                 <a href="javascript:void(0);" 
-                                                    onclick="viewRegistrationCertificate('${ngo.registration_certificate}')">
+                                                    onclick="viewRegistrationCertificate('${
+                                                      ngo.registration_certificate
+                                                    }')">
                                                     Click here to view
                                                 </a>
                                             </p>
                                             <p class="card-text">Tax Exemption Certificate: 
                                                 <a href="javascript:void(0);" 
-                                                    onclick="viewTaxExemptionCertificate('${ngo.tax_exemption_certificate}')">
+                                                    onclick="viewTaxExemptionCertificate('${
+                                                      ngo.tax_exemption_certificate
+                                                    }')">
                                                     Click here to view
                                                 </a>
                                             </p>
                                             <p class="card-text">Recent Annual Report: 
-                                                ${ngo.recent_annual_report ?
-            `<a href="javascript:void(0);" 
+                                                ${
+                                                  ngo.recent_annual_report
+                                                    ? `<a href="javascript:void(0);" 
                                                         onclick="viewAnnualReport('${ngo.recent_annual_report}')">
                                                         Click here to view
                                                     </a>`
-            : 'Not available'}
+                                                    : "Not available"
+                                                }
                                             </p>
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
                                         <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                                onclick="confirmDelete('${ngo._id}')">Delete NGO</button>
+                                                onclick="confirmDelete('${
+                                                  ngo._id
+                                                }')">Delete NGO</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>`;
-        container.insertAdjacentHTML('beforeend', ngoCard);
-      });
-    }
-
-    function displayFilteredNGOs(filteredNGOs) {
-      const container = document.getElementById('ngo-container');
-      container.innerHTML = ''; // Clear previous content
-
-      if (filteredNGOs.length === 0) {
-        const message = document.createElement('div');
-        message.className = 'message-card'; // Apply custom message-card class
-        message.textContent = 'No NGOs';
-
-        container.appendChild(message);
-        return;
-      }
-
-      filteredNGOs.forEach(ngo => {
-        const ngoCard = `
-                <div class="container mt-2">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h5 class="card-title">NGO Name: ${ngo.organization_name}</h5>
-                                            <p class="card-text">Registration Number: ${ngo.registration_number}</p>
-                                            <p class="card-text">Tax ID EIN: ${ngo.tax_id_ein}</p>
-                                            <p class="card-text">Website: 
-                                                ${ngo.website_url ?
-            `<a href="javascript:void(0);" 
-                                                        onclick="redirectToWebsite('${ngo.website_url}')">
-                                                        ${ngo.website_url}
-                                                    </a>`
-            : "Not Available"}
-                                            </p>
-                                            <p class="card-text">Primary Contact: ${ngo.primary_contact.name}</p>
-                                            <p class="card-text">Email: ${ngo.primary_contact.email}</p>
-                                            <p class="card-text">Phone: ${ngo.primary_contact.phoneno}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p class="card-text">Address Line 1: ${ngo.physical_addresses.address_line_1}</p>
-                                            <p class="card-text">Address Line 2: ${ngo.physical_addresses.address_line_2 || ''}</p>
-                                            <p class="card-text">City: ${ngo.physical_addresses.city}</p>
-                                            <p class="card-text">State: ${ngo.physical_addresses.state}</p>
-                                            <p class="card-text">Zip Code: ${ngo.physical_addresses.zip_code}</p>
-                                            <p class="card-text">Location: 
-                                                <a href="javascript:void(0);" 
-                                                    onclick="viewLocationOnMap(${ngo.physical_addresses.geo_location.latitude}, ${ngo.physical_addresses.geo_location.longitude})">
-                                                    Click here to view on map
-                                                </a>
-                                            </p>
-                                            <p class="card-text">Registration Certificate: 
-                                                <a href="javascript:void(0);" 
-                                                    onclick="viewRegistrationCertificate('${ngo.registration_certificate}')">
-                                                    Click here to view
-                                                </a>
-                                            </p>
-                                            <p class="card-text">Tax Exemption Certificate: 
-                                                <a href="javascript:void(0);" 
-                                                    onclick="viewTaxExemptionCertificate('${ngo.tax_exemption_certificate}')">
-                                                    Click here to view
-                                                </a>
-                                            </p>
-                                            <p class="card-text">Recent Annual Report: 
-                                                ${ngo.recent_annual_report ?
-            `<a href="javascript:void(0);" 
-                                                        onclick="viewAnnualReport('${ngo.recent_annual_report}')">
-                                                        Click here to view
-                                                    </a>`
-            : 'Not available'}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center mt-3">
-                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                                onclick="confirmDelete('${ngo._id}')">Delete NGO</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-        container.insertAdjacentHTML('beforeend', ngoCard);
-      });
-    }
-
-    async function deleteNGO(id) {
-      try {
-        const token = localStorage.getItem('authToken');
-        const response = await fetch(`${BACKEND_URL}/admin/deletengo/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token,
-          },
+          container.insertAdjacentHTML("beforeend", ngoCard);
         });
-        if (response.status === 200) {
-          const ngoCard = document.getElementById('ngo-container');
-          ngoCard.innerHTML = '';
-          const searchInput = document.getElementById('searchInput');
-          searchInput.value = '';
-          fetchNGOs();
-          alert('NGO deleted successfully');
-        } else {
-          alert('Failed to delete NGO');
+      }
+
+      function displayFilteredNGOs(filteredNGOs) {
+        const container = document.getElementById("ngo-container");
+        container.innerHTML = ""; // Clear previous content
+
+        if (filteredNGOs.length === 0) {
+          const message = document.createElement("div");
+          message.className = "message-card"; // Apply custom message-card class
+          message.textContent = "No NGOs";
+          message.id = "empty-message";
+          container.appendChild(message);
+          return;
         }
-      } catch (error) {
-        console.error(error);
-        alert('Error deleting NGO');
+
+        filteredNGOs.forEach((ngo) => {
+          const ngoCard = `
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title">NGO Name: ${
+                                              ngo.organization_name
+                                            }</h5>
+                                            <p class="card-text">Registration Number: ${
+                                              ngo.registration_number
+                                            }</p>
+                                            <p class="card-text">Tax ID EIN: ${
+                                              ngo.tax_id_ein
+                                            }</p>
+                                            <p class="card-text">Website: 
+                                                ${
+                                                  ngo.website_url
+                                                    ? `<a href="javascript:void(0);" 
+                                                        onclick="redirectToWebsite('${ngo.website_url}')">
+                                                        ${ngo.website_url}
+                                                    </a>`
+                                                    : "Not Available"
+                                                }
+                                            </p>
+                                            <p class="card-text">Primary Contact: ${
+                                              ngo.primary_contact.name
+                                            }</p>
+                                            <p class="card-text">Email: ${
+                                              ngo.primary_contact.email
+                                            }</p>
+                                            <p class="card-text">Phone: ${
+                                              ngo.primary_contact.phoneno
+                                            }</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="card-text">Address Line 1: ${
+                                              ngo.physical_addresses
+                                                .address_line_1
+                                            }</p>
+                                            <p class="card-text">Address Line 2: ${
+                                              ngo.physical_addresses
+                                                .address_line_2 || ""
+                                            }</p>
+                                            <p class="card-text">City: ${
+                                              ngo.physical_addresses.city
+                                            }</p>
+                                            <p class="card-text">State: ${
+                                              ngo.physical_addresses.state
+                                            }</p>
+                                            <p class="card-text">Zip Code: ${
+                                              ngo.physical_addresses.zip_code
+                                            }</p>
+                                            <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${
+                                                      ngo.physical_addresses
+                                                        .geo_location.latitude
+                                                    }, ${
+            ngo.physical_addresses.geo_location.longitude
+          })">
+                                                    Click here to view on map
+                                                </a>
+                                            </p>
+                                            <p class="card-text">Registration Certificate: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewRegistrationCertificate('${
+                                                      ngo.registration_certificate
+                                                    }')">
+                                                    Click here to view
+                                                </a>
+                                            </p>
+                                            <p class="card-text">Tax Exemption Certificate: 
+                                                <a href="javascript:void(0);" 
+                                                    onclick="viewTaxExemptionCertificate('${
+                                                      ngo.tax_exemption_certificate
+                                                    }')">
+                                                    Click here to view
+                                                </a>
+                                            </p>
+                                            <p class="card-text">Recent Annual Report: 
+                                                ${
+                                                  ngo.recent_annual_report
+                                                    ? `<a href="javascript:void(0);" 
+                                                        onclick="viewAnnualReport('${ngo.recent_annual_report}')">
+                                                        Click here to view
+                                                    </a>`
+                                                    : "Not available"
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                                onclick="confirmDelete('${
+                                                  ngo._id
+                                                }')">Delete NGO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+          container.insertAdjacentHTML("beforeend", ngoCard);
+        });
       }
-    }
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      await fetchNGOs(); // Fetch NGOs on page load
-    });
-
-  </script>
-
-  <script>
-    function confirmDelete(ngoId) {
-      if (confirm("Are you sure you want to delete this NGO?")) {
-        deleteNGO(ngoId);
+      async function deleteNGO(id) {
+        try {
+          const token = localStorage.getItem("authToken");
+          if (!token) {
+            alert("Authorization token is missing. Please log in again.");
+            window.location.href = "Login.html";
+            return;
+          }
+          const response = await fetch(`${BACKEND_URL}/admin/deletengo/${id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          });
+          if (response.status === 401) {
+            alert("Not authorised to access this route");
+            localStorage.clear();
+            window.location.assign("Login.html");
+            return;
+          }
+          if (response.status !== 200) {
+            alert('Error deleting volunteer');
+            const data = await response.json();
+            console.log(data.message);
+            return;
+          }
+            const ngoCard = document.getElementById("ngo-container");
+            ngoCard.innerHTML = "";
+            const searchInput = document.getElementById("searchInput");
+            searchInput.value = "";
+            alert("NGO deleted successfully");
+            fetchNGOs();
+        } catch (error) {
+          console.error(error);
+          alert("Error deleting NGO");
+        }
       }
-    }
-    function setupSearch() {
-      const searchInput = document.getElementById('searchInput');
-      const clearButton = document.getElementById('clearButton');
 
-      // Perform search on each input event
-      searchInput.addEventListener('input', () => {
-        const query = searchInput.value.toLowerCase();
-        const filteredNGOs = ngos.filter(ngo => ngo.organization_name.toLowerCase().includes(query));
-        displayFilteredNGOs(filteredNGOs);
+      document.addEventListener("DOMContentLoaded", async () => {
+        await fetchNGOs(); // Fetch NGOs on page load
       });
+      
+      function confirmDelete(ngoId) {
+        if (confirm("Are you sure you want to delete this NGO?")) {
+          deleteNGO(ngoId);
+        }
+      }
+      function setupSearch() {
+        const searchInput = document.getElementById("searchInput");
+        const clearButton = document.getElementById("clearButton");
 
-      clearButton.addEventListener('click', () => {
-        searchInput.value = '';
-        displayNGOs();
-      });
-    }
-  </script>
+        // Perform search on each input event
+        searchInput.addEventListener("input", () => {
+          const existingMessage = document.getElementById('empty-message');
+          if (existingMessage) {
+              ngoContainer.removeChild(existingMessage);
+          }
+          const query = searchInput.value.toLowerCase();
+          const filteredNGOs = ngos.filter((ngo) =>
+            ngo.organization_name.toLowerCase().includes(query)
+          );
+          displayFilteredNGOs(filteredNGOs);
+        });
 
+        clearButton.addEventListener("click", () => {
+          const existingMessage = document.getElementById('empty-message');
+          if (existingMessage) {
+              ngoContainer.removeChild(existingMessage);
+          }
+          searchInput.value = "";
+          displayNGOs();
+        });
+      }
+    </script>
 
-  <!-- Footer Start -->
-  <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row mb-1">
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">About Us</h2>
-            <p style="color: white;">We are dedicated to redistributing surplus food to those in need, minimizing waste,
-              and helping our community. Learn more about our mission and how you can get involved.</p>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="ftco-footer-widget mb-4" style="color: white; margin-left: 2rem;">
-            <h2 class="ftco-heading-2">Our Services</h2>
-            <ul class="list-unstyled">
-              <li><span class="icon icon-check"></span> Collaboration</li>
-              <li><span class="icon icon-check"></span> Support Network</li>
-              <li><span class="icon icon-check"></span> Volunteer Opportunities</li>
-              <li><span class="icon icon-check"></span> Community Interactions</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Testimonials</h2>
-            <div class="block-21 mb-4 d-flex">
-              <div class="text">
-                <h3 class="heading" style="color: white;">"This organization has changed my life!" - Jane Doe</h3>
-              </div>
+    <!-- Footer Start -->
+    <footer
+      class="ftco-footer ftco-section img"
+      style="height: auto; padding-bottom: 1rem"
+    >
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row mb-1">
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">About Us</h2>
+              <p style="color: white">
+                We are dedicated to redistributing surplus food to those in
+                need, minimizing waste, and helping our community. Learn more
+                about our mission and how you can get involved.
+              </p>
             </div>
-            <div class="block-21 mb-4 d-flex">
-              <div class="text">
-                <h3 class="heading" style="color: white;">"Incredible impact on our community." - John Smith</h3>
-              </div>
-            </div>
           </div>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Have a Question?</h2>
-            <div class="block-23 mb-3">
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div
+              class="ftco-footer-widget mb-4"
+              style="color: white; margin-left: 2rem"
+            >
+              <h2 class="ftco-heading-2">Our Services</h2>
               <ul class="list-unstyled">
-                <li><span class="icon icon-map-marker"></span><span class="text" style="color: white;">203 Fake St.
-                    Mountain View, San Francisco, California, USA</span></li>
-                <li><span class="icon icon-phone"></span><span class="text" style="color: white;">+2 392 3929 210</span>
+                <li><span class="icon icon-check"></span> Collaboration</li>
+                <li><span class="icon icon-check"></span> Support Network</li>
+                <li>
+                  <span class="icon icon-check"></span> Volunteer Opportunities
                 </li>
-                <li><span class="icon icon-envelope"></span><span class="text"
-                    style="color: white;">info@yourdomain.com</span></li>
+                <li>
+                  <span class="icon icon-check"></span> Community Interactions
+                </li>
               </ul>
             </div>
           </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Testimonials</h2>
+              <div class="block-21 mb-4 d-flex">
+                <div class="text">
+                  <h3 class="heading" style="color: white">
+                    "This organization has changed my life!" - Jane Doe
+                  </h3>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <div class="text">
+                  <h3 class="heading" style="color: white">
+                    "Incredible impact on our community." - John Smith
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Question?</h2>
+              <div class="block-23 mb-3">
+                <ul class="list-unstyled">
+                  <li>
+                    <span class="icon icon-map-marker"></span
+                    ><span class="text" style="color: white"
+                      >203 Fake St. Mountain View, San Francisco, California,
+                      USA</span
+                    >
+                  </li>
+                  <li>
+                    <span class="icon icon-phone"></span
+                    ><span class="text" style="color: white"
+                      >+2 392 3929 210</span
+                    >
+                  </li>
+                  <li>
+                    <span class="icon icon-envelope"></span
+                    ><span class="text" style="color: white"
+                      >info@yourdomain.com</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-  <!-- Footer End -->
+    </footer>
+    <!-- Footer End -->
 
-  <script>
-    document
-      .getElementById("logoutLink")
-      .addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent the default link action
-        var confirmation = confirm("Are you sure you want to logout?");
-        if (confirmation) {
-          localStorage.clear();
-          window.location.href = "index.html"; // Redirect to the logout page
-        }
-      });
-  </script>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/jquery.timepicker.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
-</body>
-
+    <script>
+      document
+        .getElementById("logoutLink")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the default link action
+          var confirmation = confirm("Are you sure you want to logout?");
+          if (confirmation) {
+            localStorage.clear();
+            window.location.href = "index.html"; // Redirect to the logout page
+          }
+        });
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

@@ -37,6 +37,7 @@
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .card-body {
@@ -62,17 +63,16 @@
             }
         }
 
-        .card {
-            margin-bottom: 20px;
-        }
-
         .message-card {
             text-align: center;
-            font-size: xx-large;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 1000px;
-            /* Set minimum height */
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -152,8 +152,19 @@
         let restaurants = []; // Global variable to store restaurant data
 
         async function fetchRestaurants() {
+
+            const existingMessage = document.getElementById('empty-message');
+            if (existingMessage) {
+                ngoContainer.removeChild(existingMessage);
+            }
+
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert("Authorization token is missing. Please login");
+                    window.location.href = "Login.html";
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/getallrestaurants`, {
                     method: "GET",
                     headers: {
@@ -161,8 +172,16 @@
                         'Authorization': token,
                     }
                 });
+                if (response.status === 401) {
+                    alert("Not authorised to access this route");
+                    localStorage.clear();
+                    window.location.assign("Login.html");
+                    return;
+                }
                 if (response.status !== 200) {
-                    alert('Failed to fetch restaurants data');
+                    const data = await response.json();
+                    alert("Failed to fetch restaurant data");
+                    console.log(data.message);
                     return;
                 }
                 restaurants = await response.json();
@@ -196,7 +215,7 @@
                 const message = document.createElement('div');
                 message.className = 'message-card'; // Apply custom message-card class
                 message.textContent = 'No Restaurants/Community Halls';
-
+                message.id = 'empty-message';
                 container.appendChild(message);
                 return;
             }
@@ -269,6 +288,7 @@
                 const message = document.createElement('div');
                 message.className = 'message-card'; // Apply custom message-card class
                 message.textContent = 'No Restaurants/Community Halls';
+                message.id = 'empty-message';
 
                 container.appendChild(message);
                 return;
@@ -337,6 +357,11 @@
         async function deleteRestaurant(id) {
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/deleterestaurant/${id}`, {
                     method: 'DELETE',
                     headers: {
@@ -344,6 +369,12 @@
                         'Authorization': token,
                     },
                 });
+                if (response.status == 401) {
+                    localStorage.clear();
+                    alert('Unauthorised to access this route');
+                    window.location.href = 'Login.html';
+                    return;
+                } 
                 if (response.status === 200) {
                     const restaurantCard = document.getElementById('restaurant-container');
                     restaurantCard.innerHTML = '';
@@ -353,6 +384,8 @@
                     alert('Restaurant deleted successfully');
                 } else {
                     alert('Failed to delete restaurant');
+                    const data = await response.json();
+                    console.log(data.message);
                 }
             } catch (error) {
                 console.error(error);
@@ -364,9 +397,6 @@
             await fetchRestaurants(); // Fetch restaurants on page load
         });
 
-    </script>
-
-    <script>
         function confirmDeleteRestaurant(restaurantId) {
             if (confirm("Are you sure you want to delete this restaurant?")) {
                 deleteRestaurant(restaurantId);
@@ -378,12 +408,20 @@
 
             // Perform search on each input event
             searchInput.addEventListener('input', () => {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 const query = searchInput.value.toLowerCase();
                 const filteredRestaurants = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(query));
                 displayFilteredRestaurants(filteredRestaurants);
             });
 
             clearButton.addEventListener('click', () => {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 searchInput.value = '';
                 displayNGOs();
             });

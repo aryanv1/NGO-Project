@@ -60,20 +60,31 @@
         }
 
         .photo-container {
-            max-width: 90%;
+            width: 100%;
+            max-width: 600px; /* Maximum width for larger screens */
             margin: 0 auto;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Responsive height based on viewport */
         }
 
         .photo-tile {
             display: flex;
-            flex-wrap: nowrap;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
         .tile-photo {
             max-width: 100%;
-            height: auto;
-            margin-right: 10px;
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hide all photos initially */
         }
 
         .modal-content {
@@ -351,7 +362,7 @@
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
                                 Changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary ml-3" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
@@ -742,7 +753,9 @@
                 img.src = photo;
                 img.alt = `images/person_${index + 1}`;
                 img.className = 'tile-photo';
-                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
+                if(index === 0){
+                    img.style.display = 'block';
+                }
                 photoContainer.appendChild(img);
             });
 

@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
 
@@ -52,26 +53,33 @@
         }
 
         .photo-container {
-            max-width: 90%;
-            /* Adjust as needed */
+            width: 100%;
+            max-width: 600px; /* Maximum width for larger screens */
             margin: 0 auto;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Responsive height based on viewport */
         }
 
         .photo-tile {
             display: flex;
-            flex-wrap: nowrap;
-            /* Ensure photos stay in a row */
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
         .tile-photo {
             max-width: 100%;
-            /* Ensures each photo fits within its container */
-            height: auto;
-            /* Maintain aspect ratio */
-            margin-right: 10px;
-            /* Space between photos */
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hide all photos initially */
         }
+
 
         .bold-label {
             font-weight: 700;
@@ -144,7 +152,7 @@
                     <p><strong>People Served:</strong> <span id="modalPeopleServed"></span></p>
                     <p><strong>Volunteer Phones:</strong> <span id="modalVolunteerPhones"></span></p>
                     <p><strong>Description:</strong> <span id="modalDescription"></span></p>
-                    <p><strong>Review Notes:</strong> <span id="modalReviewNotes"></span></p>
+                    <p><strong>Thanks Note:</strong> <span id="modalReviewNotes"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -245,18 +253,18 @@
                                 <p class="card-text">Quantity: ${transaction.quantity}</p>
                                 <p class="card-text">Category: ${transaction.foodtype}</p>
                                 <p class="card-text">Packaged: ${transaction.packaged ? 'Yes' : 'No'}</p>
-                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}, ${transaction.pickupLocation.address.city}</p>
+                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}${transaction.pickupLocation.address.address_line_2 ? ', ' + transaction.pickupLocation.address.address_line_2 : ''}, ${transaction.pickupLocation.address.city}</p>
                             </div>
                             <div class="col-md-6">
-                                <p class="card-text">Contact Person Name: ${transaction.contactPerson.name}</p>
+                                <p class="card-text mt-2">Contact Person Name: ${transaction.contactPerson.name}</p>
                                 <p class="card-text">Contact Person Phone: ${transaction.contactPerson.phone}</p>
                                 <p class="card-text">Restaurant Name : ${transaction.donor}</p>
                                 <p class="card-text">Additional Notes: ${transaction.additionalNotes}</p>
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                            <button class="btn btn-success btn-accept" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
-                            <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
+                            <button class="btn btn-success btn-accept mt-3" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
+                            <button class="btn btn-primary btn-view-photos mt-3 ml-3" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
                         </div>
                     </div>
                 `;
@@ -296,6 +304,9 @@
                 img.src = photo;
                 img.alt = 'Photo';
                 img.classList.add('tile-photo');
+                if (index === 0) {
+                    img.style.display = 'block'; // Display the first photo initially
+                }
                 photoContainer.appendChild(img);
             });
             $('#photoModal').modal('show');

@@ -68,11 +68,14 @@
 
         .message-card {
             text-align: center;
-            font-size: xx-large;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 1000px;
-            /* Set minimum height */
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -152,8 +155,18 @@
         let restaurants = []; // Global variable to store restaurant data
 
         async function fetchRestaurants() {
+
+            const existingMessage = document.getElementById('empty-message');
+            if (existingMessage) {
+                ngoContainer.removeChild(existingMessage);
+            }
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert("Authorization token is missing. Please log in again.");
+                    window.location.href = "Login.html";
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/getallunverifiedrestaurants`, {
                     method: "GET",
                     headers: {
@@ -161,8 +174,16 @@
                         'Authorization': token,
                     }
                 });
+                if (response.status == 401) {
+                    localStorage.clear();
+                    alert('Unauthorised to access this route');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 if (response.status !== 200) {
-                    alert('Failed to fetch restaurants data');
+                    alert('Failed to fetch restaurant data');
+                    const data = await response.json();
+                    console.log(data.message);
                     return;
                 }
                 restaurants = await response.json();
@@ -196,7 +217,7 @@
                 const message = document.createElement('div');
                 message.className = 'message-card'; // Apply custom message-card class
                 message.textContent = 'No Pending Requests';
-
+                message.id = 'empty-message';
                 container.appendChild(message);
                 return;
             }
@@ -231,7 +252,7 @@
                         : 'Not available'}
                                                 </p>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mt-2">
                                                 <p class="card-text">Email: ${restaurant.primary_contact_email}</p>
                                                 <p class="card-text">Phone: ${restaurant.primary_contact_phone}</p>
                                             <p class="card-text"> Address : ${formatAddress(restaurant.physical_address)}</p>
@@ -248,7 +269,7 @@
                                                 onclick="confirmVerifyRestaurant('${restaurant._id}')">Verify Restaurant</button>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                        <button class="btn btn-danger btn-verify ml-2" style="border-radius: 5px;"
                                                 onclick="confirmDeleteRestaurant('${restaurant._id}')">Delete Restaurant</button>
                                     </div>
                                 </div>
@@ -268,7 +289,7 @@
                 const message = document.createElement('div');
                 message.className = 'message-card'; // Apply custom message-card class
                 message.textContent = 'No Pending Requests';
-
+                message.id = 'empty-message';
                 container.appendChild(message);
                 return;
             }
@@ -303,7 +324,7 @@
                         : 'Not available'}
                                                 </p>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mt-2">
                                                 <p class="card-text">Email: ${restaurant.primary_contact_email}</p>
                                                 <p class="card-text">Phone: ${restaurant.primary_contact_phone}</p>
                                             <p class="card-text"> Address : ${formatAddress(restaurant.physical_address)}</p>
@@ -320,7 +341,7 @@
                                                 onclick="confirmVerifyRestaurant('${restaurant._id}')">Verify Restaurant</button>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
+                                        <button class="btn btn-danger btn-verify ml-2" style="border-radius: 5px;"
                                                 onclick="confirmDeleteRestaurant('${restaurant._id}')">Delete Restaurant</button>
                                     </div>
                                 </div>
@@ -344,6 +365,11 @@
             formData.append('rest_id', rest_id);
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert("Authorization token is missing. Please log in again.");
+                    window.location.href = "Login.html";
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/verifyrestaurant`, {
                     method: 'POST',
                     headers: {
@@ -351,15 +377,23 @@
                     },
                     body: formData,
                 });
+                if (response.status == 401) {
+                    localStorage.clear();
+                    alert('Unauthorised to access this route');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 if (response.status === 201) {
                     const restaurantCard = document.getElementById('restaurant-container');
                     restaurantCard.innerHTML = '';
                     const searchInput = document.getElementById('searchInput');
                     searchInput.value = '';
-                    fetchRestaurants();
                     alert('Restaurant Verified successfully');
+                    fetchRestaurants();
                 } else {
                     alert('Failed to verify restaurant');
+                    const data = await response.json();
+                    console.log(data.message);
                 }
             } catch (error) {
                 console.error(error);
@@ -370,6 +404,11 @@
         async function deleteRestaurant(id) {
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert("Authorization token is missing. Please log in again.");
+                    window.location.href = "Login.html";
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/deleteunverifiedrestaurant/${id}`, {
                     method: 'DELETE',
                     headers: {
@@ -377,15 +416,23 @@
                         'Authorization': token,
                     },
                 });
+                if (response.status == 401) {
+                    localStorage.clear();
+                    alert('Unauthorised to access this route');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 if (response.status === 200) {
                     const restaurantCard = document.getElementById('restaurant-container');
                     restaurantCard.innerHTML = '';
                     const searchInput = document.getElementById('searchInput');
                     searchInput.value = '';
-                    fetchRestaurants();
                     alert('Restaurant deleted successfully');
+                    fetchRestaurants();
                 } else {
                     alert('Failed to delete restaurant');
+                    const data = await response.json();
+                    console.log(data.message);
                 }
             } catch (error) {
                 console.error(error);
@@ -397,8 +444,6 @@
             await fetchRestaurants(); // Fetch restaurants on page load
         });
 
-    </script>
-    <script>
         function confirmVerifyRestaurant(restaurantId) {
             if (confirm("Are you sure you want to verify this restaurant?")) {
                 VerifyRestaurant(restaurantId);
@@ -415,12 +460,20 @@
 
             // Perform search on each input event
             searchInput.addEventListener('input', () => {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 const query = searchInput.value.toLowerCase();
                 const filteredRestaurants = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(query));
                 displayFilteredRestaurants(filteredRestaurants);
             });
 
             clearButton.addEventListener('click', () => {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 searchInput.value = '';
                 displayNGOs();
             });

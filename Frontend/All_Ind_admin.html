@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Welfare - All Volunteers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -65,11 +65,14 @@
 
         .message-card {
             text-align: center;
-            font-size: xx-large;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 1000px;
-            /* Set minimum height */
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -149,8 +152,19 @@
         let volunteers = []; // Global variable to store volunteer data
 
         async function fetchVolunteers() {
+
+            const existingMessage = document.getElementById('empty-message');
+            if (existingMessage) {
+                ngoContainer.removeChild(existingMessage);
+            }
+
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert("Authorization token is missing. Please login");
+                    window.location.href = "Login.html";
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/getallvolunteers`, {
                     method: "GET",
                     headers: {
@@ -158,8 +172,16 @@
                         'Authorization': token,
                     }
                 });
+                if (response.status === 401) {
+                    alert("Not authorised to access this route");
+                    localStorage.clear();
+                    window.location.assign("Login.html");
+                    return;
+                }
                 if (response.status !== 200) {
-                    alert('Failed to fetch volunteers data');
+                    const data = await response.json();
+                    alert("Failed to fetch volunteers data");
+                    console.log(data.message);
                     return;
                 }
                 volunteers = await response.json();
@@ -172,15 +194,20 @@
             }
         }
 
+        function viewLocationOnMap(latitude, longitude) {
+            const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, "_blank"); // Opens the map URL in a new tab/window
+        }
+
         function displayVolunteers() {
             const container = document.getElementById('volunteer-container');
             container.innerHTML = ''; // Clear previous content
 
             if (volunteers.length === 0) {
                 const message = document.createElement('div');
-                message.className = 'message-card'; // Apply custom message-card class
+                message.className = 'message-card';
                 message.textContent = 'No Volunteers';
-
+                message.id = 'empty-message';
                 container.appendChild(message);
                 return;
             }
@@ -203,12 +230,14 @@
                                                 <p class="card-text">Address Line 2: ${volunteer.home_address.address_line_2 || ''}</p>
                                             </div>
                                             <div class="col-md-6">
-                                                <p class="card-text">City: ${volunteer.home_address.city}</p>
+                                                <p class="card-text mt-2">City: ${volunteer.home_address.city}</p>
                                                 <p class="card-text">State: ${volunteer.home_address.state}</p>
                                                 <p class="card-text">Zip Code: ${volunteer.home_address.zip_code}</p>
-                                                <p class="card-text">Country: ${volunteer.home_address.country}</p>
-                                                <p class="card-text">Latitude: ${volunteer.home_address.geo_location.latitude}</p>
-                                                <p class="card-text">Longitude: ${volunteer.home_address.geo_location.longitude}</p>
+                                                <p class="card-text">Location: 
+                                                <a href="javascript:void(0);" onclick="viewLocationOnMap(${volunteer.home_address.geo_location.latitude}, ${volunteer.home_address.geo_location.longitude})">
+                                                    Click here to view on map
+                                                </a>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
@@ -232,7 +261,7 @@
                 const message = document.createElement('div');
                 message.className = 'message-card'; // Apply custom message-card class
                 message.textContent = 'No Volunteers Found';
-
+                message.id = 'empty-message';
                 container.appendChild(message);
                 return;
             }
@@ -255,12 +284,13 @@
                                                 <p class="card-text">Address Line 2: ${volunteer.home_address.address_line_2 || ''}</p>
                                             </div>
                                             <div class="col-md-6">
-                                                <p class="card-text">City: ${volunteer.home_address.city}</p>
+                                                <p class="card-text mt-2">City: ${volunteer.home_address.city}</p>
                                                 <p class="card-text">State: ${volunteer.home_address.state}</p>
                                                 <p class="card-text">Zip Code: ${volunteer.home_address.zip_code}</p>
-                                                <p class="card-text">Country: ${volunteer.home_address.country}</p>
-                                                <p class="card-text">Latitude: ${volunteer.home_address.geo_location.latitude}</p>
-                                                <p class="card-text">Longitude: ${volunteer.home_address.geo_location.longitude}</p>
+                                                <p class="card-text">Location: <a href="javascript:void(0);" 
+                                                    onclick="viewLocationOnMap(${volunteer.home_address.geo_location.latitude}, ${volunteer.home_address.geo_location.longitude})">
+                                                    Click here to view on map</a>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
@@ -279,6 +309,11 @@
         async function deleteVolunteer(id) {
             try {
                 const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
+                    return;
+                }
                 const response = await fetch(`${BACKEND_URL}/admin/deletevolunteer/${id}`, {
                     method: 'DELETE',
                     headers: {
@@ -286,6 +321,12 @@
                         'Authorization': token,
                     },
                 });
+                if (response.status == 401) {
+                    localStorage.clear();
+                    alert('Unauthorised to access this route');
+                    window.location.href = 'Login.html';
+                    return;
+                } 
                 if (response.status === 200) {
                     const restaurantCard = document.getElementById('volunteer-container');
                     restaurantCard.innerHTML = '';
@@ -294,8 +335,9 @@
                     fetchVolunteers();
                     alert('Volunteer deleted successfully');
                 } else {
+                    alert('Error deleting volunteer');
                     const data = await response.json();
-                    alert(`Error: ${data.message}`);
+                    console.log(data.message);
                 }
             } catch (error) {
                 console.error(error);
@@ -303,7 +345,9 @@
             }
         }
 
-        window.onload = fetchVolunteers();
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchVolunteers();
+        });
     </script>
 
     <script>
@@ -318,12 +362,20 @@
 
             // Perform search on each input event
             searchInput.addEventListener('input', () => {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 const query = searchInput.value.toLowerCase();
                 const filteredVolunteers = volunteers.filter(volunteer => volunteer.full_name.toLowerCase().includes(query));
                 displayFilteredVolunteers(filteredVolunteers);
             });
 
             clearButton.addEventListener('click', () => {
+                const existingMessage = document.getElementById('empty-message');
+                if (existingMessage) {
+                    ngoContainer.removeChild(existingMessage);
+                }
                 searchInput.value = '';
                 displayVolunteers();
             });

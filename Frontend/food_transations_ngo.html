@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Food Donation Requests</title>
+    <title>Welfare-Food Donation Requests</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -52,25 +52,31 @@
         }
 
         .photo-container {
-            max-width: 90%;
-            /* Adjust as needed */
+            width: 100%;
+            max-width: 600px; /* Maximum width for larger screens */
             margin: 0 auto;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Responsive height based on viewport */
         }
 
         .photo-tile {
             display: flex;
-            flex-wrap: nowrap;
-            /* Ensure photos stay in a row */
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
         .tile-photo {
             max-width: 100%;
-            /* Ensures each photo fits within its container */
-            height: auto;
-            /* Maintain aspect ratio */
-            margin-right: 10px;
-            /* Space between photos */
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hide all photos initially */
         }
 
         .message-card {
@@ -248,7 +254,7 @@
                                 ${donation.pickupLocation.address.address_line_2 ? ', ' + donation.pickupLocation.address.address_line_2 : ''}, 
                                 ${donation.pickupLocation.address.city}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-2">
                             <p class="card-text">Location: 
                                                 <a href="javascript:void(0);" 
                                                     onclick="viewLocationOnMap(${donation.pickupLocation.geo_location.latitude},${donation.pickupLocation.geo_location.longitude})">
@@ -263,9 +269,9 @@
                             <p class="card-text">Additional Notes: ${donation.additionalNotes || 'None'}</p>
                         </div>
                     </div>
-                    <div class="text-center mt-3">
-                        <button class="btn btn-success btn-accept" onclick="claimDonation('${donation._id}')">Accept Donation</button>
-                        <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
+                    <div class="text-center mt-1">
+                        <button class="btn btn-success btn-accept mt-3" onclick="claimDonation('${donation._id}')">Accept Donation</button>
+                        <button class="btn btn-primary btn-view-photos mt-3 ml-3" onclick="showPhotos(${JSON.stringify(donation.food_photos).replace(/"/g, '&quot;')})">View Photos</button>
                     </div>
                 </div>
             `;
@@ -321,7 +327,9 @@
                 img.src = photo;
                 img.alt = `Photo ${index + 1}`;
                 img.className = 'tile-photo';
-                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
+                if (index === 0) {
+                    img.style.display = 'block'; // Display the first photo initially
+                }
                 photoContainer.appendChild(img);
             });
 

@@ -136,6 +136,10 @@
             window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
         }
         async function fetchVolunteers() {
+            const existingMessage = document.getElementById('empty-message');
+            if (existingMessage) {
+                ngoContainer.removeChild(existingMessage);
+            }
             try {
                 const token = localStorage.getItem('authToken');
                 if (!token) {
@@ -167,7 +171,8 @@
                 if (volunteers.length === 0) {
                     const message = document.createElement('div');
                     message.className = 'message-card';
-                    message.textContent = 'No Available Volunteers';
+                    message.textContent = 'No donation histroy';
+                    message.id = 'empty-message';
                     container.appendChild(message);
                     return;
                 }

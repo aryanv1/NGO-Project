@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Food Donation History</title>
+    <title>Welfare-Food Donation History</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -52,25 +52,31 @@
         }
 
         .photo-container {
-            max-width: 90%;
-            /* Adjust as needed */
+            width: 100%;
+            max-width: 600px; /* Maximum width for larger screens */
             margin: 0 auto;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Responsive height based on viewport */
         }
 
         .photo-tile {
             display: flex;
-            flex-wrap: nowrap;
-            /* Ensure photos stay in a row */
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
         .tile-photo {
             max-width: 100%;
-            /* Ensures each photo fits within its container */
-            height: auto;
-            /* Maintain aspect ratio */
-            margin-right: 10px;
-            /* Space between photos */
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hide all photos initially */
         }
 
         .bold-label {
@@ -270,16 +276,16 @@
                                 <p class="card-text">Packaged: ${transaction.packaged ? 'Yes' : 'No'}</p>
                                 <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}${transaction.pickupLocation.address.address_line_2 ? ', ' + transaction.pickupLocation.address.address_line_2 : ''}, ${transaction.pickupLocation.address.city}</p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-2">
                                 <p class="card-text">Contact Person Name: ${transaction.contactPerson.name}</p>
                                 <p class="card-text">Contact Person Phone: ${transaction.contactPerson.phone}</p>
                                 <p class="card-text">Donor Name : ${transaction.donor}</p>
                                 <p class="card-text">Additional Notes: ${transaction.additionalNotes}</p>
                             </div>
                         </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-success btn-accept" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
-                            <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
+                        <div class="text-center mt-1">
+                            <button class="btn btn-success btn-accept mt-3" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
+                            <button class="btn btn-primary btn-view-photos mt-3 ml-3" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
                         </div>
                     </div>
                 `;
@@ -314,11 +320,14 @@
         function showPhotos(photos) {
             const photoContainer = document.querySelector('.photo-tile');
             photoContainer.innerHTML = '';
-            photos.forEach(photo => {
+            photos.forEach((photo, index) => {
                 const img = document.createElement('img');
                 img.src = photo;
                 img.alt = 'Photo';
                 img.classList.add('tile-photo');
+                if (index === 0) {
+                    img.style.display = 'block'; // Display the first photo initially
+                }
                 photoContainer.appendChild(img);
             });
             $('#photoModal').modal('show');

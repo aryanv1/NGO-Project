@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
 
@@ -52,44 +53,48 @@
         }
 
         .photo-container {
-            width: 50rem;
-            max-height: 20rem;
-            /* Set a fixed height for the photo container */
+            width: 100%;
+            max-width: 600px; /* Maximum width for larger screens */
+            margin: 0 auto;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-        }
-
-        .photo-container img {
-            max-width: 100%;
-            max-height: 15rem;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            /* Ensures the image fits within the dimensions */
+            height: 60vh; /* Responsive height based on viewport */
         }
 
         .photo-tile {
             display: flex;
-            flex-wrap: nowrap;
-            /* Ensure photos stay in a row */
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
         .tile-photo {
             max-width: 100%;
-            /* Ensure each photo fits within its container */
-            height: 30rem;
-            /* Maintain aspect ratio */
-            display: block;
-            /* Ensure each photo is displayed as a block element */
-            margin: 0 auto;
-            /* Center each photo horizontally */
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hide all photos initially */
         }
+
 
         .bold-label {
             font-weight: 700;
             /* Bolder than normal bold */
+        }
+        .message-card {
+            text-align: center;
+            font-size: 2rem;
+            padding: 3rem;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -168,7 +173,7 @@
                     <p><strong>People Served:</strong> <span id="modalPeopleServed"></span></p>
                     <p><strong>Volunteer Phones:</strong> <span id="modalVolunteerPhones"></span></p>
                     <p><strong>Description:</strong> <span id="modalDescription"></span></p>
-                    <p><strong>Review Notes:</strong> <span id="modalReviewNotes"></span></p>
+                    <p><strong>Thanks Note:</strong> <span id="modalReviewNotes"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -210,6 +215,11 @@
 
         async function fetchFoodTransactions() {
             const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('Authorization token is missing. Please login');
+                window.location.href = 'Login.html';
+                return;
+            }
             try {
                 const response = await fetch(`${BACKEND_URL}/admin/getallfoodlogs`, {
                     method: "GET",
@@ -217,6 +227,12 @@
                         'Authorization': token
                     }
                 });
+                if (response.status === 401) {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('index.html');
+                    return;
+                }
                 if (response.status !== 200) {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
@@ -234,6 +250,16 @@
             const container = document.getElementById('foodTransactionsContainer');
             container.innerHTML = ''; // Clear previous content
 
+            if (foodTransactions.length === 0) {
+                const message = document.createElement('div');
+                message.className = 'message-card'; // Apply custom message-card class
+                message.textContent = 'No NGO found';
+                message.id = 'empty-message';
+
+                ngoContainer.appendChild(message);
+                return;
+            }
+
             foodTransactions.forEach(transaction => {
                 const card = document.createElement('div');
                 card.classList.add('card', 'mb-4');
@@ -245,7 +271,7 @@
                                 <p class="card-text">Quantity: ${transaction.quantity}</p>
                                 <p class="card-text">Category: ${transaction.foodtype}</p>
                                 <p class="card-text">Packaged: ${transaction.packaged ? 'Yes' : 'No'}</p>
-                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}, ${transaction.pickupLocation.address.city}</p>
+                                <p class="card-text">Pickup Address: ${transaction.pickupLocation.address.address_line_1}${transaction.pickupLocation.address.address_line_2 ? ', ' + transaction.pickupLocation.address.address_line_2 : ''}, ${transaction.pickupLocation.address.city}</p>
                             </div>
                             <div class="col-md-6">
                                 <p class="card-text">Contact Person Name: ${transaction.contactPerson.name}</p>
@@ -254,9 +280,9 @@
                                 <p class="card-text">Additional Notes: ${transaction.additionalNotes}</p>
                             </div>
                         </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-success btn-accept" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
-                            <button class="btn btn-primary btn-view-photos ml-2" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
+                        <div class="text-center mt-1">
+                            <button class="btn btn-success btn-accept mt-3" onclick="showAcceptForm('${transaction._id}')">Distribution Form</button>
+                            <button class="btn btn-primary btn-view-photos mt-3 ml-3" onclick="showPhotos(${JSON.stringify(transaction.distribution_photos).replace(/"/g, '&quot;')})">Distribution Photos</button>
                         </div>
                     </div>
                 `;
@@ -272,13 +298,11 @@
                 return;
             }
 
-            // Populate modal with transaction details
-
             document.getElementById('NameOfNGO').textContent = transaction.ngo;
             document.getElementById('modalDescription').textContent = transaction.description;
             document.getElementById('modalPeopleServed').textContent = transaction.peopleServed;
             const volunteerPhonesElement = document.getElementById('modalVolunteerPhones');
-            if (transaction.volunteer.length > 0) {
+            if (transaction.contactPerson.phone.length > 0) {
                 volunteerPhonesElement.textContent = transaction.volunteer.join(', ');
             } else {
                 // volunteerPhonesElement.textContent = 'No volunteers participated';
@@ -298,6 +322,9 @@
                 img.src = photo;
                 img.alt = 'Photo';
                 img.classList.add('tile-photo');
+                if (index === 0) {
+                    img.style.display = 'block'; // Display the first photo initially
+                }
                 photoContainer.appendChild(img);
             });
             $('#photoModal').modal('show');

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Pending Requests</title>
+    <title>Welfare-Pending Requests</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -91,25 +91,31 @@
         }
 
         .photo-container {
-            max-width: 90%;
-            /* Adjust as needed */
+            width: 100%;
+            max-width: 600px; /* Maximum width for larger screens */
             margin: 0 auto;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Responsive height based on viewport */
         }
 
         .photo-tile {
             display: flex;
-            flex-wrap: nowrap;
-            /* Ensure photos stay in a row */
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
         .tile-photo {
             max-width: 100%;
-            /* Ensures each photo fits within its container */
-            height: auto;
-            /* Maintain aspect ratio */
-            margin-right: 10px;
-            /* Space between photos */
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hide all photos initially */
         }
         .message-card {
             text-align: center;
@@ -422,7 +428,9 @@
                 img.src = photo;
                 img.alt = `Photo ${index + 1}`;
                 img.className = 'tile-photo';
-                img.style.display = index === 0 ? 'block' : 'none'; // Show first photo initially
+                if (index === 0) {
+                    img.style.display = 'block'; // Display the first photo initially
+                }
                 photoContainer.appendChild(img);
             });
 
