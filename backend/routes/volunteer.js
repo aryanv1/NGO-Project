@@ -25,7 +25,7 @@ router
   .patch(authenticateMiddleWare_for_volunteer, updateVolunteerById);
 router.route('/delete').delete(authenticateMiddleWare_for_volunteer,deleteVolunteerById);
 router
-  .route("/updateavailabilitymode/:id")
+  .route("/updateavailabilitymode")
   .patch(authenticateMiddleWare_for_volunteer, updateVolunteerAvailability);
 
 module.exports = router;

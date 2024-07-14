@@ -180,26 +180,22 @@
                         <p><strong>City:</strong> <span id="city"></span></p>
                         <p><strong>State:</strong> <span id="state"></span></p>
                         <p><strong>Zip Code:</strong> <span id="zipCode"></span></p>
-                        <p><strong>Country:</strong> <span id="country"></span></p>
 
                         <h3>Location</h3>
-                        <p><strong>Latitude:</strong> <span id="latitude"></span></p>
-                        <p><strong>Longitude:</strong> <span id="longitude"></span></p>
+                        <p><strong>Location : </strong><span id="location"></span></p>
                     </div>
                     <!-- Card Footer with Buttons -->
                     <div class="text-center">
                         <div class="availability-toggle" style="margin: 1rem;">
                             <label class="switch">
-                                <input type="checkbox" id="availabilityMode">
+                                <input type="checkbox" id="availabilityToggle">
                                 <span class="slider round"></span>
                             </label>
                             <label for="availabilityMode" class="availability-label mt-3">Availability Mode</label>
                         </div>
                         <button class="btn btn-danger" id="deleteAccount"
-                            style="border-radius: 5px; margin: 1rem;">Delete
-                            Account</button>
-                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;">Edit
-                            Account</button>
+                            style="border-radius: 5px; margin: 1rem;">Delete Account</button>
+                        <button class="btn btn-success" id="editAccount" style="border-radius: 5px; margin: 1rem;">Edit Account</button>
                     </div>
                 </div>
             </div>
@@ -217,19 +213,19 @@
                 <div class="modal-body">
                     <form id="editProfileForm">
                         <div class="form-group">
-                            <label for="editFullName">Full Name</label>
+                            <label for="editFullName">Full Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editFullName" required />
                         </div>
                         <div class="form-group">
-                            <label for="editPhoneNumber">Phone Number</label>
+                            <label for="editPhoneNumber">Phone Number<span class="text-danger">*</span></label>
                             <input type="number" class="form-control" id="editPhoneNumber" required />
                         </div>
                         <div class="form-group">
-                            <label for="editWorkStatus">Current Work Status</label>
+                            <label for="editWorkStatus">Current Work Status<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editWorkStatus" required />
                         </div>
                         <div class="form-group">
-                            <label for="editAddressLine1">Address Line 1</label>
+                            <label for="editAddressLine1">Address Line 1<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editAddressLine1" required />
                         </div>
                         <div class="form-group">
@@ -237,23 +233,59 @@
                             <input type="text" class="form-control" id="editAddressLine2" />
                         </div>
                         <div class="form-group">
-                            <label for="editCity">City</label>
+                            <label for="editCity">City<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editCity" required />
                         </div>
                         <div class="form-group">
-                            <label for="editState">State</label>
-                            <input type="text" class="form-control" id="editState" required />
+                            <label for="editState">State<span class="text-danger">*</span></label>
+                            <select class="form-control" style="border-radius: 5px;" id="editState" name="editState"
+                                required />
+                                <option value="" disabled selected>Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and
+                                    Daman and Diu</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="editZipCode">Zip Code</label>
+                            <label for="editZipCode">Zip Code<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editZipCode" required />
                         </div>
                         <div class="form-group">
-                            <label for="editCountry">Country</label>
-                            <input type="text" class="form-control" id="editCountry" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location<span class="text-danger">*</span></label>
                             <div class="location-field">
                                 <div class="form-row">
                                     <div class="col">
@@ -274,8 +306,7 @@
                             Get Location
                         </button>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save
-                                Changes</button>
+                            <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -355,22 +386,38 @@
     </div>
 
     <script>
-        document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link action
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('editAccount').addEventListener('click', openEditModal);
+            document.getElementById('deleteAccount').addEventListener('click', deleteAccount);
+            document.getElementById('logoutLinkNavbar').addEventListener('click', logoutUser);
+            handleAvailabilityToggle();
+            fetchProfileData();
+        });
+
+        function logoutUser(event) {
+            event.preventDefault(); 
             var confirmation = confirm('Are you sure you want to logout?');
             if (confirmation) {
                 localStorage.clear();
-                window.location.href = 'index.html'; // Redirect to the logout page
+                window.location.href = 'index.html';
             }
-        });
-    </script>
-    <script>
+        }
+
+        function viewLocationOnMap(latitude, longitude) {
+             const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
+
         const BACKEND_URL = "http://localhost:3000";
+        let latitude;
+        let longitude;
+
         async function fetchProfileData() {
             try {
                 const token = localStorage.getItem('authToken');
                 if (!token) {
                     alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
                     return;
                 }
                 const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
@@ -379,31 +426,52 @@
                         'Authorization': token
                     }
                 });
+                if (response.status == 401) {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('Login.html');
+                    return;
+                }
                 const volunteer = await response.json();
                 if (response.status !== 200) {
                     alert(`Error: ${volunteer.message}`);
                     return;
                 }
+                populateProfileData(volunteer);
 
-                document.getElementById('fullName').textContent = volunteer.full_name;
-                document.getElementById('emailAddress').textContent = volunteer.email_address;
-                document.getElementById('phoneNumber').textContent = volunteer.phone_number;
-                document.getElementById('dateOfBirth').textContent = volunteer.date_of_birth;
-                document.getElementById('workStatus').textContent = volunteer.current_work_status;
-                document.getElementById('addressLine1').textContent = volunteer.home_address.address_line_1;
-                document.getElementById('addressLine2').textContent = volunteer.home_address.address_line_2 ? volunteer.home_address.address_line_2 : 'N/A';
-                document.getElementById('city').textContent = volunteer.home_address.city;
-                document.getElementById('state').textContent = volunteer.home_address.state;
-                document.getElementById('zipCode').textContent = volunteer.home_address.zip_code;
-                document.getElementById('country').textContent = volunteer.home_address.country;
-                document.getElementById('latitude').textContent = volunteer.home_address.geo_location.latitude;
-                document.getElementById('longitude').textContent = volunteer.home_address.geo_location.longitude;
             } catch (error) {
-                console.error('Error fetching profile data:', error);
+                console.error('Error fetching volunteer profile data:', error);
+                alert('Error fetching profile data');
             }
         }
 
-        function openEditModal() {
+        function populateProfileData(volunteer) {
+            document.getElementById('fullName').textContent = volunteer.full_name;
+            document.getElementById('emailAddress').textContent = volunteer.email_address;
+            document.getElementById('phoneNumber').textContent = volunteer.phone_number;
+            document.getElementById('dateOfBirth').textContent =  new Date(volunteer.date_of_birth).toLocaleDateString();
+            document.getElementById('workStatus').textContent = volunteer.current_work_status;
+            document.getElementById('addressLine1').textContent = volunteer.home_address.address_line_1;
+            document.getElementById('addressLine2').textContent = volunteer.home_address.address_line_2 ? volunteer.home_address.address_line_2 : 'N/A';
+            document.getElementById('city').textContent = volunteer.home_address.city;
+            document.getElementById('state').textContent = volunteer.home_address.state;
+            document.getElementById('zipCode').textContent = volunteer.home_address.zip_code;
+
+            latitude = volunteer.home_address.geo_location.latitude;
+            longitude = volunteer.home_address.geo_location.longitude;
+            document.getElementById('location').innerHTML = `<a href="javascript:void(0);" 
+                onclick="viewLocationOnMap(${latitude}, ${longitude})">Click here to view on map</a>`;
+            setAvailabilityMode(volunteer.availability_mode);
+        }
+
+        function setAvailabilityMode(availabilityMode) {
+            const availabilityToggle = document.getElementById('availabilityToggle');
+            if (availabilityToggle) {
+                availabilityToggle.checked = availabilityMode;
+            }
+        }
+
+        function openEditModal(event) {
             event.preventDefault();
             fetchProfileData().then(() => {
                 document.getElementById('editFullName').value = document.getElementById('fullName').textContent;
@@ -414,15 +482,20 @@
                 document.getElementById('editCity').value = document.getElementById('city').textContent;
                 document.getElementById('editState').value = document.getElementById('state').textContent;
                 document.getElementById('editZipCode').value = document.getElementById('zipCode').textContent;
-                document.getElementById('editCountry').value = document.getElementById('country').textContent;
-                document.getElementById('editlatitude').value = document.getElementById('latitude').textContent;
-                document.getElementById('editlongitude').value = document.getElementById('longitude').textContent;
+                document.getElementById('editlatitude').value = latitude;
+                document.getElementById('editlongitude').value = longitude;
                 $('#editProfileModal').modal('show');
             });
         }
 
         async function saveProfile(event) {
             event.preventDefault();
+
+            const form = document.getElementById('editProfileForm');
+            if (!form.checkValidity()) {
+                alert('Check all the required fields.');
+                return;
+            }
 
             const updatedProfile = {
                 full_name: document.getElementById('editFullName').value,
@@ -434,10 +507,9 @@
                     city: document.getElementById('editCity').value,
                     state: document.getElementById('editState').value,
                     zip_code: document.getElementById('editZipCode').value,
-                    country: document.getElementById('editCountry').value,
                     geo_location: {
-                        latitude: document.getElementById('editlatitude').value,
-                        longitude: document.getElementById('editlongitude').value,
+                        latitude: parseFloat(document.getElementById('editlatitude').value),
+                        longitude: parseFloat(document.getElementById('editlongitude').value),
                     }
                 }
             };
@@ -446,6 +518,7 @@
                 const token = localStorage.getItem('authToken');
                 if (!token) {
                     alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
                     return;
                 }
                 const response = await fetch(`${BACKEND_URL}/volunteer/getbyid`, {
@@ -456,7 +529,12 @@
                     },
                     body: JSON.stringify(updatedProfile)
                 });
-
+                if (response.status === 401) {
+                    alert('Not authorised to access this route');
+                    localStorage.clear();
+                    window.location.assign('Login.html');
+                    return;
+                }
                 if (response.status !== 200) {
                     const data = await response.json();
                     alert(`Error: ${data.message}`);
@@ -471,18 +549,16 @@
                 console.error('Error saving profile:', error);
             }
         }
-        document.getElementById('editAccount').addEventListener('click', openEditModal);
-        document.addEventListener('DOMContentLoaded', fetchProfileData);
-    </script>
-    <script>
-        document.getElementById('deleteAccount').addEventListener('click', async function (e) {
-            e.preventDefault();
+
+        async function deleteAccount(event) {
+            event.preventDefault();
             const BACKEND_URL = "http://localhost:3000";
             if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
                 try {
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Authorization token is missing. Please log in again.');
+                        window.location.href = 'Login.html';
                         return;
                     }
                     const response = await fetch(`${BACKEND_URL}/volunteer/delete`, {
@@ -492,7 +568,12 @@
                             'Authorization': token,
                         },
                     });
-
+                    if (response.status === 401) {
+                        alert('Not authorised to access this route');
+                        localStorage.clear();
+                        window.location.assign('Login.html');
+                        return;
+                    }
                     if (response.status === 200) {
                         alert('Account deleted successfully');
                         window.location.href = 'index.html';
@@ -505,29 +586,59 @@
                     alert('Error deleting profile'); // Handle error
                 }
             }
-        });
-    </script>
+        };
 
-    <script>
         function handleAvailabilityToggle() {
-            var toggleSwitch = document.getElementById('availabilityMode');
-            toggleSwitch.addEventListener('change', function () {
-                if (toggleSwitch.checked) {
-                    // Handle when toggle is turned ON
-                    console.log('Availability Mode ON');
-                    // Perform actions when availability mode is ON
+            const availabilityToggle = document.getElementById('availabilityToggle');
+            if (!availabilityToggle) return;
+
+            availabilityToggle.addEventListener('change', async (event) => {
+                const isChecked = event.target.checked;
+                if (confirm(`Are you sure you want to change your availability to ${isChecked ? 'available' : 'not available'}?`)) {
+                    try {
+                        const token = localStorage.getItem('authToken');
+                        if (!token) {
+                            alert('Authorization token is missing. Please log in again.');
+                            window.location.href = 'login.html';
+                            return;
+                        }
+                        const response = await fetch(`${BACKEND_URL}/volunteer/updateavailabilitymode`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': token,
+                            },
+                            body: JSON.stringify({ availability_mode: isChecked })
+                        });
+                        if (response.status === 401) {
+                            alert('Not authorised to access this route');
+                            localStorage.clear();
+                            window.location.href = 'login.html';
+                            return;
+                        }
+                        if (response.status !== 200) {
+                            const data = await response.json();
+                            alert(`Error: ${data.message}`);
+                            return;
+                        }
+                        // if (isChecked) {
+                        //     var confirmUpdateLocation = confirm('Do you want to update your location?');
+                        //     if (confirmUpdateLocation) {
+                        //         getLocation();
+                        //     }
+                        // }
+                        alert('Availability mode updated successfully');
+                    } catch (error) {
+                        console.error('Error updating availability mode:', error);
+                        alert('Error updating availability mode');
+                        event.target.checked = !isChecked;
+                    }
                 } else {
-                    // Handle when toggle is turned OFF
-                    console.log('Availability Mode OFF');
-                    // Perform actions when availability mode is OFF
+                    event.target.checked = !isChecked;
                 }
             });
         }
-
-        // Call the function to initialize the toggle functionality
-        handleAvailabilityToggle();
-
-
+        
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -542,7 +653,7 @@
         }
 
         function showError(error) {
-            switch (error.code) {
+            switch(error.code) {
                 case error.PERMISSION_DENIED:
                     alert("User denied the request for Geolocation.");
                     break;
@@ -558,7 +669,6 @@
             }
         }
     </script>
-    <!-- <script src="js/ngo_cards.js"></script> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

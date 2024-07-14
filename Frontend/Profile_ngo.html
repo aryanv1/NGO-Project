@@ -151,6 +151,7 @@
                         <p><strong>City:</strong> <span id="city"></span></p>
                         <p><strong>State:</strong> <span id="state"></span></p>
                         <p><strong>Zip Code:</strong> <span id="zipCode"></span></p>
+                        <p><strong>Location : </strong><span id="location"></span></p>
 
                         <h3>Primary Contact</h3>
                         <p><strong>Name:</strong> <span id="primaryContactName"></span></p>
@@ -209,6 +210,7 @@
         </div>
     </div>
 
+    <!-- Edit profile model -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -219,8 +221,7 @@
                 <div class="modal-body">
                     <form id="editProfileForm">
                         <div class="form-group">
-                            <label for="editOrganizationName">Organization Name<span
-                                    class="text-danger">*</span></label>
+                            <label for="editOrganizationName">Organization Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editOrganizationName" required>
                         </div>
                         <div class="form-group">
@@ -361,12 +362,18 @@
     </div>
 
     <script>
+        function viewLocationOnMap(latitude, longitude) {
+             const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            window.open(mapUrl, '_blank'); // Opens the map URL in a new tab/window
+        }
+
         async function fetchProfileData() {
             try {
                 const BACKEND_URL = "http://localhost:3000";
                 const token = localStorage.getItem('authToken');
                 if (!token) {
                     alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
                     return;
                 }
                 const response = await fetch(`${BACKEND_URL}/ngo/byid`, {
@@ -379,103 +386,117 @@
                 if (response.status == 401) {
                     alert('Not authorised to access this route');
                     localStorage.clear();
-                    window.location.assign('index.html');
+                    window.location.assign('Login.html');
                     return;
                 }
                 else if (response.status !== 200) {
                     alert(`Error: ${ngo.message}`);
                     return;
                 }
-                document.getElementById('ngoPhoto').src = ngo.ngo_photos[0];
-                document.getElementById('organizationName').textContent = ngo.organization_name;
-                document.getElementById('registrationNumber').textContent = ngo.registration_number;
-                document.getElementById('taxIdEin').textContent = ngo.tax_id_ein;
+                updateProfileData(ngo);
 
-                const websiteUrlElement = document.getElementById('websiteUrl');
-                if (ngo.website_url) {
-                    websiteUrlElement.textContent = ngo.website_url;
-                    websiteUrlElement.href = ngo.website_url;
-                    websiteUrlElement.style.display = 'inline';
-                } else {
-                    websiteUrlElement.textContent = 'URL not provided';
-                    websiteUrlElement.removeAttribute('href');
-                }
-
-                document.getElementById('addressLine1').textContent = ngo.physical_addresses.address_line_1;
-                document.getElementById('addressLine2').textContent = ngo.physical_addresses.address_line_2 ? ngo.physical_addresses.address_line_2 : 'N/A';
-                document.getElementById('city').textContent = ngo.physical_addresses.city;
-                document.getElementById('state').textContent = ngo.physical_addresses.state;
-                document.getElementById('zipCode').textContent = ngo.physical_addresses.zip_code;
-
-                document.getElementById('primaryContactName').textContent = ngo.primary_contact.name;
-                document.getElementById('primaryContactEmail').textContent = ngo.primary_contact.email;
-                document.getElementById('primaryContactPhone').textContent = ngo.primary_contact.phoneno;
-
-                if (ngo.secondary_contact) {
-                    document.getElementById('secondaryContactName').textContent = ngo.secondary_contact.name ? ngo.secondary_contact.name : 'N/A';
-                    document.getElementById('secondaryContactEmail').textContent = ngo.secondary_contact.email ? ngo.secondary_contact.email : 'N/A';
-                    document.getElementById('secondaryContactPhone').textContent = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : 'N/A';
-                }
-
-                const registrationCertificateElement = document.getElementById('registrationCertificate');
-                if (ngo.registration_certificate) {
-                    registrationCertificateElement.href = ngo.registration_certificate;
-                    registrationCertificateElement.style.display = 'inline';
-                } else {
-                    registrationCertificateElement.textContent = 'No Registration Certificate Provided';
-                    registrationCertificateElement.removeAttribute('href');
-                }
-
-                const taxExemptionCertificateElement = document.getElementById('taxExemptionCertificate');
-                if (ngo.tax_exemption_certificate) {
-                    taxExemptionCertificateElement.setAttribute('href', ngo.tax_exemption_certificate);
-                    taxExemptionCertificateElement.style.display = 'inline';
-                } else {
-                    taxExemptionCertificateElement.textContent = 'No Tax Exemption Certificate Provided';
-                    taxExemptionCertificateElement.removeAttribute('href');
-                }
-                const recent_annual_reportElement = document.getElementById('recent_annual_report');
-                if (ngo.recent_annual_report) {
-                    recent_annual_reportElement.setAttribute('href', ngo.recent_annual_report);
-                    recent_annual_reportElement.style.display = 'inline';
-                } else {
-                    recent_annual_reportElement.textContent = 'No Certificate Provided';
-                    recent_annual_reportElement.removeAttribute('href');
-                }
-
-                const photoButton = document.querySelector('.btn-view-photos');
-                photoButton.onclick = function () {
-                    showPhotos(ngo.ngo_photos);
-                };
-
-                document.getElementById('editAccount').addEventListener('click', () => {
-                    document.getElementById('editOrganizationName').value = ngo.organization_name;
-                    document.getElementById('editWebsiteUrl').value = ngo.website_url;
-                    document.getElementById('editAddressLine1').value = ngo.physical_addresses.address_line_1;
-                    document.getElementById('editAddressLine2').value = ngo.physical_addresses.address_line_2 ? ngo.physical_addresses.address_line_2 : '';
-                    document.getElementById('editCity').value = ngo.physical_addresses.city;
-                    document.getElementById('editState').value = ngo.physical_addresses.state;
-                    document.getElementById('editZipCode').value = ngo.physical_addresses.zip_code;
-                    document.getElementById('editlatitude').value = ngo.physical_addresses.geo_location.latitude;
-                    document.getElementById('editlongitude').value = ngo.physical_addresses.geo_location.longitude;
-                    document.getElementById('editPrimaryContactName').value = ngo.primary_contact.name;
-                    document.getElementById('editPrimaryContactEmail').value = ngo.primary_contact.email;
-                    document.getElementById('editPrimaryContactPhone').value = ngo.primary_contact.phoneno;
-                    if (ngo.secondary_contact) {
-                        document.getElementById('editSecondaryContactName').value = ngo.secondary_contact.name ? ngo.secondary_contact.name : '';
-                        document.getElementById('editSecondaryContactEmail').value = ngo.secondary_contact.email ? ngo.secondary_contact.email : '';
-                        document.getElementById('editSecondaryContactPhone').value = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : '';
-                    }
-                    $('#editProfileModal').modal('show');
-                });
             } catch (error) {
                 console.error('Error fetching NGO profile:', error);
+                alert('Error fetching profile data');
             }
         }
-    </script>
 
+        function updateProfileData(ngo) {
+            document.getElementById('ngoPhoto').src = ngo.ngo_photos[0];
+            document.getElementById('organizationName').textContent = ngo.organization_name;
+            document.getElementById('registrationNumber').textContent = ngo.registration_number;
+            document.getElementById('taxIdEin').textContent = ngo.tax_id_ein;
 
-    <script>
+            const websiteUrlElement = document.getElementById('websiteUrl');
+            if (ngo.website_url) {
+                websiteUrlElement.textContent = ngo.website_url;
+                websiteUrlElement.href = ngo.website_url;
+                websiteUrlElement.style.display = 'inline';
+            } else {
+                websiteUrlElement.textContent = 'URL not provided';
+                websiteUrlElement.removeAttribute('href');
+            }
+
+            document.getElementById('addressLine1').textContent = ngo.physical_addresses.address_line_1;
+            document.getElementById('addressLine2').textContent = ngo.physical_addresses.address_line_2 ? ngo.physical_addresses.address_line_2 : 'N/A';
+            document.getElementById('city').textContent = ngo.physical_addresses.city;
+            document.getElementById('state').textContent = ngo.physical_addresses.state;
+            document.getElementById('zipCode').textContent = ngo.physical_addresses.zip_code;
+
+            document.getElementById('location').innerHTML = `<a href="javascript:void(0);" onclick="viewLocationOnMap(${ngo.physical_addresses.geo_location.latitude}, ${ngo.physical_addresses.geo_location.longitude})">Click here to view on map</a>`;
+
+            document.getElementById('primaryContactName').textContent = ngo.primary_contact.name;
+            document.getElementById('primaryContactEmail').textContent = ngo.primary_contact.email;
+            document.getElementById('primaryContactPhone').textContent = ngo.primary_contact.phoneno;
+
+            if (ngo.secondary_contact) {
+                document.getElementById('secondaryContactName').textContent = ngo.secondary_contact.name ? ngo.secondary_contact.name : 'N/A';
+                document.getElementById('secondaryContactEmail').textContent = ngo.secondary_contact.email ? ngo.secondary_contact.email : 'N/A';
+                document.getElementById('secondaryContactPhone').textContent = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : 'N/A';
+            }
+
+            updateCertificates(ngo);
+
+            document.querySelector('.btn-view-photos').onclick = function () {
+                showPhotos(ngo.ngo_photos);
+            };
+            
+            document.getElementById('editAccount').addEventListener('click', () => {
+                populateEditForm(ngo);
+                $('#editProfileModal').modal('show');
+            });
+        }
+
+        function updateCertificates(ngo) {
+            const registrationCertificateElement = document.getElementById('registrationCertificate');
+            if (ngo.registration_certificate) {
+                registrationCertificateElement.href = ngo.registration_certificate;
+                registrationCertificateElement.style.display = 'inline';
+            } else {
+                registrationCertificateElement.textContent = 'No Registration Certificate Provided';
+                registrationCertificateElement.removeAttribute('href');
+            }
+
+            const taxExemptionCertificateElement = document.getElementById('taxExemptionCertificate');
+            if (ngo.tax_exemption_certificate) {
+                taxExemptionCertificateElement.setAttribute('href', ngo.tax_exemption_certificate);
+                taxExemptionCertificateElement.style.display = 'inline';
+            } else {
+                taxExemptionCertificateElement.textContent = 'No Tax Exemption Certificate Provided';
+                taxExemptionCertificateElement.removeAttribute('href');
+            }
+
+            const recentAnnualReportElement = document.getElementById('recent_annual_report');
+            if (ngo.recent_annual_report) {
+                recentAnnualReportElement.setAttribute('href', ngo.recent_annual_report);
+                recentAnnualReportElement.style.display = 'inline';
+            } else {
+                recentAnnualReportElement.textContent = 'No Certificate Provided';
+                recentAnnualReportElement.removeAttribute('href');
+            }
+        }
+
+        function populateEditForm(ngo) {
+            document.getElementById('editOrganizationName').value = ngo.organization_name;
+            document.getElementById('editWebsiteUrl').value = ngo.website_url;
+            document.getElementById('editAddressLine1').value = ngo.physical_addresses.address_line_1;
+            document.getElementById('editAddressLine2').value = ngo.physical_addresses.address_line_2 ? ngo.physical_addresses.address_line_2 : '';
+            document.getElementById('editCity').value = ngo.physical_addresses.city;
+            document.getElementById('editState').value = ngo.physical_addresses.state;
+            document.getElementById('editZipCode').value = ngo.physical_addresses.zip_code;
+            document.getElementById('editlatitude').value = ngo.physical_addresses.geo_location.latitude;
+            document.getElementById('editlongitude').value = ngo.physical_addresses.geo_location.longitude;
+            document.getElementById('editPrimaryContactName').value = ngo.primary_contact.name;
+            document.getElementById('editPrimaryContactEmail').value = ngo.primary_contact.email;
+            document.getElementById('editPrimaryContactPhone').value = ngo.primary_contact.phoneno;
+
+            if (ngo.secondary_contact) {
+                document.getElementById('editSecondaryContactName').value = ngo.secondary_contact.name ? ngo.secondary_contact.name : '';
+                document.getElementById('editSecondaryContactEmail').value = ngo.secondary_contact.email ? ngo.secondary_contact.email : '';
+                document.getElementById('editSecondaryContactPhone').value = ngo.secondary_contact.phoneno ? ngo.secondary_contact.phoneno : '';
+            }
+        }
+
         async function saveProfile(event) {
             event.preventDefault(); // Prevent form submission
 
@@ -485,22 +506,7 @@
                 return;
             }
 
-            const primaryContactEmail = document.getElementById('editPrimaryContactEmail').value;
-            const primaryContactPhone = document.getElementById('editPrimaryContactPhone').value;
-
-            const secondaryContactEmail = document.getElementById('editSecondaryContactEmail').value;
-            const secondaryContactPhone = document.getElementById('editSecondaryContactPhone').value;
-
-            // Frontend validation for unique primary and secondary contacts
-            if (secondaryContactEmail && secondaryContactEmail === primaryContactEmail) {
-                alert('Secondary contact email must be different from primary contact email.');
-                return;
-            }
-
-            if (secondaryContactPhone && secondaryContactPhone === primaryContactPhone) {
-                alert('Secondary contact phone must be different from primary contact phone.');
-                return;
-            }
+            if (!validateContacts()) return;
 
             const updatedNGO = {
                 organization_name: document.getElementById('editOrganizationName').value,
@@ -524,6 +530,10 @@
             };
 
             const secondaryContactName =document.getElementById('editSecondaryContactName').value;
+            const secondaryContactEmail = document.getElementById('editSecondaryContactEmail').value;
+            const secondaryContactPhone = document.getElementById('editSecondaryContactPhone').value;
+            let removeSecondaryContact = false;
+
             if (secondaryContactEmail && secondaryContactPhone && secondaryContactName) {
                 updatedNGO.secondary_contact = JSON.stringify({
                     name: secondaryContactName,
@@ -534,6 +544,8 @@
             else if(secondaryContactEmail || secondaryContactPhone || secondaryContactName){
                 alert('Fill all the secondary contact details.');
                 return;
+            } else {
+                removeSecondaryContact = true;
             }
 
             const formData = new FormData();
@@ -544,6 +556,7 @@
             if (updatedNGO.secondary_contact) {
                 formData.append('secondary_contact', updatedNGO.secondary_contact);
             }
+            formData.append('remove_secondary_contact', removeSecondaryContact);
 
             // const photosFiles = document.getElementById('photos').files;
             // for (const element of photosFiles) {
@@ -555,6 +568,7 @@
                 const token = localStorage.getItem('authToken');
                 if (!token) {
                     alert('Authorization token is missing. Please log in again.');
+                    window.location.href = 'Login.html';
                     return;
                 }
                 const response = await fetch(`${BACKEND_URL}/ngo/updatedetails`, {
@@ -586,7 +600,28 @@
                 alert('Error fetching data');
             }
         }
+
         document.addEventListener('DOMContentLoaded', fetchProfileData);
+
+        function validateContacts() {
+            const primaryContactEmail = document.getElementById('editPrimaryContactEmail').value;
+            const primaryContactPhone = document.getElementById('editPrimaryContactPhone').value;
+
+            const secondaryContactEmail = document.getElementById('editSecondaryContactEmail').value;
+            const secondaryContactPhone = document.getElementById('editSecondaryContactPhone').value;
+
+            if (secondaryContactEmail && secondaryContactEmail === primaryContactEmail) {
+                alert('Secondary contact email must be different from primary contact email.');
+                return false;
+            }
+
+            if (secondaryContactPhone && secondaryContactPhone === primaryContactPhone) {
+                alert('Secondary contact phone must be different from primary contact phone.');
+                return false;
+            }
+
+            return true;
+        }
     </script>
 
     <footer class="ftco-footer ftco-section img" style="height: auto; padding-bottom: 1rem;">
@@ -669,6 +704,7 @@
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Authorization token is missing. Please log in again.');
+                        window.location.href = 'Login.html';
                         return;
                     }
                     const response = await fetch(`${BACKEND_URL}/ngo/byid`, {
@@ -678,6 +714,12 @@
                             'Authorization': token,
                         },
                     });
+                    if (response.status === 401) {
+                        alert('Not authorised to access this route');
+                        localStorage.clear();
+                        window.location.assign('Login.html');
+                        return;
+                    }
                     if (response.status === 200) {
                         alert('Account deleted successfully');
                         localStorage.clear();
@@ -729,8 +771,7 @@
 
             $('#photoModal').modal('show');
         }
-    </script>
-    <script>
+
         document.getElementById('logoutLinkNavbar').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link action
             var confirmation = confirm('Are you sure you want to logout?');
@@ -739,8 +780,37 @@
                 window.location.href = 'index.html'; // Redirect to the logout page
             }
         });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            document.getElementById('editlatitude').value = position.coords.latitude;
+            document.getElementById('editlongitude').value = position.coords.longitude;
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
     </script>
-    <script src="js/get_location.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>

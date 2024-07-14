@@ -189,6 +189,9 @@ const updateNGODetails = async (req, res) => {
       const secondary_contact = JSON.parse(req.body.secondary_contact);
       newNGO.secondary_contact = secondary_contact;
     }
+    else if (req.body.remove_secondary_contact === 'true') {
+        newNGO.secondary_contact = null;
+    }
 
     const duplicateContact = await NGO.findOne({
       $or: [
@@ -221,7 +224,7 @@ const updateNGODetails = async (req, res) => {
     //     }
     //     newNGO.ngo_photos = ngoPhotosUrls;
     // }
-    
+
     await NGO.updateOne({ _id: ngoId }, newNGO);
     res.status(200).send("success!!");
   } catch (error) {
