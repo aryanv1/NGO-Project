@@ -146,6 +146,16 @@ const updateVolunteerById = async (req, res) => {
       current_work_status,
       home_address,
     } = req.body;
+
+    const duplicateVolunteer = await Volunteer.findOne({
+      phone_number: phone_number,
+      _id: { $ne: vol_id }
+    });
+
+    if (duplicateVolunteer) {
+      return res.status(400).json({ message: "Duplicate phone number detected." });
+    }
+    
     await Volunteer.updateOne(
       {_id: vol_id},
       {
