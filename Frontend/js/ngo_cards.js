@@ -1,5 +1,4 @@
 // For GeoLocation
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -36,6 +35,12 @@ function viewLocationOnMap(latitude, longitude) {
 }
 
 window.addEventListener('load', async () => {
+    const container = document.getElementById('ngoContainer');
+    const existingMessage = document.getElementById('empty-message');
+    if (existingMessage) {
+        container.removeChild(existingMessage);
+    }
+
     try {
         const response = await fetch('http://localhost:3000/ngo/get'); // Update with the correct backend URL
         const data = await response.json();
@@ -51,12 +56,12 @@ window.addEventListener('load', async () => {
     }
 });
 
-function displayNGOs(ngos) {
+function displayNGOs(ngosToDisplay) {
     const ngoContainer = document.getElementById('ngoContainer');
     const rowDiv = ngoContainer.querySelector('.row');
     rowDiv.innerHTML = ''; // Clear existing content
 
-    if (ngos.length === 0) {
+    if (ngosToDisplay.length === 0) {
         const message = document.createElement('div');
         message.className = 'message-card'; // Apply custom message-card class
         message.textContent = 'No NGO found';
@@ -66,7 +71,7 @@ function displayNGOs(ngos) {
         return;
     }
 
-    ngos.forEach((ngo, index) => {
+    ngosToDisplay.forEach((ngo, index) => {
         const ngoCard = document.createElement('div');
         ngoCard.className = 'col-12 col-sm-6 col-md-4 mb-4 d-flex';
         
@@ -142,11 +147,12 @@ function showPhotos(photos) {
 function setupSearch(ngos) {
     const searchInput = document.getElementById('searchInput');
     const clearButton = document.getElementById('clearButton');
-    // Perform search on each input event
+    const container = document.getElementById('ngoContainer');
+   
     searchInput.addEventListener('input', () => {
         const existingMessage = document.getElementById('empty-message');
         if (existingMessage) {
-            ngoContainer.removeChild(existingMessage);
+            container.removeChild(existingMessage);
         }
         const query = searchInput.value.toLowerCase();
         const filteredNGOs = ngos.filter(ngo => ngo.organization_name.toLowerCase().includes(query));
@@ -156,7 +162,7 @@ function setupSearch(ngos) {
     clearButton.addEventListener('click', () => {
         const existingMessage = document.getElementById('empty-message');
         if (existingMessage) {
-            ngoContainer.removeChild(existingMessage);
+            container.removeChild(existingMessage);
         }
         searchInput.value = '';
         displayNGOs(ngos); 

@@ -133,7 +133,6 @@ const getAvailableFoodTransactions_NGO = async (req, res) => {
   }
 };
 
-// for perticular NGO. 
 const getLogsofNGO = async (req, res) => {
   try {
     const logs = await FoodTransactionLogs.find({ ngo: req.user.id })
@@ -205,11 +204,11 @@ const getLogsofVolunteer = async (req, res) => {
         select: 'name',
         model: 'Restaurant'
       })
-      // .populate({
-      //   path: 'ngo',
-      //   select: 'organization_name',
-      //   model: 'NGO'
-      // })
+      .populate({
+        path: 'ngo',
+        select: 'organization_name',
+        model: 'NGO'
+      })
       .populate({
         path: 'volunteer',
         select: 'phone_number',
@@ -331,6 +330,9 @@ const createFoodTransactionLog = async (req, res) => {
           const volunteer1 = await Volunteer.findOne({ phone_number : phone});
           if(volunteer1)
             volunteer_id.push(volunteer1._id);
+          else{
+            return res.status(400).json({error : "Please enter valid volunteer phoneno"});
+          }
       }
     }
     const photoUrls = [];

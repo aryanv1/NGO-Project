@@ -8,8 +8,12 @@
 
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
 
@@ -86,40 +90,37 @@
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
-
+    
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index_admin.html" class="nav-link">Home</a></li>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Volunteers
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="Verification_Ind_admin.html">Pending Verification</a>
-                            </li>
+                        <ul class="dropdown-menu active" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="Verification_Ind_admin.html">Pending Verification</a></li>
                             <li><a class="dropdown-item" href="All_Ind_admin.html">All Volunteers</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             NGO
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="Verification_ngo_admin.html">Pending Verification</a>
-                            </li>
+                            <li><a class="dropdown-item" href="Verification_ngo_admin.html">Pending Verification</a></li>
                             <li><a class="dropdown-item" href="All_ngo_admin.html">All NGOs</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Restaurant
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="Verification_restaurant_admin.html">Pending
-                                    Verification</a></li>
+                            <li><a class="dropdown-item" href="Verification_restaurant_admin.html">Pending Verification</a></li>
                             <li><a class="dropdown-item" href="All_restaurant_admin.html">All Restaurants</a></li>
                         </ul>
                     </li>
@@ -152,10 +153,10 @@
         let volunteers = []; // Global variable to store volunteer data
 
         async function fetchVolunteers() {
-
+            const container = document.getElementById('volunteer-container');
             const existingMessage = document.getElementById('empty-message');
             if (existingMessage) {
-                ngoContainer.removeChild(existingMessage);
+                container.removeChild(existingMessage);
             }
 
             try {
@@ -185,8 +186,7 @@
                     return;
                 }
                 volunteers = await response.json();
-                setupSearch();
-                displayVolunteers();
+                displayVolunteers(volunteers);
 
             } catch (error) {
                 console.error(error);
@@ -199,11 +199,11 @@
             window.open(mapUrl, "_blank"); // Opens the map URL in a new tab/window
         }
 
-        function displayVolunteers() {
+        function displayVolunteers(volunteersToDisplay) {
             const container = document.getElementById('volunteer-container');
             container.innerHTML = ''; // Clear previous content
 
-            if (volunteers.length === 0) {
+            if (volunteersToDisplay.length === 0) {
                 const message = document.createElement('div');
                 message.className = 'message-card';
                 message.textContent = 'No Volunteers';
@@ -212,7 +212,7 @@
                 return;
             }
 
-            volunteers.forEach(volunteer => {
+            volunteersToDisplay.forEach(volunteer => {
                 const volunteerCard = `
                     <div class="container mt-2">
                         <div class="row">
@@ -223,16 +223,12 @@
                                             <div class="col-md-6">
                                                 <h5 class="card-title">Full Name: ${volunteer.full_name}</h5>
                                                 <p class="card-text">Email: ${volunteer.email_address}</p>
-                                                <p class="card-text">Phone Number: ${volunteer.phone_number}</p>
+                                                <p class="card-text">Phone Number: <a href="tel:${volunteer.phone_number}" class="phone-link">${volunteer.phone_number}</a></p>
                                                 <p class="card-text">Date of Birth: ${new Date(volunteer.date_of_birth).toLocaleDateString()}</p>
-                                                <p class="card-text">Current Work Status: ${volunteer.current_work_status}</p>
-                                                <p class="card-text">Address Line 1: ${volunteer.home_address.address_line_1}</p>
-                                                <p class="card-text">Address Line 2: ${volunteer.home_address.address_line_2 || ''}</p>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p class="card-text mt-2">City: ${volunteer.home_address.city}</p>
-                                                <p class="card-text">State: ${volunteer.home_address.state}</p>
-                                                <p class="card-text">Zip Code: ${volunteer.home_address.zip_code}</p>
+                                            <div class="col-md-6 mt-3">
+                                                <p class="card-text">Current Work Status: ${volunteer.current_work_status}</p>
+                                                <p class="card-text">Home Address : ${formatAddress(volunteer.home_address)}</p>
                                                 <p class="card-text">Location: 
                                                 <a href="javascript:void(0);" onclick="viewLocationOnMap(${volunteer.home_address.geo_location.latitude}, ${volunteer.home_address.geo_location.longitude})">
                                                     Click here to view on map
@@ -252,60 +248,12 @@
                 container.insertAdjacentHTML('beforeend', volunteerCard);
             });
         }
-
-        function displayFilteredVolunteers(filteredVolunteers) {
-            const container = document.getElementById('volunteer-container');
-            container.innerHTML = ''; // Clear previous content
-
-            if (filteredVolunteers.length === 0) {
-                const message = document.createElement('div');
-                message.className = 'message-card'; // Apply custom message-card class
-                message.textContent = 'No Volunteers Found';
-                message.id = 'empty-message';
-                container.appendChild(message);
-                return;
-            }
-
-            filteredVolunteers.forEach(volunteer => {
-                const volunteerCard = `
-                    <div class="container mt-2">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h5 class="card-title">Full Name: ${volunteer.full_name}</h5>
-                                                <p class="card-text">Email: ${volunteer.email_address}</p>
-                                                <p class="card-text">Phone Number: ${volunteer.phone_number}</p>
-                                                <p class="card-text">Date of Birth: ${new Date(volunteer.date_of_birth).toLocaleDateString()}</p>
-                                                <p class="card-text">Current Work Status: ${volunteer.current_work_status}</p>
-                                                <p class="card-text">Address Line 1: ${volunteer.home_address.address_line_1}</p>
-                                                <p class="card-text">Address Line 2: ${volunteer.home_address.address_line_2 || ''}</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p class="card-text mt-2">City: ${volunteer.home_address.city}</p>
-                                                <p class="card-text">State: ${volunteer.home_address.state}</p>
-                                                <p class="card-text">Zip Code: ${volunteer.home_address.zip_code}</p>
-                                                <p class="card-text">Location: <a href="javascript:void(0);" 
-                                                    onclick="viewLocationOnMap(${volunteer.home_address.geo_location.latitude}, ${volunteer.home_address.geo_location.longitude})">
-                                                    Click here to view on map</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="text-center mt-3">
-                                            <button class="btn btn-danger btn-verify" style="border-radius: 5px;"
-                                                    onclick="confirmDeleteVolunteer('${volunteer._id}')">Delete Volunteer</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                container.insertAdjacentHTML('beforeend', volunteerCard);
-            });
+        function formatAddress(address) {
+            return `
+            ${address.address_line_1}, ${address.address_line_2 ? address.address_line_2 + ', ' : ''}
+            ${address.city}, ${address.state}, ${address.zip_code}, ${address.country}
+        `;
         }
-
         async function deleteVolunteer(id) {
             try {
                 const token = localStorage.getItem('authToken');
@@ -347,6 +295,7 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             await fetchVolunteers();
+            setupSearch();
         });
     </script>
 
@@ -359,25 +308,26 @@
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             const clearButton = document.getElementById('clearButton');
+            const container = document.getElementById('volunteer-container');
 
             // Perform search on each input event
             searchInput.addEventListener('input', () => {
                 const existingMessage = document.getElementById('empty-message');
                 if (existingMessage) {
-                    ngoContainer.removeChild(existingMessage);
+                    container.removeChild(existingMessage);
                 }
                 const query = searchInput.value.toLowerCase();
                 const filteredVolunteers = volunteers.filter(volunteer => volunteer.full_name.toLowerCase().includes(query));
-                displayFilteredVolunteers(filteredVolunteers);
+                displayVolunteers(filteredVolunteers);
             });
 
             clearButton.addEventListener('click', () => {
                 const existingMessage = document.getElementById('empty-message');
                 if (existingMessage) {
-                    ngoContainer.removeChild(existingMessage);
+                    container.removeChild(existingMessage);
                 }
                 searchInput.value = '';
-                displayVolunteers();
+                displayVolunteers(volunteers);
             });
         }
     </script>
